@@ -1,8 +1,8 @@
 <?php
-    $db_name = "space";
-    $connection = mysqli_connect("localhost", "root", "", $db_name);
+    $dbname = "space";
+    $connection = mysqli_connect("localhost", "root", "", $dbname);
     
-    $spacedir = "blackhole/";
+    $spacedir = "assets/";
 
-    $API = "https://example.com";
+    $API = "https://eoaq73qseezwdn9.m.pipedream.net";
 ?>

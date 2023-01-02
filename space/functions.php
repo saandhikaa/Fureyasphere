@@ -35,10 +35,9 @@
         $name = $_FILES['file']['name'];
         $size = $_FILES['file']['size'];
         $pathx = $_FILES['file']['tmp_name'];
-        $limit = $time + 60 * 60;
         $sector = rand(10,99);
 
-        $codenamecheck = querying("SELECT * FROM blackhole WHERE codename LIKE '$codename'");
+        $codenamecheck = querying("SELECT * FROM blackhole WHERE codename_ LIKE '$codename'");
         for ($s = 0; $s < count($codenamecheck); $s++){
             if ($sector == $codenamecheck[$s]["sector"]){
                 $sector = rand(10,99);
@@ -62,28 +61,43 @@
             return false;
         }
 
-        $query = "INSERT INTO blackhole (id, codename, sector, path_, name_, limit_) VALUES ('$time', '$codename', '$sector', '$path', '$name', '$limit')";
-
         global $connection;
+        $query = "INSERT INTO blackhole (id, codename_, sector_, path_, name_) VALUES ('$time', '$codename', '$sector', '$path', '$name')";
         mysqli_query($connection, $query);
 
-        if (mysqli_affected_rows($connection)) {
-            $message["DATA1"] = "NEW FILE THROWN\n\n"."$codename"."\n"."$name"."\n\n";
-            $message["DATA2"] = "LAST " . count(querying("SELECT * FROM blackhole")) . " FILES IN BLACKHOLE";
-            notification($message);
-            return $sector;
+        $query = "INSERT INTO logging (id, codename_, name_, size_) VALUES ('$time', '$codename', '$name', '$size')";
+        mysqli_query($connection, $query);
 
-        }else{
-            echo "<script>alert('Database error')</script>";
-            return false;
+        return $sector;
+    }
+
+    function purging($dir){
+        global $spacedir, $connection;
+        
+        $limitation = querying("SELECT * FROM blackhole");
+        if (!empty($limitation)){
+            for ($s = 0; $s < count($limitation); $s++){
+                if ($limitation[$s]["id"] + 60 * 60 < time()) {
+                    $id = $limitation[$s]["id"];
+                    $path = $dir . $spacedir . $limitation[$s]["path_"];
+                    
+                    unlink($path);
+                    mysqli_query($connection, "DELETE FROM blackhole WHERE id = $id");
+                }
+            }
         }
     }
 
-    function purging($id, $path){
-        global $spacedir, $connection;
-        
-        unlink($spacedir.$path);
-        mysqli_query($connection, "DELETE FROM blackhole WHERE id = $id");
+    function traceline($value){
+        $time = time();
+        $penname = htmlspecialchars(rtrim($value["penname"]));
+        $message = htmlspecialchars($value["message"]);
+
+        global $connection;
+        $query = "INSERT INTO traceline (id, penname_, message_) VALUES ('$time', '$penname', '$message')";
+        mysqli_query($connection, $query);
+
+        notification(array("notification"=>"NEW COMMENT\n\n".$penname."\n".$message."\n\nhttps:saandhikaa.github.io/rose\n"));
     }
 
     function notification($value){

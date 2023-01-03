@@ -18,13 +18,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Alternative</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HISTORY</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 </head>
 
-<body style="background-color: white;">
+<body>
     <a href="../">BLACKHOLE</a><br>
     <a href="login.php?action=logout">LOGOUT</a><br><br>
 

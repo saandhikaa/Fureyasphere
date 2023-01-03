@@ -7,6 +7,8 @@
         if ($_GET["action"] == "logout"){
             session_unset();
             session_destroy();
+            header("Location: ../");
+            exit;
         }
     }
 
@@ -32,7 +34,7 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spaceship: Login</title>
+    <title>LOGIN</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>

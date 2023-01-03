@@ -1,5 +1,7 @@
 <?php
     require "../functions.php";
+    date_default_timezone_set("Asia/Jakarta");
+
     $message = querying("SELECT * FROM traceline");
 ?>
 
@@ -9,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACKHOLE: Traceline</title>
+    <title>COMMENT LIST</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 

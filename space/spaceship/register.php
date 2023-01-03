@@ -40,7 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <title>Spaceship: Register</title>
+    <title>REGISTER</title>
 </head>
 
 <body>
@@ -73,7 +73,7 @@
             </div>
             
             <div class="field">
-                <a href="../spaceship">back</a>
+                <br><a href="../">BLACKHOLE</a>
             </div>
         </form>
     </div>

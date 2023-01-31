@@ -1,6 +1,7 @@
 <?php
     require "../functions.php";
 
+    $incorrect = false;
     session_start();
 
     if (isset($_GET["action"])){
@@ -22,12 +23,19 @@
             
             if (password_verify($password, $row['password_'])){
                 $_SESSION["login"] = $row['id'];
-                header("Location: ../spaceship");
+
+                if ($_POST["from"] == "setup"){
+                    header("Location: ../setup/");
+                }else{
+                    header("Location: ../");
+                }
                 exit;
             }
         }
         $incorrect = true;
-    }    
+    }
+
+    if (!isset($_GET["from"])) die;
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +49,14 @@
 
 <body>
     <div class="panel">
-        <form action="" method="post">
+        <form action="../spaceship/login.php" method="post">
             <h2>LOGIN</h2>
+
+            <?php if ($incorrect): ?>
+                <input type="hidden" name="from" value="<?=$_POST['from']?>">
+            <?php else: ?>
+                <input type="hidden" name="from" value="<?=$_GET['from']?>">
+            <?php endif ?>
 
             <div class="field">
                 <label for="username"> Username</label><br>
@@ -50,11 +64,11 @@
             </div>
 
             <div class="field">
-                <label for="passwprd"> Password</label><br>
+                <label for="password"> Password</label><br>
                 <input type="password" id="password" name="password" size="20" required>
             </div>
 
-            <p><?=isset($incorrect) ? "*Incorrect" : ""; ?></p>
+            <p><?=isset($incorrect) && !isset($_GET['from']) ? "*Incorrect" : ""; ?></p>
 
             <div class="field">
                 <input type="submit" name="action" value="LOGIN">
@@ -64,6 +78,6 @@
                 <br><a href="../">BLACKHOLE</a>
             </div>
         </form>
-    </div>
+    </div><br><br><br><br><br>
 </body>
 </html>

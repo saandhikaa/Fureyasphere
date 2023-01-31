@@ -1,6 +1,6 @@
 <?php
     require "connections.php";
-
+    
     function querying($value){
         global $connection;
         $result = mysqli_query($connection, $value);
@@ -61,8 +61,17 @@
             return false;
         }
 
+        if (!empty($_SESSION["login"])){
+            $userid = $_SESSION["login"];
+            $owner = querying("SELECT username_ FROM spaceship WHERE id = '$userid'")[0]["username_"];
+            $limit = 8760;
+        }else{
+            $owner = "none";
+            $limit = 1;
+        }
+
         global $connection;
-        $query = "INSERT INTO blackhole (id, codename_, sector_, path_, name_) VALUES ('$time', '$codename', '$sector', '$path', '$name')";
+        $query = "INSERT INTO blackhole (id, codename_, sector_, path_, name_, limit_, owner_) VALUES ('$time', '$codename', '$sector', '$path', '$name', '$limit', '$owner')";
         mysqli_query($connection, $query);
 
         $query = "INSERT INTO logging (id, codename_, name_, size_) VALUES ('$time', '$codename', '$name', '$size')";
@@ -77,7 +86,7 @@
         $limitation = querying("SELECT * FROM blackhole");
         if (!empty($limitation)){
             for ($s = 0; $s < count($limitation); $s++){
-                if ($limitation[$s]["id"] + 60 * 60 < time()) {
+                if ($limitation[$s]["id"] + $limitation[$s]["limit_"] * 60 * 60 < time()) {
                     $id = $limitation[$s]["id"];
                     $path = $dir . $spacedir . $limitation[$s]["path_"];
                     

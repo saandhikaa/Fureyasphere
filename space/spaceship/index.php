@@ -8,10 +8,11 @@
     if (!isset($_SESSION["login"])){
         header("Location: login.php");
     }
-
+    $userid = $_SESSION["login"];
+    $owner = querying("SELECT username_ FROM spaceship WHERE id = '$userid'")[0]["username_"];
+    
     $logline = querying("SELECT * FROM logging");
     $lasting = querying("SELECT * FROM blackhole");
-
     
 ?>
 
@@ -19,16 +20,18 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HISTORY</title>
+    <title><?=$owner?></title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-    <a href="../">BLACKHOLE</a><br>
-    <a href="login.php?action=logout">LOGOUT</a><br><br>
-
+    <a href="../setup/"><input type="submit" value="SETUP"></a><br>
+    <a href="register.php"><input type="submit" value="REGISTER"></a><br>
+    <a href="login.php?action=logout"><input type="submit" value="LOGOUT"></a><br>
+    <a href="../"><input type="submit" value="BLACKHOLE"></a><br><hr>
+    
     <div class="list">
         <?php if (!empty($lasting)): ?>
             <h2>Lasting</h2>

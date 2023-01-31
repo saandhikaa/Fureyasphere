@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COMMENT LIST</title>
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 
@@ -52,6 +53,20 @@
                 </tr>
             </table>
         </form>
+    </div>
+    
+    <br><br><br><br><br>
+
+    <div class="footer"><br>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <table>
+            <tr>
+                <td style="padding: 0 10px;"><a href="https://buymeacoffee.com/vanila" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="28" width="146"></a></td>
+                <td style="padding: 0 10px;"><a class="github-button" href="https://github.com/saandhikaa" data-size="large" aria-label="Follow @saandhikaa on GitHub">Follow @saandhikaa</a>            </td>
+            </tr>
+        </table>
+                    
+        <p class="copyright">Copyright 2023 - <?= $_SERVER['SERVER_NAME'] ?> - All Rights Reserved</p>
     </div>
 </body>
 </html>

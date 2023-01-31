@@ -4,6 +4,15 @@ body{
     padding: 0;
 }
 
+a input{
+    width: 100px;
+    margin: 5px;
+}
+
+a input:hover{
+    cursor: pointer;
+}
+
 .list th{
     padding: 10px 10px;
 }

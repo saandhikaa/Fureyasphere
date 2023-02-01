@@ -61,7 +61,7 @@
 
 <body>
     <?php if ($success): ?>
-        <script>alert('Success: Acount created successfuly')</script>
+        <script>alert('Success: Acount created sucessfuly')</script>
         <a href="../spaceship/" id="link">next</a>
     
     <?php else: ?>

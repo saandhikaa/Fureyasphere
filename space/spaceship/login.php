@@ -35,7 +35,7 @@
         $incorrect = true;
     }
 
-    if (!isset($_GET["from"])) die;
+    elseif (!isset($_GET["from"])) die;
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +68,7 @@
                 <input type="password" id="password" name="password" size="20" required>
             </div>
 
-            <p><?=isset($incorrect) && !isset($_GET['from']) ? "*Incorrect" : ""; ?></p>
+            <p class="error"><?=isset($incorrect) && !isset($_GET['from']) ? "*Incorrect" : ""; ?></p>
 
             <div class="field">
                 <input type="submit" name="action" value="LOGIN">

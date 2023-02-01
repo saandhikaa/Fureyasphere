@@ -37,7 +37,7 @@
 
     <div class="leave">
         <h2>Leave a comment</h2>
-        <form action="../processing.php" method="post">
+        <form action="../result/" method="post">
             <table>
                 <tr>
                     <td>Pen name</td>
@@ -54,19 +54,17 @@
             </table>
         </form>
     </div>
-    
-    <br><br><br><br><br>
 
-    <div class="footer"><br>
+    <br><br><br><br><br><br><br><br>
+
+    <div class="footer">
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <table>
-            <tr>
-                <td style="padding: 0 10px;"><a href="https://buymeacoffee.com/vanila" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="28" width="146"></a></td>
-                <td style="padding: 0 10px;"><a class="github-button" href="https://github.com/saandhikaa" data-size="large" aria-label="Follow @saandhikaa on GitHub">Follow @saandhikaa</a>            </td>
-            </tr>
+            <tr><td><a href="https://buymeacoffee.com/vanila" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a></td></tr>
+            <tr><td><a class="github-button" href="https://github.com/saandhikaa" data-size="large" aria-label="Follow @saandhikaa on GitHub">Follow @saandhikaa</a></td></tr>
         </table>
-                    
-        <p class="copyright">Copyright 2023 - <?= $_SERVER['SERVER_NAME'] ?> - All Rights Reserved</p>
+
+        <p class="copyright">Copyright 2023 - <?= $server ?> - All Rights Reserved</p>
     </div>
 </body>
 </html>

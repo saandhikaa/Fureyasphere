@@ -22,6 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$owner?></title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 </head>
@@ -38,18 +39,24 @@
             <table>
                 <tr>
                     <th>No.</th>
+                    <th>Owner</th>
                     <th>Codename</th>
                     <th>Sector</th>
                     <th>File name</th>
+                    <th>Size</th>
                     <th>Listed</th>
+                    <th>Duration</th>
                 </tr>
                 <?php for ($i = 0; $i < count($lasting); $i++): ?>
                     <tr>
                         <td><?=$i+1?></td>
+                        <td><?=$lasting[$i]['owner_']?></td>
                         <td><?=$lasting[$i]['codename_']?></td>
                         <td><?=$lasting[$i]['sector_']?></td>
                         <td><?=$lasting[$i]['name_']?></td>
+                        <td><?=$lasting[$i]['size_']?></td>
                         <td><?= date("d/m/Y -- H:i:s", $lasting[$i]['id'])." WIB"?></td>
+                        <td><?=$lasting[$i]['hours_'] . " hours"?></td>
                     </tr>
                 <?php endfor ?>
             </table><br><br>
@@ -61,19 +68,35 @@
         <table class="list">
             <tr>
                 <th>No.</th>
+                <th>Owner</th>
                 <th>Codename</th>
                 <th>File name</th>
+                <th>Size</th>
                 <th>Listed</th>
             </tr>
             <?php for ($i = count($logline) - 1; $i >= 0; $i--): ?>
                 <tr>
                     <td><?=count($logline) - $i?></td>
+                    <td><?=$logline[$i]['owner_']?></td>
                     <td><?=$logline[$i]['codename_']?></td>
                     <td><?=$logline[$i]['name_']?></td>
+                    <td><?=$logline[$i]['size_']?></td>
                     <td><?= date("d/m/Y -- H:i:s", $logline[$i]['id'])." WIB"?></td>
                 </tr>
             <?php endfor ?>
         </table>
+    </div>
+
+    <br><br><br><br><br><br><br><br>
+
+    <div class="footer">
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <table>
+            <tr><td><a href="https://buymeacoffee.com/vanila" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a></td></tr>
+            <tr><td><a class="github-button" href="https://github.com/saandhikaa" data-size="large" aria-label="Follow @saandhikaa on GitHub">Follow @saandhikaa</a></td></tr>
+        </table>
+
+        <p class="copyright">Copyright 2023 - <?= $server ?> - All Rights Reserved</p>
     </div>
 </body>
 </html>

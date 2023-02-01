@@ -28,14 +28,14 @@
         readfile($value);
     }
 
-    function throwing($value){
+    function dropping($value){
         $codename = htmlspecialchars(rtrim($value["codename"]));
         $time = time();
-        $path = $time. "_" . $_FILES['file']['name'];
         $name = $_FILES['file']['name'];
         $size = $_FILES['file']['size'];
         $pathx = $_FILES['file']['tmp_name'];
         $sector = rand(10,99);
+        $savedname = $time. "_" . $_FILES['file']['name'];
 
         $codenamecheck = querying("SELECT * FROM blackhole WHERE codename_ LIKE '$codename'");
         for ($s = 0; $s < count($codenamecheck); $s++){
@@ -50,13 +50,16 @@
             return false;
         }
 
-        if ($size > 40000000){
+        if ($size > 41943040){
             echo "<script>alert('File size too big')</script>";
             return false;
         }
+        if ($size > 1048576) $size = number_format($size/1048576,1) . ' MB';
+        elseif ($size > 1024) $size = number_format($size/1024,1) . ' KB';
+        else $size = $size . ' bytes';
 
         global $spacedir;
-        if (!move_uploaded_file($pathx, $spacedir.$path)){
+        if (!move_uploaded_file($pathx, "../".$spacedir.$savedname)){
             echo "<script>alert('No Blackhole detected')</script>";
             return false;
         }
@@ -71,10 +74,10 @@
         }
 
         global $connection;
-        $query = "INSERT INTO blackhole (id, codename_, sector_, path_, name_, limit_, owner_) VALUES ('$time', '$codename', '$sector', '$path', '$name', '$limit', '$owner')";
+        $query = "INSERT INTO blackhole (id, codename_, sector_, savedname_, name_, hours_, owner_, size_) VALUES ('$time', '$codename', '$sector', '$savedname', '$name', '$limit', '$owner', '$size')";
         mysqli_query($connection, $query);
 
-        $query = "INSERT INTO logging (id, codename_, name_, size_) VALUES ('$time', '$codename', '$name', '$size')";
+        $query = "INSERT INTO logging (id, owner_, codename_, name_, size_) VALUES ('$time',  '$owner', '$codename', '$name', '$size')";
         mysqli_query($connection, $query);
 
         return $sector;
@@ -86,9 +89,9 @@
         $limitation = querying("SELECT * FROM blackhole");
         if (!empty($limitation)){
             for ($s = 0; $s < count($limitation); $s++){
-                if ($limitation[$s]["id"] + $limitation[$s]["limit_"] * 60 * 60 < time()) {
+                if ($limitation[$s]["id"] + $limitation[$s]["hours_"] * 60 * 60 < time()) {
                     $id = $limitation[$s]["id"];
-                    $path = $dir . $spacedir . $limitation[$s]["path_"];
+                    $path = $dir . $spacedir . $limitation[$s]["savedname_"];
                     
                     unlink($path);
                     mysqli_query($connection, "DELETE FROM blackhole WHERE id = $id");

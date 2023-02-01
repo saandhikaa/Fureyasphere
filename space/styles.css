@@ -1,4 +1,5 @@
 body{
+    font-family: 'Source Sans Pro', sans-serif;
     background-color: white;
     margin: 10px;
     padding: 0;
@@ -15,7 +16,7 @@ a input:hover{
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 10px;
+    padding: 10px 0 0;
 }
 
 .footer table{
@@ -23,6 +24,12 @@ a input:hover{
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.footer td{
+    padding-top: 10px;
+    text-align: center;
+    align-items: center;
 }
 
 .copyright{

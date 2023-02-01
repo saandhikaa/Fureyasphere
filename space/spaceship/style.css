@@ -42,7 +42,7 @@ label{
     margin-left: 5px;
 }
 
-p{
+.error{
     font-style: italic;
     color: rgb(255, 89, 89);
     position: fixed;

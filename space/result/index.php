@@ -6,7 +6,7 @@
 
     if (isset($_GET["find"])){
         $filename = $_GET["find"];
-        $row = querying("SELECT * FROM blackhole WHERE savedname_ = '$filename'")[0];
+        $row = querying("SELECT * FROM blackhole WHERE savedname_ = '$filename'");
 
     } elseif (isset($_POST["action"])){
         if ($_POST["action"] == "Drop!"){
@@ -22,7 +22,7 @@
             }
 
         } elseif ($_POST["action"] == "Find!" || $_POST["action"] == "Download"){
-            if ($_POST["action"] == "Download") collecting($_POST["path"], $_POST["name"]);
+            if ($_POST["action"] == "Download") collecting($_POST["savedname"], $_POST["name"]);
             $codename = rtrim($_POST['codename']);
             $sector = $_POST['sector'];
             $result = querying("SELECT * FROM blackhole WHERE codename_ LIKE '$codename' AND sector_ LIKE '$sector'");
@@ -45,6 +45,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RESULT</title>
+    <script src="../functions.js"></script>
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <style>
@@ -57,21 +58,19 @@
 </head>
 
 <body>
-    <?php if (isset($_GET["find"])): ?>
+    <?php if (isset($_GET["find"]) && !empty($row)): ?>
         <form action="../result/" method="post" id="direct">
-            <input type="hidden" name="codename" value="<?=$row['codename_']?>">
-            <input type="hidden" name="sector" value="<?=$row['sector_']?>">
+            <input type="hidden" name="codename" value="<?=$row[0]['codename_']?>">
+            <input type="hidden" name="sector" value="<?=$row[0]['sector_']?>">
             <input type="hidden" name="action" value="Find!">
             <script>document.getElementById("direct").submit();</script>
-            <?php exit; ?>
         </form>
-    <?php endif ?>
 
-    <?php if ($_POST["action"] == "Drop!"): ?>
-        <p>Success: <span style="color: green; font-weight: bold;"><?= $codename?></span> thrown into a Blackhole in Sector <span style="color: green; font-weight: bold;"><?=$sector?></span></p>
-    
-    <?php elseif ($_POST["action"] == "Find!"): ?>
-        <?php if (!empty($result)): ?>
+    <?php elseif (isset($_POST["action"])): ?>
+        <?php if ($_POST["action"] == "Drop!"): ?>
+            <p>Success: <span style="color: green; font-weight: bold;"><?= $codename?></span> thrown into a Blackhole in Sector <span style="color: green; font-weight: bold;"><?=$sector?></span></p>
+        
+        <?php elseif ($_POST["action"] == "Find!" && !empty($result)): ?>
             <table class="download">
                 <tr>
                     <td><?=$result[0]["name_"]?></td>
@@ -81,35 +80,26 @@
                             <input type="hidden" name="codename" value="<?=$codename?>">
                             <input type="hidden" name="sector" value="<?=$sector?>">
                             <input type="hidden" name="name" value="<?=$result[0]['name_']?>">
-                            <input type="hidden" name="path" value="<?=$result[0]['savedname_']?>">
+                            <input type="hidden" name="savedname" value="<?=$result[0]['savedname_']?>">
                             <input type="submit" name="action" value="Download">
                         </form>
                     </td>
                 </tr>
             </table>
+
         <?php else: ?>
             <p>Invalid codename or sector / Missing file</p>
         <?php endif ?>
+
+    <?php else: ?>
+        <p>File already gone...</p>
     <?php endif ?>
     
     <br>
 
     <?php if (!empty($result)): ?>
         <p style="display: none;" id="share"><?="http://".$server.'/space/result/?find='.$result[0]['savedname_']?></p>
-        <script>
-            function share(){
-                var input = document.createElement("input");
-                input.type = "text";
-                var link = document.getElementById("share").innerHTML;
-                input.value = link;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand("copy");
-                input.remove();
-                alert("link copied sucessfuly");
-            }
-        </script>
-        <button onclick="share()">COPY LINK</button><br><br>
+        <button onclick="share('share')">COPY LINK</button><br><br>
     <?php endif ?>
     <a href="../"><button>BLACKHOLE</button></a>
 

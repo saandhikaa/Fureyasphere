@@ -11,9 +11,9 @@
         return $rows;
     }
 
-    function collecting($path,$name){
+    function collecting($savedname,$name){
         global $spacedir;
-        $value = $spacedir.$path;
+        $value = "../".$spacedir.$savedname;
 
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');

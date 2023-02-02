@@ -23,6 +23,11 @@
             width: 100px;
             margin: 5px;
         }
+        .update{
+            color:crimson; 
+            font-style:italic; 
+            font-size:14px;
+        }
     </style>
 </head>
 
@@ -72,7 +77,7 @@
 
     <a href="traceline/?comment=leave"><input type="submit" value="Leave a Comment!"></a>
     <br>
-    <p style="color:crimson; font-style:italic; font-size:14px">*update on Thursday, february 2, 2023 at 00.55 (GMT+07.00)</p>
+    <p class="update">*update on Thursday, february 2, 2023 at 12.15 (GMT+07.00)</p>
 
     <br><br><br><br><br><br><br><br>
 

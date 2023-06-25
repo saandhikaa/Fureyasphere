@@ -19,17 +19,17 @@
     
             // Check connection
             if ($this->conn->connect_error) {
-                die("<br>Connection failed: " . $this->conn->connect_error);
+                die("Connection failed: " . $this->conn->connect_error) . ".<br>";
             } else {
-                echo "<br>Connected to server ($this->host)";
+                echo "Connected to server ($this->host).<br>";
             }
             
             $query = "CREATE DATABASE IF NOT EXISTS $this->database";
             
             if ($this->conn->query($query) === TRUE) {
-                echo "<br>Database ($this->database) created successfully";
+                echo "Database ($this->database) ready.<br>";
             } else {
-                echo "<br>Error creating database: " . $this->conn->error;
+                echo "Error creating database: " . $this->conn->error . ".<br>";
             }
             
             $this->closeConnection();
@@ -38,9 +38,9 @@
             
             // Check connection
             if ($this->conn->connect_error) {
-                die("<br>Connection failed: " . $this->conn->connect_error);
+                die("Connection failed: " . $this->conn->connect_error) . ".<br>";
             } else {
-                echo "<br>Connected to database ($this->database)";
+                echo "Connected to database ($this->database).<br>";
             }
         }
     

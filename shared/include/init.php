@@ -1,7 +1,7 @@
 <?php
     // Autoloader function
     spl_autoload_register(function($className){
-        $classFile = __DIR__ . '/../../shared/core/' . $className . '.php';
+        $classFile = __DIR__ . '/../core/' . $className . '.php';
         if (file_exists($classFile)) {
             require_once $classFile;
         }

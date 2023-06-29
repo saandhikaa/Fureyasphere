@@ -7,7 +7,7 @@
             $this->connection = $connection;
         }
     
-        public function executeQuery($query) {
+        public function executeQuery($query, $return = FALSE) {
             $conn = $this->connection->getConnection();
     
             $result = $conn->query($query);
@@ -16,11 +16,13 @@
                 die("Query execution failed: " . $conn->error);
             }
             
-            $row = array();
-            while ($row = $result->fetch_assoc()) {
-                $rows[] = $row;
+            if ($return) {
+                $row = array();
+                while ($row = $result->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                return $rows;
             }
-            return $rows;
         }
     }
 ?>

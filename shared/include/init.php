@@ -25,4 +25,6 @@
     
     // Create an instance of the QueryExecution class
     $queryExecution = new QueryExecution($dbConnection);
+    
+    $tableMaster = new TableMaster();
 ?>

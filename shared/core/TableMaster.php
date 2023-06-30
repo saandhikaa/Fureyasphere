@@ -24,5 +24,9 @@
         public function create ($sql) {
             $this->queryExecution->executeQuery($sql);
         }
+        
+        public function drop ($table) {
+            $this->queryExecution->executeQuery("DROP TABLE " . $table);
+        }
     }
 ?>

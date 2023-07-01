@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__ . "/../shared/include/init.php";
+    require_once __DIR__ . "/include/init.php";
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +12,6 @@
 </head>
     
 <body>
-    <?php require_once "views/clouds/setup.php"; ?>
+    <?php require_once "views/home/upload.php"; ?>
 </body>
 </html>

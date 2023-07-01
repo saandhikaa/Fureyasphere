@@ -7,13 +7,6 @@
         }
     });
     
-    spl_autoload_register(function($className){
-        $classFile = __DIR__ . '/../../freclouds/core/' . $className . '.php';
-        if (file_exists($classFile)) {
-            require_once $classFile;
-        }
-    });
-    
     // load config
     require_once __DIR__ . "/../../config/database.php";
     

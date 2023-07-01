@@ -18,6 +18,13 @@
             $size = $_FILES["file"]["size"];
             $duration = 1;
             
+            // regenerate key for duplicate codename
+            $duplicateCodename = $queryExecution->executeQuery("SELECT * FROM cloudfiles WHERE codename_ LIKE '$codename'", TRUE);
+            $takenKey = array_column($duplicateCodename, 'key_');
+            while (in_array($key, $takenKey)) {
+                $key = rand(10, 99);
+            }
+            
             // processing file
             if ($_FILES['file']['error'] != 0) {
                 echo '<script>alert("File upload failed: error code (' . $_FILES['file']['error'] . ')"); window.location.href = "";</script>';

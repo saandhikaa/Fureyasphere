@@ -22,6 +22,8 @@
                     $rows[] = $row;
                 }
                 return $rows;
+            } else {
+                return TRUE;
             }
         }
     }

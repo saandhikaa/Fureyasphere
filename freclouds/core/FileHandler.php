@@ -19,7 +19,7 @@
             $duration = 1;
             
             // regenerate key for duplicate codename
-            $duplicateCodename = $queryExecution->executeQuery("SELECT * FROM cloudfiles WHERE codename_ LIKE '$codename'", TRUE);
+            $duplicateCodename = $this->queryExecution->executeQuery("SELECT * FROM cloudfiles WHERE codename_ LIKE '$codename'", TRUE);
             $takenKey = array_column($duplicateCodename, 'key_');
             while (in_array($key, $takenKey)) {
                 $key = rand(10, 99);

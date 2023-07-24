@@ -5,6 +5,18 @@
         protected $params = array();
         protected $controllerDir = array(__DIR__ . "/../controllers/");
     
+        public function __construct() {
+            $url = $this->parseURL();
+            
+            // get controller from url
+            if (!empty($url)) {
+                if (file_exists($this->controllerDir[0] . $url[0] . ".php")) {
+                    $this->controller = $url[0];
+                    unset($url[0]);
+                }
+            }
+        }
+        
         public function parseURL() {
             if (isset($_GET['url'])){
                 $url = rtrim($_GET['url'], '/');

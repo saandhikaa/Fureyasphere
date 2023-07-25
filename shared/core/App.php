@@ -32,6 +32,8 @@
             if (isset($url[2]) && !isset($url[0]) && !isset($url[1])) {
                 $this->params = array_values($url);
             }
+            
+            call_user_func_array([$this->controller, $this->method], $this->params);
         }
         
         public function parseURL() {

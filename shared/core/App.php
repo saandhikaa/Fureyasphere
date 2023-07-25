@@ -17,9 +17,13 @@
             
             // get controller from url
             if (!empty($url)) {
-                if (file_exists($this->controllerDir[0] . $url[0] . ".php")) {
-                    $this->controller = $url[0];
-                    unset($url[0]);
+                foreach ($this->controllerDir as $dir) {
+                    if (file_exists($dir . $url[0] . ".php")) {
+                        $this->controller = $url[0];
+                        $this->controllerDir = array($dir);
+                        unset($url[0]);
+                        break;
+                    }
                 }
             }
             

@@ -8,6 +8,13 @@
         public function __construct() {
             $url = $this->parseURL();
             
+            // getting all app controller directoryPath 
+            foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
+                if (basename($app) != "shared") {
+                    $this->controllerDir[] = __DIR__ . "/../../" . basename($app) . "/controllers/";
+                }
+            }
+            
             // get controller from url
             if (!empty($url)) {
                 if (file_exists($this->controllerDir[0] . $url[0] . ".php")) {

@@ -15,6 +15,10 @@
                     unset($url[0]);
                 }
             }
+            
+            // create instance controller
+            require_once $this->controllerDir[0] . $this->controller . ".php";
+            $this->controller = new $this->controller;
         }
         
         public function parseURL() {

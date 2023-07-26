@@ -6,4 +6,7 @@
         <input type="text" id="key" name="key" required><br/><br/>
         <input type="submit" name="action" value="Download">
     </form>
+    <br/>
+    <br/>
+    <a href="<?= BASEURL ?>/clouds/upload">Upload</a>
 </div>

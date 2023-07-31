@@ -8,11 +8,7 @@
     ?>
     
     <form action="" method="post" enctype="multipart/form-data">
-        <div id="file-upload-container">
-            <div class="file-input-container">
-                <input type="file" name="file[]" class="file-input" onchange="handleFileSelection(this)" required>
-            </div>
-        </div>
+        <div id="file-upload-container"></div>
         <br>
         <label for="codename">codename: </label>
         <input type="text" id="codename" name="codename" required>

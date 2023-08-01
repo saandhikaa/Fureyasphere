@@ -5,7 +5,9 @@ function handleFileChange(event) {
     const uploadedFiles= event.target.files;
     if (uploadedFiles.length > 0) {
         for (let i = 0; i < uploadedFiles.length; i++) {
-            console.log(uploadedFiles[i].name);
+            const filename = document.createElement('p');
+            filename.textContent = uploadedFiles[i].name;
+            fileUploadContainer.appendChild(filename);
         }
     }
     

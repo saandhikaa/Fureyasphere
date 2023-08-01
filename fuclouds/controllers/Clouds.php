@@ -1,10 +1,11 @@
 <?php
     class Clouds extends Controller {
         private $app = "fuclouds";
+        private $data = [];
         
-        private $data = array(
-            "appScript" => '<script src="' . BASEURL . '/fuclouds/assets/js/app.js"></script>' 
-        );
+        public function __construct() {
+            $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>';
+        }
         
         public function index() {
             $this->data["title"] = ucwords($this->app) . ": Search";

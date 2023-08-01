@@ -1,3 +1,5 @@
+const fileUploadContainer = document.getElementById('file-upload-container');
+    
 // Function to handle the 'change' event and access file information
 function handleFileChange(event) {
     const uploadedFiles= event.target.files;
@@ -11,8 +13,6 @@ function handleFileChange(event) {
 }
 
 function createInput(isRequired = false) {
-    const fileUploadContainer = document.getElementById('file-upload-container');
-    
     // Create the input element with the specified attributes
     const inputFile = document.createElement('input');
     inputFile.type = 'file';

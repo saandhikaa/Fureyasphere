@@ -10,7 +10,7 @@ function handleFileChange(event) {
             fileUploadContainer.appendChild(filename);
         }
     }
-    
+    event.target.style.display = 'none';
     createInput();
 }
 

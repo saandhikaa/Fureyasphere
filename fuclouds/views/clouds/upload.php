@@ -1,13 +1,6 @@
 <div class="upload">
-    <?php
-        if (isset($_POST["submit"])) {
-            print_r($_POST);
-            print_r($_FILES); die;
-            $handler->upload();
-        }
-    ?>
     
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="<?= BASEURL ?>/Clouds/result" method="post" enctype="multipart/form-data">
         <div id="file-upload-container">
             <ul id="staged-files"></ul>
         </div>

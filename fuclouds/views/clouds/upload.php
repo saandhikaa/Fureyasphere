@@ -8,7 +8,9 @@
     ?>
     
     <form action="" method="post" enctype="multipart/form-data">
-        <div id="file-upload-container"></div>
+        <div id="file-upload-container">
+            <ul id="staged-files"></ul>
+        </div>
         <br>
         <label for="codename">codename: </label>
         <input type="text" id="codename" name="codename" required>

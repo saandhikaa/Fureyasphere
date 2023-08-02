@@ -3,12 +3,12 @@
         protected $controller = 'Home';
         protected $method = 'index';
         protected $params = array();
-        protected $controllerDir = array(__DIR__ . "/../controllers/");
+        protected $controllerDir = [__DIR__ . "/../controllers/"];
     
         public function __construct() {
             $url = $this->parseURL();
             
-            // getting all app controller directoryPath 
+            // getting all app directoryPath 
             foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
                 if (basename($app) != "shared") {
                     $this->controllerDir[] = __DIR__ . "/../../" . basename($app) . "/controllers/";
@@ -20,7 +20,7 @@
                 foreach ($this->controllerDir as $dir) {
                     if (file_exists($dir . $url[0] . ".php")) {
                         $this->controller = $url[0];
-                        $this->controllerDir = array($dir);
+                        $this->controllerDir = [$dir];
                         unset($url[0]);
                         break;
                     }

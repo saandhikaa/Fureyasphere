@@ -15,9 +15,16 @@ function handleFileChange(event) {
 function createStagedFiles(selectedFile) {
     const stagedContainer = document.getElementById('staged-files');
     const filelist = document.createElement('li');
+    
+    const filepost = document.createElement('input');
+    filepost.type = 'hidden';
+    filepost.name = 'post[]';
+    filepost.value = selectedFile;
+    
     const filename = document.createElement('p');
     filename.textContent = selectedFile;
     
+    filelist.appendChild(filepost);
     filelist.appendChild(filename);
     stagedContainer.appendChild(filelist);
     fileUploadContainer.appendChild(stagedContainer);

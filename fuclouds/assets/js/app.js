@@ -24,8 +24,15 @@ function createStagedFiles(selectedFile) {
     const filename = document.createElement('p');
     filename.textContent = selectedFile;
     
+    const cancel = document.createElement('button');
+    cancel.textContent = 'Cancel';
+    cancel.addEventListener('click', function() {
+        stagedContainer.removeChild(filelist);
+    });
+    
     filelist.appendChild(filepost);
     filelist.appendChild(filename);
+    filelist.appendChild(cancel);
     stagedContainer.appendChild(filelist);
     fileUploadContainer.appendChild(stagedContainer);
 }

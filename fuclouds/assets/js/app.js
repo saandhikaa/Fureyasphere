@@ -13,9 +13,14 @@ function handleFileChange(event) {
 }
 
 function createStagedFiles(selectedFile) {
+    const stagedContainer = document.getElementById('staged-files');
+    const filelist = document.createElement('li');
     const filename = document.createElement('p');
     filename.textContent = selectedFile;
-    fileUploadContainer.appendChild(filename);
+    
+    filelist.appendChild(filename);
+    stagedContainer.appendChild(filelist);
+    fileUploadContainer.appendChild(stagedContainer);
 }
 
 function createInput(isRequired = false) {

@@ -10,6 +10,12 @@
         "duration_" => "int(4) NOT NULL", 
         "available_" => "VARCHAR(3) NOT NULL"
     ];
+    
+    function generateFormFields($array) {
+        foreach ($array as $key => $value) {
+            echo '<input type="hidden" name="table['. $key . ']" value="' . $value . '">';
+        }
+    }
 ?>
 
 <section>

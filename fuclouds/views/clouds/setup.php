@@ -42,4 +42,9 @@
             <?php endforeach ?>
         </table>
     <?php endif ?>
+    
+    <form action="<?= BASEURL ?>/Clouds/setup" method="post">
+        <?php generateFormFields($columns) ?>
+        <input type="submit" name="submit" value="setup">
+    </form>
 </section>

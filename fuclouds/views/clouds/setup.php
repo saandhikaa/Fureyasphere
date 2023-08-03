@@ -1,3 +1,17 @@
+<?php
+    $columns = [
+        "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
+        "time_" => "INT(10) NOT NULL", 
+        "owner_" => "VARCHAR(20) NOT NULL",
+        "codename_" => "VARCHAR(20) NOT NULL",
+        "key_" => "INT(2) NOT NULL",
+        "filename_" => "VARCHAR(100) NOT NULL", 
+        "filesize_" => "INT(11) NOT NULL", 
+        "duration_" => "int(4) NOT NULL", 
+        "available_" => "VARCHAR(3) NOT NULL"
+    ];
+?>
+
 <section>
     <?php if ($data["table"]): ?>
     <h1>Table Structure</h1>

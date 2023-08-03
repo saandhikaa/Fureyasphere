@@ -2,6 +2,7 @@
     class Clouds extends Controller {
         private $app = "fuclouds";
         private $data = [];
+        private $table = "uploads";
         
         public function __construct() {
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>';
@@ -22,6 +23,17 @@
             $this->view("shared", "templates/header", $this->data);
             $this->view($this->app, "clouds/upload");
             $this->view("shared", "templates/footer", $this->data);
+        }
+        
+        public function setup() {
+            $this->model("shared", "TableMaster")->createTable($this->table);
+            
+            $this->data["title"] = "Setup";
+            $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($this->table);
+            
+            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->app, "clouds/setup", $this->data);
+            $this->view("shared", "templates/footer");
         }
     }
 ?>

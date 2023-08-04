@@ -11,7 +11,7 @@
         public function upload() {
             $time = time();
             $owner = "anonymous";
-            $key = rand(10, 99);
+            $key = $this->generateKey($_POST["codename"]);
             
             $accepted = $this->slice();
             $filename = $this->handleDuplicate($accepted["name"]);
@@ -67,6 +67,12 @@
             $keys = array_column($result, 'key_');
             $keys = array_unique($keys);
             $keys = array_values($keys);
+            
+            do {
+                $key = rand(10, 99);
+            } while (in_array($key, $keys));
+            
+            return $key;
         }
         
         // cut canceled file

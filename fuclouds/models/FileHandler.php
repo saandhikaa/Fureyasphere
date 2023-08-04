@@ -12,7 +12,9 @@
             print_r($accepted);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
-                move_uploaded_file($accepted["tmp_name"][$i], $this->path . $accepted["name"][$i]);
+                if ($accepted["error"][$i] === 0) {
+                    move_uploaded_file($accepted["tmp_name"][$i], $this->path . $accepted["name"][$i]); 
+                }
             }
         }
         

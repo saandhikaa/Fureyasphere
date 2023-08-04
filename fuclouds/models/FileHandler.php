@@ -2,6 +2,7 @@
     class FileHandler {
         private $db;
         private $path = __DIR__ . "/../uploads/";
+        private $table = "uploads";
         
         public function __construct() {
             $this->db = new Database;
@@ -38,8 +39,9 @@
             }
         }
         
-        public function insertDB($data) {
-            $query = "INSERT INTO uploads (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES (:time, :owner, :codename, :key, :filename, :filesize, :duration, :available)";
+        // insert values into database
+        public function insertDB ($data) {
+            $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES (:time, :owner, :codename, :key, :filename, :filesize, :duration, :available)";
     
             $this->db->query($query);
             $this->db->bind(':time', $data['time']);

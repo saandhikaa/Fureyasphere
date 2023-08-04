@@ -1,9 +1,19 @@
 <?php
     class FileHandler {
         private $db;
+        private $path = __DIR__ . "/../uploads/";
         
         public function __construct() {
             $this->db = new Database;
+        }
+        
+        public function upload() {
+            $accepted = $this->slice();
+            print_r($accepted);
+            
+            for ($i = 0; $i < count($accepted["name"]); $i++) {
+                move_uploaded_file($accepted["tmp_name"][$i], $this->path . $accepted["name"][$i]);
+            }
         }
         
         // cut canceled file

@@ -57,6 +57,13 @@
             
             return $this->db->rowCount();
         }
+
+        public function generateKey ($codename) {
+            $query = "SELECT key_ FROM $this->table WHERE codename_ = :codename";
+            $this->db->query($query);
+            $this->db->bind(':codename', $codename);
+            $result = $this->db->result(true);
+        }
         
         // cut canceled file
         public function slice() {

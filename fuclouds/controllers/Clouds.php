@@ -25,6 +25,11 @@
             $this->view("shared", "templates/footer", $this->data);
         }
         
+        public function result() {
+            $this->model($this->app, "FileHandler")->upload();
+            die;
+        }
+        
         public function setup() {
             $this->model("shared", "TableMaster")->createTable($this->table);
             

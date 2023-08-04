@@ -63,6 +63,10 @@
             $this->db->query($query);
             $this->db->bind(':codename', $codename);
             $result = $this->db->result(true);
+            
+            $keys = array_column($result, 'key_');
+            $keys = array_unique($keys);
+            $keys = array_values($keys);
         }
         
         // cut canceled file

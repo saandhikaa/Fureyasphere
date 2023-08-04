@@ -8,12 +8,13 @@
         }
         
         public function upload() {
+            $time = time();
             $accepted = $this->slice();
             $filename = $this->handleDuplicate($accepted["name"]);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
                 if ($accepted["error"][$i] === 0) {
-                    move_uploaded_file($accepted["tmp_name"][$i], $this->path . $filename[$i]); 
+                    move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i]); 
                 }
             }
         }

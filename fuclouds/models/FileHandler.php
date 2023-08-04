@@ -19,6 +19,24 @@
             }
         }
         
+        public function insertDB($data) {
+            $query = "INSERT INTO uploads (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES (:time, :owner, :codename, :key, :filename, :filesize, :duration, :available)";
+    
+            $this->db->query($query);
+            $this->db->bind(':time', $data['time']);
+            $this->db->bind(':owner', $data['owner']);
+            $this->db->bind(':codename', $data['codename']);
+            $this->db->bind(':key', $data['key']);
+            $this->db->bind(':filename', $data['filename']);
+            $this->db->bind(':filesize', $data['filesize']);
+            $this->db->bind(':duration', $data['duration']);
+            $this->db->bind(':available', $data['available']);
+            
+            $this->db->execute();
+            
+            return $this->db->rowCount();
+        }
+        
         // cut canceled file
         public function slice() {
             $sliced = [];
@@ -34,9 +52,9 @@
             return $sliced;
         }
         
+        // rename (add numbering) for duplicate filename
         public function handleDuplicate ($array) {
             $counts = array_count_values($array);
-        
             foreach ($array as $key => $filename) {
                 if ($counts[$filename] > 1) {
                     $baseName = pathinfo($filename, PATHINFO_FILENAME);
@@ -47,7 +65,6 @@
                     $array[$key] = $newFilename;
                 }
             }
-        
             return $array;
         }
     }

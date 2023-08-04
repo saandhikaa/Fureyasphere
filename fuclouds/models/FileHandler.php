@@ -9,12 +9,31 @@
         
         public function upload() {
             $time = time();
+            $owner = "anonymous";
+            $key = rand(10, 99);
+            
             $accepted = $this->slice();
             $filename = $this->handleDuplicate($accepted["name"]);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
+                $values = [
+                    "time" => $time, 
+                    "owner" => $owner,
+                    "codename" => $_POST["codename"],
+                    "key" => $key, 
+                    "filename" => $filename[$i], 
+                    "filesize" => $accepted["size"][$i], 
+                    "duration" => 1, 
+                    "available" => "YES"
+                ];
+                
                 if ($accepted["error"][$i] === 0) {
-                    move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i]); 
+                    if ($this->insertDB($values) > 0) {
+                        echo "inserted.";
+                        if (move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i])) {
+                            echo "saved<br>";
+                        }
+                    }
                 }
             }
         }

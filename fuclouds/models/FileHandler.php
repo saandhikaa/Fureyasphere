@@ -66,6 +66,16 @@
             $this->db->bind(':currentTime', $currentTime);
             $this->db->bind(':perseconds', $this->perseconds);
             $result = $this->db->result(true);
+            
+            // remove files
+            foreach ($result as $entry) {
+                $filepath = $this->path . $entry["time_"] . "_" . $entry["filename_"];
+                if (file_exists($filepath)) {
+                    if (unlink($filepath)) {
+                        echo "{$entry['filename']} removed<br>";
+                    }
+                }
+            }
         }
         
         public function generateKey ($codename) {

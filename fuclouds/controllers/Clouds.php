@@ -5,6 +5,7 @@
         private $table = "uploads";
         
         public function __construct() {
+            $this->model($this->app, "FileHandler")->autoRemove();
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>';
         }
         

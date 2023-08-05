@@ -3,6 +3,7 @@
         private $db;
         private $path = __DIR__ . "/../uploads/";
         private $table = "uploads";
+        private $perseconds = 24 * 60 * 60;
         
         public function __construct() {
             $this->db = new Database;
@@ -57,7 +58,16 @@
             
             return $this->db->rowCount();
         }
-
+        
+        public function autoRemove() {
+            $currentTime = time();
+            $query = "SELECT time_, filename_ FROM $this->table WHERE available_ = 'YES' AND time_ < :currentTime - (duration_ * :perseconds)";
+            $this->db->query($query);
+            $this->db->bind(':currentTime', $currentTime);
+            $this->db->bind(':perseconds', $this->perseconds);
+            $result = $this->db->result(true);
+        }
+        
         public function generateKey ($codename) {
             $query = "SELECT key_ FROM $this->table WHERE codename_ = :codename";
             $this->db->query($query);

@@ -76,6 +76,15 @@
                     }
                 }
             }
+            
+            // update VALUES at column available_ to NO
+            $query = "UPDATE $this->table SET available_ = 'NO' WHERE time_ < :currentTime - (duration_ * :perseconds)";
+            $this->db->query($query);
+            $this->db->bind(':currentTime', $currentTime);
+            $this->db->bind(':perseconds', $this->perseconds);
+            $this->db->execute();
+            $rowsAffected = $this->db->rowCount();
+            echo "$rowsAffected row(s) updated";
         }
         
         public function generateKey ($codename) {

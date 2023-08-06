@@ -88,6 +88,14 @@
             echo "$rowsAffected row(s) on database updated<br><br>";
         }
         
+        public function loadFiles ($codename, $key) {
+            $query = "SELECT * FROM $this->table WHERE codename_ = :codename AND key_ = :key";
+            $this->db->query($query);
+            $this->db->bind(':codename', $codename);
+            $this->db->bind(':key', $key);
+            return $this->db->result(true);
+        }
+        
         public function generateKey ($codename) {
             $query = "SELECT key_ FROM $this->table WHERE codename_ = :codename";
             $this->db->query($query);

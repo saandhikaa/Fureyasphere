@@ -27,11 +27,12 @@
         }
         
         public function result() {
-            if ($_POST["token"] === UP_TOKEN) {
-                $this->model($this->app, "FileHandler")->upload();
+            if (isset($_POST["token"])) {
+                if ($_POST["token"] === UP_TOKEN) {
+                    $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
+                }
             }
-            echo "not processed";
-            die;
+            var_dump($this->data);
         }
         
         public function setup() {

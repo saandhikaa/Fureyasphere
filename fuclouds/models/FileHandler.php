@@ -19,14 +19,15 @@
             
             $time = time();
             $owner = "anonymous";
-            $key = $this->generateKey($_POST["codename"]);
+            $codename = $_POST["codename"];
+            $key = $this->generateKey($codename);
             $filename = $this->handleDuplicate($accepted["name"]);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
                 $values = [
                     "time" => $time, 
                     "owner" => $owner,
-                    "codename" => $_POST["codename"],
+                    "codename" => $codename,
                     "key" => $key, 
                     "filename" => $filename[$i], 
                     "filesize" => $accepted["size"][$i], 

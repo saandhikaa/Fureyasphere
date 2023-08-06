@@ -9,6 +9,7 @@
         <input type="text" id="codename" name="codename" required>
         <br>
         <br>
+        <input type="hidden" name="token" value="<?= UP_TOKEN ?>">
         <input type="submit" name="submit" value="Upload">
     </form>
 </div>

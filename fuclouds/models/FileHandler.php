@@ -10,11 +10,16 @@
         }
         
         public function upload() {
+            $accepted = $this->slice();
+            foreach ($accepted["error"] as $error) {
+                if ($error != 0) {
+                    return ["error" => "upload file failed"];
+                }
+            }
+            
             $time = time();
             $owner = "anonymous";
             $key = $this->generateKey($_POST["codename"]);
-            
-            $accepted = $this->slice();
             $filename = $this->handleDuplicate($accepted["name"]);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
@@ -29,13 +34,8 @@
                     "available" => "YES"
                 ];
                 
-                if ($accepted["error"][$i] === 0) {
-                    if ($this->insertDB($values) > 0) {
-                        echo "inserted.";
-                        if (move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i])) {
-                            echo "saved<br>";
-                        }
-                    }
+                if ($this->insertDB($values) == 0 || !move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i])) {
+                    return ["error" => "server error"];
                 }
             }
         }
@@ -84,7 +84,7 @@
             $this->db->bind(':perseconds', $this->perseconds);
             $this->db->execute();
             $rowsAffected = $this->db->rowCount();
-            echo "$rowsAffected row(s) updated";
+            echo "$rowsAffected row(s) on database updated<br><br>";
         }
         
         public function generateKey ($codename) {

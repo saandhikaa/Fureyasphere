@@ -39,6 +39,14 @@
                     return ["error" => "server error"];
                 }
             }
+            
+            return [
+                "files" => $this->loadFile($codename, $key), 
+                "status" => [
+                    "codename" => $codename,
+                    "key" => $key
+                ]
+            ];
         }
         
         // insert values into database

@@ -5,4 +5,6 @@
     define('DB_USER', 'root');
     define('DB_PASS', '');
     define('DB_NAME', 'clouds');
+    
+    define('UP_TOKEN', 'Freyanashifa');
 ?>

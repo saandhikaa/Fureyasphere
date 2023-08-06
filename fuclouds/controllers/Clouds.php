@@ -27,7 +27,10 @@
         }
         
         public function result() {
-            $this->model($this->app, "FileHandler")->upload();
+            if ($_POST["token"] === UP_TOKEN) {
+                $this->model($this->app, "FileHandler")->upload();
+            }
+            echo "not processed";
             die;
         }
         

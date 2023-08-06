@@ -26,11 +26,13 @@
             $this->view("shared", "templates/footer", $this->data);
         }
         
-        public function result() {
+        public function result ($codename = null, $key = null) {
             if (isset($_POST["token"])) {
                 if ($_POST["token"] === UP_TOKEN) {
                     $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
                 }
+            } elseif (!is_null($codename)  && !is_null($key)) {
+                $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
             }
             var_dump($this->data);
         }

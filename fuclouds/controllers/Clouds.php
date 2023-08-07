@@ -14,7 +14,7 @@
             
             $this->view("shared", "templates/header", $this->data);
             $this->view($this->app, "clouds/index");
-            $this->view("shared", "templates/footer");
+            $this->view("shared", "templates/footer", $this->data);
         }
         
         public function upload() {

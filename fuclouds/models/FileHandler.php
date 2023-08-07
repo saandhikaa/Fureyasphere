@@ -97,7 +97,7 @@
         }
         
         public function loadFiles ($codename, $key) {
-            $query = "SELECT * FROM $this->table WHERE codename_ = :codename AND key_ = :key";
+            $query = "SELECT * FROM $this->table WHERE codename_ = :codename AND key_ = :key AND available_ = 'YES'";
             $this->db->query($query);
             $this->db->bind(':codename', $codename);
             $this->db->bind(':key', $key);

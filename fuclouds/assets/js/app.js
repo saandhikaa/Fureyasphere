@@ -2,7 +2,7 @@ const fileUploadContainer = document.getElementById('file-upload-container');
     
 // Function to handle the 'change' event and access file information
 function handleFileChange(event) {
-    const selectedFiles= event.target.files;
+    const selectedFiles = event.target.files;
     if (selectedFiles.length > 0) {
         for (let i = 0; i < selectedFiles.length; i++) {
             createStagedFiles(selectedFiles[i].name);
@@ -51,4 +51,17 @@ function createInput(isRequired = false) {
      
     // Append the input element to the file input container div
     fileUploadContainer.appendChild(inputFile);
+}
+
+
+
+function updateURL() {
+    const form = document.getElementById('searching');
+    
+    var url = form.getAttribute('action');
+    var codename = document.getElementById('codename').value;
+    var key = document.getElementById('key').value;
+    
+    form. action = form.action + '/' + codename + '/' + key;
+    form.submit();
 }

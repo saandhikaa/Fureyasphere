@@ -35,6 +35,9 @@
                 }
             } elseif (!is_null($codename)  && !is_null($key)) {
                 $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
+            } else {
+                $this->index();
+                exit();
             }
             
             $this->data["title"] = "Result";

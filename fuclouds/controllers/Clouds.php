@@ -34,7 +34,12 @@
             } elseif (!is_null($codename)  && !is_null($key)) {
                 $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
             }
-            var_dump($this->data);
+            
+            $this->data["title"] = "Result";
+            
+            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->app, "clouds/result", $this->data);
+            $this->view("shared", "templates/header");
         }
         
         public function setup() {

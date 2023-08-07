@@ -41,7 +41,7 @@
             }
             
             return [
-                "files" => $this->loadFile($codename, $key), 
+                "files" => $this->loadFiles($codename, $key), 
                 "status" => [
                     "codename" => $codename,
                     "key" => $key
@@ -81,7 +81,7 @@
                 $filepath = $this->path . $entry["time_"] . "_" . $entry["filename_"];
                 if (file_exists($filepath)) {
                     if (unlink($filepath)) {
-                        echo "{$entry['filename']} removed<br>";
+                        echo "{$entry['filename_']} removed<br>";
                     }
                 }
             }

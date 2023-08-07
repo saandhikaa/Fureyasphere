@@ -6,5 +6,6 @@
     define('DB_PASS', '');
     define('DB_NAME', 'clouds');
     
-    define('UP_TOKEN', 'Freyanashifa');
+    define('UP_TOKEN', 'UPFreyanashifa');
+    define('SR_TOKEN', 'SRFreyanashifa');
 ?>

@@ -30,6 +30,8 @@
             if (isset($_POST["token"])) {
                 if ($_POST["token"] === UP_TOKEN) {
                     $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
+                } elseif ($_POST["token"] === SR_TOKEN) {
+                    $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($_POST["codename"], $_POST["key"]);
                 }
             } elseif (!is_null($codename)  && !is_null($key)) {
                 $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);

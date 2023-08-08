@@ -8,4 +8,5 @@
     
     define('UP_TOKEN', 'UPFreyanashifa');
     define('SR_TOKEN', 'SRFreyanashifa');
+    define('DL_TOKEN', 'DLFreyanashifa');
 ?>

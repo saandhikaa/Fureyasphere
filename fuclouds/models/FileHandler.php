@@ -93,7 +93,23 @@
             $this->db->bind(':perseconds', $this->perseconds);
             $this->db->execute();
             $rowsAffected = $this->db->rowCount();
-            echo "$rowsAffected row(s) on database updated<br><br>";
+            //echo "$rowsAffected row(s) on database updated<br><br>";
+        }
+        
+        function download ($filename, $filepath) {
+            $fullpath = $this->path . $filepath;
+            
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.$filename.'"');
+            header('Content-Length: '.filesize($fullpath));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+        
+            flush();
+        
+            readfile($fullpath);
         }
         
         public function loadFiles ($codename, $key) {

@@ -62,6 +62,6 @@ function updateURL() {
     var codename = document.getElementById('codename').value;
     var key = document.getElementById('key').value;
     
-    form. action = form.action + '/' + codename + '/' + key;
+    form.action = url + '/' + codename + '/' + key;
     form.submit();
 }

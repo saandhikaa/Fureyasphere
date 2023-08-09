@@ -77,7 +77,7 @@
         
         public function autoRemove() {
             $currentTime = time();
-            $query = "SELECT time_, filename_ FROM $this->table WHERE available_ = 'YES' AND time_ < :currentTime - (duration_ * :perseconds)";
+            $query = "SELECT codename_, key_, time_, filename_ FROM $this->table WHERE available_ = 'YES' AND time_ < :currentTime - (duration_ * :perseconds)";
             $this->db->query($query);
             $this->db->bind(':currentTime', $currentTime);
             $this->db->bind(':perseconds', $this->perseconds);

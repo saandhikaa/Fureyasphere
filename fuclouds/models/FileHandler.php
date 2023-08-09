@@ -43,6 +43,10 @@
                 }
             }
             
+            if (count($accepted["name"]) > 1) {
+                $this->zipper($codename . "_" . $key . ".zip", $files);
+            }
+            
             return [
                 "files" => $this->loadFiles($codename, $key), 
                 "status" => [

@@ -34,7 +34,6 @@
                     $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($_POST["codename"], $_POST["key"]);
                 } elseif ($_POST["token"] === DL_TOKEN) {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
-                    $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($_POST["codename"], $_POST["key"]); 
                 }
             } elseif (!is_null($codename)  && !is_null($key)) {
                 $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);

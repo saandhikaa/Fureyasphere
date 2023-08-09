@@ -87,9 +87,14 @@
             foreach ($result as $entry) {
                 $filepath = $this->path . $entry["time_"] . "_" . $entry["filename_"];
                 if (file_exists($filepath)) {
-                    if (unlink($filepath)) {
-                        echo "{$entry['filename_']} removed<br>";
-                    }
+                    unlink($filepath);
+                }
+            }
+            
+            if ($result) {
+                $zippath = $this->path . $result[0]["codename_"] . "_" . $result[0]["key_"] . ".zip";
+                if (file_exists($zippath)) {
+                    unlink($zippath);
                 }
             }
             
@@ -100,7 +105,6 @@
             $this->db->bind(':perseconds', $this->perseconds);
             $this->db->execute();
             $rowsAffected = $this->db->rowCount();
-            //echo "$rowsAffected row(s) on database updated<br><br>";
         }
         
         function download ($savedName, $filePath) {

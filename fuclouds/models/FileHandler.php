@@ -112,6 +112,19 @@
             readfile($fullPath);
         }
         
+        public function zipper ($zipName, $files) {
+            $zip = new ZipArchive();
+            
+            if ($zip->open($this->path . $zipName, ZipArchive::CREATE) === true) {
+                foreach ($files as $file) {
+                    if (file_exists($this->path . $file["path"])) {
+                        $zip->addFile($this->path . $file["path"], $file["name"]);
+                    }
+                }
+                $zip->close();
+            }
+        }
+        
         public function loadFiles ($codename, $key) {
             $query = "SELECT * FROM $this->table WHERE codename_ = :codename AND key_ = :key AND available_ = 'YES'";
             $this->db->query($query);

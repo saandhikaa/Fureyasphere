@@ -24,6 +24,9 @@
             $filename = $this->handleDuplicate($accepted["name"]);
             
             for ($i = 0; $i < count($accepted["name"]); $i++) {
+                $files[$i]["path"] = $time . "_" . $filename[$i];
+                $files[$i]["name"] = $filename[$i];
+                
                 $values = [
                     "time" => $time, 
                     "owner" => $owner,
@@ -35,7 +38,7 @@
                     "available" => "YES"
                 ];
                 
-                if ($this->insertDB($values) == 0 || !move_uploaded_file($accepted["tmp_name"][$i], $this->path . $time . "_" . $filename[$i])) {
+                if ($this->insertDB($values) == 0 || !move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"])) {
                     return ["error" => "server error"];
                 }
             }

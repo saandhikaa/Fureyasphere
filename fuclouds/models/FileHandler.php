@@ -96,20 +96,20 @@
             //echo "$rowsAffected row(s) on database updated<br><br>";
         }
         
-        function download ($filename, $filepath) {
-            $fullpath = $this->path . $filepath;
+        function download ($savedName, $filePath) {
+            $fullPath = $this->path . $filePath;
             
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="'.$filename.'"');
-            header('Content-Length: '.filesize($fullpath));
+            header('Content-Disposition: attachment; filename="' . $savedName . '"');
+            header('Content-Length: ' . filesize($fullPath));
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
         
             flush();
         
-            readfile($fullpath);
+            readfile($fullPath);
         }
         
         public function loadFiles ($codename, $key) {

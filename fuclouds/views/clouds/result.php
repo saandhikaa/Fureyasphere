@@ -17,11 +17,13 @@
         <?php endforeach ?>
     </ul>
     
-    <form  action="<?= BASEURL ?>/Clouds/result" method="post">
-        <?php $filepath = $data["result"]["files"][0]["codename_"] . "_" . $data["result"]["files"][0]["key_"] . ".zip"?>
-        <input type="hidden" name="filename" value="<?= $filepath ?>">
-        <input type="hidden" name="filepath" value="<?= $filepath ?>">
-        <input type="hidden" name="token" value="<?= DL_TOKEN ?>">
-        <input type="submit" name="result" value="Download All as Zip">
-    </form>
+    <?php if (count($data["result"]["files"]) > 1): ?>
+        <form action="<?= BASEURL ?>/Clouds/result" method="post">
+            <?php $filepath = $data["result"]["files"][0]["codename_"] . "_" . $data["result"]["files"][0]["key_"] . ".zip"?>
+            <input type="hidden" name="filename" value="<?= $filepath ?>">
+            <input type="hidden" name="filepath" value="<?= $filepath ?>">
+            <input type="hidden" name="token" value="<?= DL_TOKEN ?>">
+            <input type="submit" name="result" value="Download All as Zip">
+        </form>
+    <?php endif ?>
 </div>

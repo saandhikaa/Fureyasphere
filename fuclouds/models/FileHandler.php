@@ -19,7 +19,7 @@
             
             $time = time();
             $owner = "anonymous";
-            $codename = $_POST["codename"];
+            $codename = trim($_POST["codename"], "-");
             $key = $this->generateKey($codename);
             $filename = $this->handleDuplicate($accepted["name"]);
             

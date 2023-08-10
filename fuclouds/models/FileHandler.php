@@ -145,7 +145,7 @@
         }
         
         public function generateKey ($codename) {
-            $query = "SELECT key_ FROM $this->table WHERE codename_ = :codename";
+            $query = "SELECT key_ FROM $this->table WHERE codename_ = :codename AND available_ = 'YES' ";
             $this->db->query($query);
             $this->db->bind(':codename', $codename);
             $result = $this->db->result(true);

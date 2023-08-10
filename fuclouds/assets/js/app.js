@@ -65,3 +65,9 @@ function updateURL() {
     form.action = url + '/' + codename + '/' + key;
     form.submit();
 }
+
+
+
+function validateInput(inputElement) {
+    inputElement.value = inputElement.value.replace(/[^a-zA-Z0-9\-]/g, "");
+}

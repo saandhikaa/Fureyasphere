@@ -1,4 +1,10 @@
 <div>
+    <?php if (isset($data["result"]["status"])): ?>
+        <p>
+            Your files uploaded successfully with codename <strong style="font-family: monospace;"><?= $data["result"]["status"]["codename"] ?> </strong>
+            and key <strong style="font-family: monospace;"><?php echo $data["result"]["status"]["key"]; ?></strong>
+        </p>
+    <?php endif ?>
     <ul>
         <?php foreach ($data["result"]["files"] as $file): ?>
             <li>

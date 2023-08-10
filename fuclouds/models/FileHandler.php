@@ -191,5 +191,20 @@
             }
             return $array;
         }
+        
+        public function handleRePost ($codename, $files) {
+            $query = "SELECT filename_, key_ FROM $this->table WHERE codename_ = :codename AND available_ = 'YES' ";
+            $this->db->query($query);
+            $this->db->bind(':codename', $codename);
+            $result = $this->db->result(true);
+            
+            if (empty($result)) {
+                return false;
+            }
+            
+            $listed = array_column($result, "filename_");
+            
+            return sort($listed) === sort($files) ? $result[0]["key_"] : false ;
+        }
     }
 ?>

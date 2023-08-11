@@ -11,4 +11,8 @@
         <input type="hidden" name="token" value="<?= UP_TOKEN ?>">
         <input type="submit" name="submit" value="Upload">
     </form>
+    
+    <br>
+    <br>
+    <a href="<?= BASEURL ?>/Clouds/index">back home</a>
 </div>

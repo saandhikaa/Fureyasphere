@@ -11,40 +11,44 @@
         
         public function upload() {
             $accepted = $this->slice();
-            foreach ($accepted["error"] as $error) {
-                if ($error != 0) {
-                    return ["error" => "upload file failed"];
-                }
-            }
-            
-            $time = time();
-            $owner = "anonymous";
-            $codename = trim($_POST["codename"], "-");
-            $key = $this->generateKey($codename);
             $filename = $this->handleDuplicate($accepted["name"]);
+            $codename = trim($_POST["codename"], "-");
+            $key = $this->handleRePost($codename, $filename);
             
-            for ($i = 0; $i < count($accepted["name"]); $i++) {
-                $files[$i]["path"] = $time . "_" . $filename[$i];
-                $files[$i]["name"] = $filename[$i];
-                
-                $values = [
-                    "time" => $time, 
-                    "owner" => $owner,
-                    "codename" => $codename,
-                    "key" => $key, 
-                    "filename" => $filename[$i], 
-                    "filesize" => $accepted["size"][$i], 
-                    "duration" => 1, 
-                    "available" => "YES"
-                ];
-                
-                if ($this->insertDB($values) == 0 || !move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"])) {
-                    return ["error" => "server error"];
+            if (empty($key)) {
+                foreach ($accepted["error"] as $error) {
+                    if ($error != 0) {
+                        return ["error" => "upload file failed"];
+                    }
                 }
-            }
-            
-            if (count($accepted["name"]) > 1) {
-                $this->zipper($codename . "_" . $key . ".zip", $files);
+                
+                $time = time();
+                $owner = "anonymous";
+                $key = $this->generateKey($codename);
+                
+                for ($i = 0; $i < count($accepted["name"]); $i++) {
+                    $files[$i]["path"] = $time . "_" . $filename[$i];
+                    $files[$i]["name"] = $filename[$i];
+                    
+                    $values = [
+                        "time" => $time, 
+                        "owner" => $owner,
+                        "codename" => $codename,
+                        "key" => $key, 
+                        "filename" => $filename[$i], 
+                        "filesize" => $accepted["size"][$i], 
+                        "duration" => 1, 
+                        "available" => "YES"
+                    ];
+                    
+                    if ($this->insertDB($values) == 0 || !move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"])) {
+                        return ["error" => "server error"];
+                    }
+                }
+                
+                if (count($accepted["name"]) > 1) {
+                    $this->zipper($codename . "_" . $key . ".zip", $files);
+                }
             }
             
             return [

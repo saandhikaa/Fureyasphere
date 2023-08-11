@@ -32,9 +32,13 @@
             <input type="hidden" name="token" value="<?= DL_TOKEN ?>">
             <input type="submit" name="result" value="Download All as Zip">
         </form>
+        <br>
+        <br>
     <?php endif ?>
     
     <?php if (empty($data["result"]["files"])): ?>
         <p>wrong codename/key or the file is gone</p>
     <?php endif ?>
+    
+    <a href="<?= BASEURL ?>/Clouds/index">back home</a>
 </div>

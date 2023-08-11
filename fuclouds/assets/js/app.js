@@ -25,6 +25,7 @@ function createStagedFiles(selectedFile) {
     filename.textContent = selectedFile;
     
     const cancel = document.createElement('button');
+    cancel.type = 'button';
     cancel.textContent = 'Cancel';
     cancel.addEventListener('click', function() {
         stagedContainer.removeChild(filelist);

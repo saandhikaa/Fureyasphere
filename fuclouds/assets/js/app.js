@@ -34,7 +34,6 @@ function createStagedFiles(selectedFile) {
     filelist.appendChild(filename);
     filelist.appendChild(cancel);
     stagedContainer.appendChild(filelist);
-    fileUploadContainer.appendChild(stagedContainer);
 }
 
 function createInput(isRequired = false) {

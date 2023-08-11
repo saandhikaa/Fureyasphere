@@ -7,6 +7,7 @@ function handleFileChange(event) {
         }
     }
     event.target.style.display = 'none';
+    event.target.classList.remove('active-input');
     createInput();
 }
 
@@ -43,6 +44,7 @@ function createInput(isRequired = false) {
     inputFile.type = 'file';
     inputFile.name = 'file[]';
     inputFile.classList.add('file-input');
+    inputFile.classList.add('active-input');
     inputFile.addEventListener('change', handleFileChange);
     inputFile.multiple = true;
      if (isRequired) {

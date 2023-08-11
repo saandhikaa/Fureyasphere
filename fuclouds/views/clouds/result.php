@@ -5,6 +5,7 @@
             and key <strong style="font-family: monospace;"><?php echo $data["result"]["status"]["key"]; ?></strong>
         </p>
     <?php endif ?>
+    
     <ul>
         <?php foreach ($data["result"]["files"] as $file): ?>
             <li>
@@ -31,5 +32,9 @@
             <input type="hidden" name="token" value="<?= DL_TOKEN ?>">
             <input type="submit" name="result" value="Download All as Zip">
         </form>
+    <?php endif ?>
+    
+    <?php if (empty($data["result"]["files"])): ?>
+        <p>wrong codename/key or the file is gone</p>
     <?php endif ?>
 </div>

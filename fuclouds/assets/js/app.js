@@ -55,6 +55,13 @@ function createInput(isRequired = false) {
     fileUploadContainer.appendChild(inputFile);
 }
 
+function clickActiveInput() {
+    var activeInput = document.querySelector('.active-input');
+    if (activeInput) {
+        activeInput.click();
+    }
+}
+
 
 
 function updateURL() {

@@ -199,13 +199,17 @@
             $this->db->bind(':codename', $codename);
             $result = $this->db->result(true);
             
-            $listed = array();
+            $time = [];
+            $listed = [];
+            $output = [];
             
+            // create array for files and time in cloud
             foreach ($result as $item) {
                 $listed[$item["key_"]][] = $item["filename_"];
+                $time[$item["key_"]] = $item["time_"];
             }
             
-            return false;
+            return $output;
         }
     }
 ?>

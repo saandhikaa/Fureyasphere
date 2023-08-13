@@ -12,7 +12,7 @@
         <br>
         <br>
         <input type="hidden" name="token" value="<?= UP_TOKEN ?>">
-        <input type="submit" name="submit" value="Upload">
+        <input type="submit" name="submit" id="up-submit" value="Upload" disabled>
     </form>
     
     <br>

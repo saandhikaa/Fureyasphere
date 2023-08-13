@@ -199,13 +199,15 @@
             $this->db->bind(':codename', $codename);
             $result = $this->db->result(true);
             
-            if (empty($result)) {
-                return false;
+            $listed = array();
+            
+            foreach ($result as $item) {
+                $listed[$item["key_"]][] = $item["filename_"];
             }
             
-            $listed = array_column($result, "filename_");
+            var_dump($listed);die;
             
-            return sort($listed) === sort($files) ? $result[0]["key_"] : false ;
+            return false;
         }
     }
 ?>

@@ -11,7 +11,6 @@ function handleFileChange(event) {
             createStagedFiles(selectedFiles[i].name);
         }
     }
-    event.target.style.display = 'none';
     event.target.classList.remove('active-input');
     createInput();
 }
@@ -48,6 +47,7 @@ function createInput(isRequired = false) {
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
     inputFile.name = 'file[]';
+    inputFile.style.display = 'none';
     inputFile.classList.add('file-input');
     inputFile.classList.add('active-input');
     inputFile.addEventListener('change', handleFileChange);

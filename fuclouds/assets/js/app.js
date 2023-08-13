@@ -1,5 +1,10 @@
 // Function to handle the 'change' event and access file information
 function handleFileChange(event) {
+    const upSubmit = document.getElementById('up-submit');
+    if (upSubmit.disabled) {
+        upSubmit.disabled = false;
+    }
+    
     const selectedFiles = event.target.files;
     if (selectedFiles.length > 0) {
         for (let i = 0; i < selectedFiles.length; i++) {

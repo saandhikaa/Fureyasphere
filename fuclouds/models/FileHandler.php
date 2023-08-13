@@ -209,6 +209,16 @@
                 $time[$item["key_"]] = $item["time_"];
             }
             
+            foreach ($listed as $key => $cloud) {
+                // Check if all files on the cloud are in the form
+                if (empty(array_diff($cloud, $files))) {
+                    $output = [
+                        "time" => $time[$key], 
+                        "key" => $key
+                    ];
+                }
+            }
+            
             return $output;
         }
     }

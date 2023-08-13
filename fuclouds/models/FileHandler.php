@@ -90,13 +90,10 @@
             // remove files
             foreach ($result as $entry) {
                 $filepath = $this->path . $entry["time_"] . "_" . $entry["filename_"];
+                $zippath = $this->path . $entry["codename_"] . "_" . $entry["key_"] . ".zip";
                 if (file_exists($filepath)) {
                     unlink($filepath);
                 }
-            }
-            
-            if ($result) {
-                $zippath = $this->path . $result[0]["codename_"] . "_" . $result[0]["key_"] . ".zip";
                 if (file_exists($zippath)) {
                     unlink($zippath);
                 }

@@ -10,21 +10,21 @@
         }
         
         public function upload() {
-            $time = time();
             $accepted = $this->slice($_POST['post']);
             $filename = $this->handleDuplicate($accepted["name"]);
             $codename = trim($_POST["codename"], "-");
-            $key = $this->generateKey($codename);
             $repost = $this->handleRePost($codename, $filename);
             
             if (!empty($repost)) {
-                $time = $repost["time"];
+                $prevtime = $repost["time"];
                 $key = $repost["key"];
                 
                 if (isset($repost["diff"])) {
                     $accepted = $this->slice($repost["diff"]);
                     $filename = $this->handleDuplicate($accepted["name"]);
                 }
+            } else {
+                $key = $this->generateKey($codename);
             }
             
             if (empty($repost) || (!empty($repost) && isset($repost["diff"]))) {
@@ -34,6 +34,7 @@
                     }
                 }
                 
+                $time = time();
                 for ($i = 0; $i < count($accepted["name"]); $i++) {
                     $files[$i]["path"] = $time . "_" . $filename[$i];
                     $files[$i]["name"] = $filename[$i];

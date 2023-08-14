@@ -55,6 +55,8 @@
                     }
                 }
                 
+                $this->updateExistingFiles();
+                
                 if (count($accepted["name"]) > 1) {
                     $this->zipper($codename . "_" . $key . ".zip", $files);
                 }
@@ -67,6 +69,17 @@
                     "key" => $key
                 ]
             ];
+        }
+        
+        public function updateExistingFiles ($codename, $key, $time, $prevtime) {
+            $query = "UPDATE $this->table SET time_ = :newTime WHERE codename_ = :codename AND key_ = :key AND time_ != :newTime";
+            
+            $this->db->query($query);
+            $this->db->bind(':newTime', $time);
+            $this->db->bind(':codename', $codename);
+            $this->db->bind(':key', $key);
+            
+            $this->db->execute();
         }
         
         // insert values into database

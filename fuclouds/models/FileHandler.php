@@ -15,6 +15,7 @@
             $codename = trim($_POST["codename"], "-");
             $repost = $this->handleRePost($codename, $filename);
             
+            // rePost variable handling
             if (!empty($repost)) {
                 $prevtime = $repost["time"];
                 $key = $repost["key"];
@@ -27,6 +28,7 @@
                 $key = $this->generateKey($codename);
             }
             
+            // uploading files, check condition: 1 new upload, 2 resubmit form, 3 new file for previous upload. 
             if (empty($repost) || (!empty($repost) && isset($repost["diff"]))) {
                 foreach ($accepted["error"] as $error) {
                     if ($error != 0) {
@@ -34,6 +36,7 @@
                     }
                 }
                 
+                // save file to cloud and database
                 $time = time();
                 for ($i = 0; $i < count($accepted["name"]); $i++) {
                     $files[$i]["path"] = $time . "_" . $filename[$i];
@@ -55,13 +58,13 @@
                     }
                 }
                 
+                // update existing file if there's new file for previous uploaded
                 if (isset($repost["diff"])) {
                     $this->updateExistingFiles($codename, $key, $time, $prevtime);
                 }
                 
-                if (count($accepted["name"]) > 1) {
-                    $this->zipper($codename . "_" . $key . ".zip", $files);
-                }
+                // create zip for multiple files
+                $this->zipper($codename . "_" . $key . ".zip", $files);
             }
             
             return [
@@ -74,6 +77,7 @@
         }
         
         public function updateExistingFiles ($codename, $key, $time, $prevtime) {
+            // update time_ in table database
             $query = "UPDATE $this->table SET time_ = :newTime WHERE codename_ = :codename AND key_ = :key AND time_ != :newTime";
             
             $this->db->query($query);
@@ -83,10 +87,12 @@
             
             $this->db->execute();
             
+            // Check if any rows are updated
             if ($this->db->rowCount() > 0) {
                 $filteredFiles = [];
-                
                 $files = scandir($this->path);
+                
+                // get list of must update file in cloud
                 foreach ($files as $file) {
                     if (strpos($file, '_') !== false) {
                         $prefix = substr($file, 0, strpos($file, '_'));
@@ -96,6 +102,7 @@
                     }
                 }
                 
+                // rename filtered files in the cloud to use new prefix
                 foreach ($filteredFiles as $file) {
                     $oldPath = $this->path . $file;
                     $newName = $time . substr($file, strpos($file, '_')); // Keep the rest of the filename after the underscore
@@ -125,7 +132,9 @@
             return $this->db->rowCount();
         }
         
+        // update availability file = NO and remove file that passed the limit
         public function autoRemove() {
+            // get list of file that passed the limit
             $currentTime = time();
             $query = "SELECT codename_, key_, time_, filename_ FROM $this->table WHERE available_ = 'YES' AND time_ < :currentTime - (duration_ * :perseconds)";
             $this->db->query($query);
@@ -133,13 +142,14 @@
             $this->db->bind(':perseconds', $this->perseconds);
             $result = $this->db->result(true);
             
-            // remove files
+            // remove file
             foreach ($result as $entry) {
                 $filepath = $this->path . $entry["time_"] . "_" . $entry["filename_"];
-                $zippath = $this->path . $entry["codename_"] . "_" . $entry["key_"] . ".zip";
                 if (file_exists($filepath)) {
                     unlink($filepath);
                 }
+                
+                $zippath = $this->path . $entry["codename_"] . "_" . $entry["key_"] . ".zip";
                 if (file_exists($zippath)) {
                     unlink($zippath);
                 }
@@ -183,6 +193,7 @@
             }
         }
         
+        // get list of file by codename and key
         public function loadFiles ($codename, $key) {
             $query = "SELECT * FROM $this->table WHERE codename_ = :codename AND key_ = :key AND available_ = 'YES'";
             $this->db->query($query);
@@ -208,7 +219,7 @@
             return $key;
         }
         
-        // cut canceled file
+        // cut canceled $_FILES by given argument
         public function slice($accepted) {
             $sliced = [];
             foreach ($_FILES['file']['name'] as $index => $file) {
@@ -239,6 +250,7 @@
             return $array;
         }
         
+        // handling for submitted form, check for codename and file
         public function handleRePost ($codename, $files) {
             $query = "SELECT filename_, key_, time_ FROM $this->table WHERE codename_ = :codename AND available_ = 'YES' ";
             $this->db->query($query);

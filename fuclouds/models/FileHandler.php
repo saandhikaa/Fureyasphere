@@ -55,7 +55,9 @@
                     }
                 }
                 
-                $this->updateExistingFiles();
+                if (isset($repost["diff"])) {
+                    $this->updateExistingFiles($codename, $key, $time, $prevtime);
+                }
                 
                 if (count($accepted["name"]) > 1) {
                     $this->zipper($codename . "_" . $key . ".zip", $files);
@@ -88,13 +90,19 @@
                 foreach ($files as $file) {
                     if (strpos($file, '_') !== false) {
                         $prefix = substr($file, 0, strpos($file, '_'));
-                        if ($prefix === $prevtime) {
+                        if ($prefix == $prevtime) {
                             $filteredFiles[] = $file;
                         }
                     }
                 }
                 
-                print_r($filteredFiles);
+                foreach ($filteredFiles as $file) {
+                    $oldPath = $this->path . $file;
+                    $newName = $time . substr($file, strpos($file, '_')); // Keep the rest of the filename after the underscore
+                    $newPath = $this->path . $newName;
+                
+                    rename($oldPath, $newPath);
+                }
             }
         }
         

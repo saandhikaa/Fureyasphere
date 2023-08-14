@@ -216,7 +216,12 @@
                         "time" => $time[$key], 
                         "key" => $key
                     ];
-                }
+                    
+                    // Check if there is a new file from the form
+                    if (!empty($diff = array_diff($files, $cloud))) {
+                        $output["diff"] = $diff;
+                    }
+                } 
             }
             
             return $output;

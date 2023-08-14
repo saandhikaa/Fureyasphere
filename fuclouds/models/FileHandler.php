@@ -17,6 +17,16 @@
             $key = $this->generateKey($codename);
             $repost = $this->handleRePost($codename, $filename);
             
+            if (!empty($repost)) {
+                $time = $repost["time"];
+                $key = $repost["key"];
+                
+                if (isset($repost["diff"])) {
+                    $accepted = $this->slice($repost["diff"]);
+                    $filename = $this->handleDuplicate($accepted["name"]);
+                }
+            }
+            
             if (empty($repost) || (!empty($repost) && isset($repost["diff"]))) {
                 foreach ($accepted["error"] as $error) {
                     if ($error != 0) {

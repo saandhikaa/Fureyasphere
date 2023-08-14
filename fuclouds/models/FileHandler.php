@@ -80,6 +80,22 @@
             $this->db->bind(':key', $key);
             
             $this->db->execute();
+            
+            if ($this->db->rowCount() > 0) {
+                $filteredFiles = [];
+                
+                $files = scandir($this->path);
+                foreach ($files as $file) {
+                    if (strpos($file, '_') !== false) {
+                        $prefix = substr($file, 0, strpos($file, '_'));
+                        if ($prefix === $prevtime) {
+                            $filteredFiles[] = $file;
+                        }
+                    }
+                }
+                
+                print_r($filteredFiles);
+            }
         }
         
         // insert values into database

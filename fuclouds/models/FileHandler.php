@@ -10,9 +10,10 @@
         }
         
         public function upload() {
-            $accepted = $this->slice();
+            $accepted = $this->slice($_POST['post']);
             $filename = $this->handleDuplicate($accepted["name"]);
             $codename = trim($_POST["codename"], "-");
+            var_dump($accepted);die;
             $key = $this->handleRePost($codename, $filename);
             
             if (empty($key)) {
@@ -163,10 +164,10 @@
         }
         
         // cut canceled file
-        public function slice() {
+        public function slice($accepted) {
             $sliced = [];
             foreach ($_FILES['file']['name'] as $index => $file) {
-                if (in_array($file, $_POST['post'])) {
+                if (in_array($file, $accepted)) {
                     $sliced['name'][] = $_FILES['file']['name'][$index];
                     $sliced['type'][] = $_FILES['file']['type'][$index];
                     $sliced['size'][] = $_FILES['file']['size'][$index];

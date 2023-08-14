@@ -10,22 +10,19 @@
         }
         
         public function upload() {
+            $time = time();
             $accepted = $this->slice($_POST['post']);
             $filename = $this->handleDuplicate($accepted["name"]);
             $codename = trim($_POST["codename"], "-");
-            var_dump($accepted);die;
-            $key = $this->handleRePost($codename, $filename);
+            $key = $this->generateKey($codename);
+            $repost = $this->handleRePost($codename, $filename);
             
-            if (empty($key)) {
+            if (empty($repost) || (!empty($repost) && isset($repost["diff"]))) {
                 foreach ($accepted["error"] as $error) {
                     if ($error != 0) {
                         return ["error" => "upload file failed"];
                     }
                 }
-                
-                $time = time();
-                $owner = "anonymous";
-                $key = $this->generateKey($codename);
                 
                 for ($i = 0; $i < count($accepted["name"]); $i++) {
                     $files[$i]["path"] = $time . "_" . $filename[$i];
@@ -33,7 +30,7 @@
                     
                     $values = [
                         "time" => $time, 
-                        "owner" => $owner,
+                        "owner" => "anonymous",
                         "codename" => $codename,
                         "key" => $key, 
                         "filename" => $filename[$i], 

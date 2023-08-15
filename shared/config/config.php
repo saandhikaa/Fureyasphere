@@ -5,8 +5,4 @@
     define('DB_USER', 'root');
     define('DB_PASS', '');
     define('DB_NAME', 'clouds');
-    
-    define('UP_TOKEN', 'UPFreyanashifa');
-    define('SR_TOKEN', 'SRFreyanashifa');
-    define('DL_TOKEN', 'DLFreyanashifa');
 ?>

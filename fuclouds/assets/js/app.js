@@ -70,7 +70,7 @@ function clickActiveInput() {
 
 
 function updateURL() {
-    const form = document.getElementById('searching');
+    const form = document.getElementById('sr-form');
     
     var url = form.getAttribute('action');
     var codename = document.getElementById('codename').value;

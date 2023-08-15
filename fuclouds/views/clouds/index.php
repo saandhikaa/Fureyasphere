@@ -1,5 +1,5 @@
 <div>
-    <form action="<?= BASEURL ?>/Clouds/result" method="post" id="searching">
+    <form action="<?= BASEURL ?>/Clouds/result" method="post" id="sr-form">
         <label for="codename">codename: </label><br/>
         <input type="text" id="codename" name="codename" oninput="validateInput(this)" required><br/>
         <label for="key">key: </label><br/>

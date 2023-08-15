@@ -28,11 +28,11 @@
         
         public function result ($codename = null, $key = null) {
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                if ($_POST["token"] === UP_TOKEN) {
+                if ($_POST["submit"] === "Upload") {
                     $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
-                } elseif ($_POST["token"] === SR_TOKEN) {
+                } elseif ($_POST["submit"] === "Search") {
                     $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($_POST["codename"], $_POST["key"]);
-                } elseif ($_POST["token"] === DL_TOKEN) {
+                } elseif ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
                 }
             } elseif (!is_null($codename)  && !is_null($key)) {

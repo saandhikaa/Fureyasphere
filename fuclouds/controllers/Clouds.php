@@ -27,7 +27,7 @@
         }
         
         public function result ($codename = null, $key = null) {
-            if (isset($_POST["token"])) {
+            if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["token"] === UP_TOKEN) {
                     $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
                 } elseif ($_POST["token"] === SR_TOKEN) {

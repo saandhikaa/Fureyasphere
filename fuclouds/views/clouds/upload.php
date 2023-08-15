@@ -11,8 +11,7 @@
         <input type="text" id="codename" name="codename" oninput="validateInput(this)" autocomplete="off" required>
         <br>
         <br>
-        <input type="hidden" name="token" value="<?= UP_TOKEN ?>">
-        <input type="submit" name="submit" id="up-submit" value="Upload" disabled>
+        <input type="submit" name="submit" value="Upload" id="up-submit" disabled>
     </form>
     
     <br>

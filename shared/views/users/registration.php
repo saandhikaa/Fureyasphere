@@ -18,6 +18,8 @@
             <button type="button" id="toggle-confirm-password-visibility" onclick="toggleVisibility('confirm-password')">Show</button><br>
         </div>
         
+        <span id="password-match-status"></span><br>
+        
         <div>
             <input type="checkbox" id="agreement" name="agreement" required>
             <label for="agreement">I agree to the <a href="">Privacy</a> and <a href="">Terms</a></label><br>

@@ -19,7 +19,7 @@
         
         public function upload() {
             $this->data["title"] = ucwords($this->app) . ": Upload";
-            $this->data["appScript"] .= '<script type="text/javascript">createInput(true);</script>';
+            $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>';
             
             $this->view("shared", "templates/header", $this->data);
             $this->view($this->app, "clouds/upload");

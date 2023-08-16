@@ -38,7 +38,7 @@ function createStagedFiles(selectedFile) {
     stagedContainer.appendChild(filelist);
 }
 
-function createInput(isRequired = false) {
+function createInput() {
     const fileUploadContainer = document.getElementById('file-upload-container');
     
     // Create the input element with the specified attributes
@@ -50,9 +50,6 @@ function createInput(isRequired = false) {
     inputFile.classList.add('active-input');
     inputFile.addEventListener('change', handleFileChange);
     inputFile.multiple = true;
-     if (isRequired) {
-         inputFile.required = true;
-     }
      
     // Append the input element to the file input container div
     fileUploadContainer.appendChild(inputFile);

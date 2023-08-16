@@ -1,14 +1,10 @@
 // Function to handle the 'change' event and access file information
 function handleFileChange(event) {
-    const upSubmit = document.getElementById('up-submit');
-    if (upSubmit.disabled) {
-        upSubmit.disabled = false;
-    }
-    
     const selectedFiles = event.target.files;
     if (selectedFiles.length > 0) {
         for (let i = 0; i < selectedFiles.length; i++) {
             createStagedFiles(selectedFiles[i].name);
+            submitButtonHandler();
         }
     }
     event.target.classList.remove('active-input');
@@ -18,6 +14,7 @@ function handleFileChange(event) {
 function createStagedFiles(selectedFile) {
     const stagedContainer = document.getElementById('staged-files');
     const filelist = document.createElement('li');
+    filelist.classList.add('accepted-file');
     
     const filepost = document.createElement('input');
     filepost.type = 'hidden';
@@ -32,6 +29,7 @@ function createStagedFiles(selectedFile) {
     cancel.textContent = 'Cancel';
     cancel.addEventListener('click', function() {
         stagedContainer.removeChild(filelist);
+        submitButtonHandler();
     });
     
     filelist.appendChild(filepost);
@@ -64,6 +62,21 @@ function clickActiveInput() {
     var activeInput = document.querySelector('.active-input');
     if (activeInput) {
         activeInput.click();
+    }
+}
+
+function submitButtonHandler() {
+    const upSubmit = document.getElementById('up-submit');
+    const filelist = document.querySelectorAll('#staged-files .accepted-file');
+    
+    if (filelist.length > 0) {
+        if (upSubmit.disabled) {
+            upSubmit.disabled = false;
+        }
+    } else {
+        if (!upSubmit.disabled) {
+            upSubmit.disabled = true;
+        }
     }
 }
 

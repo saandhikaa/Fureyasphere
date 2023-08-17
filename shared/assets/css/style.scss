@@ -1,0 +1,11 @@
+#sign-up-form {
+    input[type="password"]::-webkit-outer-spin-button,
+    input[type="password"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    input[type="password"]::-ms-reveal {
+        display: none;
+    }
+}

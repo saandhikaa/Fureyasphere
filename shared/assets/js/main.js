@@ -1,3 +1,6 @@
+const greenhex = '#04BA71';
+const redhex = '#FF0000';
+
 function passwordStatus() {
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');
@@ -5,8 +8,10 @@ function passwordStatus() {
 
     if (password.value === confirmPassword.value) {
         passwordMatchStatus.textContent = 'Passwords match';
+        passwordMatchStatus.style.color = greenhex;
     } else {
         passwordMatchStatus.textContent = 'Passwords do not match';
+        passwordMatchStatus.style.color = redhex;
     }
 }
 

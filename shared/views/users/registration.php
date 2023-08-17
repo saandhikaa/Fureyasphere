@@ -3,7 +3,8 @@
         <h1>Sign Up</h1>
         <div class="field">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" autocomplete="off" required>
+            <input type="text" id="username" name="username" oninput="checkUsernameAvailability()" autocomplete="off" required>
+            <span id="username-message"></span>
         </div>
         
         <div class="field">

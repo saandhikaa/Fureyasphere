@@ -30,5 +30,18 @@
                 }
             }
         }
+        
+        public function setup() {
+            $tableName = "users";
+            
+            $this->model($this->app, "TableMaster")->createTable($tableName);
+            
+            $this->data["title"] = "Setup";
+            $this->data["table"] = $this->model($this->app, "TableMaster")->getTableStructure($tableName);
+            
+            $this->view($this->app, "templates/header", $this->data);
+            $this->view($this->app, "users/setup", $this->data);
+            $this->view($this->app, "templates/footer");
+        }
     }
 ?>

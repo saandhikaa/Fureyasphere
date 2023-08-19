@@ -3,7 +3,7 @@
         "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
         "time_" => "INT(10) NOT NULL", 
         "username_" => "VARCHAR(20) NOT NULL", 
-        "passowrd_" => "VARCHAR(255) NOT NULL", 
+        "password_" => "VARCHAR(255) NOT NULL", 
         "level_" => "INT(2) NOT NULL"
     ];
     

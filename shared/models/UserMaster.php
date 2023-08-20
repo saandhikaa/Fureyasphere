@@ -32,5 +32,13 @@
             
             return $this->db->rowCount() > 0;
         }
+        
+        public function signIn ($username, $password) {
+            $this->db->query("SELECT * FROM $this->table WHERE username_ = :username");
+            $this->db->bind(':username', $username);
+            $userData = $this->db->result();
+            
+            return ($userData && password_verify($password, $userData['password_']));
+        }
     }
 ?>

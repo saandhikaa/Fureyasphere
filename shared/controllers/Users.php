@@ -34,10 +34,21 @@
         }
         
         public function login() {
+            if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
+                if ($_POST["submit"] === "Sign In") {
+                    if ($this->model($this->app, "UserMaster")->signIn($_POST["username"], $_POST["password"])) {
+                        $this->index();
+                        exit;
+                    } else {
+                        $this->data["sign-in-failed"] = "Username/password incorrect";
+                    }
+                }
+            }
+            
             $this->data["title"] = "Sign In";
             
             $this->view($this->app, "templates/header", $this->data);
-            $this->view($this->app, "users/login");
+            $this->view($this->app, "users/login", $this->data);
             $this->view($this->app, "templates/footer", $this->data);
         }
         

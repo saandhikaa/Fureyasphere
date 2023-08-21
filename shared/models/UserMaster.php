@@ -7,6 +7,12 @@
             $this->db = new Database;
         }
         
+        public function checkSignInInfo() {
+            if (isset($_SESSION["sign-in"]["username"])) {
+                return !$this->checkUsername($_SESSION["sign-in"]["username"]);
+            }
+        }
+        
         public function checkUsername ($username) {
             $query = "SELECT username_ FROM $this->table WHERE username_ = :username";
             $this->db->query($query);

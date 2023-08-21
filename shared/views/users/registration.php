@@ -1,5 +1,5 @@
 <main>
-    <form action="" method="post" id="sign-up-form">
+    <form action="<?= BASEURL ?>/Users/registration" method="post" id="sign-up-form">
         <h1>Sign Up</h1>
         <div class="field">
             <label for="username">Username:</label><br>
@@ -26,6 +26,6 @@
             <label for="agreement">I agree to the <a href="">Privacy</a> and <a href="">Terms</a></label><br>
         </div>
         
-        <input type="submit" name="submit" value="Sign Up">
+        <input type="submit" name="submit" id="su-submit" value="Sign Up">
     </form>
 </main>

@@ -27,7 +27,7 @@
             $this->db->bind(':time', time());
             $this->db->bind(':username', $username);
             $this->db->bind(':password', $hashedPassword);
-            $this->db->bind(':level', '1');
+            $this->db->bind(':level', '3');
             $this->db->execute();
             
             return $this->db->rowCount() > 0;
@@ -38,7 +38,13 @@
             $this->db->bind(':username', $username);
             $userData = $this->db->result();
             
-            return ($userData && password_verify($password, $userData['password_']));
+            if ($userData && password_verify($password, $userData["password_" ])) {
+                $_SESSION["sign-in"]["username"] = $userData["username_"];
+                $_SESSION["sign-in"]["level"] = $userData["level_"];
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>

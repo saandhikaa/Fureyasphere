@@ -23,11 +23,7 @@
         // Handle the AJAX request
         public function usernameavailability() {
             if (isset($_POST["username"])) {
-                if (checkUsername($_POST["username"])) {
-                    echo "available";
-                } else {
-                    echo "taken";
-                }
+                echo ($this->model($this->app, "UserMaster")->checkUsername($_POST["username"])) ? "available" : "taken";
             }
         }
         

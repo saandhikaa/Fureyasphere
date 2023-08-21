@@ -33,6 +33,14 @@
             $this->view($this->app, "templates/footer", $this->data);
         }
         
+        public function login() {
+            $this->data["title"] = "Sign In";
+            
+            $this->view($this->app, "templates/header", $this->data);
+            $this->view($this->app, "users/login");
+            $this->view($this->app, "templates/footer", $this->data);
+        }
+        
         // Handle the AJAX request
         public function usernameavailability() {
             if (isset($_POST["username"])) {

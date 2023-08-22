@@ -26,27 +26,31 @@
             $this->view("shared", "templates/footer", $this->data);
         }
         
-        public function result ($codename = null, $key = null) {
-            if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
+        public function result ($codename = null, $key = null, $status = "") {
+            if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["submit"] === "Upload") {
-                    $this->data["result"] = $this->model($this->app, "FileHandler")->upload();
+                    $result = $this->model($this->app, "FileHandler")->upload() . "/uploaded";
                 } elseif ($_POST["submit"] === "Search") {
-                    $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($_POST["codename"], $_POST["key"]);
+                    $result = $_POST["keyword"];
                 } elseif ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
+                    $result = $_POST["codename"] . "/" . $_POST["key"];
                 }
-            } elseif (!is_null($codename)  && !is_null($key)) {
-                $this->data["result"]["files"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
-            } else {
-                $this->index();
-                exit();
+                header("Location: " . BASEURL . "/Clouds/result/" . $result);
+                exit;
+            } elseif (is_null($codename) || is_null($key)) {
+                header("Location: " . BASEURL . "/Clouds");
+                exit;
             }
             
-            $this->data["title"] = "Result";
+            $this->data["title"] = ucwords($this->app) . ": Result";
+            $this->data["result"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
+            $this->data["status"] = $status;
+            $this->data["keyword"] = $codename . "/" . $key;
             
             $this->view("shared", "templates/header", $this->data);
             $this->view($this->app, "clouds/result", $this->data);
-            $this->view("shared", "templates/header");
+            $this->view("shared", "templates/footer");
         }
         
         public function setup() {

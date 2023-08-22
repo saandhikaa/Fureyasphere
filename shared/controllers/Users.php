@@ -10,7 +10,7 @@
         
         public function index() {
             if (!$this->model($this->app, "UserMaster")->checkSignInInfo()) {
-                $this->login();
+                header("Location: " . BASEURL . "/Users/login");
                 exit;
             }
             
@@ -26,7 +26,7 @@
                 if ($_POST["submit"] === "Sign Up") {
                     if ($this->model($this->app, "UserMaster")->signUp($_POST["username"], $_POST["password"])) {
                         if ($this->model($this->app, "UserMaster")->signIn($_POST["username"], $_POST["password"])) {
-                            $this->index();
+                            header("Location: " . BASEURL . "/Users");
                             exit;
                         }
                     } else {
@@ -46,7 +46,7 @@
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign In") {
                     if ($this->model($this->app, "UserMaster")->signIn($_POST["username"], $_POST["password"])) {
-                        $this->index();
+                        header("Location: " . BASEURL . "/Users");
                         exit;
                     } else {
                         $this->data["sign-in-failed"] = "Username/password incorrect";

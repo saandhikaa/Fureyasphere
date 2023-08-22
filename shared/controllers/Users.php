@@ -51,6 +51,11 @@
                     } else {
                         $this->data["sign-in-failed"] = "Username/password incorrect";
                     }
+                } elseif ($_POST["submit"] === "Sign Out") {
+                    session_destroy();
+                    unset($_SESSION["sign-in"]);
+                    header("Location: " . BASEURL . "/Users/login");
+                    exit;
                 }
             }
             

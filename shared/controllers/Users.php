@@ -9,7 +9,16 @@
         }
         
         public function index() {
+            if (!$this->model($this->app, "UserMaster")->checkSignInInfo()) {
+                $this->login();
+                exit;
+            }
             
+            $this->data["title"] = "User Account";
+            
+            $this->view($this->app, "templates/header", $this->data);
+            $this->view($this->app, "users/index");
+            $this->view($this->app, "templates/footer", $this->data);
         }
         
         public function registration() {

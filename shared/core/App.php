@@ -8,11 +8,8 @@
         public function __construct() {
             $url = $this->parseURL();
             
-            // getting all app directoryPath 
-            foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
-                if (basename($app) != "shared") {
-                    $this->controllerDir[] = __DIR__ . "/../../" . basename($app) . "/controllers/";
-                }
+            foreach (array_keys(self::getAppList()) as $app) {
+                $this->controllerDir[] = __DIR__ . "/../../" . $app . "/controllers/";
             }
             
             // get controller from url
@@ -54,6 +51,25 @@
                 $url = explode('/', $url);
                 return $url;
             }
+        }
+        
+        // getting all app directory path
+        public static function getAppList() {
+            $appList = [];
+            
+            foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
+                $appName = basename($app);
+                $controllers = [];
+                
+                if ($appName !== "shared") {
+                    foreach (glob($app . '/controllers/*.php') as $controllerFile) {
+                        $controllers[] = basename($controllerFile, '.php');
+                    }
+                    $appList[$appName] = $controllers;
+                }
+            }
+            
+            return $appList;
         }
     }
 ?>

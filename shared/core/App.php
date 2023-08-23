@@ -71,5 +71,19 @@
             
             return $appList;
         }
+        
+        public static function getAppListNavigation() {
+            $apps = self::getAppList();
+            $result = [];
+            
+            foreach ($apps as $key => $app) {
+                preg_match('/-(\d+)/', $key, $matches);
+                $newKey = $matches[1];
+                $result[$newKey] = $app;
+            }
+            
+            ksort($result);
+            return $result;
+        }
     }
 ?>

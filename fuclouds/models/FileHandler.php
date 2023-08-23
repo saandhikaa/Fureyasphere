@@ -67,13 +67,7 @@
                 $this->zipper($codename . "_" . $key . ".zip", $files);
             }
             
-            return [
-                "files" => $this->loadFiles($codename, $key), 
-                "status" => [
-                    "codename" => $codename,
-                    "key" => $key
-                ]
-            ];
+            return $codename . "/" . $key;
         }
         
         public function updateExistingFiles ($codename, $key, $time, $prevtime) {

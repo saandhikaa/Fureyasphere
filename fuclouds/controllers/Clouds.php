@@ -10,6 +10,12 @@
         }
         
         public function index() {
+            if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
+                $url = BASEURL . "/Clouds/result/" . $_POST["keyword"];
+                header("Location: $url");
+                exit;
+            }
+            
             $this->data["title"] = ucwords($this->app) . ": Search";
             
             $this->view("shared", "templates/header", $this->data);
@@ -18,6 +24,12 @@
         }
         
         public function upload() {
+            if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
+                $url = BASEURL . "/Clouds/result/" . $this->model($this->app, "FileHandler")->upload() . "/uploaded";
+                header("Location: $url");
+                exit;
+            }
+            
             $this->data["title"] = ucwords($this->app) . ": Upload";
             $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>';
             
@@ -28,16 +40,9 @@
         
         public function result ($codename = null, $key = null, $status = "") {
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                if ($_POST["submit"] === "Upload") {
-                    $result = $this->model($this->app, "FileHandler")->upload() . "/uploaded";
-                } elseif ($_POST["submit"] === "Search") {
-                    $result = $_POST["keyword"];
-                } elseif ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
+                if ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
-                    $result = $_POST["codename"] . "/" . $_POST["key"];
                 }
-                header("Location: " . BASEURL . "/Clouds/result/" . $result);
-                exit;
             } elseif (is_null($codename) || is_null($key)) {
                 header("Location: " . BASEURL . "/Clouds");
                 exit;

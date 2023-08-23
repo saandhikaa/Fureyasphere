@@ -79,19 +79,6 @@ function submitButtonHandler() {
 
 
 
-function updateURL() {
-    const form = document.getElementById('sr-form');
-    
-    var url = form.getAttribute('action');
-    var codename = document.getElementById('codename').value;
-    var key = document.getElementById('key').value;
-    
-    form.action = url + '/' + codename + '/' + key;
-    form.submit();
-}
-
-
-
 function validateInput(inputElement) {
     inputElement.value = inputElement.value.replace(/[^a-zA-Z0-9\-]/g, "");
 }

@@ -12,4 +12,7 @@
         <br>
         <input type="submit" id="up-submit" name="submit" value="Upload" disabled>
     </form>
+    <br>
+    <br>
+    <a href="<?= BASEURL ?>/Fuclouds/search">Search</a>
 </div>

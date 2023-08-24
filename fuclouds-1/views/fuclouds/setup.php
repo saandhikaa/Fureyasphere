@@ -43,7 +43,7 @@
         </table>
     <?php endif ?>
     
-    <form action="<?= BASEURL ?>/Clouds/setup" method="post">
+    <form action="" method="post">
         <?php generateFormFields($columns) ?>
         <input type="submit" name="submit" value="setup">
     </form>

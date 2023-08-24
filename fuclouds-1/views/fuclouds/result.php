@@ -10,7 +10,7 @@
                     <p><?= $file["filename_"] ?></p>
                     <p><?= $file["filesize_"] ?></p>
                 </div>
-                <form action="<?= BASEURL ?>/Clouds/result" method="post">
+                <form action="" method="post">
                     <?php $filepath = $file["time_"] . "_" . $file["filename_"] ?>
                     <input type="hidden" name="codename" value="<?= $file['codename_'] ?>">
                     <input type="hidden" name="key" value="<?= $file['key_'] ?>">
@@ -23,7 +23,7 @@
     </ul>
     
     <?php if (count($data["result"]) > 1): ?>
-        <form action="<?= BASEURL ?>/Clouds/result" method="post">
+        <form action="" method="post">
             <?php $filepath = $data["result"][0]["codename_"] . "_" . $data["result"][0]["key_"] . ".zip" ?>
             <input type="hidden" name="codename" value="<?= $file['codename_'] ?>">
             <input type="hidden" name="key" value="<?= $file['key_'] ?>">

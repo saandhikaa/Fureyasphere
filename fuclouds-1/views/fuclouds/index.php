@@ -9,5 +9,5 @@
     </form>
     <br>
     <br>
-    <a href="<?= BASEURL ?>/Clouds/upload">Upload</a>
+    <a href="<?= BASEURL ?>/Fuclouds/upload">Upload</a>
 </div>

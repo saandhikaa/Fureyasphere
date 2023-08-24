@@ -1,40 +1,45 @@
 <?php
-    class Clouds extends Controller {
-        private $app = "fuclouds";
+    class Fuclouds extends Controller {
+        private $app, $class;
         private $data = [];
-        private $table = "uploads";
         
         public function __construct() {
+            $this->class = __CLASS__;
+            $this->app = basename(dirname(__DIR__));
+            
             $this->model($this->app, "FileHandler")->autoRemove();
+            
+            $this->data["app"] = $this->class;
+            $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/shared/assets/css/style.css">';
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>';
         }
         
         public function index() {
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                $url = BASEURL . "/Clouds/result/" . $_POST["keyword"];
+                $url = BASEURL . "/$this->class/result/" . $_POST["keyword"];
                 header("Location: $url");
                 exit;
             }
             
-            $this->data["title"] = ucwords($this->app) . ": Search";
+            $this->data["title"] = $this->class . ": Search";
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "clouds/index");
+            $this->view($this->app, "fuclouds/index");
             $this->view("shared", "templates/footer", $this->data);
         }
         
         public function upload() {
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                $url = BASEURL . "/Clouds/result/" . $this->model($this->app, "FileHandler")->upload() . "/uploaded";
+                $url = BASEURL . "/$this->class/result/" . $this->model($this->app, "FileHandler")->upload() . "/uploaded";
                 header("Location: $url");
                 exit;
             }
             
-            $this->data["title"] = ucwords($this->app) . ": Upload";
+            $this->data["title"] = $this->class . ": Upload";
             $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>';
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "clouds/upload");
+            $this->view($this->app, "fuclouds/upload");
             $this->view("shared", "templates/footer", $this->data);
         }
         
@@ -44,29 +49,31 @@
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
                 }
             } elseif (is_null($codename) || is_null($key)) {
-                header("Location: " . BASEURL . "/Clouds");
+                header("Location: " . BASEURL . "/$this->class");
                 exit;
             }
             
-            $this->data["title"] = ucwords($this->app) . ": Result";
+            $this->data["title"] = $this->class . ": Result";
             $this->data["result"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
             $this->data["status"] = $status;
-            $this->data["keyword"] = $codename . "/" . $key;
+            $this->data["keyword"] = "$codename/$key";
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "clouds/result", $this->data);
-            $this->view("shared", "templates/footer");
+            $this->view($this->app, "fuclouds/result", $this->data);
+            $this->view("shared", "templates/footer", $this->data);
         }
         
         public function setup() {
-            $this->model("shared", "TableMaster")->createTable($this->table);
+            $tableName = "uploads";
             
-            $this->data["title"] = "Setup";
-            $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($this->table);
+            $this->model("shared", "TableMaster")->createTable($tableName);
+            
+            $this->data["title"] = $this->class . ": Setup";
+            $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($tableName);
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "clouds/setup", $this->data);
-            $this->view("shared", "templates/footer");
+            $this->view($this->app, "fuclouds/setup", $this->data);
+            $this->view("shared", "templates/footer", $this->data);
         }
     }
 ?>

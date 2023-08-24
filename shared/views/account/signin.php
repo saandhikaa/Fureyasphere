@@ -1,5 +1,5 @@
 <main>
-    <form action="<?= BASEURL ?>/Users/login" method="post" id="sign-in-form">
+    <form action="" method="post" id="sign-in-form">
         <h1>Sign In</h1>
         <div class="field">
             <label for="username">Username:</label><br>
@@ -22,6 +22,6 @@
         
         <br>
         
-        <p>Don't have an account?  <a href="<?= BASEURL ?>/Users/registration">Sign Up</a></p>
+        <p>Don't have an account?  <a href="<?= $data['link']['signup'] ?>">Sign Up</a></p>
     </form>
 </main>

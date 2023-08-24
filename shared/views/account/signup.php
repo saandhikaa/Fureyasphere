@@ -1,5 +1,5 @@
 <main>
-    <form action="<?= BASEURL ?>/Users/registration" method="post" id="sign-up-form">
+    <form action="" method="post" id="sign-up-form">
         <h1>Sign Up</h1>
         <div class="field">
             <label for="username">Username:</label><br>

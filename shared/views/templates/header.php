@@ -22,3 +22,18 @@
                 <button type="button">menu</button>
             </div>
         </header>
+        
+        <nav>
+            <ul>
+                <li><a href="<?= BASEURL ?>/Home">Home</a></li>
+                <li><a href="<?= BASEURL ?>/Account">Account</a></li>
+            </ul>
+            
+            <ul>
+                <?php foreach (App::getAppListNavigation() as $appControllers): ?>
+                    <?php foreach ($appControllers as $controller): ?>
+                        <li><a href="<?= BASEURL .  '/' . $controller ?>"><?= $controller ?></a></li>
+                    <?php endforeach ?>
+                <?php endforeach ?>
+            </ul>
+        </nav>

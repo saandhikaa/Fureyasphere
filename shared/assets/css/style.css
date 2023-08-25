@@ -1,3 +1,16 @@
+header {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
 form input[type="password"]::-webkit-outer-spin-button,
 form input[type="password"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

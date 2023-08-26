@@ -1,2 +1,1 @@
-<a href="<?= BASEURL ?>/Clouds">Clouds service</a><br><br>
-<a href="<?= BASEURL ?>/Users">User Account</a>
+<h1>Welcome to Fureya Cloud Service</h1>

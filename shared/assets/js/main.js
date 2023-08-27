@@ -28,38 +28,42 @@ function toggleVisibility(id) {
     }
 }
 
-var typingTimer;
-var doneTypingInterval = 1000; // 1 second
 
 function checkUsernameAvailability() {
-    var usernameInput = document.getElementById("username");
-    var messageElement = document.getElementById("username-message");
-    var username = usernameInput.value;
+    const usernameInput = document.getElementById("username");
+    const messageElement = document.getElementById("username-message");
+    const username = usernameInput.value;
 
+    let typingTimer;
+    let url = window.location.href;
+    url.slice(0, url.lastIndexOf('/'));
+        
     // Clear the previous timer
     clearTimeout(typingTimer);
     messageElement.textContent = "";
     
     // Start the timer after the user stops typing for a certain interval
     if (username.length > 3) {
-        typingTimer = setTimeout(function() {
+        typingTimer = setTimeout(() => {
             // Perform AJAX request to the server
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "http://127.0.0.1:8080/fureya-cloud-service/Users/usernameavailability", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    if (xhr.responseText === "taken") {
-                        messageElement.textContent = "Already taken.";
-                        messageElement.style.color = redhex;
-                    } else {
-                        messageElement.textContent = "Available.";
-                        messageElement.style.color = greenhex;
-                    }
+            fetch(url + "usernameavailability", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `username=${encodeURIComponent(username)}`
+            })
+            .then(response => response.text())
+            .then(text => {
+                if (text === "taken") {
+                    messageElement.textContent = "Already taken.";
+                    messageElement.style.color = redhex;
+                } else {
+                    messageElement.textContent = "Available.";
+                    messageElement.style.color = greenhex;
                 }
-            };
-            xhr.send("username=" + encodeURIComponent(username));
-        }, doneTypingInterval);
+            });
+        }, 1000);
     } else {
         // Clear the message and reset the color
         messageElement.textContent = "";

@@ -16,7 +16,7 @@
         }
         
         public function index() {
-            if (!$this->model($this->app, "UserMaster")->checkSignInInfo()) {
+            if (!$this->model($this->app, "AccountControl")->checkSignInInfo()) {
                 header("Location: " . BASEURL . "/$this->class/signin");
                 exit;
             }
@@ -28,11 +28,22 @@
             $this->view($this->app, "templates/footer", $this->data);
         }
         
-        public function signup() {
+        public function signup ($parameter = null) {
+            if ($parameter === "checkusernameavailability") {
+                // Handle the AJAX request
+                if (isset($_POST["username"])) {
+                    echo ($this->model($this->app, "AccountControl")->checkUsername($_POST["username"])) ? "available" : "taken";
+                    exit;
+                }
+            } elseif (!is_null($parameter)) {
+                header("Location: " . BASEURL . "/$this->class/signup");
+                exit;
+            }
+            
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign Up") {
-                    if ($this->model($this->app, "UserMaster")->signUp($_POST["username"], $_POST["password"])) {
-                        if ($this->model($this->app, "UserMaster")->signIn($_POST["username"], $_POST["password"])) {
+                    if ($this->model($this->app, "AccountControl")->signUp($_POST["username"], $_POST["password"])) {
+                        if ($this->model($this->app, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
                             header("Location: " . BASEURL . "/$this->class");
                             exit;
                         }
@@ -52,7 +63,7 @@
         public function signin() {
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign In") {
-                    if ($this->model($this->app, "UserMaster")->signIn($_POST["username"], $_POST["password"])) {
+                    if ($this->model($this->app, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
                         header("Location: " . BASEURL . "/$this->class");
                         exit;
                     } else {
@@ -76,13 +87,6 @@
                     header("Location: " . BASEURL . "/$this->class/signin");
                     exit;
                 }
-            }
-        }
-        
-        // Handle the AJAX request
-        public function usernameavailability() {
-            if (isset($_POST["username"])) {
-                echo ($this->model($this->app, "UserMaster")->checkUsername($_POST["username"])) ? "available" : "taken";
             }
         }
         

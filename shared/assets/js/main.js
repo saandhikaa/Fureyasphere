@@ -35,9 +35,7 @@ function checkUsernameAvailability() {
     const username = usernameInput.value;
 
     let typingTimer;
-    let url = window.location.href;
-    url.slice(0, url.lastIndexOf('/'));
-        
+    
     // Clear the previous timer
     clearTimeout(typingTimer);
     messageElement.textContent = "";
@@ -45,8 +43,11 @@ function checkUsernameAvailability() {
     // Start the timer after the user stops typing for a certain interval
     if (username.length > 3) {
         typingTimer = setTimeout(() => {
+            let url = window.location.href;
+            url += "/checkusernameavailability";
+
             // Perform AJAX request to the server
-            fetch(url + "usernameavailability", {
+            fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"

@@ -1,5 +1,5 @@
 <?php
-    class UserMaster {
+    class AccountControl {
         private $db;
         private $table = "users";
         

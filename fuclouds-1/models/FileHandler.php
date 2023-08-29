@@ -1,7 +1,7 @@
 <?php
     class FileHandler {
         private $db;
-        private $path = __DIR__ . "/../uploads/";
+        private $path = __DIR__ . "/../uploads-userfilesbox/";
         private $table = "uploads";
         private $perseconds = 24 * 60 * 60;
         
@@ -277,6 +277,20 @@
             }
             
             return $output;
+        }
+        
+        public function createUploadsDir() {
+            $directoryPath = $this->path;
+            
+            if (!is_dir($directoryPath)) {
+                if (mkdir($directoryPath, 0777, true)) {
+                    echo "Uploads directory created.";
+                } else {
+                    echo "Failed to create uploads directory.";
+                }
+            } else {
+                echo "Uploads directory already exists.";
+            }
         }
     }
 ?>

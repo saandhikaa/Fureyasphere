@@ -1,1 +1,1 @@
-<h1>Welcome to Fureya Cloud Service</h1>
+<h1>Welcome to Fureya Clouds Service</h1>

@@ -4,15 +4,12 @@
         private $data = [];
         
         public function __construct() {
-            $this->class = __CLASS__;
+            $this->class = strtolower(__CLASS__);
             $this->app = basename(dirname(__DIR__));
             
             $this->data["app"] = $this->class;
             $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->app . '/assets/css/style.css">';
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/main.js"></script>';
-            
-            $this->data["link"]["signup"] = BASEURL . "/$this->class/signup";
-            $this->data["link"]["signout"] = BASEURL . "/$this->class/signout";
         }
         
         public function index() {
@@ -21,10 +18,10 @@
                 exit;
             }
             
-            $this->data["title"] = "Account";
+            $this->data["title"] = "Fureya: Account";
             
             $this->view($this->app, "templates/header", $this->data);
-            $this->view($this->app, "account/index", $this->data);
+            $this->view($this->app, "$this->class/index", $this->data);
             $this->view($this->app, "templates/footer", $this->data);
         }
         
@@ -53,10 +50,10 @@
                 }
             }
             
-            $this->data["title"] = "Sign Up";
+            $this->data["title"] = "Fureya: Sign Up";
             
             $this->view($this->app, "templates/header", $this->data);
-            $this->view($this->app, "account/signup");
+            $this->view($this->app, "$this->class/signup", $this->data);
             $this->view($this->app, "templates/footer", $this->data);
         }
         
@@ -72,22 +69,18 @@
                 }
             }
             
-            $this->data["title"] = "Sign In";
+            $this->data["title"] = "Fureya: Sign In";
             
             $this->view($this->app, "templates/header", $this->data);
-            $this->view($this->app, "account/signin", $this->data);
+            $this->view($this->app, "$this->class/signin", $this->data);
             $this->view($this->app, "templates/footer", $this->data);
         }
         
         public function signout() {
-            if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
-                 if ($_POST["submit"] === "Sign Out") {
-                    session_destroy();
-                    unset($_SESSION["sign-in"]);
-                    header("Location: " . BASEURL . "/$this->class/signin");
-                    exit;
-                }
-            }
+            session_destroy();
+            unset($_SESSION["sign-in"]);
+            header("Location: " . BASEURL . "/$this->class/signin");
+            exit;
         }
         
         public function setup() {
@@ -95,11 +88,11 @@
             
             $this->model($this->app, "TableMaster")->createTable($tableName);
             
-            $this->data["title"] = "Setup";
+            $this->data["title"] = "Fureya: Setup";
             $this->data["table"] = $this->model($this->app, "TableMaster")->getTableStructure($tableName);
             
             $this->view($this->app, "templates/header", $this->data);
-            $this->view($this->app, "account/setup", $this->data);
+            $this->view($this->app, "$this->class/setup", $this->data);
             $this->view($this->app, "templates/footer");
         }
     }

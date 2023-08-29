@@ -3,6 +3,4 @@
 <br>
 <br>
 
-<form action="<?= $data['link']['signout'] ?>" method="post">
-    <input type="submit" name="submit" value="Sign Out">
-</form>
+<a href="<?= BASEURL . '/' . $data['app'] ?>/signout">Sign Out</a>

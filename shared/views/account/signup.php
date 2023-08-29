@@ -28,4 +28,6 @@
         
         <input type="submit" name="submit" id="su-submit" value="Sign Up">
     </form>
+    
+    <p>Already have an account?  <a href="<?= BASEURL . '/' . $data['app'] ?>/signin">Sign In</a></p>
 </main>

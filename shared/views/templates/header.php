@@ -14,7 +14,7 @@
 <body>
     <div id="container">
         <header>
-            <h1><?= $data["app"] ?></h1>
+            <h1><?= ucfirst($data["app"]) ?></h1>
             <div class="nav-button">
                 <?php if (isset($_SESSION["sign-in"])): ?>
                     <strong><?= $_SESSION["sign-in"]["username"] ?></strong>
@@ -25,14 +25,14 @@
         
         <nav>
             <ul>
-                <li><a href="<?= BASEURL ?>/Home">Home</a></li>
-                <li><a href="<?= BASEURL ?>/Account">Account</a></li>
+                <li><a href="<?= BASEURL ?>/home">Home</a></li>
+                <li><a href="<?= BASEURL ?>/account">Account</a></li>
             </ul>
             
             <ul>
                 <?php foreach (App::getAppListNavigation() as $appControllers): ?>
                     <?php foreach ($appControllers as $controller): ?>
-                        <li><a href="<?= BASEURL .  '/' . $controller ?>"><?= $controller ?></a></li>
+                        <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
                     <?php endforeach ?>
                 <?php endforeach ?>
             </ul>

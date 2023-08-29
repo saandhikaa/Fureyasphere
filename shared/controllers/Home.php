@@ -1,9 +1,10 @@
 <?php
     class Home extends Controller {
-        private $app;
+        private $app, $class;
         private $data = [];
         
         public function __construct() {
+            $this->class = strtolower(__CLASS__);
             $this->app = basename(dirname(__DIR__));
             
             $this->data["app"] = "Fureya Clouds Service";
@@ -12,11 +13,11 @@
         }
         
         public function index() {
-            $this->data["title"] = "FUREYA CLOUDS SERVICE";
+            $this->data["title"] = strtoupper($this->data["app"]);
             
-            $this->view("shared", "templates/header", $this->data);
-            $this->view("shared", "home/index");
-            $this->view("shared", "templates/footer");
+            $this->view($this->app, "templates/header", $this->data);
+            $this->view($this->app, "$this->class/index");
+            $this->view($this->app, "templates/footer");
         }
     }
 ?>

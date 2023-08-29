@@ -14,5 +14,5 @@
     </form>
     <br>
     <br>
-    <a href="<?= BASEURL ?>/Fuclouds/search">Search</a>
+    <a href="<?= BASEURL . '/' . $data['app'] ?>">Search</a>
 </div>

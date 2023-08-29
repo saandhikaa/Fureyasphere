@@ -22,6 +22,6 @@
         
         <br>
         
-        <p>Don't have an account?  <a href="<?= $data['link']['signup'] ?>">Sign Up</a></p>
+        <p>Don't have an account?  <a href="<?= BASEURL . '/' . $data['app'] ?>/signup">Sign Up</a></p>
     </form>
 </main>

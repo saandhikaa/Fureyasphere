@@ -4,7 +4,7 @@
         private $data = [];
         
         public function __construct() {
-            $this->class = __CLASS__;
+            $this->class = strtolower(__CLASS__);
             $this->app = basename(dirname(__DIR__));
             
             $this->model($this->app, "FileHandler")->autoRemove();
@@ -21,10 +21,10 @@
                 exit;
             }
             
-            $this->data["title"] = $this->class . ": Search";
+            $this->data["title"] = ucfirst($this->class) . ": Search";
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "fuclouds/index");
+            $this->view($this->app, "$this->class/index", $this->data);
             $this->view("shared", "templates/footer", $this->data);
         }
         
@@ -35,11 +35,11 @@
                 exit;
             }
             
-            $this->data["title"] = $this->class . ": Upload";
+            $this->data["title"] = ucfirst($this->class) . ": Upload";
             $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>';
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "fuclouds/upload");
+            $this->view($this->app, "$this->class/upload", $this->data);
             $this->view("shared", "templates/footer", $this->data);
         }
         
@@ -53,13 +53,13 @@
                 exit;
             }
             
-            $this->data["title"] = $this->class . ": Result";
+            $this->data["title"] = ucfirst($this->class) . ": Result";
             $this->data["result"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
             $this->data["status"] = $status;
             $this->data["keyword"] = "$codename/$key";
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "fuclouds/result", $this->data);
+            $this->view($this->app, "$this->class/result", $this->data);
             $this->view("shared", "templates/footer", $this->data);
         }
         
@@ -68,11 +68,11 @@
             
             $this->model("shared", "TableMaster")->createTable($tableName);
             
-            $this->data["title"] = $this->class . ": Setup";
+            $this->data["title"] = ucfirst($this->class) . ": Setup";
             $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($tableName);
             
             $this->view("shared", "templates/header", $this->data);
-            $this->view($this->app, "fuclouds/setup", $this->data);
+            $this->view($this->app, "$this->class/setup", $this->data);
             $this->view("shared", "templates/footer", $this->data);
         }
     }

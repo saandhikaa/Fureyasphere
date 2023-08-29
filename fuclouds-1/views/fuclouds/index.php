@@ -9,5 +9,5 @@
     </form>
     <br>
     <br>
-    <a href="<?= BASEURL ?>/Fuclouds/upload">Upload</a>
+    <a href="<?= BASEURL . '/' . $data['app']?>/upload">Upload</a>
 </div>

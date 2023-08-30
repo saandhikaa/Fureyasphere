@@ -67,6 +67,7 @@
             $tableName = "uploads";
             
             $this->model("shared", "TableMaster")->createTable($tableName);
+            $this->model($this->app, "FileHandler")->createUploadsDir();
             
             $this->data["title"] = ucfirst($this->class) . ": Setup";
             $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($tableName);

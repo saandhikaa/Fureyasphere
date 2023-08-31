@@ -12,28 +12,29 @@
 </head>
     
 <body>
-    <div id="container">
-        <header>
-            <h1><?= ucfirst($data["app"]) ?></h1>
-            <div class="nav-button">
-                <?php if (isset($_SESSION["sign-in"])): ?>
-                    <strong><?= $_SESSION["sign-in"]["username"] ?></strong>
-                <?php endif ?>
-                <button type="button">menu</button>
-            </div>
-        </header>
+    <header>
+        <h1><?= ucfirst($data["app"]) ?></h1>
+        <div class="nav-button">
+            <?php if (isset($_SESSION["sign-in"])): ?>
+                <strong><?= $_SESSION["sign-in"]["username"] ?></strong>
+            <?php endif ?>
+            <button type="button">menu</button>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="<?= BASEURL ?>/home">Home</a></li>
+            <li><a href="<?= BASEURL ?>/account">Account</a></li>
+        </ul>
         
-        <nav>
-            <ul>
-                <li><a href="<?= BASEURL ?>/home">Home</a></li>
-                <li><a href="<?= BASEURL ?>/account">Account</a></li>
-            </ul>
-            
-            <ul>
-                <?php foreach (App::getAppListNavigation() as $appControllers): ?>
-                    <?php foreach ($appControllers as $controller): ?>
-                        <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
-                    <?php endforeach ?>
+        <ul>
+            <?php foreach (App::getAppListNavigation() as $appControllers): ?>
+                <?php foreach ($appControllers as $controller): ?>
+                    <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
                 <?php endforeach ?>
-            </ul>
-        </nav>
+            <?php endforeach ?>
+        </ul>
+    </nav>
+    
+    <main>

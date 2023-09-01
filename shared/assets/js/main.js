@@ -1,6 +1,21 @@
 const greenhex = '#04BA71';
 const redhex = '#FF0000';
 
+function Scanning(){}
+const scan = new Scanning();
+
+document.body.addEventListener("click", event => {
+    const classes = event.target.className.split(' ');
+    
+    classes.forEach(className => {
+        if (className in scan) {
+            scan[className](event.target);
+        }
+    });
+    
+    event.stopPropagation();
+});
+
 function passwordStatus() {
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');

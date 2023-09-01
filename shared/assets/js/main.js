@@ -16,7 +16,21 @@ document.body.addEventListener("click", event => {
     event.stopPropagation();
 });
 
-function passwordStatus() {
+Scanning.prototype.passwordVisibility = element => {
+    const input = element.parentElement.querySelector('input');
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        element.textContent = 'Hide';
+    } else {
+        input.type = 'password';
+        element.textContent = 'Show';
+    }
+};
+
+
+
+document.querySelector('#sign-up #confirm-password').addEventListener('input', () => {
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirm-password');
     const passwordMatchStatus = document.querySelector('#password-match-status');
@@ -28,26 +42,11 @@ function passwordStatus() {
         passwordMatchStatus.textContent = 'Passwords do not match';
         passwordMatchStatus.style.color = redhex;
     }
-}
+});
 
-function toggleVisibility(id) {
-    const input = document.querySelector(`#${id}`);
-    const button = document.querySelector(`#toggle-${id}-visibility`);
-
-    if (input.type === 'password') {
-        input.type = 'text';
-        button.textContent = 'Hide';
-    } else {
-        input.type = 'password';
-        button.textContent = 'Show';
-    }
-}
-
-
-function checkUsernameAvailability() {
-    const usernameInput = document.getElementById("username");
-    const messageElement = document.getElementById("username-message");
-    const username = usernameInput.value;
+document.querySelector('#sign-up #username').addEventListener('input', () => {
+    const usernameInput = document.querySelector('#sign-up #username').value;
+    const messageElement = document.querySelector('#sign-up #username-availability');
 
     let typingTimer;
     
@@ -56,18 +55,18 @@ function checkUsernameAvailability() {
     messageElement.textContent = "";
     
     // Start the timer after the user stops typing for a certain interval
-    if (username.length > 3) {
+    if (usernameInput.length > 3) {
         typingTimer = setTimeout(() => {
             let url = window.location.href;
             url += "/checkusernameavailability";
-
+            
             // Perform AJAX request to the server
             fetch(url, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                body: `username=${encodeURIComponent(username)}`
+                body: `username=${encodeURIComponent(usernameInput)}`
             })
             .then(response => response.text())
             .then(text => {
@@ -84,4 +83,4 @@ function checkUsernameAvailability() {
         // Clear the message and reset the color
         messageElement.textContent = "";
     }
-}
+});

@@ -4,16 +4,16 @@ const redhex = '#FF0000';
 function Scanning(){}
 const scan = new Scanning();
 
-document.body.addEventListener("click", event => {
-    const classes = event.target.className.split(' ');
+document.body.addEventListener('click', element => {
+    const classes = element.target.className.split(' ');
     
     classes.forEach(className => {
         if (className in scan) {
-            scan[className](event.target);
+            scan[className](element.target);
         }
     });
     
-    event.stopPropagation();
+    element.stopPropagation();
 });
 
 Scanning.prototype.passwordVisibility = element => {
@@ -30,57 +30,59 @@ Scanning.prototype.passwordVisibility = element => {
 
 
 
-document.querySelector('#sign-up #confirm-password').addEventListener('input', () => {
-    const password = document.querySelector('#password');
-    const confirmPassword = document.querySelector('#confirm-password');
-    const passwordMatchStatus = document.querySelector('#password-match-status');
+const signUpConfirmPassword = document.querySelector('#sign-up #confirm-password');
+if (signUpConfirmPassword) {
+    signUpConfirmPassword.addEventListener('input', element => {
+        const password = element.parentElement.parentElement.querySelector('#password');
+        const passwordMatchStatus = element.parentElement.parentElement.querySelector('#password-match-status');
+        
+        if (password.value === element.target.value) {
+            passwordMatchStatus.textContent = 'Passwords match';
+            passwordMatchStatus.style.color = greenhex;
+        } else {
+            passwordMatchStatus.textContent = 'Passwords do not match';
+            passwordMatchStatus.style.color = redhex;
+        }
+    });
+}
 
-    if (password.value === confirmPassword.value) {
-        passwordMatchStatus.textContent = 'Passwords match';
-        passwordMatchStatus.style.color = greenhex;
-    } else {
-        passwordMatchStatus.textContent = 'Passwords do not match';
-        passwordMatchStatus.style.color = redhex;
-    }
-});
-
-document.querySelector('#sign-up #username').addEventListener('input', () => {
-    const usernameInput = document.querySelector('#sign-up #username').value;
-    const messageElement = document.querySelector('#sign-up #username-availability');
-
-    let typingTimer;
+const signUpUsername = document.querySelector('#sign-up #username');
+if (signUpUsername) {
+    signUpUsername.addEventListener('input', element => {
+        const messageElement = element.parentElement.querySelector('#username-availability');
     
-    // Clear the previous timer
-    clearTimeout(typingTimer);
-    messageElement.textContent = "";
-    
-    // Start the timer after the user stops typing for a certain interval
-    if (usernameInput.length > 3) {
-        typingTimer = setTimeout(() => {
-            let url = window.location.href;
-            url += "/checkusernameavailability";
-            
-            // Perform AJAX request to the server
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `username=${encodeURIComponent(usernameInput)}`
-            })
-            .then(response => response.text())
-            .then(text => {
-                if (text === "taken") {
-                    messageElement.textContent = "Already taken.";
-                    messageElement.style.color = redhex;
-                } else {
-                    messageElement.textContent = "Available.";
-                    messageElement.style.color = greenhex;
-                }
-            });
-        }, 1000);
-    } else {
-        // Clear the message and reset the color
+        let typingTimer;
+        
+        // Clear the previous timer
+        clearTimeout(typingTimer);
         messageElement.textContent = "";
-    }
-});
+        
+        // Start the timer after the user stops typing for a certain interval
+        if (element.target.value.length > 3) {
+            typingTimer = setTimeout(() => {
+                // Perform AJAX request to the server
+                const url = window.location.href + '/checkusernameavailability';
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `username=${encodeURIComponent(element.target.value)}`
+                })
+                .then(response => response.text())
+                .then(text => {
+                    if (text === "taken") {
+                        messageElement.textContent = "Already taken.";
+                        messageElement.style.color = redhex;
+                    } else {
+                        messageElement.textContent = "Available.";
+                        messageElement.style.color = greenhex;
+                    }
+                });
+            }, 1000);
+        } else {
+            // Clear the message and reset the color
+            messageElement.textContent = "";
+        }
+    });
+}

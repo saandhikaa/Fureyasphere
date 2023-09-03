@@ -9,9 +9,10 @@
             
             $this->model($this->app, "FileHandler")->autoRemove();
             
+            $this->data["mainApp"] = "shared";
             $this->data["app"] = $this->class;
-            $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/shared/assets/css/style.css">';
-            $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>';
+            $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->app . '/assets/css/app.css">' . PHP_EOL;
+            $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>' . PHP_EOL;
         }
         
         public function index() {
@@ -23,9 +24,9 @@
             
             $this->data["title"] = ucfirst($this->class) . ": Search";
             
-            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->data["mainApp"], "templates/header", $this->data);
             $this->view($this->app, "$this->class/index", $this->data);
-            $this->view("shared", "templates/footer", $this->data);
+            $this->view($this->data["mainApp"], "templates/footer", $this->data);
         }
         
         public function upload() {
@@ -36,11 +37,11 @@
             }
             
             $this->data["title"] = ucfirst($this->class) . ": Upload";
-            $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>';
+            $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>' . PHP_EOL;
             
-            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->data["mainApp"], "templates/header", $this->data);
             $this->view($this->app, "$this->class/upload", $this->data);
-            $this->view("shared", "templates/footer", $this->data);
+            $this->view($this->data["mainApp"], "templates/footer", $this->data);
         }
         
         public function result ($codename = null, $key = null, $status = "") {
@@ -58,23 +59,23 @@
             $this->data["status"] = $status;
             $this->data["keyword"] = "$codename/$key";
             
-            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->data["mainApp"], "templates/header", $this->data);
             $this->view($this->app, "$this->class/result", $this->data);
-            $this->view("shared", "templates/footer", $this->data);
+            $this->view($this->data["mainApp"], "templates/footer", $this->data);
         }
         
         public function setup() {
             $tableName = "uploads";
             
-            $this->model("shared", "TableMaster")->createTable($tableName);
+            $this->model($this->data["mainApp"], "TableMaster")->createTable($tableName);
             $this->model($this->app, "FileHandler")->createUploadsDir();
             
             $this->data["title"] = ucfirst($this->class) . ": Setup";
-            $this->data["table"] = $this->model("shared", "TableMaster")->getTableStructure($tableName);
+            $this->data["table"] = $this->model($this->data["mainApp"], "TableMaster")->getTableStructure($tableName);
             
-            $this->view("shared", "templates/header", $this->data);
+            $this->view($this->data["mainApp"], "templates/header", $this->data);
             $this->view($this->app, "$this->class/setup", $this->data);
-            $this->view("shared", "templates/footer", $this->data);
+            $this->view($this->data["mainApp"], "templates/footer", $this->data);
         }
     }
 ?>

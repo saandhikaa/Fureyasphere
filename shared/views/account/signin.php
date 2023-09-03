@@ -1,4 +1,4 @@
-<main>
+<main id="sign-in">
     <form action="" method="post" id="sign-in-form">
         <h1>Sign In</h1>
         <div class="field">
@@ -9,12 +9,10 @@
         <div class="field">
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password" required>
-            <button type="button" id="toggle-password-visibility" onclick="toggleVisibility('password')">Show</button>
+            <button type="button" class="passwordVisibility">Show</button>
         </div>
         
-        <?php if (isset($data["sign-in-failed"])): ?>
-            <span><?= $data["sign-in-failed"] ?></span>
-        <?php endif ?>
+        <span><?= isset($data["sign-in-failed"]) ? $data["sign-in-failed"] : "" ?></span>
         
         <br>
         

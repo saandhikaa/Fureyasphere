@@ -1,22 +1,22 @@
-<main>
+<main id="sign-up">
     <form action="" method="post" id="sign-up-form">
         <h1>Sign Up</h1>
         <div class="field">
             <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" oninput="checkUsernameAvailability()" autocomplete="off" required>
-            <span id="username-message"></span>
+            <input type="text" id="username" name="username" autocomplete="off" required>
+            <span id="username-availability"></span>
         </div>
         
         <div class="field">
             <label for="password">Password:</label><br>
             <input type="password" id="password" name="password" required>
-            <button type="button" id="toggle-password-visibility" onclick="toggleVisibility('password')">Show</button>
+            <button type="button" class="passwordVisibility">Show</button>
         </div>
         
         <div class="field">
             <label for="confirm-password">Confirm Password:</label><br>
-            <input type="password" id="confirm-password" name="confirm-password" required oninput="passwordStatus()">
-            <button type="button" id="toggle-confirm-password-visibility" onclick="toggleVisibility('confirm-password')">Show</button><br>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <button type="button" class="passwordVisibility">Show</button><br>
         </div>
         
         <span id="password-match-status"></span><br>

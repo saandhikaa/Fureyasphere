@@ -7,9 +7,8 @@
             $this->class = strtolower(__CLASS__);
             $this->app = basename(dirname(__DIR__));
             
+            $this->data["mainApp"] = $this->app;
             $this->data["app"] = $this->class;
-            $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->app . '/assets/css/style.css">';
-            $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/main.js"></script>';
         }
         
         public function index() {

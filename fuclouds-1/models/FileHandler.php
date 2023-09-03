@@ -10,7 +10,7 @@
         }
         
         public function upload() {
-            $accepted = $this->slice($_POST['post']);
+            $accepted = $this->slice($_POST['filteredFiles']);
             $filename = $this->handleDuplicate($accepted["name"]);
             $codename = trim($_POST["codename"], "-");
             $repost = $this->handleRePost($codename, $filename);

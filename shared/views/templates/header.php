@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $data["title"] ?></title>
     
-    <?php if (isset($data["styles"])): ?>
-        <?= $data["styles"] ?>
-    <?php endif ?>
+    <link rel="stylesheet" href="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/css/style.css">
+    <?= isset($data["styles"]) ? $data["styles"] : "" ?>
 </head>
-    
+
 <body>
     <header>
         <h1><?= ucfirst($data["app"]) ?></h1>
@@ -36,5 +35,3 @@
             <?php endforeach ?>
         </ul>
     </nav>
-    
-    <main>

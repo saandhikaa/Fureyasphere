@@ -62,7 +62,7 @@ function createFilteredFile(filename, filesize) {
     const fileInfo = document.createElement('section');
 
     const fileText = document.createElement('p');
-    fileSize.classList.add('fileName');
+    fileText.classList.add('fileName');
     fileText.textContent = filename;
     
     const fileSize = document.createElement('p');

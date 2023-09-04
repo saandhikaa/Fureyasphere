@@ -44,7 +44,7 @@
                     
                     $values = [
                         "time" => $time, 
-                        "owner" => "anonymous",
+                        "owner" => isset($_POST["owner"]) ? $_POST["owner"] : "anonymous",
                         "codename" => $codename,
                         "key" => $key, 
                         "filename" => $filename[$i], 

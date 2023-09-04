@@ -10,7 +10,7 @@
         
         <section class="field">
             <label for="codename">Give a keyword:</label>
-            <input type="text" id="codename" name="codename" autocomplete="off" required>
+            <input type="text" id="codename" name="codename" <?= isset($_SESSION["sign-in"]["username"]) ? 'value="' . $_SESSION["sign-in"]["username"] . '"' : '' ?> autocomplete="off" required>
         </section>
         
         <?= isset($_SESSION["sign-in"]["username"]) ? '<input type="hidden" name="owner" value="' . $_SESSION["sign-in"]["username"] . '">' : '' ?>

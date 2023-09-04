@@ -13,6 +13,8 @@
             <input type="text" id="codename" name="codename" autocomplete="off" required>
         </section>
         
+        <?= isset($_SESSION["sign-in"]["username"]) ? '<input type="hidden" name="owner" value="' . $_SESSION["sign-in"]["username"] . '">' : '' ?>
+        
         <input type="submit" id="up-submit" name="submit" value="Upload" disabled>
     </form>
     

@@ -1,15 +1,15 @@
-<div>
+<main id="fuclouds-result">
     <?php if ($data["status"] === "uploaded"): ?>
-        <p>Your files uploaded successfully with keyword <strong style="font-family: monospace;"><?= $data["keyword"] ?> </strong></p>
+        <p class="status">Your files uploaded successfully with keyword <strong style="font-family: monospace;"><?= $data["keyword"] ?> </strong></p>
     <?php endif ?>
     
     <ul>
         <?php foreach ($data["result"] as $file): ?>
             <li>
-                <div>
-                    <p><?= $file["filename_"] ?></p>
-                    <p><?= $file["filesize_"] ?></p>
-                </div>
+                <section>
+                    <p class="fileName"><?= $file["filename_"] ?></p>
+                    <p class="fileSize"><?= FileHandler::formatBytes($file["filesize_"]) ?></p>
+                </section>
                 <form action="" method="post">
                     <?php $filepath = $file["time_"] . "_" . $file["filename_"] ?>
                     <input type="hidden" name="codename" value="<?= $file['codename_'] ?>">
@@ -31,11 +31,9 @@
             <input type="hidden" name="filepath" value="<?= $filepath ?>">
             <input type="submit" name="submit" value="Download All as Zip">
         </form>
-        <br>
-        <br>
     <?php endif ?>
     
     <?php if (empty($data["result"])): ?>
         <p>invalid keyword or the file is gone</p>
     <?php endif ?>
-</div>
+</main>

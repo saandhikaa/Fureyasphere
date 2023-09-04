@@ -7,16 +7,11 @@ Scanning.prototype.cancelInput = element => {
     enablingUpload();
 };
 
-function enablingUpload() {
-    const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
-    const filteredFile = document.querySelectorAll('#fuclouds-upload #filtered-file li');
-    
-    upSubmit.disabled = filteredFile.length === 0 ? true : false;
-}
+
 
 function createInput() {
     const fileUploadContainer = document.querySelector('#fuclouds-upload #file-input-container');
-    
+
     // Create the input element with the specified attributes
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
@@ -31,27 +26,48 @@ function createInput() {
 
 // Function to handle the 'change' event and access file information
 function handleFileChange(element) {
+    const listed = element.target.parentElement.parentElement.querySelectorAll('#filtered-file p.fileSize');
     const selectedFiles = element.target.files;
-    if (selectedFiles.length > 0) {
-        for (let i = 0; i < selectedFiles.length; i++) {
-            createFilteredFile(selectedFiles[i].name, selectedFiles[i].size);
-            enablingUpload();
+    const newFileSize = Array.from(selectedFiles).reduce((total, file) => total + file.size, 0);
+    
+    let listedFileSize = 0;
+    if (listed.length > 0) {
+        const sizes = Array.from(listed).map(size => size.textContent);
+        
+        for (const sizeString of sizes) {
+            if (sizeString.includes(" KB")) {
+                // Remove " KB" and convert to a numeric value in bytes
+                listedFileSize += Math.ceil(parseFloat(sizeString.replace(" KB", "")) * 1024);
+            } else if (sizeString.includes(" MB")) {
+                // Remove " MB" and convert to a numeric value in bytes
+                listedFileSize += Math.ceil(parseFloat(sizeString.replace(" MB", "")) * 1024 * 1024);
+            }
         }
     }
+    
+    if (newFileSize + listedFileSize <= 40 * 1024 * 1024) {
+        Array.from(selectedFiles).forEach(file => {createFilteredFile(file.name, file.size)});
+    } else {
+        alert('You chose a file that exceeds the 40MB limit.');
+    }
+    
     element.target.removeAttribute('class');
     createInput();
+    enablingUpload();
 }
 
 function createFilteredFile(filename, filesize) {
     const filteredFileContainer = document.querySelector('#fuclouds-upload #filtered-file');
     const filteredFile = document.createElement('li');
     const fileInfo = document.createElement('section');
-    
+
     const fileText = document.createElement('p');
+    fileSize.classList.add('fileName');
     fileText.textContent = filename;
     
     const fileSize = document.createElement('p');
-    fileSize.textContent = filesize;
+    fileSize.classList.add('fileSize');
+    fileSize.textContent = formatBytes(filesize);
     
     const fileInput = document.createElement('input');
     fileInput.type = 'hidden';
@@ -67,6 +83,27 @@ function createFilteredFile(filename, filesize) {
     filteredFile.append(fileInfo, cancel);
     filteredFileContainer.appendChild(filteredFile);
 }
+
+function enablingUpload() {
+    const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
+    const filteredFile = document.querySelectorAll('#fuclouds-upload #filtered-file li');
+    
+    upSubmit.disabled = filteredFile.length === 0;
+}
+
+function formatBytes(numBytes) {
+    // Define the suffixes for different units
+    const suffixes = ["B", "KB", "MB"];
+
+    // Find the appropriate unit and format the number
+    let index = 0;
+    while (numBytes >= 1024 && index < suffixes.length - 1) {
+        numBytes /= 1024;
+        index++;
+    }
+    return numBytes.toFixed(2) + " " + suffixes[index];
+}
+
 
 
 

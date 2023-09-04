@@ -110,7 +110,7 @@
         // insert values into database
         public function insertDB ($data) {
             $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES (:time, :owner, :codename, :key, :filename, :filesize, :duration, :available)";
-    
+            
             $this->db->query($query);
             $this->db->bind(':time', $data['time']);
             $this->db->bind(':owner', $data['owner']);
@@ -291,6 +291,19 @@
             } else {
                 echo "Uploads directory already exists.";
             }
+        }
+        
+        public static function formatBytes($num_bytes) {
+            // Define the suffixes for different units
+            $suffixes = array("B", "KB", "MB");
+            
+            // Find the appropriate unit and format the number
+            $index = 0;
+            while ($num_bytes >= 1024 && $index < count($suffixes) - 1) {
+                $num_bytes /= 1024;
+                $index++;
+            }
+            return sprintf("%.2f %s", $num_bytes, $suffixes[$index]);
         }
     }
 ?>

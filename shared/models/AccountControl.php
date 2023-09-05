@@ -21,7 +21,7 @@
             return empty($this->db->result());
         }
         
-        public function signUp ($username, $password) {
+        public function signUp ($username, $password, $level = 3) {
             if (!$this->checkUsername($username)) {
                 return ($this->signIn($username, $password));
             }
@@ -33,7 +33,7 @@
             $this->db->bind(':time', time());
             $this->db->bind(':username', $username);
             $this->db->bind(':password', $hashedPassword);
-            $this->db->bind(':level', '3');
+            $this->db->bind(':level', $level);
             $this->db->execute();
             
             return $this->db->rowCount() > 0;

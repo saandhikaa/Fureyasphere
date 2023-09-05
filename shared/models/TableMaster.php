@@ -44,5 +44,13 @@
             
             return $result;
         }
+        
+        public static function generateFormFields($array) {
+            $inputs = '';
+            foreach ($array as $key => $value) {
+                $inputs .= '<input type="hidden" name="table['. $key . ']" value="' . $value . '">' . PHP_EOL;
+            }
+            return $inputs;
+        }
     }
 ?>

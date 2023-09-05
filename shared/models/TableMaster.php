@@ -17,19 +17,32 @@
             }
         }
         
-        public function createTable ($tableName) {
-            if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                $columns = $_POST["table"];
-                $columnDefinitions = [];
-                foreach ($columns as $columnName => $columnType) {
-                    $columnDefinitions[] = "$columnName $columnType";
-                }
-                
-                $query = "CREATE TABLE IF NOT EXISTS $tableName (" . implode(", ", $columnDefinitions) . ")";
-                
-                $this->db->query($query);
-                $this->db->execute();
-            } 
+        public function createTable($tableName, $columns) {
+            $columnDefinitions = [];
+            $result = '';
+            
+            foreach ($columns as $columnName => $columnType) {
+                $columnDefinitions[] = "$columnName $columnType";
+            }
+            
+            // Check if table exists
+            $checkTableQuery = "SHOW TABLES LIKE '$tableName'";
+            $this->db->query($checkTableQuery);
+            $tableExists = $this->db->result();
+            
+            // If table exists, delete it
+            if ($tableExists) {
+                $deleteTableQuery = "DROP TABLE IF EXISTS $tableName";
+                $this->db->query($deleteTableQuery);
+                $result .= $this->db->execute() > 0 ? "<p>Table deleted.</p>" . PHP_EOL : "<p>Failed delete existing table.</p>" . PHP_EOL;
+            }
+            
+            // Create table
+            $createQuery = "CREATE TABLE IF NOT EXISTS $tableName (" . implode(", ", $columnDefinitions) . ")";
+            $this->db->query($createQuery);
+            $result .= $this->db->execute() > 0 ? "<p>Table created.</p>" . PHP_EOL : "<p>Failed create table.</p>" . PHP_EOL;
+            
+            return $result;
         }
     }
 ?>

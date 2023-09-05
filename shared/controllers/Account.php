@@ -85,7 +85,14 @@
         public function setup() {
             $tableName = "users";
             
-            $this->model($this->app, "TableMaster")->createTable($tableName);
+            if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
+                if (isset($_POST["submit"]) && isset($_POST["table"])) {
+                    $this->data["status"] = $this->model($this->app, "TableMaster")->createTable($tableName, $_POST["table"]);
+                    $this->model($this->app, "AccountControl")->signup(ADMIN_USERNAME, ADMIN_PASSWORD, 1);
+                    
+                    $this->data["admin"] = "<p>Default username: <strong>" . ADMIN_USERNAME . "</strong></p>" . PHP_EOL . "<p>Default password: <strong>" . ADMIN_PASSWORD . "</strong></p>" . PHP_EOL;
+                }
+            }
             
             $this->data["title"] = "Fureya: Setup";
             $this->data["table"] = $this->model($this->app, "TableMaster")->getTableStructure($tableName);

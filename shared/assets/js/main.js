@@ -33,8 +33,8 @@ Scanning.prototype.passwordVisibility = element => {
 const signUpConfirmPassword = document.querySelector('#sign-up #confirm-password');
 if (signUpConfirmPassword) {
     signUpConfirmPassword.addEventListener('input', element => {
-        const password = element.parentElement.parentElement.querySelector('#password');
-        const passwordMatchStatus = element.parentElement.parentElement.querySelector('#password-match-status');
+        const password = element.target.parentElement.parentElement.querySelector('#password');
+        const passwordMatchStatus = element.target.parentElement.parentElement.querySelector('#password-match-status');
         
         if (password.value === element.target.value) {
             passwordMatchStatus.textContent = 'Passwords match';
@@ -49,8 +49,8 @@ if (signUpConfirmPassword) {
 const signUpUsername = document.querySelector('#sign-up #username');
 if (signUpUsername) {
     signUpUsername.addEventListener('input', element => {
-        const messageElement = element.parentElement.querySelector('#username-availability');
-    
+        const messageElement = element.target.parentElement.querySelector('#username-availability');
+        
         let typingTimer;
         
         // Clear the previous timer

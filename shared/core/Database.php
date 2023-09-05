@@ -49,7 +49,7 @@
         }
         
         public function execute() {
-            $this->statement->execute();
+            return $this->statement->execute();
         }
         
         public function result ($all = false) {

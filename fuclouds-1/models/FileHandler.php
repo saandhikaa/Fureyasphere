@@ -155,7 +155,6 @@
             $this->db->bind(':currentTime', $currentTime);
             $this->db->bind(':perseconds', $this->perseconds);
             $this->db->execute();
-            $rowsAffected = $this->db->rowCount();
         }
         
         function download ($savedName, $filePath) {
@@ -281,16 +280,26 @@
         
         public function createUploadsDir() {
             $directoryPath = $this->path;
+            $result = '';
             
-            if (!is_dir($directoryPath)) {
-                if (mkdir($directoryPath, 0777, true)) {
-                    echo "Uploads directory created.";
-                } else {
-                    echo "Failed to create uploads directory.";
+            if (is_dir($directoryPath)) {
+                $files = glob($directoryPath . '/*');
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
                 }
-            } else {
-                echo "Uploads directory already exists.";
+                rmdir($directoryPath);
+                $result .= "<p>Uploads directory deleted.</p>" . PHP_EOL;
             }
+            
+            if (mkdir($directoryPath, 0777, true)) {
+                $result .= "<p>Uploads directory created.</p>" . PHP_EOL;
+            } else {
+                $result .= "<p>Failed to create uploads directory.</p>" . PHP_EOL;
+            }
+            
+            return $result;
         }
         
         public static function formatBytes($num_bytes) {

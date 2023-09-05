@@ -2,21 +2,15 @@
     $columns = [
         "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
         "time_" => "INT(10) NOT NULL", 
-        "username_" => "VARCHAR(20) NOT NULL", 
+        "username_" => "VARCHAR(12) NOT NULL", 
         "password_" => "VARCHAR(255) NOT NULL", 
         "level_" => "INT(2) NOT NULL"
     ];
-    
-    function generateFormFields($array) {
-        foreach ($array as $key => $value) {
-            echo '<input type="hidden" name="table['. $key . ']" value="' . $value . '">';
-        }
-    }
 ?>
 
-<section>
+<main id="account-setup">
     <?php if ($data["table"]): ?>
-    <h1>Table Structure</h1>
+        <h1>Table Structure</h1>
         <table style="border-collapse: collapse; width: 80%;">
             <tr>
                 <th style="border: 1px solid black; padding: 8px; text-align: left;">Field</th>
@@ -39,8 +33,11 @@
         </table>
     <?php endif ?>
     
-    <form action="<?= BASEURL ?>/Users/setup" method="post">
-        <?php generateFormFields($columns) ?>
-        <input type="submit" name="submit" value="setup">
+    <?= isset($data["status"]) ? $data["status"] : '' ?>
+    <?= isset($data["admin"]) ? $data["admin"] : '' ?>
+    
+    <form action="" method="post">
+        <?= TableMaster::generateFormFields($columns) ?>
+        <input type="submit" name="submit" value="Setup">
     </form>
-</section>
+</main>

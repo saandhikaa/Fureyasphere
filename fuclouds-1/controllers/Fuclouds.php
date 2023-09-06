@@ -44,7 +44,7 @@
             $this->view($this->data["mainApp"], "templates/footer", $this->data);
         }
         
-        public function result ($codename = null, $key = null, $status = "") {
+        public function result ($codename = null, $key = null, $action = "") {
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
@@ -56,7 +56,7 @@
             
             $this->data["title"] = ucfirst($this->class) . ": Result";
             $this->data["result"] = $this->model($this->app, "FileHandler")->loadFiles($codename, $key);
-            $this->data["status"] = $status;
+            $this->data["action"] = $action;
             $this->data["keyword"] = "$codename/$key";
             
             $this->view($this->data["mainApp"], "templates/header", $this->data);
@@ -67,8 +67,12 @@
         public function setup() {
             $tableName = "uploads";
             
-            $this->model($this->data["mainApp"], "TableMaster")->createTable($tableName);
-            $this->model($this->app, "FileHandler")->createUploadsDir();
+            if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
+                if (isset($_POST["submit"]) && isset($_POST["table"])) {
+                    $this->data["status"] = $this->model($this->data["mainApp"], "TableMaster")->createTable($tableName, $_POST["table"]);
+                    $this->data["status"] .= $this->model($this->app, "FileHandler")->createUploadsDir();
+                }
+            }
             
             $this->data["title"] = ucfirst($this->class) . ": Setup";
             $this->data["table"] = $this->model($this->data["mainApp"], "TableMaster")->getTableStructure($tableName);

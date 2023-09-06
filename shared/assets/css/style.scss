@@ -1,3 +1,26 @@
+@mixin nav-button($left: false) {
+    button {
+        height: 2rem;
+        width: 2rem;
+        border: 2px solid salmon;
+        border-radius: 20%;
+        outline: none;
+        transition: all 0.2s ease;
+        @if $left == true {
+            position: absolute;
+            left: 280px - 10px - 32px;
+        }
+        
+        span {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    }
+    button:active {
+        transform: scale(0.9);
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,9 +42,10 @@ form {
     }
 }
 
-header {
+header#page-header {
     background-color: lightblue;
     padding: 10px;
+    height: 60px;
     
     display: flex;
     align-items: center;
@@ -31,33 +55,17 @@ header {
         font-size: 1.5rem;
     }
     
-    button {
-        height: 2rem;
-        width: 2rem;
-        border: 2px solid salmon;
-        border-radius: 20%;
-        outline: none;
-        transition: all 0.2s ease;
-        
-        span {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-    }
-    
-    button:active {
-        transform: scale(0.9);
-    }
+    @include nav-button();
 }
 
-nav.closeNav {
-    background-color: rgba(0, 0, 0, 0);
+nav.navigation {
+    background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
-    
     width: 0;
+    height: 100vh;
+    transition: width 0.1s ease;
     
     .container {
         background-color: lightgreen;
@@ -67,6 +75,20 @@ nav.closeNav {
         width: 0;
         overflow: hidden;
         transition: width 0.3s;
+        
+        header {
+            position: relative;
+            padding-left: 30px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            
+            h1 {
+                font-size: 1rem;
+            }
+            
+            @include nav-button(true);
+        }
         
         ul {
             margin: 20px 0 0 30px;

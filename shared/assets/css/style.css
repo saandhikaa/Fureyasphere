@@ -17,19 +17,20 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
-header {
+header#page-header {
     background-color: lightblue;
     padding: 10px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-header h1 {
+header#page-header h1 {
     font-size: 1.5rem;
 }
 
-header button {
+header#page-header button {
     height: 2rem;
     width: 2rem;
     border: 2px solid salmon;
@@ -38,25 +39,26 @@ header button {
     transition: all 0.2s ease;
 }
 
-header button span {
+header#page-header button span {
     font-weight: bold;
     font-size: 1.2rem;
 }
 
-header button:active {
+header#page-header button:active {
     transform: scale(0.9);
 }
 
-nav.closeNav {
-    background-color: rgba(0, 0, 0, 0);
+nav.navigation {
+    background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 0;
-    bottom: 0;
     right: 0;
     width: 0;
+    height: 100vh;
+    transition: width 0.1s ease;
 }
 
-nav.closeNav .container {
+nav.navigation .container {
     background-color: lightgreen;
     position: absolute;
     height: 100vh;
@@ -66,6 +68,38 @@ nav.closeNav .container {
     transition: width 0.3s;
 }
 
-nav.closeNav .container ul {
+nav.navigation .container header {
+    position: relative;
+    padding-left: 30px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+nav.navigation .container header h1 {
+    font-size: 1rem;
+}
+
+nav.navigation .container header button {
+    height: 2rem;
+    width: 2rem;
+    border: 2px solid salmon;
+    border-radius: 20%;
+    outline: none;
+    transition: all 0.2s ease;
+    position: absolute;
+    left: 238px;
+}
+
+nav.navigation .container header button span {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+nav.navigation .container header button:active {
+    transform: scale(0.9);
+}
+
+nav.navigation .container ul {
     margin: 20px 0 0 30px;
 }

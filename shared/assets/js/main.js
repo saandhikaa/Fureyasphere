@@ -1,6 +1,9 @@
 const greenhex = '#04BA71';
 const redhex = '#FF0000';
 
+const nav = document.querySelector('nav.closeNav div.container');
+const navBackground = document.querySelector('nav.closeNav');
+
 function Scanning(){}
 const scan = new Scanning();
 
@@ -26,6 +29,16 @@ Scanning.prototype.passwordVisibility = element => {
         input.type = 'password';
         element.textContent = 'Show';
     }
+};
+
+Scanning.prototype.openNav = () => {
+    nav.style.width = '65vw';
+    navBackground.style.width = '100vw';
+};
+
+Scanning.prototype.closeNav = () => {
+    nav.style.width = '0';
+    navBackground.style.width = '0';
 };
 
 

@@ -10,12 +10,6 @@
         "duration_" => "int(4) NOT NULL", 
         "available_" => "VARCHAR(3) NOT NULL"
     ];
-    
-    function generateFormFields($array) {
-        foreach ($array as $key => $value) {
-            echo '<input type="hidden" name="table['. $key . ']" value="' . $value . '">';
-        }
-    }
 ?>
 
 <section>
@@ -43,8 +37,10 @@
         </table>
     <?php endif ?>
     
+    <?= isset($data["status"]) ? $data["status"] : '' ?>
+     
     <form action="" method="post">
-        <?php generateFormFields($columns) ?>
+        <?= TableMaster::generateFormFields($columns) ?>
         <input type="submit" name="submit" value="setup">
     </form>
 </section>

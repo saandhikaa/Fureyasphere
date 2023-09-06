@@ -11,13 +11,17 @@
 </head>
 
 <body>
-    <header>
+    <header id="page-header">
         <h1><?= ucfirst($data["app"]) ?></h1>
         <button type="button" class="openNav"><span class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? strtoupper($_SESSION["sign-in"]["username"][0]) : '' ?></span></button>
     </header>
     
-    <nav class="closeNav">
+    <nav class="navigation closeNav">
         <div class="container">
+            <header>
+                <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "" ?></h1>
+                <button type="button" class="closeNav"><span class="closeNav"><?= isset($_SESSION["sign-in"]["username"]) ? strtoupper($_SESSION["sign-in"]["username"][0]) : '' ?></span></button>
+            </header>
             <ul>
                 <li><a href="<?= BASEURL ?>/home">Home</a></li>
                 <li><a href="<?= BASEURL ?>/account">Account</a></li>

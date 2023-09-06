@@ -1,22 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
+form input[type="password"]::-webkit-outer-spin-button,
+form input[type="password"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+form input[type="password"]::-ms-reveal {
+    display: none;
+}
+
 header {
     background-color: lightblue;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 header h1 {
-    margin: 0;
-    padding: 0;
     font-size: 1.5rem;
 }
 
-form input[type="password"]::-webkit-outer-spin-button,
-form input[type="password"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+header button {
+    height: 2rem;
+    width: 2rem;
+    border: 2px solid salmon;
+    border-radius: 20%;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
-form input[type="password"]::-ms-reveal {
-    display: none;
+header button span {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+header button:active {
+    transform: scale(0.9);
+}
+
+nav.closeNav {
+    background-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 0;
+}
+
+nav.closeNav .container {
+    background-color: lightgreen;
+    position: absolute;
+    height: 100vh;
+    right: 0;
+    width: 0;
+    overflow: hidden;
+    transition: width 0.3s;
+}
+
+nav.closeNav .container ul {
+    margin: 20px 0 0 30px;
 }

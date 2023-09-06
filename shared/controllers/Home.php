@@ -16,7 +16,7 @@
             
             $this->view($this->app, "templates/header", $this->data);
             $this->view($this->app, "$this->class/index");
-            $this->view($this->app, "templates/footer");
+            $this->view($this->app, "templates/footer", $this->data);
         }
     }
 ?>

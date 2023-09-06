@@ -13,25 +13,22 @@
 <body>
     <header>
         <h1><?= ucfirst($data["app"]) ?></h1>
-        <div class="nav-button">
-            <?php if (isset($_SESSION["sign-in"])): ?>
-                <strong><?= $_SESSION["sign-in"]["username"] ?></strong>
-            <?php endif ?>
-            <button type="button">menu</button>
-        </div>
+        <button type="button" class="openNav"><span class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? strtoupper($_SESSION["sign-in"]["username"][0]) : '' ?></span></button>
     </header>
     
-    <nav>
-        <ul>
-            <li><a href="<?= BASEURL ?>/home">Home</a></li>
-            <li><a href="<?= BASEURL ?>/account">Account</a></li>
-        </ul>
-        
-        <ul>
-            <?php foreach (App::getAppListNavigation() as $appControllers): ?>
-                <?php foreach ($appControllers as $controller): ?>
-                    <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
+    <nav class="closeNav">
+        <div class="container">
+            <ul>
+                <li><a href="<?= BASEURL ?>/home">Home</a></li>
+                <li><a href="<?= BASEURL ?>/account">Account</a></li>
+            </ul>
+            
+            <ul>
+                <?php foreach (App::getAppListNavigation() as $appControllers): ?>
+                    <?php foreach ($appControllers as $controller): ?>
+                        <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
+                    <?php endforeach ?>
                 <?php endforeach ?>
-            <?php endforeach ?>
-        </ul>
+            </ul>
+        </div>
     </nav>

@@ -4,6 +4,14 @@ const redhex = '#FF0000';
 const navContainer = document.querySelector('.navigation-container');
 const navigation = document.querySelector('.navigation-container nav.navigation');
 const navHeader = document.querySelector('nav.navigation header');
+const navMain = document.querySelector('nav.navigation .main-list');
+const navApp = document.querySelector('nav.navigation .app-list');
+const navFooter = document.querySelector('nav.navigation footer');
+const navGap = parseFloat(window.getComputedStyle(navHeader).getPropertyValue('margin-bottom'));
+const ntop = navHeader.offsetHeight + navGap + navMain.offsetHeight + navGap;
+const nbottom = navGap + navFooter.offsetHeight;
+navApp.style.top = ntop + 'px';
+navApp.style.bottom = nbottom + 'px';
 
 function Scanning(){}
 const scan = new Scanning();

@@ -1,8 +1,9 @@
 const greenhex = '#04BA71';
 const redhex = '#FF0000';
 
-const nav = document.querySelector('.navigation-container nav.navigation');
 const navContainer = document.querySelector('.navigation-container');
+const navigation = document.querySelector('.navigation-container nav.navigation');
+const navHeader = document.querySelector('nav.navigation header');
 
 function Scanning(){}
 const scan = new Scanning();
@@ -32,30 +33,20 @@ Scanning.prototype.passwordVisibility = element => {
 };
 
 Scanning.prototype.openNav = () => {
-    nav.style.width = '280px';
+    navigation.style.width = navHeader.offsetWidth + 'px';
     navContainer.style.width = '100vw';
     setScroll(false);
 };
 
 Scanning.prototype.closeNav = () => {
-    nav.style.width = '0';
+    navigation.style.width = '0';
     navContainer.style.width = '0';
     setScroll(true);
 };
 
 
 
-const setScroll = isEnabled => {
-  if (isEnabled) {
-    window.removeEventListener('wheel', preventScroll);
-    window.removeEventListener('touchmove', preventScroll);
-  } else {
-    window.addEventListener('wheel', preventScroll, { passive: false });
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-  }
-};
-
-const preventScroll = event => event.preventDefault();
+const setScroll = isEnabled => document.body.style.overflow = isEnabled ? 'auto' : 'hidden';
 
 
 

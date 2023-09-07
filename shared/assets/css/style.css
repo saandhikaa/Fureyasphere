@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+body {
+    padding-top: 100px;
+    height: 1600px;
+}
+
 ul {
     list-style-type: none;
 }
@@ -17,89 +22,126 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
-header#page-header {
+#page-header {
     background-color: lightblue;
-    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-header#page-header h1 {
+#page-header h1 {
     font-size: 1.5rem;
 }
 
-header#page-header button {
+#page-header button {
+    margin-right: 10px;
     height: 2rem;
     width: 2rem;
     border: 2px solid salmon;
     border-radius: 20%;
     outline: none;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-header#page-header button span {
+#page-header button span {
     font-weight: bold;
     font-size: 1.2rem;
+    line-height: 1.2rem;
 }
 
-header#page-header button:active {
+#page-header button:active {
     transform: scale(0.9);
 }
 
-nav.navigation {
+.navigation-container {
     background-color: rgba(0, 0, 0, 0.1);
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 0;
-    height: 100vh;
-    transition: width 0.1s ease;
-}
-
-nav.navigation .container {
-    background-color: lightgreen;
-    position: absolute;
-    height: 100vh;
-    right: 0;
-    width: 0;
+    height: 100%;
     overflow: hidden;
-    transition: width 0.3s;
+    display: flex;
+    justify-content: flex-end;
+    transition: width 0.2s ease;
 }
 
-nav.navigation .container header {
+.navigation-container nav.navigation {
+    background-color: lightgreen;
     position: relative;
-    padding-left: 30px;
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.navigation-container nav.navigation header {
+    background-color: yellow;
+    position: relative;
+    width: 280px;
     height: 60px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-nav.navigation .container header h1 {
+.navigation-container nav.navigation header section h1 {
     font-size: 1rem;
 }
 
-nav.navigation .container header button {
+.navigation-container nav.navigation header button {
+    margin-right: 10px;
     height: 2rem;
     width: 2rem;
     border: 2px solid salmon;
     border-radius: 20%;
     outline: none;
     transition: all 0.2s ease;
-    position: absolute;
-    left: 238px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-nav.navigation .container header button span {
+.navigation-container nav.navigation header button span {
     font-weight: bold;
     font-size: 1.2rem;
+    line-height: 1.2rem;
 }
 
-nav.navigation .container header button:active {
+.navigation-container nav.navigation header button:active {
     transform: scale(0.9);
 }
 
-nav.navigation .container ul {
-    margin: 20px 0 0 30px;
+.navigation-container nav.navigation ul {
+    background-color: yellow;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navigation-container nav.navigation .main-list {
+    margin-bottom: 20px;
+}
+
+.navigation-container nav.navigation .app-list {
+    background-color: pink;
+    position: absolute;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.navigation-container nav.navigation footer {
+    background-color: yellow;
+    position: absolute;
+    bottom: 0;
+    width: 280px;
+    height: 100px;
 }

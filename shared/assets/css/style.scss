@@ -1,30 +1,47 @@
-@mixin nav-button($left: false) {
+$nav-space: (
+    width: 280px,
+    bottom: 20px,
+    end: 10px
+);
+
+@mixin nav-button() {
     button {
+        margin-right: map-get($nav-space, end);
         height: 2rem;
         width: 2rem;
-        border: 2px solid salmon;
+        
+        border: 2px solid salmon ;
         border-radius: 20%;
         outline: none;
         transition: all 0.2s ease;
-        @if $left == true {
-            position: absolute;
-            left: 280px - 10px - 32px;
-        }
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
         span {
             font-weight: bold;
             font-size: 1.2rem;
+            line-height: 1.2rem;
         }
     }
+    
     button:active {
         transform: scale(0.9);
     }
 }
 
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    padding-top: 100px;
+    height: 1600px;
 }
 
 ul {
@@ -42,9 +59,13 @@ form {
     }
 }
 
-header#page-header {
+
+
+#page-header {
     background-color: lightblue;
-    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
     height: 60px;
     
     display: flex;
@@ -58,40 +79,77 @@ header#page-header {
     @include nav-button();
 }
 
-nav.navigation {
+.navigation-container {
     background-color: rgba(0, 0, 0, 0.1);
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 0;
-    height: 100vh;
-    transition: width 0.1s ease;
+    height: 100%;
+    overflow: hidden;
     
-    .container {
+    display: flex;
+    justify-content: flex-end;
+    
+    transition: width 0.2s ease;
+    
+    nav.navigation {
         background-color: lightgreen;
-        position: absolute;
-        height: 100vh;
-        right: 0;
+        position: relative;
+        height: 100%;
         width: 0;
-        overflow: hidden;
-        transition: width 0.3s;
+        transition: width 0.3s ease;
         
         header {
+            background-color: yellow;
             position: relative;
-            padding-left: 30px;
+            width: map-get($nav-space, width);
             height: 60px;
+            margin-bottom: map-get($nav-space, bottom);
+            
             display: flex;
             align-items: center;
+            justify-content: space-between;
             
-            h1 {
-                font-size: 1rem;
+            section {
+                h1 {
+                    font-size: 1rem;
+                }
             }
             
-            @include nav-button(true);
+            @include nav-button();
         }
         
         ul {
-            margin: 20px 0 0 30px;
+            background-color: yellow;
+            width: map-get($nav-space, width);
+            
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .main-list {
+            margin-bottom: map-get($nav-space, bottom);
+        }
+        
+        .app-list {
+            background-color: pink;
+            position: absolute;
+            overflow-y: auto;
+            overflow-x: hidden;
+            
+            ul {
+                // height: 1000px;
+            }
+        }
+        
+        footer {
+            background-color: yellow;
+            position: absolute;
+            bottom: 0;
+            width: map-get($nav-space, width);
+            height: 100px;
         }
     }
 }

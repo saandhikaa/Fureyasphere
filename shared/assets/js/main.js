@@ -1,8 +1,8 @@
 const greenhex = '#04BA71';
 const redhex = '#FF0000';
 
-const nav = document.querySelector('nav.closeNav div.container');
-const navBackground = document.querySelector('nav.closeNav');
+const nav = document.querySelector('.navigation-container nav.navigation');
+const navContainer = document.querySelector('.navigation-container');
 
 function Scanning(){}
 const scan = new Scanning();
@@ -32,14 +32,30 @@ Scanning.prototype.passwordVisibility = element => {
 };
 
 Scanning.prototype.openNav = () => {
-    nav.style.width = '65vw';
-    navBackground.style.width = '100vw';
+    nav.style.width = '280px';
+    navContainer.style.width = '100vw';
+    setScroll(false);
 };
 
 Scanning.prototype.closeNav = () => {
     nav.style.width = '0';
-    navBackground.style.width = '0';
+    navContainer.style.width = '0';
+    setScroll(true);
 };
+
+
+
+const setScroll = isEnabled => {
+  if (isEnabled) {
+    window.removeEventListener('wheel', preventScroll);
+    window.removeEventListener('touchmove', preventScroll);
+  } else {
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+  }
+};
+
+const preventScroll = event => event.preventDefault();
 
 
 

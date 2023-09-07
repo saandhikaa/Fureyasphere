@@ -3,15 +3,12 @@ const redhex = '#FF0000';
 
 const navContainer = document.querySelector('.navigation-container');
 const navigation = document.querySelector('.navigation-container nav.navigation');
-const navHeader = document.querySelector('nav.navigation header');
-const navMain = document.querySelector('nav.navigation .main-list');
-const navApp = document.querySelector('nav.navigation .app-list');
-const navFooter = document.querySelector('nav.navigation footer');
-const navGap = parseFloat(window.getComputedStyle(navHeader).getPropertyValue('margin-bottom'));
-const ntop = navHeader.offsetHeight + navGap + navMain.offsetHeight + navGap;
-const nbottom = navGap + navFooter.offsetHeight;
-navApp.style.top = ntop + 'px';
-navApp.style.bottom = nbottom + 'px';
+const navGroup = Array.from(navigation.children);
+const navGap = parseFloat(window.getComputedStyle(navGroup[0]).getPropertyValue('margin-bottom'));
+navGroup[2].style.top = (navGroup[0].offsetHeight + navGap + navGroup[1].offsetHeight + navGap) + 'px';
+navGroup[2].style.bottom = (navGroup[3].offsetHeight + navGap) + 'px';
+
+
 
 function Scanning(){}
 const scan = new Scanning();
@@ -41,20 +38,16 @@ Scanning.prototype.passwordVisibility = element => {
 };
 
 Scanning.prototype.openNav = () => {
-    navigation.style.width = navHeader.offsetWidth + 'px';
+    navigation.style.width = navGroup[0].offsetWidth + 'px';
     navContainer.style.width = '100vw';
-    setScroll(false);
+    document.body.style.overflow = 'hidden';
 };
 
 Scanning.prototype.closeNav = () => {
     navigation.style.width = '0';
     navContainer.style.width = '0';
-    setScroll(true);
+    document.body.style.overflow = 'auto';
 };
-
-
-
-const setScroll = isEnabled => document.body.style.overflow = isEnabled ? 'auto' : 'hidden';
 
 
 

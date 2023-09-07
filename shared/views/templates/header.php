@@ -13,7 +13,7 @@
 <body>
     <header id="page-header">
         <h1><?= ucfirst($data["app"]) ?></h1>
-        <button type="button" class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? '<span class="openNav">' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : '' ?></button>
+        <button type="button" class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? '<span class="openNav">' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : '<img class="openNav" src="' . BASEURL . '/' . $data["mainApp"] . '/assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg" alt="">' ?></button>
     </header>
     
     <div class="navigation-container closeNav">
@@ -22,7 +22,7 @@
                 <section>
                     <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "hello" ?></h1>
                 </section>
-                <button type="button" class="closeNav"></button>
+                <button type="button" class="closeNav"><img class="closeNav" src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/close_FILL0_wght400_GRAD0_opsz24.svg" alt=""></button>
             </header>
             
             <ul class="main-list">

@@ -85,8 +85,11 @@ if (signUpUsername) {
         clearTimeout(typingTimer);
         messageElement.textContent = "";
         
-        // Start the timer after the user stops typing for a certain interval
-        if (element.target.value.length > 3) {
+        if (element.target.value.length > 12) {
+            element.target.value = element.target.value.slice(0, 12);
+        } 
+        
+        if (element.target.value.length >= 4) {
             typingTimer = setTimeout(() => {
                 // Perform AJAX request to the server
                 const url = window.location.href + '/checkusernameavailability';
@@ -108,6 +111,7 @@ if (signUpUsername) {
                     }
                 });
             }, 1000);
+            
         } else {
             // Clear the message and reset the color
             messageElement.textContent = "";

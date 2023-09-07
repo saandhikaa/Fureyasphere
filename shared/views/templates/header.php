@@ -13,26 +13,35 @@
 <body>
     <header id="page-header">
         <h1><?= ucfirst($data["app"]) ?></h1>
-        <button type="button" class="openNav"><span class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? strtoupper($_SESSION["sign-in"]["username"][0]) : '' ?></span></button>
+        <button type="button" class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? '<span class="openNav">' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : '' ?></button>
     </header>
     
-    <nav class="navigation closeNav">
-        <div class="container">
+    <div class="navigation-container closeNav">
+        <nav class="navigation">
             <header>
-                <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "" ?></h1>
-                <button type="button" class="closeNav"><span class="closeNav"><?= isset($_SESSION["sign-in"]["username"]) ? strtoupper($_SESSION["sign-in"]["username"][0]) : '' ?></span></button>
+                <section>
+                    <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "hello" ?></h1>
+                </section>
+                <button type="button" class="closeNav"></button>
             </header>
-            <ul>
+            
+            <ul class="main-list">
                 <li><a href="<?= BASEURL ?>/home">Home</a></li>
                 <li><a href="<?= BASEURL ?>/account">Account</a></li>
             </ul>
             
-            <ul>
-                <?php foreach (App::getAppListNavigation() as $appControllers): ?>
-                    <?php foreach ($appControllers as $controller): ?>
-                        <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
+            <section class="app-list">
+                <ul>
+                    <?php foreach (App::getAppListNavigation() as $appControllers): ?>
+                        <?php foreach ($appControllers as $controller): ?>
+                            <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
+                        <?php endforeach ?>
                     <?php endforeach ?>
-                <?php endforeach ?>
-            </ul>
-        </div>
-    </nav>
+                </ul>
+            </section>
+            
+            <footer>
+                <p class="copyright">copyright</p>
+            </footer>
+        </nav>
+    </div>

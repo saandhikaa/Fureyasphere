@@ -62,7 +62,7 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
     right: 0;
@@ -103,17 +103,24 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation ul.row {
     width: 280px;
-    padding: 15px 20px;
+    padding: 5px 20px;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
 .navigation-container nav.navigation ul.row a {
-    padding: 5px 15px;
-    display: block;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     text-decoration: none;
     color: #222326;
+}
+
+.navigation-container nav.navigation ul.row a img {
+    width: 1.5rem;
+    height: auto;
 }
 
 .navigation-container nav.navigation header {
@@ -157,17 +164,18 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation .main-list {
     position: absolute;
+    padding: 10px 0;
 }
 
 .navigation-container nav.navigation .app-list {
     position: absolute;
+    padding: 10px 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
 .navigation-container nav.navigation .app-list h6 {
-    font-weight: normal;
-    padding: 0 5px;
+    padding: 5px;
     font-size: 1rem;
 }
 
@@ -175,19 +183,11 @@ form input[type="password"]::-ms-reveal {
     position: absolute;
     bottom: 0;
     width: 280px;
-    padding-bottom: 10px;
+    padding: 10px 0 20px;
     border-bottom-left-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.navigation-container nav.navigation footer ul.row {
-    padding-bottom: 5px;
-}
-
-.navigation-container nav.navigation footer ul.row a {
-    padding-left: 5px;
 }
 
 .navigation-container nav.navigation footer .copyright {
@@ -203,5 +203,5 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation footer .footer-list a {
     text-decoration: none;
-    color: #507295;
+    color: #2B73E6;
 }

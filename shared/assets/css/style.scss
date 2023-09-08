@@ -83,7 +83,7 @@ form {
 }
 
 .navigation-container {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0 , 0.3);
     // backdrop-filter: blur(2px);
     position: fixed;
     top: 0;
@@ -123,17 +123,25 @@ form {
         
         ul.row {
             width: map-get($nav-space, width);
-            padding: 15px map-get($nav-space, start);
+            padding: 5px map-get($nav-space, start);
             
             display: flex;
             flex-direction: column;
             gap: 5px;
             
             a {
-                padding: 5px 15px;
-                display: block;
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                
                 text-decoration: none;
                 color: #222326;
+                
+                img {
+                    width: 1.5rem;
+                    height: auto;
+                }
             }
         }
         
@@ -159,16 +167,17 @@ form {
         
         .main-list {
             position: absolute;
+            padding: 10px 0;
         }
         
         .app-list {
             position: absolute;
+            padding: 10px 0;
             overflow-y: auto;
             overflow-x: hidden;
             
             h6 {
-                font-weight: normal;
-                padding: 0 5px;
+                padding: 5px;
                 font-size: 1rem;
             }
         }
@@ -177,20 +186,12 @@ form {
             position: absolute;
             bottom: 0;
             width: map-get($nav-space, width);
-            padding-bottom: 10px;
+            padding: 10px 0 20px;
             border-bottom-left-radius: map-get($nav-space, radius);
             
             display: flex;
             flex-direction: column;
             gap: 10px;
-            
-            ul.row {
-                padding-bottom: 5px;
-                
-                a {
-                    padding-left: 5px;
-                }
-            }
             
             .copyright {
                 padding-left: 5px + map-get($nav-space, start);
@@ -204,7 +205,7 @@ form {
                 
                 a {
                     text-decoration: none;
-                    color: #507295;
+                    color: #2B73E6;
                 }
             }
         }

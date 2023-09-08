@@ -23,15 +23,20 @@
                     <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "hello" ?></h1>
                 </section>
                 <button type="button" class="closeNav"><img class="closeNav" src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/close_FILL0_wght400_GRAD0_opsz24.svg" alt=""></button>
+                <span class="separator bottom"></span>
             </header>
             
-            <ul class="main-list">
-                <li><a href="<?= BASEURL ?>/home">Home</a></li>
-                <li><a href="<?= BASEURL ?>/account">Account</a></li>
-            </ul>
+            <section class="main-list">
+                <ul class="row">
+                    <li><a href="<?= BASEURL ?>/home">Home</a></li>
+                    <li><a href="<?= BASEURL ?>/account">Account</a></li>
+                </ul>
+                <span class="separator bottom"></span>
+            </section>
             
             <section class="app-list">
-                <ul>
+                <ul class="row">
+                    <h6>Services</h6>
                     <?php foreach (App::getAppListNavigation() as $appControllers): ?>
                         <?php foreach ($appControllers as $controller): ?>
                             <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
@@ -41,7 +46,17 @@
             </section>
             
             <footer>
+                <span class="separator top"></span>
+                <ul class="row">
+                    <li><a href="https://github.com/saandhikaa" target="_blank">Follow me on GitHub</a></li>
+                    <li><a href="">Leave a comment</a></li>
+                </ul>
                 <p class="copyright"><span></span> <?= ME ?>.</p>
+                <ul class="footer-list">
+                    <li><a href="">About</a></li>
+                    <li><a href="">Terms</a></li>
+                    <li><a href="">Privacy</a></li>
+                </ul>
             </footer>
         </nav>
     </div>

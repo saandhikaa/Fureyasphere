@@ -8,6 +8,8 @@ const navGap = parseFloat(window.getComputedStyle(navGroup[0]).getPropertyValue(
 navGroup[2].style.top = (navGroup[0].offsetHeight + navGap + navGroup[1].offsetHeight + navGap) + 'px';
 navGroup[2].style.bottom = (navGroup[3].offsetHeight + navGap) + 'px';
 
+document.querySelector('.copyright span').innerHTML = `&copy; ${new Date().getFullYear()}`;
+
 
 
 function Scanning(){}

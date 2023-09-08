@@ -41,7 +41,7 @@
             </section>
             
             <footer>
-                <p class="copyright">copyright</p>
+                <p class="copyright"><span></span> <?= ME ?>.</p>
             </footer>
         </nav>
     </div>

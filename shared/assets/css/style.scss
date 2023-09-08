@@ -2,6 +2,7 @@ $nav-space: (
     width: 280px,    // config: navigation menu width
     bottom: 20px,
     radius: 10px,
+    start: 20px,
     end: 10px
 );
 
@@ -81,7 +82,7 @@ form {
 }
 
 .navigation-container {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(240, 241, 243, 0.7);
     position: fixed;
     top: 0;
     right: 0;
@@ -95,21 +96,51 @@ form {
     transition: width 0.2s ease;
     
     nav.navigation {
-        background-color: lightgreen;
+        background-color: white;
         position: relative;
         height: 100%;
         width: 0;
+        border: 2px solid rgba(100, 100, 100, 0.3);
         border-top-left-radius: map-get($nav-space, radius);
         border-bottom-left-radius: map-get($nav-space, radius); 
         transition: width 0.3s ease;
         
+        .separator {
+            background-color: rgba(156, 100, 148, 0.5);
+            position: absolute;
+            right: 0;
+            height: 0.5px;
+            width: map-get($nav-space, width) - map-get($nav-space, start);
+        }
+        .separator.top {
+            top: 0;
+        }
+        .separator.bottom {
+            bottom: 0;
+        }
+        
+        ul.row {
+            width: map-get($nav-space, width);
+            padding: 15px map-get($nav-space, start);
+            
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            
+            a {
+                padding: 5px 15px;
+                display: block;
+                text-decoration: none;
+                color: #222326;
+            }
+        }
+        
         header {
-            background-color: yellow;
             position: relative;
             width: map-get($nav-space, width);
             height: 60px;
+            padding-left: map-get($nav-space, start);
             border-top-left-radius: map-get($nav-space, radius);
-            margin-bottom: map-get($nav-space, bottom);
             
             display: flex;
             align-items: center;
@@ -124,37 +155,56 @@ form {
             @include nav-button();
         }
         
-        ul {
-            background-color: yellow;
-            width: map-get($nav-space, width);
-            
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
         .main-list {
-            margin-bottom: map-get($nav-space, bottom);
+            position: absolute;
         }
         
         .app-list {
-            background-color: pink;
             position: absolute;
             overflow-y: auto;
             overflow-x: hidden;
             
-            ul {
-                // height: 1000px;
+            h6 {
+                font-weight: normal;
+                padding: 0 5px;
+                font-size: 1rem;
             }
         }
         
         footer {
-            background-color: yellow;
             position: absolute;
             bottom: 0;
             width: map-get($nav-space, width);
-            height: 100px;
-            border-bottom-left-radius: map-get($nav-space, radius); 
+            padding-bottom: 10px;
+            border-bottom-left-radius: map-get($nav-space, radius);
+            
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+            ul.row {
+                padding-bottom: 5px;
+                
+                a {
+                    padding-left: 5px;
+                }
+            }
+            
+            .copyright {
+                padding-left: 5px + map-get($nav-space, start);
+                color: #8A8D90;
+            }
+            
+            .footer-list {
+                padding-left: 5px + map-get($nav-space, start);
+                display: flex;
+                gap: 10px;
+                
+                a {
+                    text-decoration: none;
+                    color: #507295;
+                }
+            }
         }
     }
 }

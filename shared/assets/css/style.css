@@ -61,7 +61,7 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(240, 241, 243, 0.7);
     position: fixed;
     top: 0;
     right: 0;
@@ -74,22 +74,53 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container nav.navigation {
-    background-color: lightgreen;
+    background-color: white;
     position: relative;
     height: 100%;
     width: 0;
+    border: 2px solid rgba(100, 100, 100, 0.3);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transition: width 0.3s ease;
 }
 
+.navigation-container nav.navigation .separator {
+    background-color: rgba(156, 100, 148, 0.5);
+    position: absolute;
+    right: 0;
+    height: 0.5px;
+    width: 260px;
+}
+
+.navigation-container nav.navigation .separator.top {
+    top: 0;
+}
+
+.navigation-container nav.navigation .separator.bottom {
+    bottom: 0;
+}
+
+.navigation-container nav.navigation ul.row {
+    width: 280px;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.navigation-container nav.navigation ul.row a {
+    padding: 5px 15px;
+    display: block;
+    text-decoration: none;
+    color: #222326;
+}
+
 .navigation-container nav.navigation header {
-    background-color: yellow;
     position: relative;
     width: 280px;
     height: 60px;
+    padding-left: 20px;
     border-top-left-radius: 10px;
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,30 +153,53 @@ form input[type="password"]::-ms-reveal {
     transform: scale(0.9);
 }
 
-.navigation-container nav.navigation ul {
-    background-color: yellow;
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .navigation-container nav.navigation .main-list {
-    margin-bottom: 20px;
+    position: absolute;
 }
 
 .navigation-container nav.navigation .app-list {
-    background-color: pink;
     position: absolute;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
+.navigation-container nav.navigation .app-list h6 {
+    font-weight: normal;
+    padding: 0 5px;
+    font-size: 1rem;
+}
+
 .navigation-container nav.navigation footer {
-    background-color: yellow;
     position: absolute;
     bottom: 0;
     width: 280px;
-    height: 100px;
+    padding-bottom: 10px;
     border-bottom-left-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navigation-container nav.navigation footer ul.row {
+    padding-bottom: 5px;
+}
+
+.navigation-container nav.navigation footer ul.row a {
+    padding-left: 5px;
+}
+
+.navigation-container nav.navigation footer .copyright {
+    padding-left: 25px;
+    color: #8A8D90;
+}
+
+.navigation-container nav.navigation footer .footer-list {
+    padding-left: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.navigation-container nav.navigation footer .footer-list a {
+    text-decoration: none;
+    color: #507295;
 }

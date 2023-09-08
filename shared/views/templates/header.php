@@ -28,8 +28,8 @@
             
             <section class="main-list">
                 <ul class="row">
-                    <li><a href="<?= BASEURL ?>/home">Home</a></li>
-                    <li><a href="<?= BASEURL ?>/account">Account</a></li>
+                    <li><a href="<?= BASEURL ?>/home"><img src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/home_FILL0_wght400_GRAD0_opsz24.svg" alt="">Home</a></li>
+                    <li><a href="<?= BASEURL ?>/account"><img src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/person_FILL0_wght400_GRAD0_opsz24.svg" alt="">Account</a></li>
                 </ul>
                 <span class="separator bottom"></span>
             </section>

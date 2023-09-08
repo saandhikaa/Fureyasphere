@@ -29,6 +29,7 @@ function handleFileChange(element) {
     const listed = element.target.parentElement.parentElement.querySelectorAll('#filtered-file p.fileSize');
     const selectedFiles = element.target.files;
     const newFileSize = Array.from(selectedFiles).reduce((total, file) => total + file.size, 0);
+    const uploadLimit = 40;    // config: upload limit in MB
     
     let listedFileSize = 0;
     if (listed.length > 0) {
@@ -36,19 +37,17 @@ function handleFileChange(element) {
         
         for (const sizeString of sizes) {
             if (sizeString.includes(" KB")) {
-                // Remove " KB" and convert to a numeric value in bytes
                 listedFileSize += Math.ceil(parseFloat(sizeString.replace(" KB", "")) * 1024);
             } else if (sizeString.includes(" MB")) {
-                // Remove " MB" and convert to a numeric value in bytes
                 listedFileSize += Math.ceil(parseFloat(sizeString.replace(" MB", "")) * 1024 * 1024);
             }
         }
     }
     
-    if (newFileSize + listedFileSize <= 40 * 1024 * 1024) {
+    if (newFileSize + listedFileSize <= uploadLimit * 1024 * 1024) {
         Array.from(selectedFiles).forEach(file => {createFilteredFile(file.name, file.size)});
     } else {
-        alert('You chose a file that exceeds the 40MB limit.');
+        alert(`You chose a file that exceeds the ${uploadLimit}MB limit.`);
     }
     
     element.target.removeAttribute('class');
@@ -103,7 +102,6 @@ function formatBytes(numBytes) {
     }
     return numBytes.toFixed(2) + " " + suffixes[index];
 }
-
 
 
 

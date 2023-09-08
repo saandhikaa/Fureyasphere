@@ -8,4 +8,6 @@
     
     define('ADMIN_USERNAME', 'fureya');
     define('ADMIN_PASSWORD', '0213');
+    
+    define('ME', 'saandhikaa');
 ?>

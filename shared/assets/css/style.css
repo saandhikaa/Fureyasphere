@@ -27,6 +27,7 @@ form input[type="password"]::-ms-reveal {
     background-color: lightblue;
     position: fixed;
     top: 0;
+    padding: 0 10px;
     width: 100vw;
     height: 60px;
     display: flex;
@@ -40,10 +41,9 @@ form input[type="password"]::-ms-reveal {
 }
 
 #page-header button {
-    margin-right: 10px;
+    background-color: #EEEEEE;
     height: 2rem;
     width: 2rem;
-    background-color: #EEEEEE;
     border: 0;
     border-radius: 20%;
     outline: none;
@@ -89,11 +89,12 @@ form input[type="password"]::-ms-reveal {
     width: 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
     transition: width 0.3s ease;
 }
 
 .navigation-container nav.navigation .separator {
-    background-color: rgba(34, 35, 38, 0.5);
+    background-color: rgba(35, 35, 35, 0.3);
     position: absolute;
     right: 0;
     height: 0.5px;
@@ -136,6 +137,7 @@ form input[type="password"]::-ms-reveal {
     width: 280px;
     height: 60px;
     padding-left: 20px;
+    padding-right: 10px;
     border-top-left-radius: 10px;
     display: flex;
     align-items: center;
@@ -148,10 +150,9 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container nav.navigation header button {
-    margin-right: 10px;
+    background-color: #EEEEEE;
     height: 2rem;
     width: 2rem;
-    background-color: #EEEEEE;
     border: 0;
     border-radius: 20%;
     outline: none;

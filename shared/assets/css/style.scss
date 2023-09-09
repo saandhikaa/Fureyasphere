@@ -9,11 +9,9 @@ $nav-space: (
 
 @mixin nav-button() {
     button {
-        margin-right: map-get($nav-space, end);
+        background-color: #EEEEEE;
         height: 2rem;
         width: 2rem;
-        
-        background-color: #EEEEEE;
         border: 0;
         border-radius: 20%;
         outline: none;
@@ -76,6 +74,7 @@ form {
     background-color: lightblue;
     position: fixed;
     top: 0;
+    padding: 0 map-get($nav-space, end);
     width: 100vw;
     height: 60px;
     
@@ -113,10 +112,11 @@ form {
         width: 0;
         border-top-left-radius: map-get($nav-space, radius);
         border-bottom-left-radius: map-get($nav-space, radius); 
+        box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
         transition: width 0.3s ease;
         
         .separator {
-            background-color: rgba(34, 35, 38, 0.5);
+            background-color: rgba(35, 35, 35, 0.3);
             position: absolute;
             right: 0;
             height: 0.5px;
@@ -159,6 +159,7 @@ form {
             width: map-get($nav-space, width);
             height: 60px;
             padding-left: map-get($nav-space, start);
+            padding-right: map-get($nav-space, end);
             border-top-left-radius: map-get($nav-space, radius);
             
             display: flex;

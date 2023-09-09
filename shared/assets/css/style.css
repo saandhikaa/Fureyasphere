@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 body {
@@ -35,13 +36,14 @@ form input[type="password"]::-ms-reveal {
 
 #page-header h1 {
     font-size: 1.5rem;
+    font-weight: 500;
 }
 
 #page-header button {
     margin-right: 10px;
     height: 2rem;
     width: 2rem;
-    background-color: #F3F4F6;
+    background-color: #EEEEEE;
     border: 0;
     border-radius: 20%;
     outline: none;
@@ -55,6 +57,12 @@ form input[type="password"]::-ms-reveal {
     font-weight: bold;
     font-size: 1.2rem;
     line-height: 1.2rem;
+    color: #333333;
+    pointer-events: none;
+}
+
+#page-header button svg, #page-header button svg path {
+    pointer-events: none;
 }
 
 #page-header button:active {
@@ -79,7 +87,6 @@ form input[type="password"]::-ms-reveal {
     position: relative;
     height: 100%;
     width: 0;
-    border: 2px solid rgba(100, 100, 100, 0.3);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transition: width 0.3s ease;
@@ -113,9 +120,10 @@ form input[type="password"]::-ms-reveal {
     padding: 5px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     text-decoration: none;
-    color: #222326;
+    font-weight: 400;
+    color: #333333;
 }
 
 .navigation-container nav.navigation ul.row a img {
@@ -135,14 +143,15 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container nav.navigation header section h1 {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .navigation-container nav.navigation header button {
     margin-right: 10px;
     height: 2rem;
     width: 2rem;
-    background-color: #F3F4F6;
+    background-color: #EEEEEE;
     border: 0;
     border-radius: 20%;
     outline: none;
@@ -156,27 +165,34 @@ form input[type="password"]::-ms-reveal {
     font-weight: bold;
     font-size: 1.2rem;
     line-height: 1.2rem;
+    color: #333333;
+    pointer-events: none;
+}
+
+.navigation-container nav.navigation header button svg, .navigation-container nav.navigation header button svg path {
+    pointer-events: none;
 }
 
 .navigation-container nav.navigation header button:active {
     transform: scale(0.9);
 }
 
-.navigation-container nav.navigation .main-list {
-    position: absolute;
-    padding: 10px 0;
-}
-
-.navigation-container nav.navigation .app-list {
+.navigation-container nav.navigation .list {
     position: absolute;
     padding: 10px 0;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.navigation-container nav.navigation .app-list h6 {
+.navigation-container nav.navigation .list .main-list {
+    margin-bottom: 10px;
+}
+
+.navigation-container nav.navigation .list h6 {
+    margin-top: 10px;
     padding: 5px;
     font-size: 1rem;
+    font-weight: 500;
 }
 
 .navigation-container nav.navigation footer {
@@ -192,6 +208,7 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation footer .copyright {
     padding-left: 25px;
+    font-size: 0.8rem;
     color: #8A8D90;
 }
 
@@ -203,5 +220,6 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation footer .footer-list a {
     text-decoration: none;
+    font-size: 0.8rem;
     color: #2B73E6;
 }

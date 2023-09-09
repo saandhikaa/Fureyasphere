@@ -3,6 +3,7 @@ $nav-space: (
     bottom: 20px,
     radius: 10px,
     start: 20px,
+    apadding: 5px,
     end: 10px
 );
 
@@ -12,7 +13,7 @@ $nav-space: (
         height: 2rem;
         width: 2rem;
         
-        background-color: #F3F4F6;
+        background-color: #EEEEEE;
         border: 0;
         border-radius: 20%;
         outline: none;
@@ -26,6 +27,12 @@ $nav-space: (
             font-weight: bold;
             font-size: 1.2rem;
             line-height: 1.2rem;
+            color: #333333;
+            pointer-events: none;
+        }
+        
+        svg, svg path {
+            pointer-events: none;
         }
     }
     
@@ -40,6 +47,7 @@ $nav-space: (
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 body {
@@ -77,6 +85,7 @@ form {
     
     h1 {
         font-size: 1.5rem;
+        font-weight: 500;
     }
     
     @include nav-button();
@@ -102,7 +111,6 @@ form {
         position: relative;
         height: 100%;
         width: 0;
-        border: 2px solid rgba(100, 100, 100, 0.3);
         border-top-left-radius: map-get($nav-space, radius);
         border-bottom-left-radius: map-get($nav-space, radius); 
         transition: width 0.3s ease;
@@ -130,13 +138,14 @@ form {
             gap: 5px;
             
             a {
-                padding: 5px;
+                padding: map-get($nav-space, apadding);
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                gap: 8px;
                 
                 text-decoration: none;
-                color: #222326;
+                font-weight: 400;
+                color: #333333;
                 
                 img {
                     width: 1.5rem;
@@ -158,27 +167,29 @@ form {
             
             section {
                 h1 {
-                    font-size: 1rem;
+                    font-size: 1.2rem;
+                    font-weight: 500;
                 }
             }
             
             @include nav-button();
         }
         
-        .main-list {
-            position: absolute;
-            padding: 10px 0;
-        }
-        
-        .app-list {
+        .list {
             position: absolute;
             padding: 10px 0;
             overflow-y: auto;
             overflow-x: hidden;
             
+            .main-list {
+                margin-bottom: 10px;
+            }
+            
             h6 {
-                padding: 5px;
+                margin-top: 10px;
+                padding: map-get($nav-space, apadding);
                 font-size: 1rem;
+                font-weight: 500;
             }
         }
         
@@ -194,17 +205,19 @@ form {
             gap: 10px;
             
             .copyright {
-                padding-left: 5px + map-get($nav-space, start);
+                padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
+                font-size: 0.8rem;
                 color: #8A8D90;
             }
             
             .footer-list {
-                padding-left: 5px + map-get($nav-space, start);
+                padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
                 display: flex;
                 gap: 10px;
                 
                 a {
                     text-decoration: none;
+                    font-size: 0.8rem;
                     color: #2B73E6;
                 }
             }

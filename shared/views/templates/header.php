@@ -13,7 +13,7 @@
 <body>
     <header id="page-header">
         <h1><?= ucfirst($data["app"]) ?></h1>
-        <button type="button" class="openNav"><?= isset($_SESSION["sign-in"]["username"]) ? '<span class="openNav">' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : '<img class="openNav" src="' . BASEURL . '/' . $data["mainApp"] . '/assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg" alt="">' ?></button>
+        <button type="button" class="openNav nav-button"><?= isset($_SESSION["sign-in"]["username"]) ? '<span>' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : (function() { readfile(__DIR__ . '/../../assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg'); })() ?></button>
     </header>
     
     <div class="navigation-container closeNav">
@@ -22,20 +22,17 @@
                 <section>
                     <h1><?= isset($_SESSION["sign-in"]["username"]) ? $_SESSION["sign-in"]["username"] : "hello" ?></h1>
                 </section>
-                <button type="button" class="closeNav"><img class="closeNav" src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/close_FILL0_wght400_GRAD0_opsz24.svg" alt=""></button>
+                <button type="button" class="closeNav nav-button"><?php readfile(__DIR__ . '/../../assets/images/icons/close_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
                 <span class="separator bottom"></span>
             </header>
             
-            <section class="main-list">
-                <ul class="row">
-                    <li><a href="<?= BASEURL ?>/home"><img src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/home_FILL0_wght400_GRAD0_opsz24.svg" alt="">Home</a></li>
-                    <li><a href="<?= BASEURL ?>/account"><img src="<?= BASEURL . '/' . $data["mainApp"] ?>/assets/images/icons/person_FILL0_wght400_GRAD0_opsz24.svg" alt="">Account</a></li>
+            <section class="list">
+                <ul class="main-list row">
+                    <li><a href="<?= BASEURL ?>/home"><?php readfile(__DIR__ . '/../../assets/images/icons/home_FILL0_wght400_GRAD0_opsz24.svg') ?>Home</a></li>
+                    <li><a href="<?= BASEURL ?>/account"><?php readfile(__DIR__ . '/../../assets/images/icons/person_FILL0_wght400_GRAD0_opsz24.svg') ?>Account</a></li>
                 </ul>
-                <span class="separator bottom"></span>
-            </section>
-            
-            <section class="app-list">
-                <ul class="row">
+                <span class="separator"></span>
+                <ul class="app-list row">
                     <h6>Services</h6>
                     <?php foreach (App::getAppListNavigation() as $appControllers): ?>
                         <?php foreach ($appControllers as $controller): ?>
@@ -54,6 +51,7 @@
                 <p class="copyright"><span></span> <?= ME ?>.</p>
                 <ul class="footer-list">
                     <li><a href="">About</a></li>
+                    <li><a href="">Resources</a></li>
                     <li><a href="">Terms</a></li>
                     <li><a href="">Privacy</a></li>
                 </ul>

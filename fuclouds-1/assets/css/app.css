@@ -1,3 +1,64 @@
+#fuclouds-search {
+    padding: 30px 20px 0;
+}
+
+#fuclouds-search form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 100px;
+}
+
+#fuclouds-search form h2 {
+    font-weight: 500;
+}
+
+#fuclouds-search form label {
+    margin-top: 20px;
+}
+
+#fuclouds-search form section {
+    display: flex;
+    border: 2px solid #787878;
+    border-radius: 21px;
+    height: 42px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+#fuclouds-search form section input {
+    height: 100%;
+    outline: none;
+    border: 0;
+    border-radius: 0;
+    background-color: white;
+    font-size: 1rem;
+}
+
+#fuclouds-search form section input:focus {
+    outline: none;
+}
+
+#fuclouds-search form section input[type="text"] {
+    width: 60%;
+    padding: 0 10px;
+    border-right: 2px solid #787878;
+}
+
+#fuclouds-search form section input[type="button"] {
+    width: 20%;
+    border-right: 2px solid #787878;
+}
+
+#fuclouds-search form section input[type="submit"] {
+    width: 20%;
+}
+
+#fuclouds-search form section input[type="button"]:active,
+#fuclouds-search form section input[type="submit"]:active {
+    background-color: dodgerblue;
+}
+
 #fuclouds-upload #file-input-container {
     display: none;
 }

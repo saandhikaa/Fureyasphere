@@ -4,9 +4,8 @@ const redhex = '#FF0000';
 const navContainer = document.querySelector('.navigation-container');
 const navigation = document.querySelector('.navigation-container nav.navigation');
 const navGroup = Array.from(navigation.children);
-const navGap = parseFloat(window.getComputedStyle(navGroup[0]).getPropertyValue('margin-bottom'));
-navGroup[2].style.top = (navGroup[0].offsetHeight + navGap + navGroup[1].offsetHeight + navGap) + 'px';
-navGroup[2].style.bottom = (navGroup[3].offsetHeight + navGap) + 'px';
+navGroup[2].style.top = (navGroup[0].offsetHeight + navGroup[1].offsetHeight) + 'px';
+navGroup[2].style.bottom = navGroup[3].offsetHeight + 'px';
 
 document.querySelector('.copyright span').innerHTML = `&copy; ${new Date().getFullYear()}`;
 

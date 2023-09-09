@@ -112,3 +112,12 @@ if (signUpUsername) {
         }
     });
 }
+
+
+
+const mainListSVG = Array.from(document.querySelectorAll('nav.navigation .main-list ul path'));
+mainListSVG.forEach(path => {
+    path.setAttribute('stroke', 'white' );
+    path.setAttribute('stroke-width', '20' );
+    path.setAttribute('fill', '#333333');
+});

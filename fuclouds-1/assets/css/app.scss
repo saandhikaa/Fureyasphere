@@ -77,4 +77,13 @@ $space: (
     #file-input-container {
         display: none;
     }
+    
+    form {
+        margin-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        @include group-input();
+    }
 }

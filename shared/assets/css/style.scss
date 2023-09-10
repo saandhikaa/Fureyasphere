@@ -10,22 +10,23 @@ $nav-space: (
 @mixin nav-button() {
     button {
         background-color: #EEEEEE;
-        height: 2rem;
-        width: 2rem;
+        outline: none;
         border: 0;
         border-radius: 20%;
-        outline: none;
-        transition: all 0.2s ease;
+        width: 2rem;
+        height: 2rem;
         
         display: flex;
         align-items: center;
         justify-content: center;
         
+        transition: all 0.2s ease;
+        
         span {
-            font-weight: bold;
-            font-size: 1.2rem;
-            line-height: 1.2rem;
             color: #333333;
+            line-height: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
             pointer-events: none;
         }
         
@@ -98,6 +99,7 @@ form {
     width: 0;
     height: 100%;
     overflow: hidden;
+    z-index: 10;
     
     display: flex;
     justify-content: flex-end;
@@ -107,19 +109,20 @@ form {
     nav.navigation {
         background-color: white;
         position: relative;
-        height: 100%;
         width: 0;
+        height: 100%;
+        box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
         border-top-left-radius: map-get($nav-space, radius);
         border-bottom-left-radius: map-get($nav-space, radius); 
-        box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
+        
         transition: width 0.3s ease;
         
         .separator {
             background-color: rgba(35, 35, 35, 0.3);
             position: absolute;
             right: 0;
-            height: 0.5px;
             width: map-get($nav-space, width) - map-get($nav-space, start);
+            height: 0.5px;
         }
         .separator.top {
             top: 0;
@@ -129,8 +132,8 @@ form {
         }
         
         ul.row {
-            width: map-get($nav-space, width);
             padding: 5px map-get($nav-space, start);
+            width: map-get($nav-space, width);
             
             display: flex;
             flex-direction: column;
@@ -155,11 +158,11 @@ form {
         
         header {
             position: relative;
-            width: map-get($nav-space, width);
-            height: 60px;
+            border-top-left-radius: map-get($nav-space, radius);
             padding-left: map-get($nav-space, start);
             padding-right: map-get($nav-space, end);
-            border-top-left-radius: map-get($nav-space, radius);
+            width: map-get($nav-space, width);
+            height: 60px;
             
             display: flex;
             align-items: center;
@@ -196,9 +199,9 @@ form {
         footer {
             position: absolute;
             bottom: 0;
-            width: map-get($nav-space, width);
-            padding: 10px 0 20px;
             border-bottom-left-radius: map-get($nav-space, radius);
+            padding: 10px 0 20px;
+            width: map-get($nav-space, width);
             
             display: flex;
             flex-direction: column;

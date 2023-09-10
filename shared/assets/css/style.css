@@ -41,22 +41,22 @@ form input[type="password"]::-ms-reveal {
 
 #page-header button {
     background-color: #EEEEEE;
-    height: 2rem;
-    width: 2rem;
+    outline: none;
     border: 0;
     border-radius: 20%;
-    outline: none;
-    transition: all 0.2s ease;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
 #page-header button span {
-    font-weight: bold;
-    font-size: 1.2rem;
-    line-height: 1.2rem;
     color: #333333;
+    line-height: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     pointer-events: none;
 }
 
@@ -76,6 +76,7 @@ form input[type="password"]::-ms-reveal {
     width: 0;
     height: 100%;
     overflow: hidden;
+    z-index: 10;
     display: flex;
     justify-content: flex-end;
     transition: width 0.2s ease;
@@ -84,11 +85,11 @@ form input[type="password"]::-ms-reveal {
 .navigation-container nav.navigation {
     background-color: white;
     position: relative;
-    height: 100%;
     width: 0;
+    height: 100%;
+    box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
     transition: width 0.3s ease;
 }
 
@@ -96,8 +97,8 @@ form input[type="password"]::-ms-reveal {
     background-color: rgba(35, 35, 35, 0.3);
     position: absolute;
     right: 0;
-    height: 0.5px;
     width: 260px;
+    height: 0.5px;
 }
 
 .navigation-container nav.navigation .separator.top {
@@ -109,8 +110,8 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container nav.navigation ul.row {
-    width: 280px;
     padding: 5px 20px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -133,11 +134,11 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation header {
     position: relative;
-    width: 280px;
-    height: 60px;
+    border-top-left-radius: 10px;
     padding-left: 20px;
     padding-right: 10px;
-    border-top-left-radius: 10px;
+    width: 280px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -150,22 +151,22 @@ form input[type="password"]::-ms-reveal {
 
 .navigation-container nav.navigation header button {
     background-color: #EEEEEE;
-    height: 2rem;
-    width: 2rem;
+    outline: none;
     border: 0;
     border-radius: 20%;
-    outline: none;
-    transition: all 0.2s ease;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .navigation-container nav.navigation header button span {
-    font-weight: bold;
-    font-size: 1.2rem;
-    line-height: 1.2rem;
     color: #333333;
+    line-height: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     pointer-events: none;
 }
 
@@ -198,9 +199,9 @@ form input[type="password"]::-ms-reveal {
 .navigation-container nav.navigation footer {
     position: absolute;
     bottom: 0;
-    width: 280px;
-    padding: 10px 0 20px;
     border-bottom-left-radius: 10px;
+    padding: 10px 0 20px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     gap: 10px;

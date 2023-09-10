@@ -1,6 +1,6 @@
 <main id="fuclouds-result">
     <?php if ($data["action"] === "uploaded"): ?>
-        <p class="status">Your files uploaded successfully with keyword <strong style="font-family: monospace;"><?= $data["keyword"] ?> </strong></p>
+        <p class="status"><?= FileHandler::uploadSuccess($data["keyword"]) ?></p>
     <?php endif ?>
     
     <ul>

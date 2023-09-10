@@ -49,9 +49,6 @@
                 if ($_POST["submit"] === "Download" || $_POST["submit"] === "Download All as Zip") {
                     $this->model($this->app, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
                 }
-            } elseif (is_null($codename) || is_null($key)) {
-                header("Location: " . BASEURL . "/$this->class");
-                exit;
             }
             
             $this->data["title"] = ucfirst($this->class) . ": Result";

@@ -314,5 +314,22 @@
             }
             return sprintf("%.2f %s", $num_bytes, $suffixes[$index]);
         }
+        
+        public static function uploadSuccess($keyword) {
+            $inspiringTexts = [
+                "Great news! Your digital treasures are now safely stored, and they await your command via the mystical keyword <span>$keyword</span>. Unleash your files whenever you desire.",
+                "With the enchanting keyword <span>$keyword</span>, your files have embarked on a magical journey to a secure realm of infinite possibilities.",
+                "Your files, tied to the celestial thread of <span>$keyword</span>, are now at your beck and call, ready to illuminate your path.",
+                "Embrace the power of <span>$keyword</span>, and watch as your files become a wellspring of inspiration and creativity.",
+                "The keyword <span>$keyword</span> has unlocked a world of endless potential within your files. Unleash their brilliance.",
+                "In the realm of <span>$keyword</span>, your files have transformed into a symphony of ideas waiting to harmonize with your creativity.",
+                "With the secret key <span>$keyword</span>, your files have become the canvas upon which your imagination paints the future.",
+                "Your files, now bound by the mystical <span>$keyword</span>, hold the keys to unlock a universe of inspiration.",
+                "Within the sacred vault of <span>$keyword</span>, your files await, each one a spark of inspiration to fuel your journey."
+            ];
+            
+            $randomIndex = array_rand($inspiringTexts);
+            return $inspiringTexts[$randomIndex];
+        }
     }
 ?>

@@ -9,6 +9,23 @@ Scanning.prototype.cancelInput = element => {
 
 
 
+const searchKeyword = document.querySelector('#fuclouds-search #keyword');
+if (searchKeyword) {
+    searchKeyword.addEventListener('input', event => event.target.value = event.target.value.replace(/[^a-zA-Z0-9/-]/g, ""));
+    groupInput(searchKeyword, event);
+}
+
+const uploadCodename = document.querySelector('#fuclouds-upload #codename');
+if (uploadCodename) {
+    uploadCodename.addEventListener('input', event => {
+        event.target.value = event.target.value.replace(/[^a-zA-Z0-9-]/g, "");
+        enablingUpload();
+    });
+    groupInput(uploadCodename, event);
+}
+
+
+
 function createInput() {
     const fileUploadContainer = document.querySelector('#fuclouds-upload #file-input-container');
 
@@ -20,7 +37,7 @@ function createInput() {
     inputFile.multiple = true;
     inputFile.addEventListener('change', handleFileChange);
      
-    // Append the input element to the file input container div
+    // Append the input element to the file input container
     fileUploadContainer.appendChild(inputFile);
 }
 
@@ -87,14 +104,12 @@ function enablingUpload() {
     const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
     const filteredFile = document.querySelectorAll('#fuclouds-upload #filtered-file li');
     
-    upSubmit.disabled = filteredFile.length === 0;
+    upSubmit.disabled = filteredFile.length === 0 || uploadCodename.value === '';
 }
 
 function formatBytes(numBytes) {
-    // Define the suffixes for different units
     const suffixes = ["B", "KB", "MB"];
 
-    // Find the appropriate unit and format the number
     let index = 0;
     while (numBytes >= 1024 && index < suffixes.length - 1) {
         numBytes /= 1024;
@@ -103,14 +118,13 @@ function formatBytes(numBytes) {
     return numBytes.toFixed(2) + " " + suffixes[index];
 }
 
-
-
-const searchKeyword = document.querySelector('#fuclouds-search #keyword');
-if (searchKeyword) {
-    searchKeyword.addEventListener('input', element => element.target.value = element.target.value.replace(/[^a-zA-Z0-9/-]/g, ""));
-}
-
-const uploadCodename = document.querySelector('#fuclouds-upload #codename');
-if (uploadCodename) {
-    uploadCodename.addEventListener('input', element => element.target.value = element.target.value.replace(/[^a-zA-Z0-9-]/g, ""));
+function groupInput(element, event) {
+    element.addEventListener('focus', event => {
+        event.target.parentElement.style.border = '2px solid dodgerblue';
+        event.target.parentElement.style.padding = '9px';
+    });
+    element.addEventListener('blur', event => {
+        event.target.parentElement.style.border = '1px solid #999999';
+        event.target.parentElement.style.padding = '10px';
+    });
 }

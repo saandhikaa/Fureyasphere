@@ -1,63 +1,79 @@
-#fuclouds-search {
-    padding: 30px 20px 0;
-    
-    form {
+$space: (
+    input-height: 32px, 
+    input-padding: 10px
+);
+
+@mixin group-input() {
+    .group-input {
+        padding: 10px 0;
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 100px;
+        gap: 5px;
         
-        h2 {
-            font-weight: 500;
-        }
-        
-        label {
-            margin-top: 20px;
-        }
-        
-        section {
+        .field {
+            background-color: #F6F6F6;
+            border: 1px solid #999999;
+            border-radius: 10px;
+            padding: map-get($space, input-padding);
+            width: 100%;
+            height: map-get($space, input-height) + 2 * map-get($space, input-padding);
+            
             display: flex;
-            border: 2px solid #787878;
-            border-radius: 21px;
-            height: 42px;
-            overflow: hidden;
-            transition: all 0.2s ease;
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 10px;
             
             input {
-                height: 100%;
                 outline: none;
-                border: 0;
-                border-radius: 0;
-                background-color: white;
+                height: map-get($space, input-height);
                 font-size: 1rem;
             }
-            input:focus {
-                outline: none;
-            }
-            
             input[type="text"] {
-                width: 60%;
+                background-color: transparent;
+                border: 0;
                 padding: 0 10px;
-                border-right: 2px solid #787878;
-            }
-            input[type="button"] {
-                width: 20%;
-                border-right: 2px solid #787878;
-            }
-            input[type="submit"] {
-                width: 20%;
+                width: 100%;
             }
             
-            input[type="button"]:active, 
-            input[type="submit"]:active {
+            input[type="submit"], 
+            input[type="submit"]:disabled {
+                background-color: #dddddd;
+                border: 0;
+                border-radius: 5px;
+                width: 40%;
+                color: #999999;
+                transition: 0.3s ease 0.5s;
+            }
+            input[type="submit"]:enabled {
                 background-color: dodgerblue;
+                color: white;
+                transition: 0.3s ease 0.5s;
             }
         }
     }
 }
 
+#fuclouds-search {
+    padding: 30px 20px 0;
+    
+    form {
+        margin-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        h2 {
+            font-weight: 500;
+        }
+        
+        @include group-input();
+    }
+}
+
 
 #fuclouds-upload {
+    padding: 30px 20px 0;
+    
     #file-input-container {
         display: none;
     }

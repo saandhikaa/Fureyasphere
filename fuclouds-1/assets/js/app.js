@@ -1,5 +1,9 @@
+const imagePath = document.querySelector('.image-path').textContent;
+
+
+
 Scanning.prototype.triggerInput = element => {
-    element.parentElement.parentElement.querySelector('.active-input').click();
+    document.querySelector('.active-input').click();
 };
 
 Scanning.prototype.cancelInput = element => {
@@ -72,17 +76,25 @@ function handleFileChange(element) {
     enablingUpload();
 }
 
-function createFilteredFile(filename, filesize) {
+async function createFilteredFile(filename, filesize) {
     const filteredFileContainer = document.querySelector('#fuclouds-upload #filtered-file');
     const filteredFile = document.createElement('li');
     const fileInfo = document.createElement('section');
+    const fileDesc = document.createElement('section');
+    
+    fileInfo.classList.add('file-info');
+    fileDesc.classList.add('file-desc');
+    
+    const fileThumbnail = document.createElement("img");
+    fileThumbnail.onerror = () => fileThumbnail.src = imagePath + 'file-type-icon/others.png';
+    fileThumbnail.src = imagePath + 'file-type-icon/' + filename.split('.').pop() + '.png';
 
     const fileText = document.createElement('p');
-    fileText.classList.add('fileName');
+    fileText.classList.add('file-name');
     fileText.textContent = filename;
     
     const fileSize = document.createElement('p');
-    fileSize.classList.add('fileSize');
+    fileSize.classList.add('file-size');
     fileSize.textContent = formatBytes(filesize);
     
     const fileInput = document.createElement('input');
@@ -93,9 +105,9 @@ function createFilteredFile(filename, filesize) {
     const cancel = document.createElement('button');
     cancel.type = 'button';
     cancel.classList.add('cancelInput');
-    cancel.textContent = 'Cancel';
     
-    fileInfo.append(fileText, fileSize, fileInput);
+    fileDesc.append(fileText, fileSize, fileInput);
+    fileInfo.append(fileThumbnail, fileDesc);
     filteredFile.append(fileInfo, cancel);
     filteredFileContainer.appendChild(filteredFile);
 }

@@ -1,8 +1,10 @@
 <main id="fuclouds-upload">
-    <p class="image-path"><?= BASEURL . '/' . basename(dirname(dirname(dirname(__FILE__)))) . '/assets/images/file-type-icon/' ?></p>
+    <p class="image-path"><?= BASEURL . '/' . basename(dirname(dirname(dirname(__FILE__)))) . '/assets/images/' ?></p>
     
     <form action="" method="post" enctype="multipart/form-data">
         <section id="file-input-container">
+            <p class="heading">Selected files:</p>
+            <p class="empty">No file selected</p>
             <ul id="filtered-file"></ul>
         </section>
         

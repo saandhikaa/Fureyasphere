@@ -66,25 +66,78 @@
     padding: 30px 20px 0;
 }
 
-#fuclouds-upload #file-input-container {
+#fuclouds-upload .image-path {
     display: none;
 }
 
-#fuclouds-upload form {
-    margin-bottom: 100px;
+#fuclouds-upload #file-input-container {
+    margin-bottom: 20px;
+}
+
+#fuclouds-upload #file-input-container #filtered-file {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#fuclouds-upload form .group-input {
+#fuclouds-upload #file-input-container #filtered-file li {
+    position: relative;
+}
+
+#fuclouds-upload #file-input-container #filtered-file li .file-info {
+    display: flex;
+    align-items: center;
+}
+
+#fuclouds-upload #file-input-container #filtered-file li .file-info img {
+    width: 3rem;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.1);
+}
+
+#fuclouds-upload #file-input-container #filtered-file li .file-info .file-size {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #999999;
+}
+
+#fuclouds-upload #file-input-container #filtered-file li .cancelInput {
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 3px;
+    top: 50%;
+    right: 10px;
+    border: 0;
+    border-radius: 50%;
+    width: 1.6rem;
+    height: 1.6rem;
+    transform: translateY(-50%);
+}
+
+#fuclouds-upload #file-input-container input[type="file"] {
+    display: none;
+}
+
+#fuclouds-upload .input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 100px;
+}
+
+#fuclouds-upload .input-form .group-input {
     padding: 10px 0;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#fuclouds-upload form .group-input .field {
+#fuclouds-upload .input-form .group-input .field {
     background-color: #F6F6F6;
     border: 1px solid #999999;
     border-radius: 10px;
@@ -97,21 +150,21 @@
     gap: 10px;
 }
 
-#fuclouds-upload form .group-input .field input {
+#fuclouds-upload .input-form .group-input .field input {
     outline: none;
     height: 32px;
     font-size: 1rem;
 }
 
-#fuclouds-upload form .group-input .field input[type="text"] {
+#fuclouds-upload .input-form .group-input .field input[type="text"] {
     background-color: transparent;
     border: 0;
     padding: 0 10px;
     width: 100%;
 }
 
-#fuclouds-upload form .group-input .field input[type="submit"],
-#fuclouds-upload form .group-input .field input[type="submit"]:disabled {
+#fuclouds-upload .input-form .group-input .field input[type="submit"],
+#fuclouds-upload .input-form .group-input .field input[type="submit"]:disabled {
     background-color: #dddddd;
     border: 0;
     border-radius: 5px;
@@ -120,8 +173,16 @@
     transition: 0.3s ease 0.5s;
 }
 
-#fuclouds-upload form .group-input .field input[type="submit"]:enabled {
+#fuclouds-upload .input-form .group-input .field input[type="submit"]:enabled {
     background-color: dodgerblue;
     color: white;
     transition: 0.3s ease 0.5s;
+}
+
+#fuclouds-result p.status span {
+    background-color: lightgreen;
+    padding: 0 5px;
+    font-family: 'Monospace';
+    font-weight: bold;
+    color: darkgreen;
 }

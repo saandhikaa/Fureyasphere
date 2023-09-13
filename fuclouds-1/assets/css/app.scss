@@ -53,6 +53,8 @@ $space: (
     }
 }
 
+
+
 #fuclouds-search {
     padding: 30px 20px 0;
     
@@ -71,19 +73,88 @@ $space: (
 }
 
 
+
 #fuclouds-upload {
     padding: 30px 20px 0;
     
-    #file-input-container {
+    .image-path {
         display: none;
     }
     
-    form {
-        margin-bottom: 100px;
+    #file-input-container {
+        margin-bottom: 20px;
+        
+        #filtered-file{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            
+            li {
+                position: relative;
+                
+                .file-info {
+                    display: flex;
+                    align-items: center;
+                    
+                    img {
+                        width: 3rem;
+                        height: auto;
+                        object-fit: cover;
+                        object-position: center;
+                        transform: scale(1.1);
+                    }
+                    
+                    .file-size {
+                        margin-top: 5px;
+                        font-size: 0.8rem;
+                        color: #999999;
+                    }
+                }
+                
+                .cancelInput {
+                    background-color: pink;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    
+                    padding: 3px;
+                    top: 50%;
+                    right: 10px;
+                    border: 0;
+                    border-radius: 50%;
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+        
+        input[type="file"] {
+            display: none;
+        }
+    }
+    
+    .input-form {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-bottom: 100px;
         
         @include group-input();
+    }
+}
+
+
+
+#fuclouds-result {
+    p.status {
+        span {
+            background-color: lightgreen;
+            padding: 0 5px;
+            font-family: 'Monospace';
+            font-weight: bold;
+            color: darkgreen;
+        }
     }
 }

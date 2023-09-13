@@ -37,7 +37,7 @@ $space: (
             
             input[type="submit"], 
             input[type="submit"]:disabled {
-                background-color: #dddddd;
+                background-color: #DDDDDD;
                 border: 0;
                 border-radius: 5px;
                 width: 40%;
@@ -48,25 +48,52 @@ $space: (
                 background-color: dodgerblue;
                 color: white;
                 transition: 0.3s ease 0.5s;
+                transition: scale 0.2s ease;
+            }
+            input[type="submit"]:active {
+                transform: scale(0.95);
             }
         }
+    }
+}
+
+section.go {
+    margin: 50px 0;
+    
+    a {
+        text-decoration: none;
+        color: #2B73E6;
+    }
+    
+    .upload {
+        float: right;
+    }
+}
+
+section.header {
+    margin-bottom: 20px;
+    
+    h2 {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+    
+    p {
+        margin-bottom: 10px;
     }
 }
 
 
 
 #fuclouds-search {
-    padding: 30px 20px 0;
+    padding: 20px 20px 0;
     
     form {
-        margin-bottom: 100px;
         display: flex;
         flex-direction: column;
         gap: 10px;
-        
-        h2 {
-            font-weight: 500;
-        }
+        margin-bottom: 40px;
+        padding: 10px 0;
         
         @include group-input();
     }
@@ -75,14 +102,37 @@ $space: (
 
 
 #fuclouds-upload {
-    padding: 30px 20px 0;
+    padding: 20px 20px 0;
     
     .image-path {
         display: none;
     }
     
+    form {
+        margin-bottom: 40px;
+        padding: 10px 0;
+    }
+    
     #file-input-container {
-        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border: 1px solid lightblue;
+        border-bottom: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding-bottom: 10px;
+        
+        .heading {
+            margin: 10px 0 0 20px;
+        }
+        
+        .empty {
+            margin: 20px auto 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #DDDDDD;
+        }
         
         #filtered-file{
             display: flex;
@@ -91,6 +141,7 @@ $space: (
             
             li {
                 position: relative;
+                margin: 0 10px;
                 
                 .file-info {
                     display: flex;
@@ -138,8 +189,40 @@ $space: (
     .input-form {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 100px;
+        gap: 20px;
+        
+        .browse-file {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 10px 0 20px;
+            width: 100%;
+            border: 1px solid lightblue;
+            border-top: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            
+            label {
+                width: 40%;
+                margin: 0 auto;
+            }
+            
+            button {
+                background-color: dodgerblue;
+                outline: none;
+                border: 0;
+                border-radius: 5px;
+                height: 2.5rem;
+                width: 40%;
+                margin: 0 auto;
+                font-size: 1rem;
+                color: white;
+                transition: scale 0.2s ease;
+            }
+            button:active {
+                transform: scale(0.95);
+            }
+        }
         
         @include group-input();
     }

@@ -8,7 +8,7 @@ Scanning.prototype.triggerInput = element => {
 
 Scanning.prototype.cancelInput = element => {
     element.closest('li').remove();
-    enablingUpload();
+    inputCheck();
 };
 
 
@@ -23,7 +23,7 @@ const uploadCodename = document.querySelector('#fuclouds-upload #codename');
 if (uploadCodename) {
     uploadCodename.addEventListener('input', event => {
         event.target.value = event.target.value.replace(/[^a-zA-Z0-9-]/g, "");
-        enablingUpload();
+        inputCheck();
     });
     groupInput(uploadCodename, event);
 }
@@ -73,7 +73,6 @@ function handleFileChange(element) {
     
     element.target.removeAttribute('class');
     createInput();
-    enablingUpload();
 }
 
 async function createFilteredFile(filename, filesize) {
@@ -103,19 +102,23 @@ async function createFilteredFile(filename, filesize) {
     fileInput.value = filename;
     
     const cancel = document.createElement('button');
+    const cancelSVG = await fetch(imagePath + 'icons/close_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
     cancel.type = 'button';
     cancel.classList.add('cancelInput');
+    cancel.innerHTML = cancelSVG;
     
     fileDesc.append(fileText, fileSize, fileInput);
     fileInfo.append(fileThumbnail, fileDesc);
     filteredFile.append(fileInfo, cancel);
     filteredFileContainer.appendChild(filteredFile);
+    
+    inputCheck();
 }
 
-function enablingUpload() {
-    const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
+function inputCheck() {
     const filteredFile = document.querySelectorAll('#fuclouds-upload #filtered-file li');
     
+    const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
     upSubmit.disabled = filteredFile.length === 0 || uploadCodename.value === '';
 }
 

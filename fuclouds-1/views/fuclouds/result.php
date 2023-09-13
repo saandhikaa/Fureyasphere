@@ -36,4 +36,9 @@
     <?php if (empty($data["result"])): ?>
         <p>invalid keyword or the file is gone</p>
     <?php endif ?>
+    
+    <section class="go">
+        <a class="search" href="<?= BASEURL . '/' . $data['app'] ?>">Go to Search page</a>
+        <a class="upload" href="<?= BASEURL . '/' . $data['app']?>/upload">Go to Upload page</a>
+    </section>
 </main>

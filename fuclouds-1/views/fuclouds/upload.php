@@ -1,4 +1,9 @@
 <main id="fuclouds-upload">
+    <section class="header">
+        <h2>Upload Files</h2>
+        <p>Use the form below to upload your files.</p>
+    </section>
+    
     <p class="image-path"><?= BASEURL . '/' . basename(dirname(dirname(dirname(__FILE__)))) . '/assets/images/' ?></p>
     
     <form action="" method="post" enctype="multipart/form-data">
@@ -26,5 +31,7 @@
         </section>
     </form>
     
-    <a href="<?= BASEURL . '/' . $data['app'] ?>">Search</a>
+    <section class="go">
+        <a class="search" href="<?= BASEURL . '/' . $data['app'] ?>">Go to Search page</a>
+    </section>
 </main>

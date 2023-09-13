@@ -112,6 +112,7 @@ async function createFilteredFile(filename, filesize) {
     filteredFile.append(fileInfo, cancel);
     filteredFileContainer.appendChild(filteredFile);
     
+    insertEllipsis();
     inputCheck();
 }
 
@@ -144,5 +145,21 @@ function groupInput(element, event) {
     element.addEventListener('blur', event => {
         event.target.parentElement.style.border = '1px solid #999999';
         event.target.parentElement.style.padding = '10px';
+    });
+}
+
+function insertEllipsis() {
+    const frame = document.querySelector('#filtered-file li').offsetWidth - document.querySelector('#filtered-file .cancelInput').offsetWidth - document.querySelector('#filtered-file img').offsetWidth - 20 - 10;
+    const filenames = document.querySelectorAll('.file-name');
+    
+    filenames.forEach(file => {
+        let filenameArray = [...file.textContent];
+        let shortening = filenameArray.slice(0, -8);
+        let suffix = filenameArray.slice(-8);
+        
+        while (file.offsetWidth > frame && shortening.length > 10) {
+            shortening.pop();
+            file.textContent = shortening.join('') + ' . . . ' + suffix.join('');
+        }
     });
 }

@@ -22,6 +22,10 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
+svg, svg path {
+    pointer-events: none;
+}
+
 #page-header {
     background-color: lightblue;
     position: fixed;
@@ -32,6 +36,7 @@ form input[type="password"]::-ms-reveal {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 9;
 }
 
 #page-header h1 {
@@ -57,10 +62,6 @@ form input[type="password"]::-ms-reveal {
     line-height: 1.2rem;
     font-size: 1.2rem;
     font-weight: bold;
-    pointer-events: none;
-}
-
-#page-header button svg, #page-header button svg path {
     pointer-events: none;
 }
 
@@ -170,10 +171,6 @@ form input[type="password"]::-ms-reveal {
     pointer-events: none;
 }
 
-.navigation-container nav.navigation header button svg, .navigation-container nav.navigation header button svg path {
-    pointer-events: none;
-}
-
 .navigation-container nav.navigation header button:active {
     transform: scale(0.9);
 }
@@ -210,7 +207,7 @@ form input[type="password"]::-ms-reveal {
 .navigation-container nav.navigation footer .copyright {
     padding-left: 25px;
     font-size: 0.8rem;
-    color: #8A8D90;
+    color: #8A8A8A;
 }
 
 .navigation-container nav.navigation footer .footer-list {

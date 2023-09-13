@@ -29,10 +29,6 @@ $nav-space: (
             font-weight: bold;
             pointer-events: none;
         }
-        
-        svg, svg path {
-            pointer-events: none;
-        }
     }
     
     button:active {
@@ -67,6 +63,10 @@ form {
         display: none;
     }
 }
+        
+svg, svg path {
+    pointer-events: none;
+}
 
 
 
@@ -81,6 +81,7 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 9;
     
     h1 {
         font-size: 1.5rem;
@@ -210,7 +211,7 @@ form {
             .copyright {
                 padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
                 font-size: 0.8rem;
-                color: #8A8D90;
+                color: #8A8A8A;
             }
             
             .footer-list {

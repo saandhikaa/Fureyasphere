@@ -120,6 +120,9 @@ function inputCheck() {
     
     const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
     upSubmit.disabled = filteredFile.length === 0 || uploadCodename.value === '';
+    
+    const emptyMark = document.querySelector('#fuclouds-upload .empty');
+    emptyMark.style.display = filteredFile.length === 0 ? 'block' : 'none';
 }
 
 function formatBytes(numBytes) {

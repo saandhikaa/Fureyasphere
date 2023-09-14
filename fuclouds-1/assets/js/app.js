@@ -1,7 +1,3 @@
-const imagePath = document.querySelector('.image-path').textContent;
-
-
-
 Scanning.prototype.triggerInput = element => {
     document.querySelector('.active-input').click();
 };
@@ -33,7 +29,6 @@ if (uploadCodename) {
 function createInput() {
     const fileUploadContainer = document.querySelector('#fuclouds-upload #file-input-container');
 
-    // Create the input element with the specified attributes
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
     inputFile.name = 'file[]';
@@ -41,11 +36,9 @@ function createInput() {
     inputFile.multiple = true;
     inputFile.addEventListener('change', handleFileChange);
      
-    // Append the input element to the file input container
     fileUploadContainer.appendChild(inputFile);
 }
 
-// Function to handle the 'change' event and access file information
 function handleFileChange(element) {
     const listed = element.target.parentElement.parentElement.querySelectorAll('#filtered-file p.fileSize');
     const selectedFiles = element.target.files;
@@ -80,6 +73,7 @@ async function createFilteredFile(filename, filesize) {
     const filteredFile = document.createElement('li');
     const fileInfo = document.createElement('section');
     const fileDesc = document.createElement('section');
+    const imagePath = document.querySelector('.image-path').textContent;
     
     fileInfo.classList.add('file-info');
     fileDesc.classList.add('file-desc');
@@ -105,6 +99,7 @@ async function createFilteredFile(filename, filesize) {
     const cancelSVG = await fetch(imagePath + 'icons/close_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
     cancel.type = 'button';
     cancel.classList.add('cancelInput');
+    cancel.classList.add('file-action');
     cancel.innerHTML = cancelSVG;
     
     fileDesc.append(fileText, fileSize, fileInput);
@@ -112,7 +107,10 @@ async function createFilteredFile(filename, filesize) {
     filteredFile.append(fileInfo, cancel);
     filteredFileContainer.appendChild(filteredFile);
     
-    insertEllipsis();
+    const frame = document.querySelector('#filtered-file li').offsetWidth - document.querySelector('#filtered-file .cancelInput').offsetWidth - document.querySelector('#filtered-file img').offsetWidth - 20 - 10;
+    const filelist = document.querySelectorAll('.file-name');
+    insertEllipsis(frame, filelist);
+    
     inputCheck();
 }
 
@@ -125,6 +123,18 @@ function inputCheck() {
     const emptyMark = document.querySelector('#fuclouds-upload .empty');
     emptyMark.style.display = filteredFile.length === 0 ? 'block' : 'none';
 }
+
+function autorunResult() {
+    const frame = document.querySelector('.file-list li').offsetWidth - document.querySelector('.file-list .file-action').offsetWidth - document.querySelector('.file-list img').offsetWidth - 20 - 10;
+    const filelist = document.querySelectorAll('.file-name');
+    insertEllipsis(frame, filelist);
+    
+    document.querySelector('.download-all svg').setAttribute('width', '30');
+    document.querySelector('.download-all svg').setAttribute('height', '30');
+    document.querySelector('.download-all svg path').setAttribute('fill', 'white');
+}
+
+
 
 function formatBytes(numBytes) {
     const suffixes = ["B", "KB", "MB"];
@@ -148,18 +158,15 @@ function groupInput(element, event) {
     });
 }
 
-function insertEllipsis() {
-    const frame = document.querySelector('#filtered-file li').offsetWidth - document.querySelector('#filtered-file .cancelInput').offsetWidth - document.querySelector('#filtered-file img').offsetWidth - 20 - 10;
-    const filenames = document.querySelectorAll('.file-name');
-    
-    filenames.forEach(file => {
-        let filenameArray = [...file.textContent];
-        let shortening = filenameArray.slice(0, -8);
-        let suffix = filenameArray.slice(-8);
+function insertEllipsis(frame, list) {
+    list.forEach(file => {
+        let listSpread = [...file.textContent];
+        let ellipsis = listSpread.slice(0, -8);
+        let suffix = listSpread.slice(-8);
         
-        while (file.offsetWidth > frame && shortening.length > 10) {
-            shortening.pop();
-            file.textContent = shortening.join('') + ' . . . ' + suffix.join('');
+        while (file.offsetWidth > frame) {
+            ellipsis.pop();
+            file.textContent = ellipsis.join('') + ' . . . ' + suffix.join('');
         }
     });
 }

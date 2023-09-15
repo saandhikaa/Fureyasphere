@@ -57,18 +57,72 @@ $space: (
     }
 }
 
-section.go {
-    margin: 50px 0;
+@mixin file-list($action-color, $action-size) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     
-    a {
-        text-decoration: none;
-        color: #2B73E6;
-    }
-    
-    .upload {
-        float: right;
+    li {
+        position: relative;
+        margin: 0 10px;
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            
+            img {
+                width: 3rem;
+                height: auto;
+                object-fit: cover;
+                object-position: center;
+                transform: scale(1.1);
+            }
+            
+            .file-size {
+                margin-top: 5px;
+                font-size: 0.8rem;
+                color: #999999;
+            }
+        }
+        
+        .file-action {
+            background-color: $action-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            
+            padding: 3px;
+            top: 50%;
+            right: 10px;
+            border: 0;
+            border-radius: 50%;
+            width: $action-size;
+            height: $action-size;
+            transform: translateY(-50%);
+        }
     }
 }
+
+@mixin action-button($width) {
+    button {
+        background-color: dodgerblue;
+        outline: none;
+        border: 0;
+        border-radius: 5px;
+        height: 2.5rem;
+        width: $width;
+        margin: 0 auto;
+        font-size: 1rem;
+        color: white;
+        transition: scale 0.2s ease;
+    }
+    button:active {
+        transform: scale(0.95);
+    }
+}
+
+
 
 section.header {
     margin-bottom: 20px;
@@ -80,6 +134,19 @@ section.header {
     
     p {
         margin-bottom: 10px;
+    }
+}
+
+section.go {
+    margin: 50px 0;
+    
+    a {
+        text-decoration: none;
+        color: #2B73E6;
+    }
+    
+    .upload {
+        float: right;
     }
 }
 
@@ -135,50 +202,7 @@ section.header {
         }
         
         #filtered-file{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            
-            li {
-                position: relative;
-                margin: 0 10px;
-                
-                .file-info {
-                    display: flex;
-                    align-items: center;
-                    
-                    img {
-                        width: 3rem;
-                        height: auto;
-                        object-fit: cover;
-                        object-position: center;
-                        transform: scale(1.1);
-                    }
-                    
-                    .file-size {
-                        margin-top: 5px;
-                        font-size: 0.8rem;
-                        color: #999999;
-                    }
-                }
-                
-                .cancelInput {
-                    background-color: pink;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: absolute;
-                    
-                    padding: 3px;
-                    top: 50%;
-                    right: 10px;
-                    border: 0;
-                    border-radius: 50%;
-                    width: 1.6rem;
-                    height: 1.6rem;
-                    transform: translateY(-50%);
-                }
-            }
+            @include file-list(pink, 1.6rem);
         }
         
         input[type="file"] {
@@ -207,21 +231,7 @@ section.header {
                 margin: 0 auto;
             }
             
-            button {
-                background-color: dodgerblue;
-                outline: none;
-                border: 0;
-                border-radius: 5px;
-                height: 2.5rem;
-                width: 40%;
-                margin: 0 auto;
-                font-size: 1rem;
-                color: white;
-                transition: scale 0.2s ease;
-            }
-            button:active {
-                transform: scale(0.95);
-            }
+            @include action-button(40%);
         }
         
         @include group-input();
@@ -231,13 +241,47 @@ section.header {
 
 
 #fuclouds-result {
+    padding: 20px 20px 0;
+    
     p.status {
+        margin-top: 30px;
+        line-height: 1.6rem;
+        
         span {
-            background-color: lightgreen;
+            background-color: #CFF3FF;
+            border-radius: 5px;
             padding: 0 5px;
             font-family: 'Monospace';
             font-weight: bold;
-            color: darkgreen;
+            color: #0C6EA1;
+        }
+    }
+    
+    ul.file-list {
+        margin: 40px 0 50px;
+        
+        @include file-list(#CFF3FF, 2rem);
+    }
+    
+    form.download-all {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 20px 0;
+        
+        @include action-button(14rem);
+        
+        button {
+            position: relative;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+            padding-left: 5px;
+            
+            svg {
+                padding-bottom: 2px;
+            }
         }
     }
 }

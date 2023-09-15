@@ -1,16 +1,3 @@
-section.go {
-    margin: 50px 0;
-}
-
-section.go a {
-    text-decoration: none;
-    color: #2B73E6;
-}
-
-section.go .upload {
-    float: right;
-}
-
 section.header {
     margin-bottom: 20px;
 }
@@ -22,6 +9,19 @@ section.header h2 {
 
 section.header p {
     margin-bottom: 10px;
+}
+
+section.go {
+    margin: 50px 0;
+}
+
+section.go a {
+    text-decoration: none;
+    color: #2B73E6;
+}
+
+section.go .upload {
+    float: right;
 }
 
 #fuclouds-search {
@@ -155,7 +155,7 @@ section.header p {
     color: #999999;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .cancelInput {
+#fuclouds-upload #file-input-container #filtered-file li .file-action {
     background-color: pink;
     display: flex;
     align-items: center;
@@ -269,10 +269,104 @@ section.header p {
     transform: scale(0.95);
 }
 
+#fuclouds-result {
+    padding: 20px 20px 0;
+}
+
+#fuclouds-result p.status {
+    margin-top: 30px;
+    line-height: 1.6rem;
+}
+
 #fuclouds-result p.status span {
-    background-color: lightgreen;
+    background-color: #CFF3FF;
+    border-radius: 5px;
     padding: 0 5px;
     font-family: 'Monospace';
     font-weight: bold;
-    color: darkgreen;
+    color: #0C6EA1;
+}
+
+#fuclouds-result ul.file-list {
+    margin: 40px 0 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#fuclouds-result ul.file-list li {
+    position: relative;
+    margin: 0 10px;
+}
+
+#fuclouds-result ul.file-list li .file-info {
+    display: flex;
+    align-items: center;
+}
+
+#fuclouds-result ul.file-list li .file-info img {
+    width: 3rem;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.1);
+}
+
+#fuclouds-result ul.file-list li .file-info .file-size {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #999999;
+}
+
+#fuclouds-result ul.file-list li .file-action {
+    background-color: #CFF3FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding: 3px;
+    top: 50%;
+    right: 10px;
+    border: 0;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    transform: translateY(-50%);
+}
+
+#fuclouds-result form.download-all {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px 0;
+}
+
+#fuclouds-result form.download-all button {
+    background-color: dodgerblue;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    height: 2.5rem;
+    width: 14rem;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: white;
+    transition: scale 0.2s ease;
+}
+
+#fuclouds-result form.download-all button:active {
+    transform: scale(0.95);
+}
+
+#fuclouds-result form.download-all button {
+    position: relative;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5px;
+}
+
+#fuclouds-result form.download-all button svg {
+    padding-bottom: 2px;
 }

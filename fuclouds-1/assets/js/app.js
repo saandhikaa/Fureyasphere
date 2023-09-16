@@ -132,6 +132,8 @@ function autorunResult() {
     document.querySelector('.download-all svg').setAttribute('width', '30');
     document.querySelector('.download-all svg').setAttribute('height', '30');
     document.querySelector('.download-all svg path').setAttribute('fill', 'white');
+    
+    Array.from(document.querySelectorAll('.file-list form path')).forEach(path => path.setAttribute('fill', '#0C6EA1'))
 }
 
 

@@ -100,6 +100,12 @@ $space: (
             width: $action-size;
             height: $action-size;
             transform: translateY(-50%);
+            
+            transition: scale 0.2s ease;
+            
+            &:active {
+                transform: translateY(-50%) scale(0.9);
+            }
         }
     }
 }
@@ -116,9 +122,10 @@ $space: (
         font-size: 1rem;
         color: white;
         transition: scale 0.2s ease;
-    }
-    button:active {
-        transform: scale(0.95);
+        
+        &:active {
+            transform: scale(0.95);
+        }
     }
 }
 

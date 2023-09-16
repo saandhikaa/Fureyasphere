@@ -169,6 +169,11 @@ section.go .upload {
     width: 1.6rem;
     height: 1.6rem;
     transform: translateY(-50%);
+    transition: scale 0.2s ease;
+}
+
+#fuclouds-upload #file-input-container #filtered-file li .file-action:active {
+    transform: translateY(-50%) scale(0.9);
 }
 
 #fuclouds-upload #file-input-container input[type="file"] {
@@ -332,6 +337,11 @@ section.go .upload {
     width: 2rem;
     height: 2rem;
     transform: translateY(-50%);
+    transition: scale 0.2s ease;
+}
+
+#fuclouds-result ul.file-list li .file-action:active {
+    transform: translateY(-50%) scale(0.9);
 }
 
 #fuclouds-result form.download-all {

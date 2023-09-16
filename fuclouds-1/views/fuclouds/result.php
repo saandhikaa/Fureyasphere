@@ -1,11 +1,16 @@
 <main id="fuclouds-result">
-    <section class="header">
-        <h2>Search Results</h2>
-        <p>Here are the files that match your search keyword:</p>
-    </section>
     
     <?php if ($data["action"] === "uploaded"): ?>
+        <section class="header">
+            <h2>Upload Results</h2>
+            <p>Your files uploaded successfully.</p>
+        </section>
         <p class="status"><?= FileHandler::uploadSuccess($data["keyword"]) ?></p>
+    <?php else: ?>
+        <section class="header">
+            <h2>Search Results</h2>
+            <p>Here are the files that match your search keyword:</p>
+        </section>
     <?php endif ?>
     
     <ul class="file-list">

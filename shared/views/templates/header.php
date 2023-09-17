@@ -20,6 +20,8 @@
         <button type="button" class="openNav nav-button"><?= isset($_SESSION["sign-in"]["username"]) ? '<span>' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : (function() { readfile(__DIR__ . '/../../assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg'); })() ?></button>
     </header>
     
+    <?= isset($data["image-path"]) ? $data["image-path"] : "" ?>
+    
     <div class="navigation-container closeNav">
         <nav class="navigation">
             <header>

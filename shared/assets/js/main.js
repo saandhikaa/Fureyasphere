@@ -26,16 +26,20 @@ document.body.addEventListener('click', element => {
     element.stopPropagation();
 });
 
-Scanning.prototype.passwordVisibility = element => {
+Scanning.prototype.passwordVisibility = async element => {
     const input = element.parentElement.querySelector('input');
+    const imagePath = document.querySelector('.image-path').textContent;
     
     if (input.type === 'password') {
         input.type = 'text';
-        element.textContent = 'Hide';
+        element.innerHTML = await fetch(imagePath + 'icons/visibility_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
     } else {
         input.type = 'password';
-        element.textContent = 'Show';
+        element.innerHTML = await fetch(imagePath + 'icons/visibility_off_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
     }
+    
+    input.focus();
+    thicknessSVG('.passwordVisibility path', '15');
 };
 
 Scanning.prototype.openNav = () => {
@@ -52,24 +56,19 @@ Scanning.prototype.closeNav = () => {
 
 
 
-const signUpConfirmPassword = document.querySelector('#sign-up #confirm-password');
-if (signUpConfirmPassword) {
-    signUpConfirmPassword.addEventListener('input', element => {
-        const password = element.target.parentElement.parentElement.querySelector('#password');
-        const passwordMatchStatus = element.target.parentElement.parentElement.querySelector('#password-match-status');
-        
-        if (password.value === element.target.value) {
-            passwordMatchStatus.textContent = 'Passwords match';
-            passwordMatchStatus.style.color = greenhex;
-        } else {
-            passwordMatchStatus.textContent = 'Passwords do not match';
-            passwordMatchStatus.style.color = redhex;
-        }
-    });
+const signInUsername = document.querySelector('#sign-in #username');
+if (signInUsername) {
+    groupInput(signInUsername, event);
+}
+const signInPassword = document.querySelector('#sign-in #password');
+if (signInPassword) {
+    groupInput(signInPassword, event);
 }
 
 const signUpUsername = document.querySelector('#sign-up #username');
 if (signUpUsername) {
+    groupInput(signUpUsername, event);
+    
     signUpUsername.addEventListener('input', element => {
         const messageElement = element.target.parentElement.querySelector('#username-availability');
         
@@ -110,6 +109,51 @@ if (signUpUsername) {
             // Clear the message and reset the color
             messageElement.textContent = "";
         }
+    });
+}
+
+const signUpPassword = document.querySelector('#sign-up #password');
+if (signUpPassword) {
+    groupInput(signUpPassword, event);
+}
+
+const signUpConfirmPassword = document.querySelector('#sign-up #confirm-password');
+if (signUpConfirmPassword) {
+    groupInput(signUpConfirmPassword, event);
+    
+    signUpConfirmPassword.addEventListener('input', element => {
+        const password = element.target.parentElement.parentElement.querySelector('#password');
+        const passwordMatchStatus = element.target.parentElement.parentElement.querySelector('#password-match-status');
+        
+        if (password.value === element.target.value) {
+            passwordMatchStatus.textContent = 'Passwords match';
+            passwordMatchStatus.style.color = greenhex;
+        } else {
+            passwordMatchStatus.textContent = 'Passwords do not match';
+            passwordMatchStatus.style.color = redhex;
+        }
+    });
+}
+
+
+
+function groupInput(element, event) {
+    element.addEventListener('focus', event => {
+        event.target.parentElement.style.border = '2px solid dodgerblue';
+        event.target.parentElement.style.padding = '9px';
+    });
+    element.addEventListener('blur', event => {
+        event.target.parentElement.style.border = '1px solid #999999';
+        event.target.parentElement.style.padding = '10px';
+    });
+}
+
+function thicknessSVG(selector, thickness) {
+    const paths = Array.from(document.querySelectorAll(selector));
+    paths.forEach(path => {
+        path.setAttribute('stroke', 'white');
+        path.setAttribute('stroke-width', thickness);
+        path.setAttribute('fill', '#333333');
     });
 }
 

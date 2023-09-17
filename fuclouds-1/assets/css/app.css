@@ -1,8 +1,32 @@
+.group-input input[type="submit"],
+.group-input input[type="submit"]:disabled {
+    background-color: #DDDDDD;
+    border: 0;
+    border-radius: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-width: 80px;
+    color: #999999;
+    transition: 0.3s ease 0.5s;
+}
+
+.group-input input[type="submit"]:enabled {
+    background-color: dodgerblue;
+    color: white;
+    transition: 0.3s ease 0.5s;
+    transition: scale 0.2s ease;
+}
+
+.group-input input[type="submit"]:active {
+    transform: scale(0.95);
+}
+
 section.header {
     margin-bottom: 20px;
 }
 
 section.header h2 {
+    font-size: 1.25rem;
     font-weight: 500;
     margin-bottom: 10px;
 }
@@ -36,66 +60,8 @@ section.go .upload {
     padding: 10px 0;
 }
 
-#fuclouds-search form .group-input {
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#fuclouds-search form .group-input .field {
-    background-color: #F6F6F6;
-    border: 1px solid #999999;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
-    height: 52px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 10px;
-}
-
-#fuclouds-search form .group-input .field input {
-    outline: none;
-    height: 32px;
-    font-size: 1rem;
-}
-
-#fuclouds-search form .group-input .field input[type="text"] {
-    background-color: transparent;
-    border: 0;
-    padding: 0 10px;
-    width: 100%;
-}
-
-#fuclouds-search form .group-input .field input[type="submit"],
-#fuclouds-search form .group-input .field input[type="submit"]:disabled {
-    background-color: #DDDDDD;
-    border: 0;
-    border-radius: 5px;
-    width: 40%;
-    color: #999999;
-    transition: 0.3s ease 0.5s;
-}
-
-#fuclouds-search form .group-input .field input[type="submit"]:enabled {
-    background-color: dodgerblue;
-    color: white;
-    transition: 0.3s ease 0.5s;
-    transition: scale 0.2s ease;
-}
-
-#fuclouds-search form .group-input .field input[type="submit"]:active {
-    transform: scale(0.95);
-}
-
 #fuclouds-upload {
     padding: 20px 20px 0;
-}
-
-#fuclouds-upload .image-path {
-    display: none;
 }
 
 #fuclouds-upload form {
@@ -217,60 +183,6 @@ section.go .upload {
 }
 
 #fuclouds-upload .input-form .browse-file button:active {
-    transform: scale(0.95);
-}
-
-#fuclouds-upload .input-form .group-input {
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#fuclouds-upload .input-form .group-input .field {
-    background-color: #F6F6F6;
-    border: 1px solid #999999;
-    border-radius: 10px;
-    padding: 10px;
-    width: 100%;
-    height: 52px;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 10px;
-}
-
-#fuclouds-upload .input-form .group-input .field input {
-    outline: none;
-    height: 32px;
-    font-size: 1rem;
-}
-
-#fuclouds-upload .input-form .group-input .field input[type="text"] {
-    background-color: transparent;
-    border: 0;
-    padding: 0 10px;
-    width: 100%;
-}
-
-#fuclouds-upload .input-form .group-input .field input[type="submit"],
-#fuclouds-upload .input-form .group-input .field input[type="submit"]:disabled {
-    background-color: #DDDDDD;
-    border: 0;
-    border-radius: 5px;
-    width: 40%;
-    color: #999999;
-    transition: 0.3s ease 0.5s;
-}
-
-#fuclouds-upload .input-form .group-input .field input[type="submit"]:enabled {
-    background-color: dodgerblue;
-    color: white;
-    transition: 0.3s ease 0.5s;
-    transition: scale 0.2s ease;
-}
-
-#fuclouds-upload .input-form .group-input .field input[type="submit"]:active {
     transform: scale(0.95);
 }
 

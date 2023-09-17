@@ -1,16 +1,19 @@
 <main id="fuclouds-result">
-    
-    <?php if ($data["action"] === "uploaded"): ?>
-        <section class="header">
-            <h2>Upload Results</h2>
-            <p>Your files uploaded successfully.</p>
-        </section>
-        <p class="status"><?= FileHandler::uploadSuccess($data["keyword"]) ?></p>
+    <?php if (!empty($data["result"])): ?>
+        <?php if ($data["action"] === "uploaded"): ?>
+            <section class="header">
+                <h2>Upload Results</h2>
+                <p>Your files uploaded successfully.</p>
+            </section>
+            <p class="status"><?= FileHandler::uploadSuccess($data["keyword"]) ?></p>
+        <?php else: ?>
+            <section class="header">
+                <h2>Search Results</h2>
+                <p>Here are the files that match your search keyword:</p>
+            </section>
+        <?php endif ?>
     <?php else: ?>
-        <section class="header">
-            <h2>Search Results</h2>
-            <p>Here are the files that match your search keyword:</p>
-        </section>
+        <p>invalid keyword or the file is gone</p>
     <?php endif ?>
     
     <ul class="file-list">
@@ -44,10 +47,6 @@
             <input type="hidden" name="filepath" value="<?= $filepath ?>">
             <button type="submit" name="submit" id="download-all">Download all as Zip <?php readfile(__DIR__ . '/../../assets/images/icons/download_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
         </form>
-    <?php endif ?>
-    
-    <?php if (empty($data["result"])): ?>
-        <p>invalid keyword or the file is gone</p>
     <?php endif ?>
     
     <section class="go">

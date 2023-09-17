@@ -7,6 +7,11 @@ $nav-space: (
     end: 10px
 );
 
+$group-input-space: (
+    input-height: 32px, 
+    input-padding: 10px
+);
+
 @mixin nav-button() {
     button {
         background-color: #EEEEEE;
@@ -22,6 +27,10 @@ $nav-space: (
         
         transition: all 0.2s ease;
         
+        &:active {
+            transform: scale(0.9);
+        }
+        
         span {
             color: #333333;
             line-height: 1.2rem;
@@ -30,9 +39,27 @@ $nav-space: (
             pointer-events: none;
         }
     }
-    
-    button:active {
-        transform: scale(0.9);
+}
+
+@mixin password-visibility-button() {
+    button {
+        background-color: transparent;
+        outline: none;
+        border: 0;
+        margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        transition: scale 0.2s;
+        
+        svg {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+        &:active {
+            transform: scale(0.9);
+        }
     }
 }
 
@@ -63,9 +90,47 @@ form {
         display: none;
     }
 }
-        
+
+.image-path {
+    display: none;
+}
+
 svg, svg path {
     pointer-events: none;
+}
+
+.group-input {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    .field {
+        background-color: #F6F6F6;
+        border: 1px solid #999999;
+        border-radius: 10px;
+        padding: map-get($group-input-space, input-padding);
+        width: 100%;
+        height: map-get($group-input-space, input-height) + 2 * map-get($group-input-space, input-padding);
+        
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 10px;
+        
+        input {
+            outline: none;
+            height: map-get($group-input-space, input-height);
+            font-size: 1rem;
+        }
+        input[type="text"], 
+        input[type="password"] {
+            background-color: transparent;
+            border: 0;
+            padding: 0 10px;
+            width: 100%;
+        }
+    }
 }
 
 
@@ -226,5 +291,19 @@ svg, svg path {
                 }
             }
         }
+    }
+}
+
+
+
+#sign-up {
+    .group-input {
+        @include password-visibility-button();
+    }
+}
+
+#sign-in {
+    .group-input {
+        @include password-visibility-button();
     }
 }

@@ -133,7 +133,7 @@ function autorunResult() {
     document.querySelector('.download-all svg').setAttribute('height', '30');
     document.querySelector('.download-all svg path').setAttribute('fill', 'white');
     
-    Array.from(document.querySelectorAll('.file-list form path')).forEach(path => path.setAttribute('fill', '#0C6EA1'))
+    Array.from(document.querySelectorAll('.file-list form path')).forEach(path => path.setAttribute('fill', '#0C6EA1'));
 }
 
 
@@ -147,17 +147,6 @@ function formatBytes(numBytes) {
         index++;
     }
     return numBytes.toFixed(2) + " " + suffixes[index];
-}
-
-function groupInput(element, event) {
-    element.addEventListener('focus', event => {
-        event.target.parentElement.style.border = '2px solid dodgerblue';
-        event.target.parentElement.style.padding = '9px';
-    });
-    element.addEventListener('blur', event => {
-        event.target.parentElement.style.border = '1px solid #999999';
-        event.target.parentElement.style.padding = '10px';
-    });
 }
 
 function insertEllipsis(frame, list) {

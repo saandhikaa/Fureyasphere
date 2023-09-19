@@ -1,5 +1,4 @@
-const greenhex = '#04BA71';
-const redhex = '#FF0000';
+let typingTimer;
 
 const navContainer = document.querySelector('.navigation-container');
 const navigation = document.querySelector('.navigation-container nav.navigation');
@@ -30,6 +29,8 @@ Scanning.prototype.passwordVisibility = async element => {
     const input = element.parentElement.querySelector('input');
     const imagePath = document.querySelector('.image-path').textContent;
     
+    input.focus();
+    
     if (input.type === 'password') {
         input.type = 'text';
         element.innerHTML = await fetch(imagePath + 'icons/visibility_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
@@ -38,7 +39,7 @@ Scanning.prototype.passwordVisibility = async element => {
         element.innerHTML = await fetch(imagePath + 'icons/visibility_off_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
     }
     
-    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
     thicknessSVG('.passwordVisibility path', '15');
 };
 
@@ -58,35 +59,25 @@ Scanning.prototype.closeNav = () => {
 
 const signInUsername = document.querySelector('#sign-in #username');
 if (signInUsername) {
-    groupInput(signInUsername, event);
+    groupInput(signInUsername, event, 8);
 }
 const signInPassword = document.querySelector('#sign-in #password');
 if (signInPassword) {
-    groupInput(signInPassword, event);
+    groupInput(signInPassword, event, 8);
 }
 
 const signUpUsername = document.querySelector('#sign-up #username');
 if (signUpUsername) {
-    groupInput(signUpUsername, event);
+    groupInput(signUpUsername, event, 8);
     
     signUpUsername.addEventListener('input', element => {
         const messageElement = element.target.parentElement.querySelector('#username-availability');
-        
-        let typingTimer;
-        
-        // Clear the previous timer
         clearTimeout(typingTimer);
-        messageElement.textContent = "";
         
-        if (element.target.value.length > 12) {
-            element.target.value = element.target.value.slice(0, 12);
-        } 
-        
-        if (element.target.value.length >= 4) {
-            typingTimer = setTimeout(() => {
-                // Perform AJAX request to the server
+        if (element.target.value.length >= 3 && element.target.value.length <= 12) {
+            typingTimer = setTimeout(async () => {
                 const url = window.location.href + '/checkusernameavailability';
-                fetch(url, {
+                await fetch(url, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
@@ -95,56 +86,85 @@ if (signUpUsername) {
                 })
                 .then(response => response.text())
                 .then(text => {
-                    if (text === "taken") {
-                        messageElement.textContent = "Already taken.";
-                        messageElement.style.color = redhex;
+                    if (text === "available") {
+                        document.querySelector('.validation.username-availability').classList.add('pass');
+                        document.querySelector('.validation.username-availability').classList.remove('not-pass');
                     } else {
-                        messageElement.textContent = "Available.";
-                        messageElement.style.color = greenhex;
+                        document.querySelector('.validation.username-availability').classList.remove('pass');
+                        document.querySelector('.validation.username-availability').classList.add('not-pass');
                     }
+                    signUpValidation();
                 });
             }, 1000);
             
+            document.querySelector('.validation.username-length').classList.add('pass');
+        } else if (element.target.value.length > 12) {
+            document.querySelector('.validation.username-availability').classList.remove('pass');
+            document.querySelector('.validation.username-availability').classList.add('not-pass');
+            document.querySelector('.validation.username-length').classList.remove('pass');
+            document.querySelector('.validation.username-length').classList.add('not-pass');
         } else {
-            // Clear the message and reset the color
-            messageElement.textContent = "";
+            document.querySelector('.validation.username-availability').classList.remove('pass');
+            document.querySelector('.validation.username-availability').classList.remove('not-pass');
+            document.querySelector('.validation.username-length').classList.remove('pass');
+            document.querySelector('.validation.username-length').classList.remove('not-pass');
         }
+        
+        if (element.target.value.length > 0) {
+            if (usernameFormat(element.target.value.trim())) {
+                document.querySelector('.validation.username-format').classList.add('pass');
+                document.querySelector('.validation.username-format').classList.remove('not-pass');
+            } else {
+                document.querySelector('.validation.username-format').classList.remove('pass');
+                document.querySelector('.validation.username-format').classList.add('not-pass');
+            }
+        } else {
+            document.querySelector('.validation.username-format').classList.remove('pass');
+            document.querySelector('.validation.username-format').classList.remove('not-pass');
+        }
+        
+        signUpValidation();
     });
 }
 
 const signUpPassword = document.querySelector('#sign-up #password');
 if (signUpPassword) {
-    groupInput(signUpPassword, event);
+    groupInput(signUpPassword, event, 8);
+    signUpPassword.addEventListener('input', () => matchingPassword());
 }
 
 const signUpConfirmPassword = document.querySelector('#sign-up #confirm-password');
 if (signUpConfirmPassword) {
-    groupInput(signUpConfirmPassword, event);
-    
-    signUpConfirmPassword.addEventListener('input', element => {
-        const password = element.target.parentElement.parentElement.querySelector('#password');
-        const passwordMatchStatus = element.target.parentElement.parentElement.querySelector('#password-match-status');
-        
-        if (password.value === element.target.value) {
-            passwordMatchStatus.textContent = 'Passwords match';
-            passwordMatchStatus.style.color = greenhex;
-        } else {
-            passwordMatchStatus.textContent = 'Passwords do not match';
-            passwordMatchStatus.style.color = redhex;
-        }
-    });
+    groupInput(signUpConfirmPassword, event, 8);
+    signUpConfirmPassword.addEventListener('input', () => matchingPassword());
 }
 
 
 
-function groupInput(element, event) {
+function matchingPassword() {
+    const password = document.querySelector('#sign-up #password').value;
+    const confirm = document.querySelector('#sign-up #confirm-password').value;
+    
+    if (password.length > 0 && confirm.length > 0) {
+        if (password === confirm) {
+            document.querySelector('.validation.passwords-match').classList.add('pass');
+            document.querySelector('.validation.passwords-match').classList.remove('not-pass');
+        } else {
+            document.querySelector('.validation.passwords-match').classList.remove('pass');
+            document.querySelector('.validation.passwords-match').classList.add('not-pass');
+        }
+        signUpValidation();
+    }
+}
+
+function groupInput(element, event, padding = 10) {
     element.addEventListener('focus', event => {
         event.target.parentElement.style.border = '2px solid dodgerblue';
-        event.target.parentElement.style.padding = '9px';
+        event.target.parentElement.style.padding = `${padding-1}px`;
     });
     element.addEventListener('blur', event => {
         event.target.parentElement.style.border = '1px solid #999999';
-        event.target.parentElement.style.padding = '10px';
+        event.target.parentElement.style.padding = `${padding}px`;
     });
 }
 
@@ -155,6 +175,30 @@ function thicknessSVG(selector, thickness) {
         path.setAttribute('stroke-width', thickness);
         path.setAttribute('fill', '#333333');
     });
+}
+
+function signUpValidation() {
+    const paths = Array.from(document.querySelectorAll('.validation path'));
+    let required = 0;
+    
+    paths.forEach(path => {
+        const validation = path.parentElement.parentElement.classList;
+        if (validation.contains('pass')) {
+            path.setAttribute('fill', '#04BA71');
+            required++;
+        } else if (validation.contains('not-pass')) {
+            path.setAttribute('fill', '#FF0000');
+        } else {
+            path.setAttribute('fill', '#AAAAAA');
+        }
+    });
+    
+    document.querySelector('#su-submit').disabled = required != paths.length;
+}
+
+function usernameFormat(inputString) {
+    let pattern = /^[a-zA-Z0-9-]+$/;
+    return pattern.test(inputString);
 }
 
 

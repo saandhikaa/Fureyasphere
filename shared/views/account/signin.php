@@ -1,5 +1,5 @@
 <main id="sign-in">
-    <form action="" method="post" id="sign-in-form">
+    <form action="" method="post">
         <h1>Sign In</h1>
         
         <section class="group-input">

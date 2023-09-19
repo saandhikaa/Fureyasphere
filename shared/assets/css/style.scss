@@ -54,8 +54,8 @@ $group-input-space: (
         transition: scale 0.2s;
         
         svg {
-            width: 1.8rem;
-            height: 1.8rem;
+            width: 1.6rem;
+            height: 1.6rem;
         }
         &:active {
             transform: scale(0.9);
@@ -111,7 +111,6 @@ svg, svg path {
         border-radius: 10px;
         padding: map-get($group-input-space, input-padding);
         width: 100%;
-        height: map-get($group-input-space, input-height) + 2 * map-get($group-input-space, input-padding);
         
         display: flex;
         flex-wrap: nowrap;
@@ -297,8 +296,44 @@ svg, svg path {
 
 
 #sign-up {
+    margin: 20px;
+    
+    .validation {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        line-height: 1rem;
+        margin: 5px;
+        color: #AAAAAA;
+        
+        svg {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+    .not-pass {
+        color: #FF0000;
+    }
+    .pass {
+        color: #04BA71;
+    }
+    
     .group-input {
+        .field {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        
         @include password-visibility-button();
+    }
+    
+    #su-submit {
+        background-color: dodgerblue;
+        padding: 10px 20px;
+        
+        &:disabled {
+            background-color: grey;
+        }
     }
 }
 

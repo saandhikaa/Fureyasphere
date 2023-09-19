@@ -1,5 +1,5 @@
 <main id="sign-up">
-    <form action="" method="post" id="sign-up-form">
+    <form action="" method="post">
         <h1>Sign Up</h1>
         
         <section class="group-input">
@@ -7,10 +7,10 @@
             <div class="field">
                 <input type="text" id="username" name="username" autocomplete="off" required>
             </div>
-            <ul class="validation">
-                <li class="username-availability not-pass"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Username available</li>
-                <li class="username-length not-pass"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>3-12 characters</li>
-                <li class="username-format not-pass"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Alphabet, number & hyphen</li>
+            <ul>
+                <li class="validation username-availability"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Username available</li>
+                <li class="validation username-length"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>3-12 characters</li>
+                <li class="validation username-format"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Alphabet, number or hyphen</li>
             </ul>
         </section>
         
@@ -28,7 +28,7 @@
                 <input type="password" id="confirm-password" name="confirm-password" autocomplete="off" required>
                 <button type="button" class="passwordVisibility"><?php readfile(__DIR__ . '/../../assets/images/icons/visibility_off_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
             </div>
-            <span class="validation passwords-match not-pass"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Passwords match</span>
+            <span class="validation passwords-match"><?php readfile(__DIR__ . '/../../assets/images/icons/check_circle_FILL0_wght400_GRAD0_opsz24.svg') ?>Passwords match</span>
         </section>
         
         <section class="agreement">
@@ -36,7 +36,7 @@
             <label for="agreement">I agree to the <a href="">Privacy</a> and <a href="">Terms</a></label><br>
         </section>
         
-        <input type="submit" name="submit" id="su-submit" value="Sign Up">
+        <input type="submit" name="submit" id="su-submit" value="Sign Up" disabled>
     </form>
     
     <p>Already have an account?  <a href="<?= BASEURL . '/' . $data['app'] ?>/signin">Sign In</a></p>

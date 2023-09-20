@@ -45,7 +45,7 @@
             <input type="hidden" name="key" value="<?= $file['key_'] ?>">
             <input type="hidden" name="filename" value="<?= $filepath ?>">
             <input type="hidden" name="filepath" value="<?= $filepath ?>">
-            <button type="submit" name="submit" id="download-all">Download all as Zip <?php readfile(__DIR__ . '/../../assets/images/icons/download_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
+            <button type="submit" name="submit" id="download-all" class="action-button">Download all as Zip <?php readfile(__DIR__ . '/../../assets/images/icons/download_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
         </form>
     <?php endif ?>
     

@@ -18,7 +18,7 @@
             
             <section class="browse-file">
                 <label for="trigger-input">Select a file:</label>
-                <button type="button" id="trigger-input" class="triggerInput">Browse file</button>
+                <button type="button" id="trigger-input" class="triggerInput action-button">Browse file</button>
             </section>
             
             <section class="group-input">

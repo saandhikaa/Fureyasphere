@@ -39,5 +39,5 @@
         <input type="submit" name="submit" id="su-submit" class="action-button" value="Sign Up" disabled>
     </form>
     
-    <section class="go">Already have an account?  <a class="brandeis" href="<?= BASEURL . '/' . $data['app'] ?>/signin">Sign In</a></section>
+    <section class="go">Already have an account?<a class="brandeis" href="<?= BASEURL . '/' . $data['app'] ?>/signin">Sign In</a></section>
 </main>

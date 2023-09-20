@@ -17,6 +17,10 @@ a.brandeis, a.brandeis:visited {
     color: #2B73E6;
 }
 
+svg, svg path {
+    pointer-events: none;
+}
+
 form input[type="password"]::-webkit-outer-spin-button,
 form input[type="password"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -28,10 +32,6 @@ form input[type="password"]::-ms-reveal {
 
 .image-path {
     display: none;
-}
-
-svg, svg path {
-    pointer-events: none;
 }
 
 .group-input {
@@ -68,18 +68,27 @@ svg, svg path {
 }
 
 .action-button {
-    background-color: dodgerblue;
     outline: none;
     border: 0;
     border-radius: 5px;
     height: 2.5rem;
     margin: 0 auto;
     font-size: 1rem;
-    color: white;
-    transition: scale 0.2s ease;
 }
 
-.action-button:active {
+.action-button:disabled {
+    background-color: #DDDDDD;
+    color: #999999;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s;
+}
+
+.action-button:enabled {
+    background-color: dodgerblue;
+    color: white;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s, scale 0.2s ease;
+}
+
+.action-button:enabled:active {
     transform: scale(0.95);
 }
 
@@ -284,26 +293,10 @@ svg, svg path {
     margin: 30px 60px;
 }
 
-#sign-up .validation {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    line-height: 1rem;
-    margin: 5px 10px;
-    color: #AAAAAA;
-}
-
-#sign-up .validation svg {
-    width: 1rem;
-    height: 1rem;
-}
-
-#sign-up .not-pass {
-    color: #FF0000;
-}
-
-#sign-up .pass {
-    color: #04BA71;
+#sign-up h1 {
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 #sign-up .group-input .field {
@@ -331,40 +324,41 @@ svg, svg path {
     transform: scale(0.9);
 }
 
-#sign-up h1 {
-    font-weight: 500;
-    margin-top: 20px;
-    margin-bottom: 10px;
+#sign-up .action-button {
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 48px;
+}
+
+#sign-up .validation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1rem;
+    margin: 5px 10px;
+    color: #AAAAAA;
+}
+
+#sign-up .validation svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+#sign-up .not-pass {
+    color: #FF0000;
+}
+
+#sign-up .pass {
+    color: #04BA71;
 }
 
 #sign-up .agreement {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin: 10px 1px 50px;
-}
-
-#sign-up #su-submit {
-    border-radius: 10px;
-    margin-bottom: 30px;
-    width: 100%;
-    height: 48px;
-}
-
-#sign-up #su-submit:disabled {
-    background-color: #DDDDDD;
-    color: #999999;
-    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s;
-}
-
-#sign-up #su-submit:enabled {
-    background-color: dodgerblue;
-    color: white;
-    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s, scale 0.2s ease;
-}
-
-#sign-up #su-submit:enabled:active {
-    transform: scale(0.95);
+    margin: 10px 1px 0;
 }
 
 #sign-up section.go {
@@ -372,6 +366,22 @@ svg, svg path {
     justify-content: center;
     gap: 5px;
     margin-bottom: 100px;
+}
+
+#sign-in {
+    position: relative;
+    margin: 30px 60px;
+}
+
+#sign-in h1 {
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#sign-in .group-input .field {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 #sign-in .group-input button {
@@ -394,6 +404,23 @@ svg, svg path {
     transform: scale(0.9);
 }
 
-#sign-in #si-submit {
-    width: 8rem;
+#sign-in .action-button {
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 48px;
+}
+
+#sign-in section.go {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 100px;
+}
+
+#sign-in .sign-in-failed {
+    color: #FF0000;
+    font-style: italic;
+    position: absolute;
 }

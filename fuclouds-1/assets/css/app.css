@@ -7,17 +7,16 @@
     padding-right: 1rem;
     min-width: 80px;
     color: #999999;
-    transition: 0.3s ease 0.5s;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s;
 }
 
 .group-input input[type="submit"]:enabled {
     background-color: dodgerblue;
     color: white;
-    transition: 0.3s ease 0.5s;
-    transition: scale 0.2s ease;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s,  scale 0.2s ease;
 }
 
-.group-input input[type="submit"]:active {
+.group-input input[type="submit"]:enabled:active {
     transform: scale(0.95);
 }
 
@@ -169,21 +168,8 @@ section.go .upload {
     margin: 0 auto;
 }
 
-#fuclouds-upload .input-form .browse-file button {
-    background-color: dodgerblue;
-    outline: none;
-    border: 0;
-    border-radius: 5px;
-    height: 2.5rem;
+#fuclouds-upload .input-form .browse-file .action-button {
     width: 40%;
-    margin: 0 auto;
-    font-size: 1rem;
-    color: white;
-    transition: scale 0.2s ease;
-}
-
-#fuclouds-upload .input-form .browse-file button:active {
-    transform: scale(0.95);
 }
 
 #fuclouds-result {
@@ -263,32 +249,16 @@ section.go .upload {
     margin: 20px 0;
 }
 
-#fuclouds-result form.download-all button {
-    background-color: dodgerblue;
-    outline: none;
-    border: 0;
-    border-radius: 5px;
-    height: 2.5rem;
-    width: 14rem;
-    margin: 0 auto;
-    font-size: 1rem;
-    color: white;
-    transition: scale 0.2s ease;
-}
-
-#fuclouds-result form.download-all button:active {
-    transform: scale(0.95);
-}
-
-#fuclouds-result form.download-all button {
+#fuclouds-result form.download-all .action-button {
     position: relative;
     display: flex;
     gap: 5px;
     justify-content: center;
     align-items: center;
     padding-left: 5px;
+    width: 14rem;
 }
 
-#fuclouds-result form.download-all button svg {
+#fuclouds-result form.download-all .action-button svg {
     padding-bottom: 2px;
 }

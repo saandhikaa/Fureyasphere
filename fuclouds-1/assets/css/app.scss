@@ -51,25 +51,6 @@
     }
 }
 
-@mixin action-button($width) {
-    button {
-        background-color: dodgerblue;
-        outline: none;
-        border: 0;
-        border-radius: 5px;
-        height: 2.5rem;
-        width: $width;
-        margin: 0 auto;
-        font-size: 1rem;
-        color: white;
-        transition: scale 0.2s ease;
-        
-        &:active {
-            transform: scale(0.95);
-        }
-    }
-}
-
 
 
 .group-input {
@@ -81,17 +62,18 @@
         padding-left: 1rem;
         padding-right: 1rem;
         min-width: 80px;
-        
         color: #999999;
-        transition: 0.3s ease 0.5s;
+        transition: background-color 0.3s ease 0.5s, 
+                    color 0.3s ease 0.5s;
     }
     input[type="submit"]:enabled {
         background-color: dodgerblue;
         color: white;
-        transition: 0.3s ease 0.5s;
-        transition: scale 0.2s ease;
+        transition: background-color 0.3s ease 0.5s, 
+                    color 0.3s ease 0.5s, 
+                    scale 0.2s ease;
     }
-    input[type="submit"]:active {
+    input[type="submit"]:enabled:active {
         transform: scale(0.95);
     }
 }
@@ -199,7 +181,9 @@ section.go {
                 margin: 0 auto;
             }
             
-            @include action-button(40%);
+            .action-button {
+                width: 40%;
+            }
         }
     }
 }
@@ -235,15 +219,14 @@ section.go {
         gap: 5px;
         margin: 20px 0;
         
-        @include action-button(14rem);
-        
-        button {
+        .action-button {
             position: relative;
             display: flex;
             gap: 5px;
             justify-content: center;
             align-items: center;
             padding-left: 5px;
+            width: 14rem;
             
             svg {
                 padding-bottom: 2px;

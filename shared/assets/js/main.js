@@ -139,6 +139,11 @@ if (signUpConfirmPassword) {
     signUpConfirmPassword.addEventListener('input', () => matchingPassword());
 }
 
+const signUpAgreement = document.querySelector('#sign-up .agreement input[type="checkbox"]');
+if (signUpAgreement) {
+    signUpAgreement.addEventListener('change', () => matchingPassword());
+}
+
 
 
 function matchingPassword() {
@@ -153,8 +158,12 @@ function matchingPassword() {
             document.querySelector('.validation.passwords-match').classList.remove('pass');
             document.querySelector('.validation.passwords-match').classList.add('not-pass');
         }
-        signUpValidation();
+    } else {
+        document.querySelector('.validation.passwords-match').classList.remove('pass');
+        document.querySelector('.validation.passwords-match').classList.remove('not-pass');
     }
+    
+    signUpValidation();
 }
 
 function groupInput(element, event, padding = 10) {
@@ -193,7 +202,8 @@ function signUpValidation() {
         }
     });
     
-    document.querySelector('#su-submit').disabled = required != paths.length;
+    
+    document.querySelector('#su-submit').disabled = required != paths.length || !signUpAgreement.checked;
 }
 
 function usernameFormat(inputString) {

@@ -13,6 +13,10 @@ ul {
     list-style-type: none;
 }
 
+a.brandeis, a.brandeis:visited {
+    color: #2B73E6;
+}
+
 form input[type="password"]::-webkit-outer-spin-button,
 form input[type="password"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -61,6 +65,22 @@ svg, svg path {
     border: 0;
     padding: 0 10px;
     width: 100%;
+}
+
+.action-button {
+    background-color: dodgerblue;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    height: 2.5rem;
+    margin: 0 auto;
+    font-size: 1rem;
+    color: white;
+    transition: scale 0.2s ease;
+}
+
+.action-button:active {
+    transform: scale(0.95);
 }
 
 #page-header {
@@ -260,7 +280,8 @@ svg, svg path {
 }
 
 #sign-up {
-    margin: 20px;
+    position: relative;
+    margin: 30px 60px;
 }
 
 #sign-up .validation {
@@ -268,7 +289,7 @@ svg, svg path {
     align-items: center;
     gap: 5px;
     line-height: 1rem;
-    margin: 5px;
+    margin: 5px 10px;
     color: #AAAAAA;
 }
 
@@ -310,13 +331,47 @@ svg, svg path {
     transform: scale(0.9);
 }
 
+#sign-up h1 {
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#sign-up .agreement {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 1px 50px;
+}
+
 #sign-up #su-submit {
-    background-color: dodgerblue;
-    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 48px;
 }
 
 #sign-up #su-submit:disabled {
-    background-color: grey;
+    background-color: #DDDDDD;
+    color: #999999;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s;
+}
+
+#sign-up #su-submit:enabled {
+    background-color: dodgerblue;
+    color: white;
+    transition: background-color 0.3s ease 0.5s,  color 0.3s ease 0.5s, scale 0.2s ease;
+}
+
+#sign-up #su-submit:enabled:active {
+    transform: scale(0.95);
+}
+
+#sign-up section.go {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 100px;
 }
 
 #sign-in .group-input button {
@@ -337,4 +392,8 @@ svg, svg path {
 
 #sign-in .group-input button:active {
     transform: scale(0.9);
+}
+
+#sign-in #si-submit {
+    width: 8rem;
 }

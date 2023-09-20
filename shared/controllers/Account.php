@@ -52,7 +52,7 @@
             
             $this->data["title"] = "Fureya: Sign Up";
             $this->data["appScript"] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
-            $this->data["appScript"] .= '<script type="text/javascript">validationSVG();</script>' . PHP_EOL;
+            $this->data["appScript"] .= '<script type="text/javascript">signUpValidation();</script>' . PHP_EOL;
             
             $this->view($this->app, "templates/header", $this->data);
             $this->view($this->app, "$this->class/signup", $this->data);

@@ -7,13 +7,17 @@
             $this->class = strtolower(__CLASS__);
             $this->app = basename(dirname(__DIR__));
             
-            $this->model($this->app, "FileHandler")->autoRemove();
-            
             $this->data["mainApp"] = "shared";
             $this->data["app"] = $this->class;
             $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->app . '/assets/css/app.css">' . PHP_EOL;
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>' . PHP_EOL;
             $this->data["image-path"] = '<p class="image-path">' . BASEURL . '/' . $this->app . '/assets/images/</p>' . PHP_EOL;
+            
+            try {
+                $this->model($this->app, "FileHandler")->autoRemove();
+            } catch (PDOException $e) {
+                echo substr($e->getMessage(), 0, 15);
+            }
         }
         
         public function index() {

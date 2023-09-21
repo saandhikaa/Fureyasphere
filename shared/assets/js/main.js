@@ -71,7 +71,9 @@ if (signUpUsername) {
     groupInput(signUpUsername, event, 8);
     
     signUpUsername.addEventListener('input', element => {
-        const messageElement = element.target.parentElement.querySelector('#username-availability');
+        document.querySelector('.validation.username-availability').classList.remove('pass');
+        document.querySelector('.validation.username-availability').classList.remove('not-pass');
+        signUpValidation();
         clearTimeout(typingTimer);
         
         if (element.target.value.length >= 3 && element.target.value.length <= 12) {

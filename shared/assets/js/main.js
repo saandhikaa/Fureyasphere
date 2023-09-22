@@ -6,8 +6,6 @@ const navGroup = Array.from(navigation.children);
 navGroup[1].style.top = navGroup[0].offsetHeight + 'px';
 navGroup[1].style.bottom = navGroup[2].offsetHeight + 'px';
 
-document.querySelector('.copyright span').innerHTML = `&copy; ${new Date().getFullYear()}`;
-
 
 
 function Scanning(){}
@@ -204,7 +202,6 @@ function signUpValidation() {
         }
     });
     
-    
     document.querySelector('#su-submit').disabled = required != paths.length || !signUpAgreement.checked;
 }
 
@@ -214,6 +211,20 @@ function usernameFormat(inputString) {
 }
 
 
+
+const greeting = document.querySelector('h1.nav-greeting');
+if (greeting) {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+        greeting.textContent = 'Good morning!';
+    } else if (hour < 18) {
+        greeting.textContent = 'Good afternoon!';
+    } else {
+        greeting.textContent = 'Good evening!';
+    }
+}
+
+document.querySelector('.copyright span').innerHTML = `&copy; ${new Date().getFullYear()}`;
 
 const mainListSVG = Array.from(document.querySelectorAll('nav.navigation .main-list path'));
 mainListSVG.forEach(path => {

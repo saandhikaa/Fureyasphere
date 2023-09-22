@@ -128,8 +128,8 @@ form input[type="password"]::-ms-reveal {
 }
 
 #page-header button span {
+    padding-top: 2px;
     color: #333333;
-    line-height: 1.2rem;
     font-size: 1.2rem;
     font-weight: bold;
     pointer-events: none;
@@ -179,24 +179,18 @@ form input[type="password"]::-ms-reveal {
 .navigation-container nav.navigation ul.row {
     padding: 5px 20px;
     width: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
 }
 
-.navigation-container nav.navigation ul.row a {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.navigation-container nav.navigation ul.row li {
+    position: relative;
+}
+
+.navigation-container nav.navigation ul.row li a {
+    padding: 7px 5px;
+    display: block;
     text-decoration: none;
     font-weight: 400;
     color: #333333;
-}
-
-.navigation-container nav.navigation ul.row a img {
-    width: 1.5rem;
-    height: auto;
 }
 
 .navigation-container nav.navigation header {
@@ -234,8 +228,8 @@ form input[type="password"]::-ms-reveal {
 }
 
 .navigation-container nav.navigation header button span {
+    padding-top: 2px;
     color: #333333;
-    line-height: 1.2rem;
     font-size: 1.2rem;
     font-weight: bold;
     pointer-events: none;
@@ -248,12 +242,28 @@ form input[type="password"]::-ms-reveal {
     overflow-x: hidden;
 }
 
+.navigation-container nav.navigation .list a {
+    margin: 5px 0;
+}
+
 .navigation-container nav.navigation .list .main-list {
     margin-bottom: 10px;
 }
 
+.navigation-container nav.navigation .list .main-list span {
+    margin-left: 30px;
+}
+
+.navigation-container nav.navigation .list .main-list svg {
+    height: 1.6rem;
+    width: 1.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-55%);
+}
+
 .navigation-container nav.navigation .list h6 {
-    margin-top: 10px;
+    margin: 10px 0;
     padding: 5px;
     font-size: 1rem;
     font-weight: 500;
@@ -265,12 +275,10 @@ form input[type="password"]::-ms-reveal {
     border-bottom-left-radius: 10px;
     padding: 10px 0 20px;
     width: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .navigation-container nav.navigation footer .copyright {
+    margin: 10px 0;
     padding-left: 25px;
     font-size: 0.8rem;
     color: #8A8A8A;

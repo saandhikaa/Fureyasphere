@@ -32,8 +32,8 @@ $group-input-space: (
         }
         
         span {
+            padding-top: 2px;
             color: #333333;
-            line-height: 1.2rem;
             font-size: 1.2rem;
             font-weight: bold;
             pointer-events: none;
@@ -266,26 +266,20 @@ form {
             padding: 5px map-get($nav-space, start);
             width: map-get($nav-space, width);
             
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            
-            a {
-                padding: map-get($nav-space, apadding);
-                display: flex;
-                align-items: center;
-                gap: 8px;
+            li {
+                position: relative;
                 
-                text-decoration: none;
-                font-weight: 400;
-                color: #333333;
-                
-                img {
-                    width: 1.5rem;
-                    height: auto;
+                a {
+                    padding: 7px map-get($nav-space, apadding);
+                    display: block;
+                    
+                    text-decoration: none;
+                    font-weight: 400;
+                    color: #333333;
                 }
             }
         }
+        
         
         header {
             position: relative;
@@ -315,12 +309,26 @@ form {
             overflow-y: auto;
             overflow-x: hidden;
             
+            a {
+               margin: 5px 0;
+            }
             .main-list {
                 margin-bottom: 10px;
+                
+                span {
+                    margin-left: 30px;
+                }
+                svg {
+                    height: 1.6rem;
+                    width: 1.6rem;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-55%);
+                }
             }
             
             h6 {
-                margin-top: 10px;
+                margin: 10px 0;
                 padding: map-get($nav-space, apadding);
                 font-size: 1rem;
                 font-weight: 500;
@@ -334,11 +342,8 @@ form {
             padding: 10px 0 20px;
             width: map-get($nav-space, width);
             
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            
             .copyright {
+                margin: 10px 0;
                 padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
                 font-size: 0.8rem;
                 color: #8A8A8A;

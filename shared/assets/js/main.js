@@ -53,6 +53,18 @@ Scanning.prototype.closeNav = () => {
     document.body.style.overflow = 'auto';
 };
 
+Scanning.prototype.feedbackList = (element) => {
+    const container = document.querySelector('.feedback-list');
+    
+    if (container.offsetHeight == 0) {
+        element.querySelector('svg').setAttribute('transform', 'rotate(180)');
+        container.style.height = 'auto';
+    } else {
+        element.querySelector('svg').setAttribute('transform', 'rotate(0)');
+        container.style.height = '0';
+    }
+};
+
 
 
 const signInUsername = document.querySelector('#sign-in #username');

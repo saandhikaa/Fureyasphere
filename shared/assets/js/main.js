@@ -236,7 +236,7 @@ if (greeting) {
     }
 }
 
-document.querySelector('.copyright span').innerHTML = `&copy; ${new Date().getFullYear()}`;
+document.querySelector('.copyright span').innerHTML = `${new Date().getFullYear()}`;
 
 const mainListSVG = Array.from(document.querySelectorAll('nav.navigation .main-list path'));
 mainListSVG.forEach(path => {

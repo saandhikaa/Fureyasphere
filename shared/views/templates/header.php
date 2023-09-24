@@ -56,7 +56,7 @@
                     <li><a href=""><span class="mobile">Leave a </span>Comment</a></li>
                     <li><a href="<?= $data['issue'] ?>" target="_blank"><span class="mobile">Create an Issue on GitHub</span><span class="desktop">GitHub Issue</span></a></li>
                 </ul>
-                <p class="copyright mobile"><span></span> <?= ME ?>.</p>
+                <p class="copyright mobile">&copy; <?= ME ?> <span></span>.</p>
                 <ul class="footer-list mobile">
                     <li><a href="">About</a></li>
                     <li><a href="">Resources</a></li>

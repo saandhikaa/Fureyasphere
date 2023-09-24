@@ -54,7 +54,7 @@
                 <button class="feedbackList desktop">Feedback <?php readfile(__DIR__ . '/../../assets/images/icons/expand_more_FILL0_wght400_GRAD0_opsz24.svg') ?></button>
                 <ul class="row feedback-list">
                     <li><a href=""><span class="mobile">Leave a </span>Comment</a></li>
-                    <li><a href="https://github.com/saandhikaa/fureya-clouds-service/issues" target="_blank"><span class="mobile">Create an Issue on GitHub</span><span class="desktop">GitHub Issue</span></a></li>
+                    <li><a href="<?= $data['issue'] ?>" target="_blank"><span class="mobile">Create an Issue on GitHub</span><span class="desktop">GitHub Issue</span></a></li>
                 </ul>
                 <p class="copyright mobile"><span></span> <?= ME ?>.</p>
                 <ul class="footer-list mobile">

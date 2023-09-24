@@ -256,6 +256,88 @@ form {
         width: 25rem;
     }
     
+    .navigation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        
+        svg, 
+        .separator {
+            display: none;
+        }
+        
+        nav.navigation {
+            background-color: lightblue;
+            position: fixed;
+            top: 0;
+            padding-right: 20px;
+            width: 100%;
+            height: 3.75rem;
+            
+            display: flex;
+            gap: 5px;
+            justify-content: right;
+            align-items: center;
+            
+            h1 {
+                position: absolute;
+                left: 20px;
+                transform: translateY(14px);
+                font-weight: 500;
+            }
+            a, button {
+                outline: none;
+                background-color: transparent;
+                border: 0;
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+                font-size: 1.2rem;
+                color: #333333;
+            }
+            
+            .list {
+                display: flex;
+                gap: 20px;
+                ul {
+                    display: flex;
+                    gap: 20px;
+                }
+            }
+            
+            footer {
+                .feedbackList {
+                    display: flex;
+                    align-items: center;
+                    overflow: hidden;
+                    svg {
+                        display: inline-block;
+                    }
+                }
+                
+                .feedback-list {
+                    position: absolute;
+                    top: 60px;
+                    height: 0;
+                    overflow: hidden;
+                    transition: height 0.5s ease;
+                    li {
+                        background-color: lightblue;
+                        margin-top: 10px;
+                        overflow: hidden;
+                        border-radius: 10px;
+                    }
+                }
+            }
+            
+            .account-info {
+                margin-left: 20px;
+            }
+        }
+    }
+    
     .mobile {
         display: none;
     }

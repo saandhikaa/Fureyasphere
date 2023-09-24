@@ -235,6 +235,77 @@ form input[type="password"]::-ms-reveal {
         margin: auto;
         width: 25rem;
     }
+    .navigation-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
+    .navigation-container svg,
+.navigation-container .separator {
+        display: none;
+    }
+    .navigation-container nav.navigation {
+        background-color: lightblue;
+        position: fixed;
+        top: 0;
+        padding-right: 20px;
+        width: 100%;
+        height: 3.75rem;
+        display: flex;
+        gap: 5px;
+        justify-content: right;
+        align-items: center;
+    }
+    .navigation-container nav.navigation h1 {
+        position: absolute;
+        left: 20px;
+        transform: translateY(14px);
+        font-weight: 500;
+    }
+    .navigation-container nav.navigation a, .navigation-container nav.navigation button {
+        outline: none;
+        background-color: transparent;
+        border: 0;
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: #333333;
+    }
+    .navigation-container nav.navigation .list {
+        display: flex;
+        gap: 20px;
+    }
+    .navigation-container nav.navigation .list ul {
+        display: flex;
+        gap: 20px;
+    }
+    .navigation-container nav.navigation footer .feedbackList {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+    .navigation-container nav.navigation footer .feedbackList svg {
+        display: inline-block;
+    }
+    .navigation-container nav.navigation footer .feedback-list {
+        position: absolute;
+        top: 60px;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.5s ease;
+    }
+    .navigation-container nav.navigation footer .feedback-list li {
+        background-color: lightblue;
+        margin-top: 10px;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    .navigation-container nav.navigation .account-info {
+        margin-left: 20px;
+    }
     .mobile {
         display: none;
     }

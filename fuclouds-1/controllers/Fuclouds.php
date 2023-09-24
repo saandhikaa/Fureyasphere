@@ -9,6 +9,7 @@
             
             $this->data["mainApp"] = "shared";
             $this->data["app"] = $this->class;
+            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
             $this->data["styles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->app . '/assets/css/app.css">' . PHP_EOL;
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->app . '/assets/js/app.js"></script>' . PHP_EOL;
             $this->data["image-path"] = '<p class="image-path">' . BASEURL . '/' . $this->app . '/assets/images/</p>' . PHP_EOL;

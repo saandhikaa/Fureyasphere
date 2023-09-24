@@ -9,6 +9,7 @@
             
             $this->data["mainApp"] = $this->app;
             $this->data["app"] = $this->class;
+            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
             $this->data["image-path"] = '<p class="image-path">' . BASEURL . '/' . $this->app . '/assets/images/</p>' . PHP_EOL;
         }
         

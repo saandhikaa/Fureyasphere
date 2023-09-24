@@ -9,6 +9,7 @@
             
             $this->data["mainApp"] = $this->app;
             $this->data["app"] = "Fureya Clouds Service";
+            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
         }
         
         public function index() {

@@ -200,172 +200,6 @@ form {
 
 
 
-#page-header {
-    background-color: lightblue;
-    position: fixed;
-    top: 0;
-    padding: 0 map-get($nav-space, end);
-    width: 100vw;
-    height: 60px;
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 9;
-    
-    h1 {
-        font-size: 1.5rem;
-        font-weight: 500;
-    }
-    
-    @include nav-button();
-}
-
-.navigation-container {
-    background-color: rgba(0, 0, 0 , 0.3);
-    // backdrop-filter: blur(2px);
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 100%;
-    overflow: hidden;
-    z-index: 10;
-    
-    display: flex;
-    justify-content: flex-end;
-    
-    transition: width 0.2s ease;
-    
-    nav.navigation {
-        background-color: white;
-        position: relative;
-        width: 0;
-        height: 100%;
-        box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
-        border-top-left-radius: map-get($nav-space, radius);
-        border-bottom-left-radius: map-get($nav-space, radius); 
-        
-        transition: width 0.3s ease;
-        
-        .separator {
-            background-color: rgba(35, 35, 35, 0.3);
-            position: absolute;
-            right: 0;
-            width: map-get($nav-space, width) - map-get($nav-space, start);
-            height: 0.5px;
-        }
-        .separator.top {
-            top: 0;
-        }
-        .separator.bottom {
-            bottom: 0;
-        }
-        
-        ul.row {
-            padding: 5px map-get($nav-space, start);
-            width: map-get($nav-space, width);
-            
-            li {
-                position: relative;
-                
-                a {
-                    padding: 7px map-get($nav-space, apadding);
-                    display: block;
-                    
-                    text-decoration: none;
-                    font-weight: 400;
-                    color: #333333;
-                }
-            }
-        }
-        
-        
-        header {
-            position: relative;
-            border-top-left-radius: map-get($nav-space, radius);
-            padding-left: map-get($nav-space, start);
-            padding-right: map-get($nav-space, end);
-            width: map-get($nav-space, width);
-            height: 60px;
-            
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            
-            section {
-                h1 {
-                    font-size: 1.2rem;
-                    font-weight: 500;
-                }
-            }
-            
-            @include nav-button();
-        }
-        
-        .list {
-            position: absolute;
-            padding: 10px 0;
-            overflow-y: auto;
-            overflow-x: hidden;
-            
-            a {
-               margin: 5px 0;
-            }
-            .main-list {
-                margin-bottom: 10px;
-                
-                span {
-                    margin-left: 30px;
-                }
-                svg {
-                    height: 1.6rem;
-                    width: 1.6rem;
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-55%);
-                }
-            }
-            
-            h6 {
-                margin: 10px 0;
-                padding: map-get($nav-space, apadding);
-                font-size: 1rem;
-                font-weight: 500;
-            }
-        }
-        
-        footer {
-            position: absolute;
-            bottom: 0;
-            border-bottom-left-radius: map-get($nav-space, radius);
-            padding: 10px 0 20px;
-            width: map-get($nav-space, width);
-            
-            .copyright {
-                margin: 10px 0;
-                padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
-                font-size: 0.8rem;
-                color: #8A8A8A;
-            }
-            
-            .footer-list {
-                padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
-                display: flex;
-                gap: 10px;
-                
-                a {
-                    text-decoration: none;
-                    font-size: 0.8rem;
-                    color: #2B73E6;
-                }
-            }
-        }
-    }
-}
-
-
-
 #sign-up {
     position: relative;
     @include account-form();
@@ -410,5 +244,189 @@ form {
         color: #FF0000;
         font-style: italic;
         position: absolute;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    #sign-up, 
+    #sign-in {
+        margin: auto;
+        width: 25rem;
+    }
+    
+    .mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #page-header {
+        background-color: lightblue;
+        position: fixed;
+        top: 0;
+        padding: 0 map-get($nav-space, end);
+        width: 100vw;
+        height: 60px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9;
+        
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        @include nav-button();
+    }
+    
+    .navigation-container {
+        background-color: rgba(0, 0, 0 , 0.3);
+        // backdrop-filter: blur(2px);
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 100%;
+        overflow: hidden;
+        z-index: 10;
+        
+        display: flex;
+        justify-content: flex-end;
+        
+        transition: width 0.2s ease;
+        
+        nav.navigation {
+            background-color: white;
+            position: relative;
+            width: 0;
+            height: 100%;
+            box-shadow: 10px 0 25px 1px rgba(0, 0, 0, 0.3);
+            border-top-left-radius: map-get($nav-space, radius);
+            border-bottom-left-radius: map-get($nav-space, radius); 
+            
+            transition: width 0.3s ease;
+            
+            .separator {
+                background-color: rgba(35, 35, 35, 0.3);
+                position: absolute;
+                right: 0;
+                width: map-get($nav-space, width) - map-get($nav-space, start);
+                height: 0.5px;
+            }
+            .separator.top {
+                top: 0;
+            }
+            .separator.bottom {
+                bottom: 0;
+            }
+            
+            ul.row {
+                padding: 5px map-get($nav-space, start);
+                width: map-get($nav-space, width);
+                
+                li {
+                    position: relative;
+                    
+                    a {
+                        padding: 7px map-get($nav-space, apadding);
+                        display: block;
+                        
+                        text-decoration: none;
+                        font-weight: 400;
+                        color: #333333;
+                    }
+                }
+            }
+            
+            
+            header {
+                position: relative;
+                border-top-left-radius: map-get($nav-space, radius);
+                padding-left: map-get($nav-space, start);
+                padding-right: map-get($nav-space, end);
+                width: map-get($nav-space, width);
+                height: 60px;
+                
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                
+                section {
+                    h1 {
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+                }
+                
+                @include nav-button();
+            }
+            
+            .list {
+                position: absolute;
+                padding: 10px 0;
+                overflow-y: auto;
+                overflow-x: hidden;
+                
+                a {
+                   margin: 5px 0;
+                }
+                .main-list {
+                    margin-bottom: 10px;
+                    
+                    span {
+                        margin-left: 30px;
+                    }
+                    svg {
+                        height: 1.6rem;
+                        width: 1.6rem;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-55%);
+                    }
+                }
+                
+                h6 {
+                    margin: 10px 0;
+                    padding: map-get($nav-space, apadding);
+                    font-size: 1rem;
+                    font-weight: 500;
+                }
+            }
+            
+            footer {
+                position: absolute;
+                bottom: 0;
+                border-bottom-left-radius: map-get($nav-space, radius);
+                padding: 10px 0 20px;
+                width: map-get($nav-space, width);
+                
+                .copyright {
+                    margin: 10px 0;
+                    padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
+                    font-size: 0.8rem;
+                    color: #8A8A8A;
+                }
+                
+                .footer-list {
+                    padding-left: map-get($nav-space, apadding) + map-get($nav-space, start);
+                    display: flex;
+                    gap: 10px;
+                    
+                    a {
+                        text-decoration: none;
+                        font-size: 0.8rem;
+                        color: #2B73E6;
+                    }
+                }
+            }
+        }
+    }
+    
+    .desktop {
+        display: none;
     }
 }

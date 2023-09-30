@@ -90,6 +90,13 @@
         public function setup() {
             $tableName = "users";
             
+            try {
+                if (!$this->model($this->app, "AccountControl")->checkUsername(ADMIN_USERNAME)) {
+                    header("Location: " . BASEURL);
+                    exit;
+                }
+            } catch (PDOException) {}
+            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if (isset($_POST["submit"]) && isset($_POST["table"])) {
                     $this->data["status"] = $this->model($this->app, "TableMaster")->createTable($tableName, $_POST["table"]);

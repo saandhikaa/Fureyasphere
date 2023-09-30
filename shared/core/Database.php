@@ -17,7 +17,11 @@
             try {
                 $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
             } catch (PDOException $e) {
-                die($e->getMessage());
+                echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+                echo '<h2>Database not found, please set it up</h2>';
+                echo '<p>' . $e->getMessage() . '</p><br><br>';
+                echo '<a href="' . BASEURL . '">back</a>';
+                die;
             }
         }
         

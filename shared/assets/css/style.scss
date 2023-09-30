@@ -135,6 +135,15 @@ form {
     }
 }
 
+.database-error {
+    position: relative;
+    background-color: #FCF3D6;
+    color: #BE9655;
+    left: 0;
+    right: 0;
+    margin-top: 10px;
+    padding: 0 10px;
+}
 .image-path {
     display: none;
 }

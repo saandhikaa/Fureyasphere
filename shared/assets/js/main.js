@@ -55,6 +55,7 @@ Scanning.prototype.closeNav = () => {
 
 Scanning.prototype.feedbackList = (element) => {
     const container = document.querySelector('.feedback-list');
+    const closing = document.querySelector('.navigation-container');
     
     if (container.offsetHeight == 0) {
         element.querySelector('svg').setAttribute('transform', 'rotate(180)');

@@ -17,7 +17,7 @@
             try {
                 $this->model($this->app, "FileHandler")->autoRemove();
             } catch (PDOException $e) {
-                echo substr($e->getMessage(), 0, 15);
+                echo '<p class="database-error">' . $e->getMessage() . '</p>';
             }
         }
         

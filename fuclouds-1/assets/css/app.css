@@ -262,3 +262,14 @@ section.go .upload {
 #fuclouds-result form.download-all .action-button svg {
     padding-bottom: 2px;
 }
+
+@media (min-width: 768px) {
+    #fuclouds-search,
+#fuclouds-upload,
+#fuclouds-result {
+        padding-left: 0;
+        padding-right: 0;
+        margin: auto;
+        width: 26rem;
+    }
+}

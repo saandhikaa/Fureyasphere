@@ -234,3 +234,14 @@ section.go {
         }
     }
 }
+
+@media(min-width: 768px) {
+    #fuclouds-search, 
+    #fuclouds-upload, 
+    #fuclouds-result {
+        padding-left: 0;
+        padding-right: 0;
+        margin: auto;
+        width: 26rem;
+    }
+}

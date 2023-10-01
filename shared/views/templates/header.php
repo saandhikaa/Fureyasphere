@@ -16,7 +16,7 @@
 
 <body id="body">
     <header id="page-header">
-        <h1 class="app"><?= ucfirst($data["app"]) ?></h1>
+        <h1 class="app"><?= $data["app"] == 'home' ? 'Fureya Clouds Service' : ucfirst($data["app"]) ?></h1>
         <button type="button" class="openNav nav-button mobile"><?= isset($_SESSION["sign-in"]["username"]) ? '<span>' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : (function() { readfile(__DIR__ . '/../../assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg'); })() ?></button>
         <section class="desktop">
             <?= isset($_SESSION["sign-in"]["username"]) ? '<h1>Hi, ' . $_SESSION["sign-in"]["username"] . '</h1>' : '<h1 class="nav-greeting"></h1>' ?>
@@ -58,7 +58,7 @@
                 </ul>
                 <p class="copyright">&copy; <?= ME ?> <span></span>.</p>
                 <ul class="footer-list mobile">
-                    <li><a href="">About</a></li>
+                    <li><a href="<?= BASEURL . '/' . ($data['app'] == 'account' ? 'home' : $data['app']) ?>/about">About</a></li>
                     <li><a href="">Resources</a></li>
                     <li><a href="">Terms</a></li>
                     <li><a href="">Privacy</a></li>

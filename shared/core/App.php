@@ -71,6 +71,11 @@
             }
             
             return $appList;
+            // Array(
+            //     ["app dir/"] => Array(
+            //         [0] => "controller class"... 
+            //     )... 
+            // )
         }
         
         public static function getAppListNavigation() {
@@ -85,6 +90,11 @@
             
             ksort($result);
             return $result;
+            // Array(
+            //     [index at the end of app dir/] => Array(
+            //         [0] => "controller class"... 
+            //     )... 
+            // )
         }
     }
 ?>

@@ -225,8 +225,8 @@ function usernameFormat(inputString) {
 
 
 
-const greeting = document.querySelector('h1.nav-greeting');
-if (greeting) {
+const greetings = document.querySelectorAll('h1.nav-greeting');
+greetings.forEach(greeting => {
     const hour = new Date().getHours();
     if (hour < 12) {
         greeting.textContent = 'Good morning!';
@@ -235,7 +235,7 @@ if (greeting) {
     } else {
         greeting.textContent = 'Good evening!';
     }
-}
+});
 
 document.querySelector('.copyright span').innerHTML = `${new Date().getFullYear()}`;
 

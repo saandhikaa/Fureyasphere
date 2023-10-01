@@ -27,6 +27,11 @@
         }
         
         public function signup ($parameter = null) {
+            if ($this->model($this->app, "AccountControl")->checkSignInInfo()) {
+                header("Location: " . BASEURL . "/$this->class");
+                exit;
+            }
+            
             if ($parameter === "checkusernameavailability") {
                 // Handle the AJAX request
                 if (isset($_POST["username"])) {
@@ -61,6 +66,11 @@
         }
         
         public function signin() {
+            if ($this->model($this->app, "AccountControl")->checkSignInInfo()) {
+                header("Location: " . BASEURL . "/$this->class");
+                exit;
+            }
+            
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign In") {
                     if ($this->model($this->app, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {

@@ -21,6 +21,6 @@
         
         <input type="submit" name="submit" id="si-submit" class="action-button" value="Sign In">
         
-        <section class="go">Don't have an account?<a class="brandeis" href="<?= BASEURL . '/' . $data['app'] ?>/signup">Sign Up</a></section>
+        <section class="go">Don't have an account?<a class="brandeis" href="<?= BASEURL . '/' . $data['class'] ?>/signup">Sign Up</a></section>
     </form>
 </main>

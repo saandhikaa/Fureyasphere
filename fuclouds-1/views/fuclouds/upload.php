@@ -4,8 +4,6 @@
         <p>Use the form below to upload your files.</p>
     </section>
     
-    <p class="image-path"><?= BASEURL . '/' . basename(dirname(dirname(dirname(__FILE__)))) . '/assets/images/' ?></p>
-    
     <form action="" method="post" enctype="multipart/form-data">
         <section id="file-input-container">
             <p class="heading">Selected files:</p>
@@ -32,6 +30,6 @@
     </form>
     
     <section class="go">
-        <a class="search" href="<?= BASEURL . '/' . $data['app'] ?>">Go to Search page</a>
+        <a class="search" href="<?= BASEURL . '/' . $data['class'] ?>">Go to Search page</a>
     </section>
 </main>

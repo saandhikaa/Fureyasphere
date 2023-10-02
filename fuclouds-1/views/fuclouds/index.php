@@ -15,6 +15,6 @@
     </form>
     
     <section class="go">
-        <a class="upload" href="<?= BASEURL . '/' . $data['app']?>/upload">Go to Upload page</a>
+        <a class="upload" href="<?= BASEURL . '/' . $data['class']?>/upload">Go to Upload page</a>
     </section>
 </main>

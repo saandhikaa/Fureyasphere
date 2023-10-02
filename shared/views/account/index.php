@@ -3,4 +3,4 @@
 <br>
 <br>
 
-<a href="<?= BASEURL . '/' . $data['app'] ?>/signout">Sign Out</a>
+<a href="<?= BASEURL . '/' . $data['class'] ?>/signout">Sign Out</a>

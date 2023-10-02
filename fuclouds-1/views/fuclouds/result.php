@@ -50,7 +50,7 @@
     <?php endif ?>
     
     <section class="go">
-        <a class="search" href="<?= BASEURL . '/' . $data['app'] ?>">Go to Search page</a>
-        <a class="upload" href="<?= BASEURL . '/' . $data['app']?>/upload">Go to Upload page</a>
+        <a class="search" href="<?= BASEURL . '/' . $data['class'] ?>">Go to Search page</a>
+        <a class="upload" href="<?= BASEURL . '/' . $data['class']?>/upload">Go to Upload page</a>
     </section>
 </main>

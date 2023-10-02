@@ -17,7 +17,8 @@ ul {
     list-style-type: none;
 }
 
-a.brandeis, a.brandeis:visited {
+a.brandeis,
+a.brandeis:visited {
     color: #2B73E6;
 }
 
@@ -34,6 +35,10 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
+.no-display {
+    display: none;
+}
+
 .database-error {
     position: relative;
     background-color: #FCF3D6;
@@ -42,10 +47,6 @@ form input[type="password"]::-ms-reveal {
     right: 0;
     margin-top: 10px;
     padding: 0 10px;
-}
-
-.image-path {
-    display: none;
 }
 
 .group-input {
@@ -446,6 +447,64 @@ form input[type="password"]::-ms-reveal {
     position: absolute;
 }
 
+#body #home-about {
+    padding: 20px;
+}
+
+#body #home-about section.readme {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+#body #home-about section.readme h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#body #home-about section.readme h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+#body #home-about section.readme p {
+    margin-bottom: 15px;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+#body #home-about section.readme a {
+    color: #2B73E6;
+    text-decoration: none;
+}
+
+#body #home-about section.readme code {
+    background-color: #f7f7f7;
+    padding: 2px 4px;
+    font-family: Consolas, monospace;
+}
+
+#body #home-about section.readme ul, #body #home-about section.readme ol {
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+#body #home-about section.readme ul {
+    list-style-type: disc;
+}
+
+#body #home-about section.readme li {
+    margin-bottom: 5px;
+}
+
+#body #home-about section.readme strong {
+    font-weight: 500;
+}
+
 @media (min-width: 768px) {
     body {
         padding-right: 280px;
@@ -474,6 +533,9 @@ form input[type="password"]::-ms-reveal {
     }
     #body .navigation-container footer .copyright {
         margin-bottom: 0;
+    }
+    #home-about {
+        font-size: 8px;
     }
     #body .mobile {
         display: none;

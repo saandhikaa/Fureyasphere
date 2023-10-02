@@ -10,7 +10,7 @@
             $this->data["mainAppDir"] = $this->appDir;
             $this->data["class"] = $this->class;
             $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
-            $this->data["image-path"] = '<p class="image-path">' . BASEURL . '/' . $this->appDir . '/assets/images/</p>' . PHP_EOL;
+            $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . $this->appDir . '/assets/images/</p>' . PHP_EOL;
         }
         
         public function index() {

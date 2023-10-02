@@ -224,9 +224,19 @@ function usernameFormat(inputString) {
 }
 
 async function loadReadme() {
-    const url = window.location.href.split('/').slice(0, -2).join('/')  + '/README.md';
-    const content = await fetch(url).then(response => response.text());
-    document.querySelector('.readme.shared').innerHTML = marked.parse(content);
+    const baseURL = document.querySelector('.root-path').textContent;
+    const section = Array.from(document.querySelectorAll('.readme'));
+    
+    section.forEach(async element => {
+        const appDir = element.className.split(' ')[1];
+        if (appDir != 'shared') {
+            const content = await fetch(baseURL + '/' + appDir + '/README.md').then(response => response.text());
+            element.innerHTML = marked.parse(content);
+        } else {
+            const content = await fetch(baseURL + '/README.md').then(response => response.text());
+            element.innerHTML = marked.parse(content);
+        }
+    });
 }
 
 

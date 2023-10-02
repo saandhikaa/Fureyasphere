@@ -223,6 +223,12 @@ function usernameFormat(inputString) {
     return pattern.test(inputString);
 }
 
+async function loadReadme() {
+    const url = window.location.href.split('/').slice(0, -2).join('/')  + '/README.md';
+    const content = await fetch(url).then(response => response.text());
+    document.querySelector('.readme.shared').innerHTML = marked.parse(content);
+}
+
 
 
 const greetings = document.querySelectorAll('h1.nav-greeting');
@@ -237,11 +243,11 @@ greetings.forEach(greeting => {
     }
 });
 
-document.querySelector('.copyright span').innerHTML = `${new Date().getFullYear()}`;
-
 const mainListSVG = Array.from(document.querySelectorAll('nav.navigation .main-list path'));
 mainListSVG.forEach(path => {
     path.setAttribute('stroke', 'white' );
     path.setAttribute('stroke-width', '20' );
     path.setAttribute('fill', '#333333');
 });
+
+document.querySelector('.copyright span').innerHTML = `${new Date().getFullYear()}`;

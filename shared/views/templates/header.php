@@ -24,6 +24,7 @@
     </header>
     
     <?= isset($data["image-path"]) ? $data["image-path"] : "" ?>
+    <p class="root-path no-display"><?= BASEURL ?></p>
     
     <div class="navigation-container closeNav">
         <nav class="navigation">

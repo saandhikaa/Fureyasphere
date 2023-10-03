@@ -16,12 +16,8 @@
             
             try {
                 $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
-            } catch (PDOException $e) {
-                echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-                echo '<h2>Database not found, please set it up</h2>';
-                echo '<p>' . $e->getMessage() . '</p><br><br>';
-                echo '<a href="' . BASEURL . '">back</a>';
-                die;
+            } catch (Exception $e) {
+                die($e->getMessage());
             }
         }
         
@@ -63,6 +59,16 @@
         
         public function rowCount() {
             return $this->statement->rowCount();
+        }
+        
+        public function databaseExists($databaseName) {
+            $query = "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = :databaseName";
+            
+            $this->query($query);
+            $this->bind(':databaseName', $databaseName);
+            $this->execute();
+            
+            return $this->rowCount() > 0;
         }
     }
 ?>

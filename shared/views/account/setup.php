@@ -8,36 +8,20 @@
     ];
 ?>
 
-<main id="account-setup">
-    <?php if ($data["table"]): ?>
-        <h1>Table Structure</h1>
-        <table style="border-collapse: collapse; width: 80%;">
-            <tr>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Field</th>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Type</th>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Null</th>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Key</th>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Default</th>
-                <th style="border: 1px solid black; padding: 8px; text-align: left;">Extra</th>
-            </tr>
-            <?php foreach ($data["table"] as $row): ?>
-                <tr>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Field"]; ?></td>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Type"]; ?></td>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Null"]; ?></td>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Key"]; ?></td>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Default"]; ?></td>
-                    <td style="border: 1px solid black; padding: 8px; text-align: left;"><?php echo $row["Extra"]; ?></td>
-                </tr>
-            <?php endforeach ?>
-        </table>
-    <?php endif ?>
-    
-    <?= isset($data["status"]) ? $data["status"] : '' ?>
-    <?= isset($data["admin"]) ? $data["admin"] : '' ?>
-    
-    <form action="" method="post">
+<style>
+    input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px 20px;
+    }
+</style>
+
+<main>
+    <?php $confirm = 'A new [' . $data["table-name"] . '] will be created with the following default account credentials:\n\nUsername\t:   ' .  ADMIN_USERNAME . '\nPassword\t:   ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.' ?>
+    <form action="" method="post" onsubmit="return confirm('<?= $confirm ?>');">
         <?= TableMaster::generateFormFields($columns) ?>
-        <input type="submit" name="submit" value="Setup">
+        <input type="submit" name="submit" value="CREATE TABLE USERS">
     </form>
 </main>

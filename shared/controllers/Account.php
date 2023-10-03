@@ -109,19 +109,18 @@
             
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                    $this->data["status"] = $this->model($this->appDir, "TableMaster")->createTable($tableName, $_POST["table"]);
+                    $this->model($this->appDir, "TableMaster")->createTable($tableName, $_POST["table"]);
                     $this->model($this->appDir, "AccountControl")->signup(ADMIN_USERNAME, ADMIN_PASSWORD, 1);
-                    
-                    $this->data["admin"] = "<p>Default username: <strong>" . ADMIN_USERNAME . "</strong></p>" . PHP_EOL . "<p>Default password: <strong>" . ADMIN_PASSWORD . "</strong></p>" . PHP_EOL;
+                    header("Location: " . BASEURL . "/$this->class");
+                    exit;
                 }
             }
             
-            $this->data["title"] = "Fureya: Setup";
-            $this->data["table"] = $this->model($this->appDir, "TableMaster")->getTableStructure($tableName);
+            $this->model($this->appDir, "TableMaster");
+            $this->data["table-name"] = DB_NAME . '.' . $tableName;
             
-            $this->view($this->appDir, "templates/header", $this->data);
+            echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
             $this->view($this->appDir, "$this->class/setup", $this->data);
-            $this->view($this->appDir, "templates/footer");
         }
     }
 ?>

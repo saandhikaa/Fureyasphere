@@ -83,5 +83,15 @@
             $this->view($this->appDir, "$this->class/setup", $this->data);
             $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
         }
+        
+        public function about() {
+            $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
+            
+            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
+            echo '<main id="home-about">' . PHP_EOL;
+            echo '<section class="readme ' . $this->appDir . '"></section>' . PHP_EOL;
+            echo '</main>' . PHP_EOL;
+            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+        }
     }
 ?>

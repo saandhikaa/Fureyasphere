@@ -8,6 +8,8 @@ Fuclouds is an anonymous cloud-based file sharing service that allows anyone to 
 * Keyword-based file search
 * Easy-to-use interface
 * Secure file storage and transfer
+* Upload limit: 40MB
+* Automatic file removal after 24 hours
 
 ### Usage
 
@@ -26,6 +28,4 @@ Fuclouds is an anonymous cloud-based file sharing service that allows anyone to 
 
 ### Conclusion
 
-Fuclouds is a powerful and easy-to-use file sharing platform that offers a number of benefits to users, including anonymity, security, and convenience. It is a great choice for anyone who needs to share files with others without having to worry about privacy or security.
-
-Please note that Fuclouds does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Fuclouds.
+Please note that Fuclouds does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Fuclouds. Additionally, remember that files uploaded to Fuclouds will be automatically removed after 24 hours.

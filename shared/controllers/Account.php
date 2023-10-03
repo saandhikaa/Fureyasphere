@@ -14,6 +14,13 @@
         }
         
         public function index() {
+            try {
+                $this->model($this->appDir, "AccountControl")->checkUsername(ADMIN_USERNAME);
+            } catch (PDOException) {
+                header("Location: " . BASEURL . "/$this->class/setup");
+                exit;
+            }
+            
             if (!$this->model($this->appDir, "AccountControl")->checkSignInInfo()) {
                 header("Location: " . BASEURL . "/$this->class/signin");
                 exit;

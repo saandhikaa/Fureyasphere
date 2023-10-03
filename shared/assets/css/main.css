@@ -489,8 +489,8 @@ form input[type="password"]::-ms-reveal {
 }
 
 #body #home-about section.readme ul, #body #home-about section.readme ol {
-    margin-left: 20px;
-    margin-bottom: 5px;
+    margin-left: 30px;
+    margin-bottom: 10px;
 }
 
 #body #home-about section.readme ul {
@@ -535,7 +535,8 @@ form input[type="password"]::-ms-reveal {
         margin-bottom: 0;
     }
     #home-about {
-        font-size: 8px;
+        margin: auto;
+        width: 30rem;
     }
     #body .mobile {
         display: none;

@@ -2,6 +2,7 @@
     class Fuclouds extends Controller {
         private $appDir, $class;
         private $data = [];
+        private $tableName = "uploads";
         
         public function __construct() {
             $this->class = strtolower(__CLASS__);
@@ -16,12 +17,12 @@
             
             try {
                 $this->model($this->appDir, "FileHandler")->autoRemove();
-            } catch (PDOException $e) {
-                echo '<p class="database-error">' . $e->getMessage() . '</p>';
-            }
+            } catch (PDOException $e) {}
         }
         
         public function index() {
+            $this->checkTableExists();
+            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $url = BASEURL . "/$this->class/result/" . $_POST["keyword"];
                 header("Location: $url");
@@ -36,6 +37,8 @@
         }
         
         public function upload() {
+            $this->checkTableExists();
+            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $url = BASEURL . "/$this->class/result/" . $this->model($this->appDir, "FileHandler")->upload() . "/uploaded";
                 header("Location: $url");
@@ -51,6 +54,8 @@
         }
         
         public function result ($codename = null, $key = null, $action = "") {
+            $this->checkTableExists();
+            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $this->model($this->appDir, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
             }
@@ -67,24 +72,38 @@
         }
         
         public function setup() {
-            $tableName = "uploads";
-            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                    $this->data["status"] = $this->model($this->data["mainAppDir"], "TableMaster")->createTable($tableName, $_POST["table"]);
-                    $this->data["status"] .= $this->model($this->appDir, "FileHandler")->createUploadsDir();
+                    $this->model($this->data["mainAppDir"], "TableMaster")->createTable($this->tableName, $_POST["table"]);
+                    $this->model($this->appDir, "FileHandler")->createUploadsDir();
+                    header("Location: " . BASEURL . "/$this->class");
+                    exit;
                 }
             }
             
-            $this->data["title"] = ucfirst($this->class) . ": Setup";
-            $this->data["table"] = $this->model($this->data["mainAppDir"], "TableMaster")->getTableStructure($tableName);
+            $this->model($this->data["mainAppDir"], "TableMaster");
             
-            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
-            $this->view($this->appDir, "$this->class/setup", $this->data);
-            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+            $this->data["title"] = ucfirst($this->class) . ": Setup";
+            $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $this->tableName . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
+            $this->data["button"] = "Re-Create Table [" . $this->tableName . "] and Upload Storage";
+            $this->data["columns"] = [
+                "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
+                "time_" => "INT(10) NOT NULL",
+                "owner_" => "VARCHAR(20) NOT NULL",
+                "codename_" => "VARCHAR(20) NOT NULL",
+                "key_" => "INT(2) NOT NULL",
+                "filename_" => "VARCHAR(100) NOT NULL",
+                "filesize_" => "INT(11) NOT NULL",
+                "duration_" => "int(4) NOT NULL",
+                "available_" => "VARCHAR(3) NOT NULL"
+            ];
+            
+            $this->view($this->data["mainAppDir"], "shares/setup-table", $this->data);
         }
         
         public function about() {
+            $this->checkTableExists();
+            
             $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
             
             $this->view($this->data["mainAppDir"], "templates/header", $this->data);
@@ -92,6 +111,13 @@
             echo '<section class="readme ' . $this->appDir . '"></section>' . PHP_EOL;
             echo '</main>' . PHP_EOL;
             $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+        }
+        
+        private function checkTableExists() {
+            if (!$this->model($this->data["mainAppDir"], "TableMaster")->getTableStructure($this->tableName)) {
+                header("Location: " . BASEURL . "/$this->class/setup");
+                exit;
+            }
         }
     }
 ?>

@@ -14,12 +14,7 @@
         }
         
         public function index() {
-            try {
-                $this->model($this->appDir, "AccountControl")->checkUsername(ADMIN_USERNAME);
-            } catch (PDOException) {
-                header("Location: " . BASEURL . "/$this->class/setup");
-                exit;
-            }
+            $this->checkTableExists();
             
             if (!$this->model($this->appDir, "AccountControl")->checkSignInInfo()) {
                 header("Location: " . BASEURL . "/$this->class/signin");
@@ -34,6 +29,8 @@
         }
         
         public function signup ($parameter = null) {
+            $this->checkTableExists();
+            
             if ($this->model($this->appDir, "AccountControl")->checkSignInInfo()) {
                 header("Location: " . BASEURL . "/$this->class");
                 exit;
@@ -73,6 +70,8 @@
         }
         
         public function signin() {
+            $this->checkTableExists();
+            
             if ($this->model($this->appDir, "AccountControl")->checkSignInInfo()) {
                 header("Location: " . BASEURL . "/$this->class");
                 exit;
@@ -124,10 +123,28 @@
             }
             
             $this->model($this->appDir, "TableMaster");
-            $this->data["table-name"] = DB_NAME . '.' . $tableName;
             
-            echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-            $this->view($this->appDir, "$this->class/setup", $this->data);
+            $this->data["title"] = ucfirst($this->class) . ": Setup";
+            $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
+            $this->data["button"] = "Create Table [$tableName]";
+            $this->data["columns"] = [
+                "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
+                "time_" => "INT(10) NOT NULL",
+                "username_" => "VARCHAR(12) NOT NULL",
+                "password_" => "VARCHAR(255) NOT NULL",
+                "level_" => "INT(2) NOT NULL"
+            ];
+            
+            $this->view($this->appDir, "shares/setup-table", $this->data);
+        }
+        
+        private function checkTableExists() {
+            try {
+                $this->model($this->appDir, "AccountControl")->checkUsername(ADMIN_USERNAME);
+            } catch (PDOException) {
+                header("Location: " . BASEURL . "/$this->class/setup");
+                exit;
+            }
         }
     }
 ?>

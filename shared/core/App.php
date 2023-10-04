@@ -4,7 +4,7 @@
         protected $method = 'index';
         protected $params = array();
         protected $controllerDir = [__DIR__ . "/../controllers/"];
-    
+        
         public function __construct() {
             $url = $this->parseURL();
             
@@ -54,7 +54,6 @@
             }
         }
         
-        // getting all app directory path
         public static function getAppList() {
             $appList = [];
             

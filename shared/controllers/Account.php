@@ -69,7 +69,7 @@
             $this->view($this->appDir, "templates/footer", $this->data);
         }
         
-        public function signin() {
+        public function signin($redirect = null) {
             $this->checkTableExists();
             
             if ($this->model($this->appDir, "AccountControl")->checkSignInInfo()) {
@@ -80,7 +80,11 @@
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign In") {
                     if ($this->model($this->appDir, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
-                        header("Location: " . BASEURL . "/$this->class");
+                        if (is_null($redirect)) {
+                            header("Location: " . BASEURL . "/$this->class");
+                        } elseif (!empty($redirect)) {
+                            header("Location: " . BASEURL . "/$redirect");
+                        }
                         exit;
                     } else {
                         $this->data["sign-in-failed"] = "Username/password incorrect";

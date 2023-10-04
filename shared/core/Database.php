@@ -1,5 +1,5 @@
 <?php
-    class Database {
+    class Database extends Controller {
         private $host = DB_HOST;
         private $user = DB_USER;
         private $pass = DB_PASS;
@@ -16,8 +16,41 @@
             
             try {
                 $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
-            } catch (Exception $e) {
-                die($e->getMessage());
+                $this->query("USE " . $this->dbname);
+                $this->execute();
+            } catch (PDOException $e) {
+                $data = ["title" => "Database Error"];
+                
+                $errorCode = $e->getCode();
+                switch ($errorCode) {
+                    case 1049:
+                        $data["strong"] = "Error: Unknown database.";
+                        $data["normal"] = "Please check the database name, connection settings, or create the database if it does not exist.";
+                        break;
+                    case 1044:
+                        $data["strong"] = "Error: Access denied for user.";
+                        $data["normal"] = "Please check the username, password, connection settings, or the user's permissions.";
+                        break;
+                    case 2002:
+                        $data["strong"] = "Error: Connection refused.";
+                        $data["normal"] = "Please check the database server, host, port, or connection settings.";
+                        break;
+                    case 1045:
+                        $data["strong"] = "Error: Access denied for user.";
+                        $data["normal"] = "Please check the username, password, connection settings, or the user's permissions.";
+                        break;
+                    case 42000:
+                        $data["strong"] = "Error: SQL syntax error or access violation (42000).";
+                        $data["normal"] = "Please check the SQL syntax, database name, connection settings, or create the database if it does not exist.";
+                        break;
+                    default:
+                        $data["strong"] = "An error occurred:" . $e->getCode();
+                        $data["normal"] = $e->getMessage();
+                        break;
+                }
+                
+                $this->view(basename(dirname(__DIR__)), "shares/error", $data);
+                die;
             }
         }
         
@@ -59,16 +92,6 @@
         
         public function rowCount() {
             return $this->statement->rowCount();
-        }
-        
-        public function databaseExists($databaseName) {
-            $query = "SELECT SCHEMA_NAME FROM information_schema.SCHEMATA WHERE SCHEMA_NAME = :databaseName";
-            
-            $this->query($query);
-            $this->bind(':databaseName', $databaseName);
-            $this->execute();
-            
-            return $this->rowCount() > 0;
         }
     }
 ?>

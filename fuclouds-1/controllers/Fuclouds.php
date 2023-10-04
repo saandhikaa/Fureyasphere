@@ -81,6 +81,19 @@
                 }
             }
             
+            if (!isset($_SESSION["sign-in"]) || $_SESSION["sign-in"]["level"] !== 1) {
+                $switch = isset($_SESSION["sign-in"]) ? "sign out from current Account and" : "";
+                
+                echo '<script>
+                    if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please ' . $switch . ' provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+                        window.location.href = "' . BASEURL . '/account/signin/' . $this->class . '";
+                    } else {
+                        window.location.href = "' . BASEURL . '";
+                    }
+                </script>';
+                exit;
+            }
+            
             $this->model($this->data["mainAppDir"], "TableMaster");
             
             $this->data["title"] = ucfirst($this->class) . ": Setup";

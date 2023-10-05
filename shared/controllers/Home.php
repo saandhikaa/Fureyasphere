@@ -31,5 +31,10 @@
             echo '</main>' . PHP_EOL;
             $this->view($this->appDir, "templates/footer", $this->data);
         }
+        
+        public function terms() {
+            $this->data["web-application"] = "Fureya Clouds Service";
+            $this->view($this->appDir, "$this->class/terms-of-service", $this->data);
+        }
     }
 ?>

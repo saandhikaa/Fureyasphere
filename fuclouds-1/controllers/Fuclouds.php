@@ -114,6 +114,13 @@
             $this->view($this->data["mainAppDir"], "shares/setup-table", $this->data);
         }
         
+        public function resources() {
+            $this->data["title"] = ucfirst($this->class) . ": Resources";
+            $this->data["page-title"] = "Resources";
+            $this->data["body"][] = __DIR__ . "/../views/$this->class/resources.php";
+            $this->view($this->data["mainAppDir"], "layout/main", $this->data);
+        }
+        
         public function about() {
             $this->checkTableExists();
             

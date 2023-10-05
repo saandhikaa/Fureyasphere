@@ -60,7 +60,7 @@
                 <p class="copyright">&copy; <?= ME ?> <span></span>.</p>
                 <ul class="footer-list mobile">
                     <li><a href="<?= BASEURL . '/' . ($data['class'] == 'account' ? 'home' : $data['class']) ?>/about">About</a></li>
-                    <li><a href="">Resources</a></li>
+                    <li><a href="<?= BASEURL . '/' . $data["class"] . '/resources' ?>">Resources</a></li>
                     <li><a href="<?= BASEURL ?>/home/terms" target="_blank">Terms</a></li>
                     <li><a href="<?= BASEURL ?>/home/privacy" target="_blank">Privacy</a></li>
                 </ul>

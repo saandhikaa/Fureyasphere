@@ -36,5 +36,10 @@
             $this->data["web-application"] = "Fureya Clouds Service";
             $this->view($this->appDir, "$this->class/terms-of-service", $this->data);
         }
+        
+        public function privacy() {
+            $this->data["web-application"] = "Fureya Clouds Service";
+            $this->view($this->appDir, "$this->class/privacy-policy", $this->data);
+        }
     }
 ?>

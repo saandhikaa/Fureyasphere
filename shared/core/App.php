@@ -54,18 +54,18 @@
             }
         }
         
-        public static function getAppList() {
+        public static function getAppList($shared = false) {
             $appList = [];
             
             foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
-                $appName = basename($app);
+                $appDir = basename($app);
                 $controllers = [];
                 
-                if ($appName !== "shared") {
+                if ($appDir !== "shared" || $shared) {
                     foreach (glob($app . '/controllers/*.php') as $controllerFile) {
                         $controllers[] = basename($controllerFile, '.php');
                     }
-                    $appList[$appName] = $controllers;
+                    $appList[$appDir] = $controllers;
                 }
             }
             
@@ -77,21 +77,29 @@
             // )
         }
         
-        public static function getAppListNavigation() {
-            $apps = self::getAppList();
+        public static function getAppDetail($shared = false) {
+            $apps = self::getAppList($shared);
             $result = [];
             
             foreach ($apps as $key => $app) {
-                preg_match('/-(\d+)/', $key, $matches);
-                $newKey = $matches[1];
-                $result[$newKey] = $app;
+                if ($key == "shared") {
+                    $result[0]["dir"] = $key;
+                    $result[0]["class"] = $app;
+                } else {
+                    preg_match('/-(\d+)/', $key, $matches);
+                    $result[$matches[1]]["dir"] = $key;
+                    $result[$matches[1]]["class"] = $app;
+                }
             }
             
             ksort($result);
             return $result;
             // Array(
             //     [index at the end of app dir/] => Array(
-            //         [0] => "controller class"... 
+            //         ["dir"] => "app dir/",
+            //         ["class"] => array(
+            //             [0] => "controller class"... 
+            //         )
             //     )... 
             // )
         }

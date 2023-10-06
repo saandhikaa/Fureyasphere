@@ -43,8 +43,8 @@
                 </ul>
                 <ul class="app-list row">
                     <h6>Services</h6>
-                    <?php foreach (App::getAppListNavigation() as $appControllers): ?>
-                        <?php foreach ($appControllers as $controller): ?>
+                    <?php foreach (App::getAppDetail() as $apps): ?>
+                        <?php foreach ($apps["class"] as $controller): ?>
                             <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
                         <?php endforeach ?>
                     <?php endforeach ?>
@@ -60,7 +60,7 @@
                 <p class="copyright">&copy; <?= ME ?> <span></span>.</p>
                 <ul class="footer-list mobile">
                     <li><a href="<?= BASEURL . '/' . ($data['class'] == 'account' ? 'home' : $data['class']) ?>/about">About</a></li>
-                    <li><a href="<?= BASEURL . '/' . $data["class"] . '/resources' ?>">Resources</a></li>
+                    <li><a href="<?= BASEURL ?>/home/resources" target="_blank">Resources</a></li>
                     <li><a href="<?= BASEURL ?>/home/terms" target="_blank">Terms</a></li>
                     <li><a href="<?= BASEURL ?>/home/privacy" target="_blank">Privacy</a></li>
                 </ul>

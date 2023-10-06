@@ -32,6 +32,24 @@
             $this->view($this->appDir, "templates/footer", $this->data);
         }
         
+        public function resources() {
+            $this->data["title"] = "Resources";
+            $this->data["main-id"] = "resources";
+            $this->data["page-title"] = "Resources";
+            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/resources.css">' . PHP_EOL;
+            $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/resources.js"></script>' . PHP_EOL;
+            
+            foreach (App::getAppDetail(true) as $app) {
+                foreach ($app["class"] as $appClass) {
+                    $appClass = strtolower($appClass);
+                    if ($app["dir"] != $this->appDir || $appClass == $this->class) {
+                        $this->data["body"][] = __DIR__ . "/../../" . $app["dir"] . "/views/$appClass/resources.php";
+                    }
+                }
+            }
+            $this->view($this->appDir, "layout/main", $this->data);
+        }
+        
         public function terms() {
             $this->data["web-application"] = "Fureya Clouds Service";
             $this->view($this->appDir, "$this->class/terms-of-service", $this->data);

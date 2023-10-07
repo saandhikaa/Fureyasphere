@@ -6,6 +6,8 @@
     define('DB_PASS', '');
     define('DB_NAME', 'clouds');
     
+    define('SHARED_DIR', basename(dirname(__DIR__)));
+    
     define('ADMIN_USERNAME', 'fureya');
     define('ADMIN_PASSWORD', '0213');
     

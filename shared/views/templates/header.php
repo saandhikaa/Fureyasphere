@@ -43,7 +43,7 @@
                 </ul>
                 <ul class="app-list row">
                     <h6>Services</h6>
-                    <?php foreach (App::getAppDetail() as $apps): ?>
+                    <?php foreach (App::getAppList() as $apps): ?>
                         <?php foreach ($apps["class"] as $controller): ?>
                             <li><a href="<?= BASEURL .  '/' . strtolower($controller) ?>"><?= $controller ?></a></li>
                         <?php endforeach ?>

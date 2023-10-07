@@ -3,21 +3,21 @@
         protected $controller = 'Home';
         protected $method = 'index';
         protected $params = array();
-        protected $controllerDir = [__DIR__ . "/../controllers/"];
         
         public function __construct() {
             $url = $this->parseURL();
+            $controllerDir = [__DIR__ . "/../controllers/"];
             
-            foreach (self::getAppList() as $app) {
-                $this->controllerDir[] = __DIR__ . "/../../" . $app["dir"][0] . "/controllers/";
+            foreach (self::getAppList(true) as $app) {
+                $controllerDir[] = __DIR__ . "/../../" . $app["dir"][0] . "/controllers/";
             }
             
             // get controller from url
             if (!empty($url)) {
-                foreach ($this->controllerDir as $dir) {
+                foreach ($controllerDir as $dir) {
                     if (file_exists($dir . $url[0] . ".php")) {
                         $this->controller = $url[0];
-                        $this->controllerDir = [$dir];
+                        $controllerDir = [$dir];
                         unset($url[0]);
                         break;
                     }
@@ -25,7 +25,7 @@
             }
             
             // create instance controller
-            require_once $this->controllerDir[0] . $this->controller . ".php";
+            require_once $controllerDir[0] . $this->controller . ".php";
             $this->controller = new $this->controller;
             
             // get method from url
@@ -83,11 +83,11 @@
             return $result;
             // array(
             //     [index of the end app dir/] => array(
-            //         "dir" => array(
+            //         ["dir"] => array(
             //             [0] => "app dir/",
             //             [1] => "clean app dir/"
             //         ),
-            //         "class" => array(
+            //         ["class"] => array(
             //             [0] => "app class",
             //             ...
             //         )

@@ -8,7 +8,6 @@
             $this->class = strtolower(__CLASS__);
             $this->appDir = basename(dirname(__DIR__));
             
-            $this->data["mainAppDir"] = "shared";
             $this->data["class"] = $this->class;
             $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
             $this->data["appStyles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/app.css">' . PHP_EOL;
@@ -31,9 +30,9 @@
             
             $this->data["title"] = ucfirst($this->class) . ": Search";
             
-            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
+            $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/index", $this->data);
-            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+            $this->view(SHARED_DIR, "templates/footer", $this->data);
         }
         
         public function upload() {
@@ -48,9 +47,9 @@
             $this->data["title"] = ucfirst($this->class) . ": Upload";
             $this->data["appScript"] .= '<script type="text/javascript">createInput();</script>' . PHP_EOL;
             
-            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
+            $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/upload", $this->data);
-            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+            $this->view(SHARED_DIR, "templates/footer", $this->data);
         }
         
         public function result ($codename = null, $key = null, $action = "") {
@@ -66,15 +65,15 @@
             $this->data["keyword"] = "$codename/$key";
             $this->data["appScript"] .= '<script type="text/javascript">autorunResult();</script>' . PHP_EOL;
             
-            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
+            $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/result", $this->data);
-            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+            $this->view(SHARED_DIR, "templates/footer", $this->data);
         }
         
         public function setup() {
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                    $this->model($this->data["mainAppDir"], "TableMaster")->createTable($this->tableName, $_POST["table"]);
+                    $this->model(SHARED_DIR, "TableMaster")->createTable($this->tableName, $_POST["table"]);
                     $this->model($this->appDir, "FileHandler")->createUploadsDir();
                     header("Location: " . BASEURL . "/$this->class");
                     exit;
@@ -94,7 +93,7 @@
                 exit;
             }
             
-            $this->model($this->data["mainAppDir"], "TableMaster");
+            $this->model(SHARED_DIR, "TableMaster");
             
             $this->data["title"] = ucfirst($this->class) . ": Setup";
             $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $this->tableName . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
@@ -111,7 +110,7 @@
                 "available_" => "VARCHAR(3) NOT NULL"
             ];
             
-            $this->view($this->data["mainAppDir"], "shares/setup-table", $this->data);
+            $this->view(SHARED_DIR, "shares/setup-table", $this->data);
         }
         
         public function about() {
@@ -119,15 +118,15 @@
             
             $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
             
-            $this->view($this->data["mainAppDir"], "templates/header", $this->data);
+            $this->view(SHARED_DIR, "templates/header", $this->data);
             echo '<main id="home-about">' . PHP_EOL;
             echo '<section class="readme ' . $this->appDir . '"></section>' . PHP_EOL;
             echo '</main>' . PHP_EOL;
-            $this->view($this->data["mainAppDir"], "templates/footer", $this->data);
+            $this->view(SHARED_DIR, "templates/footer", $this->data);
         }
         
         private function checkTableExists() {
-            if (!$this->model($this->data["mainAppDir"], "TableMaster")->getTableStructure($this->tableName)) {
+            if (!$this->model(SHARED_DIR, "TableMaster")->getTableStructure($this->tableName)) {
                 header("Location: " . BASEURL . "/$this->class/setup");
                 exit;
             }

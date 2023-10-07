@@ -61,12 +61,12 @@
                 $appDir = basename($app);
                 $controllers = [];
                 
-                if ($appDir !== "shared" || $shared) {
+                if ($appDir !== SHARED_DIR || $shared) {
                     foreach (glob($app . '/controllers/*.php') as $controllerFile) {
                         $controllers[] = basename($controllerFile, '.php');
                     }
                     
-                    if ($appDir == "shared") {
+                    if ($appDir == SHARED_DIR ) {
                         $result[0]["dir"][0] = $appDir;
                         $result[0]["dir"][1] = self::title($appDir);
                         $result[0]["class"] = $controllers;

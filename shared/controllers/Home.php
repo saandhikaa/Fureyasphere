@@ -14,9 +14,14 @@
         }
         
         public function index() {
-            $this->view($this->appDir, "templates/header", $this->data);
-            $this->view($this->appDir, "$this->class/index");
-            $this->view($this->appDir, "templates/footer", $this->data);
+            $this->data["main-id"] = "home";
+            $this->data["page-title"] = "Fureya Clouds Service";
+            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/main.css">' . PHP_EOL;
+            $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/main.js"></script>' . PHP_EOL;
+            $this->data["body"][] = __DIR__ . "/../" . "/views/$this->class/index.php";
+            $this->data["navigation"] = true;
+            
+            $this->view($this->appDir, "layout/main", $this->data);
         }
         
         public function about() {
@@ -25,8 +30,8 @@
             $this->view($this->appDir, "templates/header", $this->data);
             echo '<main id="home-about">' . PHP_EOL;
             echo '<section class="readme shared"></section>' . PHP_EOL;
-            foreach (App::getAppList() as $appDir => $class) {
-                echo '<section class="readme ' . $appDir . '"></section>' . PHP_EOL;
+            foreach (App::getAppList(true) as $app) {
+                echo '<section class="readme ' . $app["dir"][0] . '"></section>' . PHP_EOL;
             }
             echo '</main>' . PHP_EOL;
             $this->view($this->appDir, "templates/footer", $this->data);
@@ -39,11 +44,11 @@
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/resources.css">' . PHP_EOL;
             $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/resources.js"></script>' . PHP_EOL;
             
-            foreach (App::getAppDetail(true) as $app) {
+            foreach (App::getAppList(true) as $app) {
                 foreach ($app["class"] as $appClass) {
                     $appClass = strtolower($appClass);
-                    if ($app["dir"] != $this->appDir || $appClass == $this->class) {
-                        $this->data["body"][] = __DIR__ . "/../../" . $app["dir"] . "/views/$appClass/resources.php";
+                    if ($app["dir"][0] != $this->appDir || $appClass == $this->class) {
+                        $this->data["body"][] = __DIR__ . "/../../" . $app["dir"][0] . "/views/$appClass/resources.php";
                     }
                 }
             }

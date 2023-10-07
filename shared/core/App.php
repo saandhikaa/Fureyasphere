@@ -8,8 +8,8 @@
         public function __construct() {
             $url = $this->parseURL();
             
-            foreach (array_keys(self::getAppList()) as $app) {
-                $this->controllerDir[] = __DIR__ . "/../../" . $app . "/controllers/";
+            foreach (self::getAppList() as $app) {
+                $this->controllerDir[] = __DIR__ . "/../../" . $app["dir"][0] . "/controllers/";
             }
             
             // get controller from url
@@ -55,7 +55,7 @@
         }
         
         public static function getAppList($shared = false) {
-            $appList = [];
+            $result = [];
             
             foreach (glob(__DIR__ . '/../../*', GLOB_ONLYDIR) as $app) {
                 $appDir = basename($app);
@@ -65,43 +65,43 @@
                     foreach (glob($app . '/controllers/*.php') as $controllerFile) {
                         $controllers[] = basename($controllerFile, '.php');
                     }
-                    $appList[$appDir] = $controllers;
-                }
-            }
-            
-            return $appList;
-            // Array(
-            //     ["app dir/"] => Array(
-            //         [0] => "controller class"... 
-            //     )... 
-            // )
-        }
-        
-        public static function getAppDetail($shared = false) {
-            $apps = self::getAppList($shared);
-            $result = [];
-            
-            foreach ($apps as $key => $app) {
-                if ($key == "shared") {
-                    $result[0]["dir"] = $key;
-                    $result[0]["class"] = $app;
-                } else {
-                    preg_match('/-(\d+)/', $key, $matches);
-                    $result[$matches[1]]["dir"] = $key;
-                    $result[$matches[1]]["class"] = $app;
+                    
+                    if ($appDir == "shared") {
+                        $result[0]["dir"][0] = $appDir;
+                        $result[0]["dir"][1] = self::title($appDir);
+                        $result[0]["class"] = $controllers;
+                    } else {
+                        preg_match('/-(\d+)/', $appDir, $matches);
+                        $result[$matches[1]]["dir"][0] = $appDir;
+                        $result[$matches[1]]["dir"][1] = self::title($appDir);
+                        $result[$matches[1]]["class"] = $controllers;
+                    }
                 }
             }
             
             ksort($result);
             return $result;
-            // Array(
-            //     [index at the end of app dir/] => Array(
-            //         ["dir"] => "app dir/",
-            //         ["class"] => array(
-            //             [0] => "controller class"... 
+            // array(
+            //     [index of the end app dir/] => array(
+            //         "dir" => array(
+            //             [0] => "app dir/",
+            //             [1] => "clean app dir/"
+            //         ),
+            //         "class" => array(
+            //             [0] => "app class",
+            //             ...
             //         )
-            //     )... 
+            //     )...
             // )
+        }
+        
+        public static function title($string) {
+            $parts = explode('-', $string);
+            $parts = array_map('ucfirst', $parts);
+            if (is_numeric(end($parts))) {
+                array_pop($parts);
+            }
+            return implode(' ', $parts);
         }
     }
 ?>

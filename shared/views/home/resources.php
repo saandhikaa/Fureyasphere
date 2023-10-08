@@ -1,5 +1,6 @@
 <ul class="google-fonts fonts">
     <li><a href="https://fonts.google.com/share?selection.family=Ubuntu:wght@300;400;500;700" target="_blank">Font family: Ubuntu</a></li>
+    <li><a href="https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aarrow_upward%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024" target="_blank">Icon: Arrow Upward</a></li>
 </ul>
 
 <ul class="google-fonts icons">

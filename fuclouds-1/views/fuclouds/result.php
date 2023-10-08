@@ -20,7 +20,12 @@
         <?php foreach ($data["result"] as $file): ?>
             <li>
                 <section class="file-info">
-                    <img src="<?= BASEURL . '/' . basename(dirname(dirname(dirname(__FILE__)))) . '/assets/images/file-type-icon/' . pathinfo($file["filename_"], PATHINFO_EXTENSION) . '.png' ?>" alt="">
+                    <?php if (file_exists(__DIR__ . '/../../assets/images/file-type-icon/' . pathinfo($file['filename_'], PATHINFO_EXTENSION) . '.png')): ?>
+                        <img src="<?= BASEURL . '/' . $data['appDir'] . '/assets/images/file-type-icon/' . pathinfo($file['filename_'], PATHINFO_EXTENSION) . '.png' ?>" alt="">
+                    <?php else: ?>
+                        <img src="<?= BASEURL . '/' . $data['appDir'] . '/assets/images/file-type-icon/others.png' ?>" alt="">
+                    <?php endif ?>
+                    
                     <section class="file-dec">
                         <p class="file-name"><?= $file["filename_"] ?></p>
                         <p class="file-size"><?= FileHandler::formatBytes($file["filesize_"]) ?></p>

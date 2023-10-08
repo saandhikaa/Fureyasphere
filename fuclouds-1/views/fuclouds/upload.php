@@ -29,7 +29,15 @@
         </section>
     </form>
     
-    <section class="go">
+    <section class="go desktop">
         <a class="search" href="<?= BASEURL . '/' . $data['class'] ?>">Go to Search page</a>
     </section>
+    
+    <nav class="go mobile">
+        <ul>
+            <li><a href="<?= BASEURL . '/' . $data["class"] . '/about' ?>"><?php readfile(__DIR__ . "/../../assets/images/icons/question_mark_FILL0_wght400_GRAD0_opsz24.svg") ?></a></li>
+            <li><a href="<?= BASEURL . '/' . $data['class'] ?>"><?php readfile(__DIR__ . "/../../assets/images/icons/search_FILL0_wght400_GRAD0_opsz24.svg") ?></a></li>
+        </ul>
+        <span><button class="scrollTop"><?php readfile(__DIR__ . "/../../../" . SHARED_DIR . "/assets/images/icons/arrow_upward_FILL0_wght400_GRAD0_opsz24.svg") ?></button></span>
+    </nav>
 </main>

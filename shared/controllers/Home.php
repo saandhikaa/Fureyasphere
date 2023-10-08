@@ -16,7 +16,7 @@
             $this->data["page-title"] = "Fureya Clouds Service";
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/main.css">' . PHP_EOL;
             $this->data["script"][] = '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' . PHP_EOL;
-            $this->data["body"][] = __DIR__ . "/../" . "/views/$this->class/index.php";
+            $this->data["body"][] = __DIR__ . "/../views/$this->class/index.php";
             $this->data["navigation"] = true;
             
             $this->view(SHARED_DIR, "layout/main", $this->data);

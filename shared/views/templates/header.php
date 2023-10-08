@@ -56,7 +56,7 @@
                     <li><a href="<?= $data['issue'] ?>" target="_blank">Create an Issue on GitHub</a></li>
                 </ul>
                 <p class="copyright">&copy; <?= ME ?> <span></span>.</p>
-                <ul class="footer-list mobile">
+                <ul class="footer-list">
                     <li><a href="<?= BASEURL . '/' . ($data['class'] == 'account' ? 'home' : $data['class']) ?>/about">About</a></li>
                     <li><a href="<?= BASEURL ?>/home/resources" target="_blank">Resources</a></li>
                     <li><a href="<?= BASEURL ?>/home/terms" target="_blank">Terms</a></li>

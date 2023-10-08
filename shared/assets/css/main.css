@@ -531,9 +531,6 @@ form input[type="password"]::-ms-reveal {
     #body .navigation-container footer {
         padding-bottom: 0;
     }
-    #body .navigation-container footer .copyright {
-        margin-bottom: 0;
-    }
     #home-about {
         margin: auto;
         width: 30rem;

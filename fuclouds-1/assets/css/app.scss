@@ -1,3 +1,8 @@
+$space: (
+    go-padding-x: 20px,
+    go-padding-y: 10px
+);
+    
 @mixin file-list($action-color, $action-size) {
     display: flex;
     flex-direction: column;
@@ -95,21 +100,61 @@ section.header {
 
 section.go {
     margin: 50px 0;
-    
     a {
         text-decoration: none;
         color: #2B73E6;
     }
-    
     .upload {
         float: right;
+    }
+}
+
+nav.go {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: map-get($space, go-padding-y) map-get($space, go-padding-x);
+    background-color: white;
+    
+    ul {
+        display: inline-flex;
+        gap: map-get($space, go-padding-y);
+    }
+    
+    span {
+        position: absolute;
+        top: map-get($space, go-padding-y);
+        right: map-get($space, go-padding-x);
+        
+        button {
+            transition: scale 0.2s;
+            &:active {
+                transition: scale 0.2s;
+                transform: scale(0.95);
+            }
+        }
+    } 
+    
+    a, button {
+        background-color: lightblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        
+        outline: none;
+        border-radius: 5px;
+        border: 0;
+        width: 3rem;
+        height: 3rem;
     }
 }
 
 
 
 #fuclouds-search {
-    padding: 20px 20px 0;
+    padding: 20px map-get($space, go-padding-x) 4rem;
     
     form {
         display: flex;
@@ -123,7 +168,7 @@ section.go {
 
 
 #fuclouds-upload {
-    padding: 20px 20px 0;
+    padding: 20px map-get($space, go-padding-x) 4rem;
     
     form {
         margin-bottom: 40px;
@@ -191,7 +236,7 @@ section.go {
 
 
 #fuclouds-result {
-    padding: 20px 20px 0;
+    padding: 20px map-get($space, go-padding-x) 4rem;
     
     p.status {
         margin-top: 30px;
@@ -239,6 +284,7 @@ section.go {
     #fuclouds-search, 
     #fuclouds-upload, 
     #fuclouds-result {
+        position: relative;
         padding-left: 0;
         padding-right: 0;
         margin: auto;

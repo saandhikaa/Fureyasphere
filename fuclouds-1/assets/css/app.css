@@ -47,8 +47,50 @@ section.go .upload {
     float: right;
 }
 
+nav.go {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 20px;
+    background-color: white;
+}
+
+nav.go ul {
+    display: inline-flex;
+    gap: 10px;
+}
+
+nav.go span {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+nav.go span button {
+    transition: scale 0.2s;
+}
+
+nav.go span button:active {
+    transition: scale 0.2s;
+    transform: scale(0.95);
+}
+
+nav.go a, nav.go button {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    outline: none;
+    border-radius: 5px;
+    border: 0;
+    width: 3rem;
+    height: 3rem;
+}
+
 #fuclouds-search {
-    padding: 20px 20px 0;
+    padding: 20px 20px 4rem;
 }
 
 #fuclouds-search form {
@@ -60,7 +102,7 @@ section.go .upload {
 }
 
 #fuclouds-upload {
-    padding: 20px 20px 0;
+    padding: 20px 20px 4rem;
 }
 
 #fuclouds-upload form {
@@ -173,7 +215,7 @@ section.go .upload {
 }
 
 #fuclouds-result {
-    padding: 20px 20px 0;
+    padding: 20px 20px 4rem;
 }
 
 #fuclouds-result p.status {
@@ -267,6 +309,7 @@ section.go .upload {
     #fuclouds-search,
 #fuclouds-upload,
 #fuclouds-result {
+        position: relative;
         padding-left: 0;
         padding-right: 0;
         margin: auto;

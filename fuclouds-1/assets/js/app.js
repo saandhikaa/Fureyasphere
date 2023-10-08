@@ -16,6 +16,8 @@ Scanning.prototype.scrollTop = () => {
 
 
 
+window.addEventListener('scroll', () => document.querySelector('nav.go .scrollTop').style.display = window.scrollY > 300 ? 'block' : 'none');
+
 const searchKeyword = document.querySelector('#fuclouds-search #keyword');
 if (searchKeyword) {
     searchKeyword.addEventListener('input', event => event.target.value = event.target.value.replace(/[^a-zA-Z0-9/-]/g, ""));

@@ -115,7 +115,7 @@ nav.go {
     right: 0;
     bottom: 0;
     padding: map-get($space, go-padding-y) map-get($space, go-padding-x);
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
     
     ul {
         display: inline-flex;
@@ -128,9 +128,11 @@ nav.go {
         right: map-get($space, go-padding-x);
         
         button {
-            transition: scale 0.2s;
+            display: none;
+            transition: scale 0.2s ease;
+            
             &:active {
-                transition: scale 0.2s;
+                transition: scale 0.2s ease;
                 transform: scale(0.95);
             }
         }
@@ -262,7 +264,7 @@ nav.go {
         display: flex;
         flex-direction: column;
         gap: 5px;
-        margin: 20px 0;
+        margin: 20px 0 50px;
         
         .action-button {
             position: relative;

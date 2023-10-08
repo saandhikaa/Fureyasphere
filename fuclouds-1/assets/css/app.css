@@ -53,7 +53,7 @@ nav.go {
     right: 0;
     bottom: 0;
     padding: 10px 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 nav.go ul {
@@ -68,11 +68,12 @@ nav.go span {
 }
 
 nav.go span button {
-    transition: scale 0.2s;
+    display: none;
+    transition: scale 0.2s ease;
 }
 
 nav.go span button:active {
-    transition: scale 0.2s;
+    transition: scale 0.2s ease;
     transform: scale(0.95);
 }
 
@@ -288,7 +289,7 @@ nav.go a, nav.go button {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin: 20px 0;
+    margin: 20px 0 50px;
 }
 
 #fuclouds-result form.download-all .action-button {

@@ -1,10 +1,17 @@
-Scanning.prototype.triggerInput = element => {
+Scanning.prototype.triggerInput = () => {
     document.querySelector('.active-input').click();
 };
 
 Scanning.prototype.cancelInput = element => {
     element.closest('li').remove();
     inputCheck();
+};
+
+Scanning.prototype.scrollTop = () => {
+    window.scrollTo({
+        top: 0, 
+        behavior: 'smooth'
+    });
 };
 
 

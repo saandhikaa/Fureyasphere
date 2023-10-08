@@ -1,5 +1,8 @@
 <ul class="google-fonts icons">
     <li><a href="https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Adownload%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024" target="_blank">Icon: Download</a></li>
+    <li><a href="https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Asearch%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024" target="_blank">Icon: Search</a></li>
+    <li><a href="https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Acloud_upload%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024" target="_blank">Icon: Cloud Upload</a></li>
+    <li><a href="https://fonts.google.com/icons?selected=Material%20Symbols%20Outlined%3Aquestion_mark%3AFILL%400%3Bwght%40400%3BGRAD%400%3Bopsz%4024" target="_blank">Icon: Question Mark</a></li>
 </ul>
 
 <ul class="flaticon">

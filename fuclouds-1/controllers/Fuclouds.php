@@ -64,6 +64,7 @@
             $this->data["action"] = $action;
             $this->data["keyword"] = "$codename/$key";
             $this->data["appScript"] .= '<script type="text/javascript">autorunResult();</script>' . PHP_EOL;
+            $this->data["appDir"] = $this->appDir;
             
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/result", $this->data);

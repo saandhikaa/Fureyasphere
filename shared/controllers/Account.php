@@ -6,6 +6,8 @@
         public function __construct() {
             $this->class = strtolower(__CLASS__);
             
+            $this->data["title"] = SITE_TITLE;
+            $this->data["page-title"] = __CLASS__;
             $this->data["class"] = $this->class;
             $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
             $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . SHARED_DIR . '/assets/images/</p>' . PHP_EOL;
@@ -18,8 +20,6 @@
                 header("Location: " . BASEURL . "/$this->class/signin");
                 exit;
             }
-            
-            $this->data["title"] = "Fureya: Account";
             
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view(SHARED_DIR, "$this->class/index", $this->data);
@@ -58,7 +58,7 @@
                 }
             }
             
-            $this->data["title"] = "Fureya: Sign Up";
+            $this->data["title"] .= ": Sign Up";
             $this->data["appScript"] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
             $this->data["appScript"] .= '<script type="text/javascript">signUpValidation();</script>' . PHP_EOL;
             
@@ -90,7 +90,7 @@
                 }
             }
             
-            $this->data["title"] = "Fureya: Sign In";
+            $this->data["title"] .= ": Sign In";
             $this->data["appScript"] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
             
             $this->view(SHARED_DIR, "templates/header", $this->data);
@@ -103,6 +103,14 @@
             unset($_SESSION["sign-in"]);
             header("Location: " . BASEURL . "/$this->class/signin");
             exit;
+        }
+        
+        public function terms() {
+            $this->view(SHARED_DIR, "$this->class/terms-of-service", $this->data);
+        }
+        
+        public function privacy() {
+            $this->view(SHARED_DIR, "$this->class/privacy-policy", $this->data);
         }
         
         public function setup() {
@@ -126,7 +134,7 @@
             
             $this->model(SHARED_DIR, "TableMaster");
             
-            $this->data["title"] = ucfirst($this->class) . ": Setup";
+            $this->data["title"] .= ": Setup " . ucfirst($this->class);
             $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
             $this->data["button"] = "Create Table [$tableName]";
             $this->data["columns"] = [

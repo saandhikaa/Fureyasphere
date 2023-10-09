@@ -31,11 +31,11 @@
 </head>
 <body>
     <h1>Privacy Policy</h1>
-    <p><strong>Last Updated:</strong> September 05, 2023</p>
-    <p>This Privacy Policy outlines how <?= $data["web-application"] ?> ("we," "our," or "us") collects, uses, and protects your personal information when you access or use our website and services. By using <?= $data["web-application"] ?>, you consent to the practices described in this Privacy Policy.</p>
+    <p><strong>Last Updated:</strong> October 09, 2023</p>
+    <p>This Privacy Policy outlines how <?= SITE_TITLE ?> ("we," "our," or "us") collects, uses, and protects your personal information when you access or use our website and services. By using <?= SITE_TITLE ?>, you consent to the practices described in this Privacy Policy.</p>
     
     <h2>Information We Collect</h2>
-    <p>We may collect the following types of information when you use <?= $data["web-application"] ?>:</p>
+    <p>We may collect the following types of information when you use <?= SITE_TITLE ?>:</p>
     <ul>
         <li>Personal information, such as your name and email address, when you voluntarily provide it to us.</li>
         <li>Usage data, including information about your interactions with the web app, such as the files you upload and download.</li>
@@ -45,8 +45,8 @@
     <h2>How We Use Your Information</h2>
     <p>We use the information we collect for the following purposes:</p>
     <ul>
-        <li>To provide and maintain <?= $data["web-application"] ?> and its services.</li>
-        <li>To improve and personalize your experience with <?= $data["web-application"] ?>.</li>
+        <li>To provide and maintain <?= SITE_TITLE ?> and its services.</li>
+        <li>To improve and personalize your experience with <?= SITE_TITLE ?>.</li>
         <li>To analyze usage patterns and trends.</li>
         <li>To respond to your requests and inquiries.</li>
         <li>To enforce our Terms of Service and protect the security of our users.</li>
@@ -63,9 +63,9 @@
     <p>We take reasonable measures to protect your personal information. However, please be aware that no method of transmission over the internet or electronic storage is entirely secure, and we cannot guarantee absolute security.</p>
     
     <h2>Changes to this Privacy Policy</h2>
-    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. The revised Privacy Policy will be posted on <?= $data["web-application"] ?>, and we encourage you to review it periodically.</p>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. The revised Privacy Policy will be posted on <?= SITE_TITLE ?>, and we encourage you to review it periodically.</p>
     
     <h2>Contact Us</h2>
-    <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at <a href="mailto:snowhite.power@outlook.com?subject=Fureya:%20privacy">snowhite.power@outlook.com</a>.</p>
+    <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at <a href="mailto:astronaut.symphony@outlook.com?subject=Fureya:%20privacy">astronaut.symphony@outlook.com</a>.</p>
 </body>
 </html>

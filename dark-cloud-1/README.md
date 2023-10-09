@@ -1,6 +1,6 @@
-## Fuclouds
+## Dark Cloud
 
-Fuclouds is an anonymous cloud-based file sharing service that allows anyone to upload and download files of any format, without having to register or log in.
+Dark Cloud is an anonymous cloud-based file sharing service that allows anyone to upload and download files of any format, without having to register or log in.
 
 ### Features
 
@@ -28,4 +28,4 @@ Fuclouds is an anonymous cloud-based file sharing service that allows anyone to 
 
 ### Conclusion
 
-Please note that Fuclouds does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Fuclouds. Additionally, remember that files uploaded to Fuclouds will be automatically removed after 24 hours.
+Please note that Dark Cloud does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Dark Cloud. Additionally, remember that files uploaded to Dark Cloud will be automatically removed after 24 hours.

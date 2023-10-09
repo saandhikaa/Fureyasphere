@@ -2,30 +2,26 @@
     class App {
         protected $controller = 'Home';
         protected $method = 'index';
-        protected $params = array();
+        protected $params = [];
         
         public function __construct() {
             $url = $this->parseURL();
-            $controllerDir = [__DIR__ . "/../controllers/"];
-            
-            foreach (self::getAppList(true) as $app) {
-                $controllerDir[] = __DIR__ . "/../../" . $app["dir"][0] . "/controllers/";
-            }
+            $controllerDir = __DIR__ . "/../controllers/";
             
             // get controller from url
-            if (!empty($url)) {
-                foreach ($controllerDir as $dir) {
-                    if (file_exists($dir . $url[0] . ".php")) {
-                        $this->controller = $url[0];
-                        $controllerDir = [$dir];
+            foreach (self::getAppList(true) as $app) {
+                foreach ($app["class"] as $class) {
+                    if (isset($url[0]) && strtolower($class) == $url[0]) {
+                        $this->controller = $class;
+                        $controllerDir = __DIR__ . "/../../" . $app["dir"][0] . "/controllers/";
                         unset($url[0]);
-                        break;
+                        break 2;
                     }
                 }
             }
             
             // create instance controller
-            require_once $controllerDir[0] . $this->controller . ".php";
+            require_once $controllerDir . $this->controller . ".php";
             $this->controller = new $this->controller;
             
             // get method from url
@@ -49,7 +45,7 @@
                 $url = rtrim($_GET['url'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode('/', $url);
-                $url[0] = ucfirst(strtolower($url[0]));
+                $url[0] = strtolower($url[0]);
                 return $url;
             }
         }

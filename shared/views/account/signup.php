@@ -33,7 +33,7 @@
         
         <section class="agreement">
             <input type="checkbox" id="agreement" name="agreement" required>
-            <label for="agreement">I agree to the <a class="brandeis" href="">Privacy</a> and <a class="brandeis" href="">Terms</a></label>
+            <label for="agreement">I agree to the <a class="brandeis" href="<?= BASEURL . '/' . $data["class"] . '/privacy' ?>" target="_blank">Privacy</a> and <a class="brandeis" href="<?= BASEURL . '/' . $data["class"] . '/terms' ?>" target="_blank">Terms</a></label>
         </section>
         
         <input type="submit" name="submit" id="su-submit" class="action-button" value="Sign Up" disabled>

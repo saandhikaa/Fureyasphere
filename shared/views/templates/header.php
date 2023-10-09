@@ -16,7 +16,7 @@
 
 <body id="body">
     <header id="page-header">
-        <h1 class="app"><?= $data["class"] == 'home' ? 'Fureya Clouds Service' : ucfirst($data["class"]) ?></h1>
+        <h1 class="app"><?= $data["page-title"] ?></h1>
         <button type="button" class="openNav nav-button mobile"><?= isset($_SESSION["sign-in"]["username"]) ? '<span>' . strtoupper($_SESSION["sign-in"]["username"][0]) . '</span>' : (function() { readfile(__DIR__ . '/../../assets/images/icons/menu_FILL0_wght400_GRAD0_opsz24.svg'); })() ?></button>
         <section class="desktop">
             <?= isset($_SESSION["sign-in"]["username"]) ? '<h1>Hi, ' . $_SESSION["sign-in"]["username"] . '</h1>' : '<h1 class="nav-greeting"></h1>' ?>

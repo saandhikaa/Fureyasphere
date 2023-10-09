@@ -1,5 +1,5 @@
 <?php
-    class Fuclouds extends Controller {
+    class DarkCloud extends Controller {
         private $appDir, $class;
         private $data = [];
         private $tableName = "uploads";
@@ -8,6 +8,7 @@
             $this->class = strtolower(__CLASS__);
             $this->appDir = basename(dirname(__DIR__));
             
+            $this->data["page-title"] = App::title($this->appDir);
             $this->data["class"] = $this->class;
             $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
             $this->data["appStyles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/app.css">' . PHP_EOL;

@@ -10,7 +10,7 @@
             $this->data["page-title"] = SITE_TITLE;
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/home.css">' . PHP_EOL;
             $this->data["class"] = $this->class;
-            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
+            $this->data["issue"] = GITHUB . "Fureyasphere/issues";
         }
         
         public function index() {

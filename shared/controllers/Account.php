@@ -9,7 +9,7 @@
             $this->data["title"] = SITE_TITLE;
             $this->data["page-title"] = __CLASS__;
             $this->data["class"] = $this->class;
-            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
+            $this->data["issue"] = GITHUB . "Fureyasphere/issues";
             $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . SHARED_DIR . '/assets/images/</p>' . PHP_EOL;
         }
         

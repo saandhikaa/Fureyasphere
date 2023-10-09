@@ -10,7 +10,7 @@
             
             $this->data["page-title"] = App::title($this->appDir);
             $this->data["class"] = $this->class;
-            $this->data["issue"] = "https://github.com/saandhikaa/fureya-clouds-service/issues";
+            $this->data["issue"] = GITHUB . "Fureyasphere/issues";
             $this->data["appStyles"] = '<link rel="stylesheet" href="' . BASEURL . '/' . $this->appDir . '/assets/css/app.css">' . PHP_EOL;
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/app.js"></script>' . PHP_EOL;
             $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . $this->appDir . '/assets/images/</p>' . PHP_EOL;

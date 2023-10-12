@@ -26,7 +26,7 @@
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $time = time();
             
-            return $this->db->inserting("INSERT INTO $this->table (time_, username_, password_, level_) VALUES ('$time', '$username', '$hashedPassword', '$level')");
+            return $this->db->executing("INSERT INTO $this->table (time_, username_, password_, level_) VALUES ($time, '$username', '$hashedPassword', $level)");
         }
         
         public function signIn ($username, $password) {

@@ -21,7 +21,7 @@
             return $rows;
         }
         
-        public function inserting ($query) {
+        public function executing ($query) {
             return $this->conn->query($query);
         }
         

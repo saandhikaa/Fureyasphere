@@ -128,7 +128,7 @@
                 }
             }
             
-            $confirm = 'A new [' . DB_NAME . '.' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
+            $confirm = 'A new [' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
             echo '<script type="text/javascript">
                 var r = confirm("' . $confirm . '");
                 if (r == true) {

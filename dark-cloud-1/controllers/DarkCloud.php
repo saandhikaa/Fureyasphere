@@ -4,7 +4,9 @@
         private $data = [];
         private $tableName = "uploads";
         
-        public function __construct() {
+        public function __construct(Database $database) {
+            $this->database = $database;
+            
             $this->class = strtolower(__CLASS__);
             $this->appDir = basename(dirname(__DIR__));
             
@@ -15,14 +17,10 @@
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/app.js"></script>' . PHP_EOL;
             $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . $this->appDir . '/assets/images/</p>' . PHP_EOL;
             
-            try {
-                $this->model($this->appDir, "FileHandler")->autoRemove();
-            } catch (PDOException $e) {}
+            //$this->model($this->appDir, "FileHandler")->autoRemove();
         }
         
         public function index() {
-            $this->checkTableExists();
-            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $url = BASEURL . "/$this->class/result/" . $_POST["keyword"];
                 header("Location: $url");
@@ -37,8 +35,6 @@
         }
         
         public function upload() {
-            $this->checkTableExists();
-            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $url = BASEURL . "/$this->class/result/" . $this->model($this->appDir, "FileHandler")->upload() . "/uploaded";
                 header("Location: $url");
@@ -54,8 +50,6 @@
         }
         
         public function result ($codename = null, $key = null, $action = "") {
-            $this->checkTableExists();
-            
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 $this->model($this->appDir, "FileHandler")->download($_POST["filename"], $_POST["filepath"]);
             }
@@ -73,51 +67,58 @@
         }
         
         public function setup() {
+            $columns = "(
+                id INT(11) AUTO_INCREMENT PRIMARY KEY,
+                time_ INT(10) NOT NULL,
+                owner_ VARCHAR(20) NOT NULL,
+                codename_ VARCHAR(20) NOT NULL,
+                key_ INT(2) NOT NULL,
+                filename_ VARCHAR(100) NOT NULL,
+                filesize_ INT(11) NOT NULL,
+                duration_ int(4) NOT NULL,
+                available_ VARCHAR(3) NOT NULL
+            )";
+            
+            // if (!isset($_SESSION["sign-in"]) || $_SESSION["sign-in"]["level"] !== 1) {
+            //     $msg = isset($_SESSION["sign-in"]) ? "sign out from current Account and" : "";
+            //     echo '<script>
+            //         if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please ' . $msg . ' provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+            //             window.location.href = "' . BASEURL . '/account/signin/' . $this->class . '";
+            //         } else {
+            //             window.location.href = "' . BASEURL . '";
+            //         }
+            //     </script>';
+            //     $this->database->closing();
+            //     exit;
+            // }
+            
+            // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                    $this->model(SHARED_DIR, "TableMaster")->createTable($this->tableName, $_POST["table"]);
+                if ($_POST["confirmed"] == 'true') {
+                    $this->database->dropAndCreateTable($this->tableName, "CREATE TABLE $this->tableName $columns");
                     $this->model($this->appDir, "FileHandler")->createUploadsDir();
-                    header("Location: " . BASEURL . "/$this->class");
                     exit;
                 }
             }
             
-            if (!isset($_SESSION["sign-in"]) || $_SESSION["sign-in"]["level"] !== 1) {
-                $switch = isset($_SESSION["sign-in"]) ? "sign out from current Account and" : "";
-                
-                echo '<script>
-                    if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please ' . $switch . ' provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
-                        window.location.href = "' . BASEURL . '/account/signin/' . $this->class . '";
-                    } else {
-                        window.location.href = "' . BASEURL . '";
-                    }
-                </script>';
-                exit;
-            }
+            $confirm = 'A new [' . $this->tableName . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
+            echo '<script type="text/javascript">
+                var r = confirm("' . $confirm . '");
+                if (r == true) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "' . BASEURL . '/' . $this->class . '/setup", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("confirmed=true");
+                    window.location.href = "' . BASEURL .'/' . $this->class . '";
+                } else {
+                    window.location.href = "' . BASEURL . '";
+                }
+            </script>';
             
-            $this->model(SHARED_DIR, "TableMaster");
-            
-            $this->data["title"] = ucfirst($this->class) . ": Setup";
-            $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $this->tableName . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
-            $this->data["button"] = "Re-Create Table [" . $this->tableName . "] and Upload Storage";
-            $this->data["columns"] = [
-                "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
-                "time_" => "INT(10) NOT NULL",
-                "owner_" => "VARCHAR(20) NOT NULL",
-                "codename_" => "VARCHAR(20) NOT NULL",
-                "key_" => "INT(2) NOT NULL",
-                "filename_" => "VARCHAR(100) NOT NULL",
-                "filesize_" => "INT(11) NOT NULL",
-                "duration_" => "int(4) NOT NULL",
-                "available_" => "VARCHAR(3) NOT NULL"
-            ];
-            
-            $this->view(SHARED_DIR, "shares/setup-table", $this->data);
+            $this->database->closing();
         }
         
         public function about() {
-            $this->checkTableExists();
-            
             $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
             
             $this->view(SHARED_DIR, "templates/header", $this->data);
@@ -125,13 +126,6 @@
             echo '<section class="readme ' . $this->appDir . '"></section>' . PHP_EOL;
             echo '</main>' . PHP_EOL;
             $this->view(SHARED_DIR, "templates/footer", $this->data);
-        }
-        
-        private function checkTableExists() {
-            if (!$this->model(SHARED_DIR, "TableMaster")->getTableStructure($this->tableName)) {
-                header("Location: " . BASEURL . "/$this->class/setup");
-                exit;
-            }
         }
     }
 ?>

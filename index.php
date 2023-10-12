@@ -5,6 +5,9 @@
         session_start();
     }
     
-    new Database;
-    new App;
+    $database = new Database;
+    
+    new App($database);
+    
+    $database->closing();
 ?>

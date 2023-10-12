@@ -4,7 +4,7 @@
         protected $method = 'index';
         protected $params = [];
         
-        public function __construct() {
+        public function __construct(Database $database) {
             $url = $this->parseURL();
             $controllerDir = __DIR__ . "/../controllers/";
             
@@ -22,7 +22,7 @@
             
             // create instance controller
             require_once $controllerDir . $this->controller . ".php";
-            $this->controller = new $this->controller;
+            $this->controller = new $this->controller($database);
             
             // get method from url
             if (isset($url[1]) && !isset($url[0])) {

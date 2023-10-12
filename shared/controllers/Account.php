@@ -3,7 +3,9 @@
         private $class;
         private $data = [];
         
-        public function __construct() {
+        public function __construct(Database $database) {
+            $this->database = $database;
+            
             $this->class = strtolower(__CLASS__);
             
             $this->data["title"] = SITE_TITLE;
@@ -14,9 +16,7 @@
         }
         
         public function index() {
-            $this->checkTableExists();
-            
-            if (!$this->model(SHARED_DIR, "AccountControl")->checkSignInInfo()) {
+            if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
                 header("Location: " . BASEURL . "/$this->class/signin");
                 exit;
             }
@@ -27,9 +27,7 @@
         }
         
         public function signup ($parameter = null) {
-            $this->checkTableExists();
-            
-            if ($this->model(SHARED_DIR, "AccountControl")->checkSignInInfo()) {
+            if ($this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
                 header("Location: " . BASEURL . "/$this->class");
                 exit;
             }
@@ -37,7 +35,7 @@
             if ($parameter === "checkusernameavailability") {
                 // Handle the AJAX request
                 if (isset($_POST["username"])) {
-                    echo ($this->model(SHARED_DIR, "AccountControl")->checkUsername($_POST["username"])) ? "available" : "taken";
+                    echo ($this->model(SHARED_DIR, "AccountControl")->userRegistered($_POST["username"])) ? "taken" : "available" ;
                     exit;
                 }
             } elseif (!is_null($parameter)) {
@@ -68,9 +66,7 @@
         }
         
         public function signin($redirect = null) {
-            $this->checkTableExists();
-            
-            if ($this->model(SHARED_DIR, "AccountControl")->checkSignInInfo()) {
+            if ($this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
                 header("Location: " . BASEURL . "/$this->class");
                 exit;
             }
@@ -115,46 +111,38 @@
         
         public function setup() {
             $tableName = "users";
+            $columns = "(
+                id INT(11) AUTO_INCREMENT PRIMARY KEY,
+                time_ INT(10) NOT NULL,
+                username_ VARCHAR(12) NOT NULL,
+                password_ VARCHAR(255) NOT NULL,
+                level_ INT(2) NOT NULL
+            )";
             
-            try {
-                if (!$this->model(SHARED_DIR, "AccountControl")->checkUsername(ADMIN_USERNAME)) {
-                    header("Location: " . BASEURL);
-                    exit;
-                }
-            } catch (PDOException) {}
-            
+            // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
-                if (isset($_POST["submit"]) && isset($_POST["table"])) {
-                    $this->model(SHARED_DIR, "TableMaster")->createTable($tableName, $_POST["table"]);
+                if ($_POST["confirmed"] == 'true') {
+                    $this->database->dropAndCreateTable($tableName, "CREATE TABLE $tableName $columns");
                     $this->model(SHARED_DIR, "AccountControl")->signup(ADMIN_USERNAME, ADMIN_PASSWORD, 1);
-                    header("Location: " . BASEURL . "/$this->class");
                     exit;
                 }
             }
             
-            $this->model(SHARED_DIR, "TableMaster");
+            $confirm = 'A new [' . DB_NAME . '.' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
+            echo '<script type="text/javascript">
+                var r = confirm("' . $confirm . '");
+                if (r == true) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "' . BASEURL . '/' . $this->class . '/setup", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("confirmed=true");
+                    window.location.href = "' . BASEURL .'/' . $this->class . '";
+                } else {
+                    window.location.href = "' . BASEURL . '";
+                }
+            </script>';
             
-            $this->data["title"] .= ": Setup " . ucfirst($this->class);
-            $this->data["confirm"] = 'A new [' . DB_NAME . '.' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
-            $this->data["button"] = "Create Table [$tableName]";
-            $this->data["columns"] = [
-                "id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
-                "time_" => "INT(10) NOT NULL",
-                "username_" => "VARCHAR(12) NOT NULL",
-                "password_" => "VARCHAR(255) NOT NULL",
-                "level_" => "INT(2) NOT NULL"
-            ];
-            
-            $this->view(SHARED_DIR, "shares/setup-table", $this->data);
-        }
-        
-        private function checkTableExists() {
-            try {
-                $this->model(SHARED_DIR, "AccountControl")->checkUsername(ADMIN_USERNAME);
-            } catch (PDOException) {
-                header("Location: " . BASEURL . "/$this->class/setup");
-                exit;
-            }
+            $this->database->closing();
         }
     }
 ?>

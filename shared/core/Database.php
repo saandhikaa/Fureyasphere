@@ -7,7 +7,7 @@
             try {
                 $this->conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             } catch (Exception $exception) {
-                echo "Connection error: " . $exception->getMessage();
+                die("<h1>Connection error: " . $exception->getMessage() . "</h1>");
             }
             return $this->conn;
         }
@@ -25,7 +25,7 @@
             return $this->conn->query($query);
         }
         
-        public function dropAndCreateTable($tableName, $createTableSQL) {
+        public function dropAndCreateTable ($tableName, $createTableSQL) {
             $dropQuery = "DROP TABLE IF EXISTS $tableName";
             $createQuery = $createTableSQL;
             
@@ -33,6 +33,19 @@
             return $this->conn->query($createQuery);
         }
         
+        public function tableExists ($tableName, $url) {
+            $result = $this->conn->query("SHOW TABLES LIKE '$tableName'");
+            if ($result->num_rows == 0) {
+                echo '<script>
+                    if(confirm("The Database Table is not set up.\n\nDo you wish to proceed to the setup page?")) {
+                        window.location.href = "' . $url . '";
+                    } else {
+                        window.location.href = "' . BASEURL . '";
+                    }
+                </script>';
+            }
+        }
+
         public function closing() {
             $this->conn->close();
         }

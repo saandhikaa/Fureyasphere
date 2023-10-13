@@ -2,7 +2,7 @@
     class DarkCloud extends Controller {
         private $appDir, $class;
         private $data = [];
-        private $tableName = "uploads";
+        private $table = "uploads";
         
         public function __construct(Database $database) {
             $this->database = $database;
@@ -17,7 +17,9 @@
             $this->data["appScript"] = '<script src="' . BASEURL . '/' . $this->appDir . '/assets/js/app.js"></script>' . PHP_EOL;
             $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . $this->appDir . '/assets/images/</p>' . PHP_EOL;
             
-            //$this->model($this->appDir, "FileHandler")->autoRemove();
+            try {
+                $this->model($this->appDir, "FileHandler")->autoRemove();
+            } catch (Exception $e) {}
         }
         
         public function index() {
@@ -32,6 +34,8 @@
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/index", $this->data);
             $this->view(SHARED_DIR, "templates/footer", $this->data);
+            
+            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
         }
         
         public function upload() {
@@ -47,6 +51,8 @@
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/upload", $this->data);
             $this->view(SHARED_DIR, "templates/footer", $this->data);
+            
+            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
         }
         
         public function result ($codename = null, $key = null, $action = "") {
@@ -64,6 +70,8 @@
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/result", $this->data);
             $this->view(SHARED_DIR, "templates/footer", $this->data);
+            
+            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
         }
         
         public function setup() {
@@ -79,43 +87,49 @@
                 available_ VARCHAR(3) NOT NULL
             )";
             
-            // if (!isset($_SESSION["sign-in"]) || $_SESSION["sign-in"]["level"] !== 1) {
-            //     $msg = isset($_SESSION["sign-in"]) ? "sign out from current Account and" : "";
-            //     echo '<script>
-            //         if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please ' . $msg . ' provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
-            //             window.location.href = "' . BASEURL . '/account/signin/' . $this->class . '";
-            //         } else {
-            //             window.location.href = "' . BASEURL . '";
-            //         }
-            //     </script>';
-            //     $this->database->closing();
-            //     exit;
-            // }
-            
             // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["confirmed"] == 'true') {
-                    $this->database->dropAndCreateTable($this->tableName, "CREATE TABLE $this->tableName $columns");
+                    $this->database->dropAndCreateTable($this->table, "CREATE TABLE $this->table $columns");
                     $this->model($this->appDir, "FileHandler")->createUploadsDir();
                     exit;
                 }
             }
             
-            $confirm = 'A new [' . $this->tableName . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
-            echo '<script type="text/javascript">
-                var r = confirm("' . $confirm . '");
-                if (r == true) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "' . BASEURL . '/' . $this->class . '/setup", true);
-                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.send("confirmed=true");
-                    window.location.href = "' . BASEURL .'/' . $this->class . '";
+            if (isset($_SESSION["sign-in"])) {
+                $userData = $this->model(SHARED_DIR, "AccountControl")->isLoggedIn();
+                if ($userData && $userData["level_"] == 1) {
+                    $confirm = 'A new [' . $this->table . '] and upload storage will be created.\n\nPlease confirm if you wish to proceed.';
+                    echo '<script type="text/javascript">
+                        var r = confirm("' . $confirm . '");
+                        if (r == true) {
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "' . BASEURL . '/' . $this->class . '/setup", true);
+                            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr.send("confirmed=true");
+                            window.location.href = "' . BASEURL .'/' . $this->class . '";
+                        } else {
+                            window.location.href = "' . BASEURL . '";
+                        }
+                    </script>'; 
                 } else {
-                    window.location.href = "' . BASEURL . '";
+                    echo '<script>
+                        if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please sign out from current Account and provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+                            window.location.href = "' . BASEURL . '/account/signin/";
+                        } else {
+                            window.location.href = "' . BASEURL . '";
+                        }
+                    </script>';
                 }
-            </script>';
-            
-            $this->database->closing();
+            } else {
+                echo '<script>
+                    if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+                        window.location.href = "' . BASEURL . '/account/signin/";
+                    } else {
+                        window.location.href = "' . BASEURL . '";
+                    }
+                </script>'; 
+            }
         }
         
         public function about() {

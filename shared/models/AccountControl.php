@@ -8,8 +8,9 @@
         }
         
         public function isLoggedIn() {
-            if (isset($_SESSION["sign-in"]["username"])) {
-                return $this->userRegistered($_SESSION["sign-in"]["username"]);
+            if (isset($_SESSION["sign-in"]["uid"])) {
+                $userData = $this->db->fetching("SELECT * FROM $this->table WHERE time_ = '{$_SESSION["sign-in"]["uid"]}'");
+                return !empty($userData[0]) ? $userData[0] : false ;
             }
         }
         
@@ -34,7 +35,7 @@
             
             if (!empty($userData) && password_verify($password, $userData[0]["password_"])) {
                 $_SESSION["sign-in"]["username"] = $userData[0]["username_"];
-                $_SESSION["sign-in"]["level"] = $userData[0]["level_"];
+                $_SESSION["sign-in"]["uid"] = $userData[0]["time_"];
                 return true;
             } else {
                 return false;

@@ -2,6 +2,7 @@
     class Account extends Controller {
         private $class;
         private $data = [];
+        private $table = "users";
         
         public function __construct(Database $database) {
             $this->database = $database;
@@ -63,6 +64,8 @@
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view(SHARED_DIR, "$this->class/signup", $this->data);
             $this->view(SHARED_DIR, "templates/footer", $this->data);
+            
+            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
         }
         
         public function signin($redirect = null) {
@@ -92,6 +95,8 @@
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view(SHARED_DIR, "$this->class/signin", $this->data);
             $this->view(SHARED_DIR, "templates/footer", $this->data);
+            
+            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
         }
         
         public function signout() {
@@ -110,7 +115,6 @@
         }
         
         public function setup() {
-            $tableName = "users";
             $columns = "(
                 id INT(11) AUTO_INCREMENT PRIMARY KEY,
                 time_ INT(10) NOT NULL,
@@ -122,13 +126,13 @@
             // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["confirmed"] == 'true') {
-                    $this->database->dropAndCreateTable($tableName, "CREATE TABLE $tableName $columns");
+                    $this->database->dropAndCreateTable($this->table, "CREATE TABLE $this->table $columns");
                     $this->model(SHARED_DIR, "AccountControl")->signup(ADMIN_USERNAME, ADMIN_PASSWORD, 1);
                     exit;
                 }
             }
             
-            $confirm = 'A new [' . $tableName . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
+            $confirm = 'A new [' . $this->table . '] will be created with the following default account credentials:\n\nUsername\t: ' .  ADMIN_USERNAME . '\nPassword\t: ' . ADMIN_PASSWORD . '\n\nPlease confirm if you wish to proceed.';
             echo '<script type="text/javascript">
                 var r = confirm("' . $confirm . '");
                 if (r == true) {

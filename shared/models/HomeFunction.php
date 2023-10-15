@@ -13,5 +13,12 @@
                 file_put_contents($this->commentPath, json_encode([]));
             }
         }
+        
+        public function addComment($newComment) {
+            $comments = json_decode(file_get_contents($this->commentPath), true);
+            $comments[] = $newComment;
+            
+            return file_put_contents($this->commentPath, json_encode($comments));
+        }
     }
 ?>

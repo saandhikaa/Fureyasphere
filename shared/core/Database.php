@@ -33,9 +33,9 @@
             return $this->conn->query($createQuery);
         }
         
-        public function tableExists ($tableName, $url) {
+        public function tableExists ($tableName, $url = "") {
             $result = $this->conn->query("SHOW TABLES LIKE '$tableName'");
-            if ($result->num_rows == 0) {
+            if ($result->num_rows == 0 && !empty($url)) {
                 echo '<script>
                     if(confirm("The Table [' . $tableName . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
                         window.location.href = "' . $url . '";
@@ -44,6 +44,7 @@
                     }
                 </script>';
             }
+            return $result->num_rows > 0;
         }
 
         public function closing() {

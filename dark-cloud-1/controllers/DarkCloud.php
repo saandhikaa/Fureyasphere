@@ -64,8 +64,11 @@
             $this->data["result"] = $this->model($this->appDir, "FileHandler")->loadFiles($codename, $key);
             $this->data["action"] = $action;
             $this->data["keyword"] = "$codename/$key";
-            $this->data["appScript"] .= '<script type="text/javascript">autorunResult();</script>' . PHP_EOL;
             $this->data["appDir"] = $this->appDir;
+            
+            if (count($this->data["result"]) > 0) {
+                $this->data["appScript"] .= '<script type="text/javascript">autorunResult();</script>' . PHP_EOL;
+            }
             
             $this->view(SHARED_DIR, "templates/header", $this->data);
             $this->view($this->appDir, "$this->class/result", $this->data);
@@ -114,7 +117,7 @@
                     </script>'; 
                 } else {
                     echo '<script>
-                        if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please sign out from current Account and provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+                        if(confirm("Access Denied, please sign out from current Account and provide a Level 1 Account.\n\nDo you wish to proceed to the sign-in page?")) {
                             window.location.href = "' . BASEURL . '/account/signin/";
                         } else {
                             window.location.href = "' . BASEURL . '";
@@ -123,7 +126,7 @@
                 }
             } else {
                 echo '<script>
-                    if(confirm("Access Denied: The Server is not set up. \n\nTo continue, please provide a Level 1 Account.\n\n\nDo you wish to proceed to the sign-in page?")) {
+                    if(confirm("Access Denied, please provide a Level 1 Account.\n\nDo you wish to proceed to the sign-in page?")) {
                         window.location.href = "' . BASEURL . '/account/signin/";
                     } else {
                         window.location.href = "' . BASEURL . '";

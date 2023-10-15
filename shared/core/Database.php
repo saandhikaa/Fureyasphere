@@ -37,7 +37,7 @@
             $result = $this->conn->query("SHOW TABLES LIKE '$tableName'");
             if ($result->num_rows == 0) {
                 echo '<script>
-                    if(confirm("The Database Table is not set up.\n\nDo you wish to proceed to the setup page?")) {
+                    if(confirm("The Table [' . $tableName . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
                         window.location.href = "' . $url . '";
                     } else {
                         window.location.href = "' . BASEURL . '";

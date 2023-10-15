@@ -115,6 +115,11 @@
         }
         
         public function setup() {
+            if ($this->database->tableExists($this->table)) {
+                header("Location: " . BASEURL . "/$this->class");
+                exit;
+            }
+            
             $columns = "(
                 id INT(11) AUTO_INCREMENT PRIMARY KEY,
                 time_ INT(10) NOT NULL,

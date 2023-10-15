@@ -53,8 +53,14 @@
                         "available" => "YES"
                     ];
                     
-                    $this->insertDB($values);
-                    move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"]);
+                    if ($this->insertDB($values)) {
+                        if (!is_dir($this->path)) {
+                            mkdir($this->path, 0777, true);
+                        }
+                        move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"]);
+                    } else {
+                        echo 'failed to upload file';
+                    }
                 }
                 
                 // update existing file if there's new file for previous uploaded
@@ -101,16 +107,19 @@
         
         // insert values into database
         public function insertDB ($data) {
-            $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES ('{$data["time"]}', '{$data["owner"]}', '{$data["codename"]}', '{$data["key"]}', '{$data["filename"]}', '{$data["filesize"]}', '{$data["duration"]}', '{$data["available"]}')";
-            
-            return $this->db->executing($query);
+            $result = false;
+            try {
+                $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES ('{$data["time"]}', '{$data["owner"]}', '{$data["codename"]}', '{$data["key"]}', '{$data["filename"]}', '{$data["filesize"]}', '{$data["duration"]}', '{$data["available"]}')";
+                $result = $this->db->executing($query);
+            } catch (Exception $e) {}
+            return $result;
         }
         
         // update availability file = NO and remove file that passed the limit
         public function autoRemove() {
             // get list of file that passed the limit
             $limit = time() - $this->perseconds;
-            $result = $this->db->fetching("SELECT codename_, key_, time_, filename_ FROM $this->table WHERE available_ = 'YES' AND time_ < '$limit')");
+            $result = $this->db->fetching("SELECT * FROM $this->table WHERE available_ = 'YES' AND time_ < '$limit'");
             
             // remove file
             foreach ($result as $entry) {
@@ -236,19 +245,17 @@
         }
         
         public function createUploadsDir() {
-            $directoryPath = $this->path;
-            
-            if (is_dir($directoryPath)) {
-                $files = glob($directoryPath . '/*');
+            if (is_dir($this->path)) {
+                $files = glob($this->path . '/*');
                 foreach ($files as $file) {
                     if (is_file($file)) {
                         unlink($file);
                     }
                 }
-                rmdir($directoryPath);
+                rmdir($this->path);
             }
             
-            mkdir($directoryPath, 0777, true);
+            mkdir($this->path, 0777, true);
         }
         
         // get list of file by codename and key

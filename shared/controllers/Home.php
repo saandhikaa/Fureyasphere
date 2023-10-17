@@ -3,7 +3,9 @@
         private $class;
         private $data = [];
         
-        public function __construct() {
+        public function __construct(Database $database) {
+            $this->database = $database;
+            
             $this->class = strtolower(__CLASS__);
             
             $this->data["title"] = SITE_TITLE;
@@ -21,6 +23,27 @@
             $this->data["navigation"] = true;
             
             $this->view(SHARED_DIR, "layout/main", $this->data);
+        }
+        
+        public function comment() {
+            if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
+                header("Location: " . BASEURL . "/account/signin");
+                exit;
+            }
+            
+            if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
+                if ($_POST["submit"] === "send") {
+                    $data = [
+                        "time" => time(),
+                        "uid" => $_SESSION["sign-in"]["uid"],
+                        "mentioned" => $_POST["mentioned"],
+                        "message" => $_POST["message"]
+                    ];
+                    $this->model(SHARED_DIR, "HomeFunction")->addComment($data);
+                }
+            }
+            
+            $this->view(SHARED_DIR, "home/comment");
         }
         
         public function about() {

@@ -6,9 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $data["title"] ?></title>
     
-    <?php foreach ($data["style"] as $style): ?>
-        <?= $style ?>
-    <?php endforeach ?>
+    <?= isset($data["navigation"]) && $data["navigation"] ? '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/main.css">' : '' ?>
+    <?php if (isset($data["style"])): ?>
+        <?php foreach ($data["style"] as $style): ?>
+            <?= $style ?>
+        <?php endforeach ?>
+    <?php endif ?>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,14 +25,13 @@
         <h1><?= $data["page-title"] ?></h1>
     <?php endif ?>
     
-    <main id="<?= $data["main-id"] ?>">
-        <?php foreach ($data["body"] as $section): ?>
-            <?php file_exists($section) ? require_once $section : false ?>
-        <?php endforeach ?>
-    </main>
+    <?php require_once $data["body"] ?>
     
-    <?php foreach ($data["script"] as $script): ?>
-        <?= $script ?>
-    <?php endforeach ?>
+    <?= isset($data["navigation"]) && $data["navigation"] ? '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' : '' ?>
+    <?php if (isset($data["script"])): ?>
+        <?php foreach ($data["script"] as $script): ?>
+            <?= $script ?>
+        <?php endforeach ?>
+    <?php endif ?>
 </body>
 </html>

@@ -23,11 +23,6 @@
         }
         
         public function comment() {
-            // if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
-            //     header("Location: " . BASEURL . "/account/signin");
-            //     exit;
-            // }
-            
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "send") {
                     $data = [
@@ -39,6 +34,14 @@
                     $this->model(SHARED_DIR, "HomeFunction")->addComment($data);
                 }
             }
+            
+            $this->data["comment-lists"] = $this->model(SHARED_DIR, "HomeFunction")->loadComments();
+            
+            $this->data["page-title"] = SITE_TITLE;
+            $this->data["navigation"] = true;
+            $this->data["body"] = __DIR__ . "/../views/$this->class/comment.php"; 
+            
+            $this->view(SHARED_DIR, "layout/main", $this->data);
         }
         
         public function about() {

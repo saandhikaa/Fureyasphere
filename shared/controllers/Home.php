@@ -7,29 +7,26 @@
             $this->database = $database;
             
             $this->class = strtolower(__CLASS__);
+            $this->data["class"] = $this->class;
             
             $this->data["title"] = SITE_TITLE;
-            $this->data["page-title"] = SITE_TITLE;
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/home.css">' . PHP_EOL;
-            $this->data["class"] = $this->class;
             $this->data["issue"] = GITHUB . "Fureyasphere/issues";
         }
         
         public function index() {
-            $this->data["main-id"] = "home";
-            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/main.css">' . PHP_EOL;
-            $this->data["script"][] = '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' . PHP_EOL;
-            $this->data["body"][] = __DIR__ . "/../views/$this->class/index.php";
+            $this->data["page-title"] = SITE_TITLE;
             $this->data["navigation"] = true;
+            $this->data["body"] = __DIR__ . "/../views/$this->class/index.php";
             
             $this->view(SHARED_DIR, "layout/main", $this->data);
         }
         
         public function comment() {
-            if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
-                header("Location: " . BASEURL . "/account/signin");
-                exit;
-            }
+            // if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
+            //     header("Location: " . BASEURL . "/account/signin");
+            //     exit;
+            // }
             
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "send") {
@@ -42,8 +39,6 @@
                     $this->model(SHARED_DIR, "HomeFunction")->addComment($data);
                 }
             }
-            
-            $this->view(SHARED_DIR, "home/comment");
         }
         
         public function about() {

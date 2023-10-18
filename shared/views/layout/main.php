@@ -6,11 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= $data["title"] ?></title>
     
-    <?= isset($data["navigation"]) && $data["navigation"] ? '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/main.css">' : '' ?>
+    <?php if (isset($data["navigation"]) && $data["navigation"]) echo '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/main.css">' ?>
     <?php if (isset($data["style"])): ?>
-        <?php foreach ($data["style"] as $style): ?>
-            <?= $style ?>
-        <?php endforeach ?>
+        <?php foreach ($data["style"] as $style) echo $style ?>
     <?php endif ?>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,20 +17,16 @@
 </head>
 
 <body id="body">
-    <?php if (isset($data["navigation"]) && $data["navigation"]): ?>
-        <?php require_once __DIR__ . "/navigation.php" ?>
-    <?php endif ?>
+    <?php if (isset($data["navigation"]) && $data["navigation"]) require_once __DIR__ . "/navigation.php" ?>
     
     <p class="root-path no-display"><?= BASEURL ?></p>
-    <?= isset($data["image-path"]) ? $data["image-path"] : "" ?>
+    <?php if (isset($data["image-path"])) echo $data["image-path"] ?>
     
     <?php require_once $data["body"] ?>
     
-    <?= isset($data["navigation"]) && $data["navigation"] ? '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' : '' ?>
+    <?php if (isset($data["navigation"]) && $data["navigation"]) echo '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' ?>
     <?php if (isset($data["script"])): ?>
-        <?php foreach ($data["script"] as $script): ?>
-            <?= $script ?>
-        <?php endforeach ?>
+        <?php foreach ($data["script"] as $script) echo $script ?>
     <?php endif ?>
 </body>
 </html>

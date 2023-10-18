@@ -6,9 +6,6 @@
     </section>
 </header>
 
-<?= isset($data["image-path"]) ? $data["image-path"] : "" ?>
-<p class="root-path no-display"><?= BASEURL ?></p>
-
 <div class="navigation-container closeNav">
     <nav class="navigation">
         <header class="mobile">
@@ -35,7 +32,7 @@
         <footer>
             <span class="separator top"></span>
             <ul class="row feedback-list">
-                <li><a href="">Leave a Comment</a></li>
+                <li><a href="<?= BASEURL . '/home/comment' ?>">Leave a Comment</a></li>
                 <li><a href="<?= $data['issue'] ?>" target="_blank">Create an Issue on GitHub</a></li>
             </ul>
             <p class="copyright">&copy; <?= ME ?> <span></span>.</p>

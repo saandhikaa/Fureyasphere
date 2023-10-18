@@ -21,9 +21,10 @@
 <body id="body">
     <?php if (isset($data["navigation"]) && $data["navigation"]): ?>
         <?php require_once __DIR__ . "/navigation.php" ?>
-    <?php else: ?>
-        <h1><?= $data["page-title"] ?></h1>
     <?php endif ?>
+    
+    <p class="root-path no-display"><?= BASEURL ?></p>
+    <?= isset($data["image-path"]) ? $data["image-path"] : "" ?>
     
     <?php require_once $data["body"] ?>
     

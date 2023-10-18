@@ -14,16 +14,18 @@
     }
 ?>
 
-<h1>Welcome to <?= SITE_TITLE ?></h1>
-
-<p><?= getDesc(__DIR__ . "/../../../README.md") ?></p>
-
-<ul class="app-list">
-    <?php foreach (App::getAppList() as $app): ?>
-        <li>
-            <h2><?= $app["dir"][1] ?></h2>
-            <p><?= getDesc(__DIR__ . "/../../../" . $app["dir"][0] . "/README.md") ?></p>
-            <span><a href="<?= BASEURL . "/" . strtolower($app["class"][0]) ?>">Open</a></span>
-        </li>
-    <?php endforeach ?>
-</ul>
+<main id="home">
+    <h1>Welcome to <?= SITE_TITLE ?></h1>
+    
+    <p><?= getDesc(__DIR__ . "/../../../README.md") ?></p>
+    
+    <ul class="app-list">
+        <?php foreach (App::getAppList() as $app): ?>
+            <li>
+                <h2><?= $app["dir"][1] ?></h2>
+                <p><?= getDesc(__DIR__ . "/../../../" . $app["dir"][0] . "/README.md") ?></p>
+                <span><a href="<?= BASEURL . "/" . strtolower($app["class"][0]) ?>">Open</a></span>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</main>

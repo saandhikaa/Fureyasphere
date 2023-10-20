@@ -63,12 +63,18 @@
     color: #2B73E6;
 }
 
+#comment {
+    font-size: 16px;
+    margin: 20px 10px 100px;
+}
+
 @media (min-width: 768px) {
     body {
         font-size: 16px;
     }
     #home,
-#resources {
+#resources,
+#comment {
         margin: 2rem auto 100px;
         width: 24rem;
     }

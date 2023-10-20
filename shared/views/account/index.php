@@ -3,4 +3,13 @@
 <br>
 <br>
 
+<?php if ($_SESSION["sign-in"]["username"] === ADMIN_USERNAME): ?>
+    <a href="<?= BASEURL . '/' . $data['class'] ?>/setup">Setup</a>
+<?php else: ?>
+    <a href="<?= BASEURL . '/' . $data['class'] ?>/delete">Delete my account</a>
+<?php endif ?>
+
+<br>
+<br>
+
 <a href="<?= BASEURL . '/' . $data['class'] ?>/signout">Sign Out</a>

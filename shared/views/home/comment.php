@@ -5,12 +5,16 @@
         <br>
     <?php endforeach ?>
     
-    <form action="" method="post">
-        <label for="comment-message">Comment</label>
-        <input type="text" id="comment-message" name="message">
-        
-        <input type="hidden" name="mentioned" value="0">
-        
-        <input type="submit" name="submit" value="send">
-    </form>
+    <?php if (isset($_SESSION["sign-in"])): ?>
+        <form action="" method="post">
+            <label for="comment-message">Comment</label>
+            <input type="text" id="comment-message" name="message">
+            
+            <input type="hidden" name="mentioned" value="0">
+            
+            <input type="submit" name="submit" value="send">
+        </form>
+    <?php else: ?>
+        <a href="<?= BASEURL . '/account/signin' ?>">Sign in to Comment</a>
+    <?php endif ?>
 </main>

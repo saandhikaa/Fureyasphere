@@ -1,15 +1,12 @@
 <?php
     class Home extends Controller {
-        private $class;
         private $data = [];
         
         public function __construct(Database $database) {
             $this->database = $database;
             
-            $this->class = strtolower(__CLASS__);
-            $this->data["class"] = $this->class;
-            
             $this->data["title"] = SITE_TITLE;
+            $this->data["class"] = strtolower(__CLASS__);
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/home.css">' . PHP_EOL;
             $this->data["issue"] = GITHUB . "Fureyasphere/issues";
         }
@@ -17,7 +14,7 @@
         public function index() {
             $this->data["page-title"] = SITE_TITLE;
             $this->data["navigation"] = true;
-            $this->data["body"] = __DIR__ . "/../views/$this->class/index.php";
+            $this->data["body"] = __DIR__ . "/../views/{$this->data['class']}/index.php";
             
             $this->view(SHARED_DIR, "layout/main", $this->data);
         }
@@ -39,7 +36,7 @@
             
             $this->data["page-title"] = SITE_TITLE;
             $this->data["navigation"] = true;
-            $this->data["body"] = __DIR__ . "/../views/$this->class/comment.php"; 
+            $this->data["body"] = __DIR__ . "/../views/{$this->data['class']}/comment.php"; 
             
             $this->view(SHARED_DIR, "layout/main", $this->data);
         }
@@ -67,7 +64,7 @@
             foreach (App::getAppList(true) as $app) {
                 foreach ($app["class"] as $appClass) {
                     $appClass = strtolower($appClass);
-                    if ($app["dir"][0] != SHARED_DIR || $appClass == $this->class) {
+                    if ($app["dir"][0] != SHARED_DIR || $appClass == $this->data["class"]) {
                         $this->data["body"][] = __DIR__ . "/../../" . $app["dir"][0] . "/views/$appClass/resources.php";
                     }
                 }
@@ -76,11 +73,11 @@
         }
         
         public function terms() {
-            $this->view(SHARED_DIR, "$this->class/terms-of-use", $this->data);
+            $this->view(SHARED_DIR, "{$this->data['class']}/terms-of-use", $this->data);
         }
         
         public function privacy() {
-            $this->view(SHARED_DIR, "$this->class/privacy-policy", $this->data);
+            $this->view(SHARED_DIR, "{$this->data['class']}/privacy-policy", $this->data);
         }
     }
 ?>

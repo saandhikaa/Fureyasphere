@@ -19,15 +19,18 @@
             return !empty($result);
         }
         
-        public function signUp ($username, $password, $level = 3) {
-            if ($this->userRegistered($username)) {
-                return ($this->signIn($username, $password));
+        public function signUp ($data, $level = 3) {
+            if ($this->userRegistered($data["username"])) {
+                return ($this->signIn($data["username"], $data["password"]));
             }
             
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
             $time = time();
+            if (! $agreement_accepted = isset($data["agreement"]) ? 1 : 0 ) {
+                return false;
+            }
             
-            return $this->db->executing("INSERT INTO $this->table (time_, username_, password_, level_) VALUES ($time, '$username', '$hashedPassword', $level)");
+            return $this->db->executing("INSERT INTO $this->table (time_, username_, password_, level_, agreed_) VALUES ($time, '{$data["username"]}', '$hashedPassword', $level, $agreement_accepted)");
         }
         
         public function signIn ($username, $password) {

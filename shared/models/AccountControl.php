@@ -44,5 +44,9 @@
                 return false;
             }
         }
+        
+        public function dropUser() {
+            return $this->db->executing("DELETE FROM $this->table WHERE time_ = {$_SESSION['sign-in']['uid']}");
+        }
     }
 ?>

@@ -46,7 +46,7 @@
             
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
                 if ($_POST["submit"] === "Sign Up") {
-                    if ($this->model(SHARED_DIR, "AccountControl")->signUp($_POST["username"], $_POST["password"])) {
+                    if ($this->model(SHARED_DIR, "AccountControl")->signUp($_POST)) {
                         if ($this->model(SHARED_DIR, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
                             header("Location: " . BASEURL . "/$this->class");
                             exit;
@@ -115,7 +115,7 @@
         }
         
         public function setup() {
-            if ($this->database->tableExists($this->table)) {
+            if ($this->database->tableExists($this->table) && (!isset($_SESSION["sign-in"]["username"]) || $_SESSION["sign-in"]["username"] !== ADMIN_USERNAME)) {
                 header("Location: " . BASEURL . "/$this->class");
                 exit;
             }
@@ -125,14 +125,15 @@
                 time_ INT(10) NOT NULL,
                 username_ VARCHAR(12) NOT NULL,
                 password_ VARCHAR(255) NOT NULL,
-                level_ INT(2) NOT NULL
+                level_ INT(2) NOT NULL,
+                agreed_ TINYINT(1) NOT NULL
             )";
             
             // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["confirmed"] == 'true') {
                     $this->database->dropAndCreateTable($this->table, "CREATE TABLE $this->table $columns");
-                    $this->model(SHARED_DIR, "AccountControl")->signup(ADMIN_USERNAME, ADMIN_PASSWORD, 1);
+                    $this->model(SHARED_DIR, "AccountControl")->signup(["username" => ADMIN_USERNAME, "password" => ADMIN_PASSWORD, "agreement" => 1], 1);
                     exit;
                 }
             }

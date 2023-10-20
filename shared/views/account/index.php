@@ -6,7 +6,7 @@
 <?php if ($_SESSION["sign-in"]["username"] === ADMIN_USERNAME): ?>
     <a href="<?= BASEURL . '/' . $data['class'] ?>/setup">Setup</a>
 <?php else: ?>
-    <a href="<?= BASEURL . '/' . $data['class'] ?>/delete">Delete my account</a>
+    <form action="<?= BASEURL . '/' . $data['class'] ?>/delete" method="post"><input type="submit" value="Deleted my account"></form>
 <?php endif ?>
 
 <br>

@@ -106,6 +106,15 @@
             exit;
         }
         
+        public function delete() {
+            if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == BASEURL . "/account") {
+                if ($this->model(SHARED_DIR, "AccountControl")->dropUser()) {
+                    header("Location: " . BASEURL . "/$this->class/signout");
+                    exit;
+                }
+            }
+        }
+        
         public function terms() {
             $this->view(SHARED_DIR, "$this->class/terms-of-service", $this->data);
         }

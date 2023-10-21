@@ -1,35 +1,33 @@
 <?php
     class Account extends Controller {
-        private $class;
         private $data = [];
         private $table = "users";
         
         public function __construct(Database $database) {
             $this->database = $database;
             
-            $this->class = strtolower(__CLASS__);
+            $this->data["class"] = strtolower(__CLASS__);
+            $this->data["dir"] = SHARED_DIR;
             
             $this->data["title"] = SITE_TITLE;
             $this->data["page-title"] = __CLASS__;
-            $this->data["class"] = $this->class;
-            $this->data["issue"] = GITHUB . "Fureyasphere/issues";
-            $this->data["image-path"] = '<p class="image-path no-display">' . BASEURL . '/' . SHARED_DIR . '/assets/images/</p>' . PHP_EOL;
+            $this->data["navigation"] = true;
         }
         
         public function index() {
             if (!$this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
-                header("Location: " . BASEURL . "/$this->class/signin");
+                header("Location: " . BASEURL . "/{$this->data['class']}/signin");
                 exit;
             }
             
-            $this->view(SHARED_DIR, "templates/header", $this->data);
-            $this->view(SHARED_DIR, "$this->class/index", $this->data);
-            $this->view(SHARED_DIR, "templates/footer", $this->data);
+            $this->data["navigation"] = true;
+            
+            $this->view("index", $this->data);
         }
         
         public function signup ($parameter = null) {
             if ($this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
-                header("Location: " . BASEURL . "/$this->class");
+                header("Location: " . BASEURL . "/{$this->data['class']}");
                 exit;
             }
             
@@ -40,7 +38,7 @@
                     exit;
                 }
             } elseif (!is_null($parameter)) {
-                header("Location: " . BASEURL . "/$this->class/signup");
+                header("Location: " . BASEURL . "/{$this->data['class']}/signup");
                 exit;
             }
             
@@ -48,7 +46,7 @@
                 if ($_POST["submit"] === "Sign Up") {
                     if ($this->model(SHARED_DIR, "AccountControl")->signUp($_POST)) {
                         if ($this->model(SHARED_DIR, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
-                            header("Location: " . BASEURL . "/$this->class");
+                            header("Location: " . BASEURL . "/{$this->data['class']}");
                             exit;
                         }
                     } else {
@@ -58,19 +56,17 @@
             }
             
             $this->data["title"] .= ": Sign Up";
-            $this->data["appScript"] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
-            $this->data["appScript"] .= '<script type="text/javascript">signUpValidation();</script>' . PHP_EOL;
+            $this->data["script"][] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
+            $this->data["script"][] = '<script type="text/javascript">signUpValidation();</script>' . PHP_EOL;
             
-            $this->view(SHARED_DIR, "templates/header", $this->data);
-            $this->view(SHARED_DIR, "$this->class/signup", $this->data);
-            $this->view(SHARED_DIR, "templates/footer", $this->data);
+            $this->view("signup", $this->data);
             
-            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
+            $this->database->tableExists($this->table, BASEURL . "/{$this->data['class']}/setup");
         }
         
         public function signin($redirect = null) {
             if ($this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
-                header("Location: " . BASEURL . "/$this->class");
+                header("Location: " . BASEURL . "/{$this->data['class']}");
                 exit;
             }
             
@@ -78,7 +74,7 @@
                 if ($_POST["submit"] === "Sign In") {
                     if ($this->model(SHARED_DIR, "AccountControl")->signIn($_POST["username"], $_POST["password"])) {
                         if (is_null($redirect)) {
-                            header("Location: " . BASEURL . "/$this->class");
+                            header("Location: " . BASEURL . "/{$this->data['class']}");
                         } elseif (!empty($redirect)) {
                             header("Location: " . BASEURL . "/$redirect");
                         }
@@ -90,42 +86,42 @@
             }
             
             $this->data["title"] .= ": Sign In";
-            $this->data["appScript"] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
+            $this->data["script"][] = '<script type="text/javascript">thicknessSVG(' . "'.passwordVisibility path', '15');</script>" . PHP_EOL;
             
-            $this->view(SHARED_DIR, "templates/header", $this->data);
-            $this->view(SHARED_DIR, "$this->class/signin", $this->data);
-            $this->view(SHARED_DIR, "templates/footer", $this->data);
+            $this->view("signin", $this->data);
             
-            $this->database->tableExists($this->table, BASEURL . "/$this->class/setup");
+            $this->database->tableExists($this->table, BASEURL . "/{$this->data['class']}/setup");
         }
         
         public function signout() {
             session_destroy();
             unset($_SESSION["sign-in"]);
-            header("Location: " . BASEURL . "/$this->class/signin");
+            header("Location: " . BASEURL . "/{$this->data['class']}/signin");
             exit;
         }
         
         public function delete() {
             if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] == BASEURL . "/account") {
                 if ($this->model(SHARED_DIR, "AccountControl")->dropUser()) {
-                    header("Location: " . BASEURL . "/$this->class/signout");
+                    header("Location: " . BASEURL . "/{$this->data['class']}/signout");
                     exit;
                 }
             }
         }
         
         public function terms() {
-            $this->view(SHARED_DIR, "$this->class/terms-of-service", $this->data);
+            $this->data["navigation"] = false;
+            $this->view("terms-of-service", $this->data);
         }
         
         public function privacy() {
-            $this->view(SHARED_DIR, "$this->class/privacy-policy", $this->data);
+            $this->data["navigation"] = false;
+            $this->view("privacy-policy", $this->data);
         }
         
         public function setup() {
             if ($this->database->tableExists($this->table) && (!isset($_SESSION["sign-in"]["username"]) || $_SESSION["sign-in"]["username"] !== ADMIN_USERNAME)) {
-                header("Location: " . BASEURL . "/$this->class");
+                header("Location: " . BASEURL . "/{$this->data['class']}");
                 exit;
             }
             
@@ -152,10 +148,10 @@
                 var r = confirm("' . $confirm . '");
                 if (r == true) {
                     var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "' . BASEURL . '/' . $this->class . '/setup", true);
+                    xhr.open("POST", "' . BASEURL . '/' . $this->data['class'] . '/setup", true);
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     xhr.send("confirmed=true");
-                    window.location.href = "' . BASEURL .'/' . $this->class . '";
+                    window.location.href = "' . BASEURL .'/' . $this->data['class'] . '";
                 } else {
                     window.location.href = "' . BASEURL . '";
                 }

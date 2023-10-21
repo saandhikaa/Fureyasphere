@@ -33,7 +33,7 @@
             <span class="separator top"></span>
             <ul class="row feedback-list">
                 <li><a href="<?= BASEURL . '/home/comment' ?>">Leave a Comment</a></li>
-                <li><a href="<?= $data['issue'] ?>" target="_blank">Create an Issue on GitHub</a></li>
+                <li><a href="<?= GITHUB . '/' . SITE_TITLE . '/issues' ?>" target="_blank">Create an Issue on GitHub</a></li>
             </ul>
             <p class="copyright">&copy; <?= ME ?> <span></span>.</p>
             <ul class="footer-list mobile">

@@ -5,18 +5,18 @@
         public function __construct(Database $database) {
             $this->database = $database;
             
-            $this->data["title"] = SITE_TITLE;
             $this->data["class"] = strtolower(__CLASS__);
+            $this->data["dir"] = SHARED_DIR;
+            
+            $this->data["title"] = SITE_TITLE;
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/home.css">' . PHP_EOL;
-            $this->data["issue"] = GITHUB . "Fureyasphere/issues";
         }
         
         public function index() {
             $this->data["page-title"] = SITE_TITLE;
             $this->data["navigation"] = true;
-            $this->data["body"] = __DIR__ . "/../views/{$this->data['class']}/index.php";
             
-            $this->view(SHARED_DIR, "layout/main", $this->data);
+            $this->view("index", $this->data);
         }
         
         public function comment() {
@@ -36,9 +36,8 @@
             
             $this->data["page-title"] = SITE_TITLE;
             $this->data["navigation"] = true;
-            $this->data["body"] = __DIR__ . "/../views/{$this->data['class']}/comment.php"; 
             
-            $this->view(SHARED_DIR, "layout/main", $this->data);
+            $this->view("comment", $this->data);
         }
         
         public function about() {
@@ -73,11 +72,11 @@
         }
         
         public function terms() {
-            $this->view(SHARED_DIR, "{$this->data['class']}/terms-of-use", $this->data);
+            $this->view("terms-of-use", $this->data);
         }
         
         public function privacy() {
-            $this->view(SHARED_DIR, "{$this->data['class']}/privacy-policy", $this->data);
+            $this->view("privacy-policy", $this->data);
         }
     }
 ?>

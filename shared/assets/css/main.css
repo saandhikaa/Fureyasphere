@@ -35,10 +35,6 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
-.no-display {
-    display: none;
-}
-
 .database-error {
     position: relative;
     background-color: #FCF3D6;

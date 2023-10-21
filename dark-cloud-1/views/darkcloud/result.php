@@ -21,9 +21,9 @@
             <li>
                 <section class="file-info">
                     <?php if (file_exists(__DIR__ . '/../../assets/images/file-type-icon/' . pathinfo($file['filename_'], PATHINFO_EXTENSION) . '.png')): ?>
-                        <img src="<?= BASEURL . '/' . $data['appDir'] . '/assets/images/file-type-icon/' . pathinfo($file['filename_'], PATHINFO_EXTENSION) . '.png' ?>" alt="">
+                        <img src="<?= BASEURL . '/' . $data['dir'] . '/assets/images/file-type-icon/' . pathinfo($file['filename_'], PATHINFO_EXTENSION) . '.png' ?>" alt="">
                     <?php else: ?>
-                        <img src="<?= BASEURL . '/' . $data['appDir'] . '/assets/images/file-type-icon/others.png' ?>" alt="">
+                        <img src="<?= BASEURL . '/' . $data['dir'] . '/assets/images/file-type-icon/others.png' ?>" alt="">
                     <?php endif ?>
                     
                     <section class="file-dec">

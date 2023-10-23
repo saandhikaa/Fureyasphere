@@ -1,6 +1,7 @@
 ## Fureyasphere
 
-Fureyasphere stands as a state-of-the-art platform committed to delivering efficient and dependable application services. You can explore our services by visiting our website at <a href="http://freya.infinityfreeapp.com" target="_blank">http://freya.infinityfreeapp.com</a>.
+Fureyasphere stands as a state-of-the-art platform committed to delivering efficient and dependable application services.
+You can explore our services by visiting our website at <a href="http://freya.infinityfreeapp.com" target="_blank">http://freya.infinityfreeapp.com</a>.
 
 ### Contributing
 We invite you to be part of our community! You can contribute by:

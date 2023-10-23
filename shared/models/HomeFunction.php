@@ -29,9 +29,10 @@
             
             $rows = [];
             foreach ($comments as $comment) {
+                $username = $this->db->fetching("SELECT username_ FROM users WHERE time_ = {$comment['uid']}");
                 $rows[] = [
                     "time" => date('M d, Y', $comment['time']),
-                    "username" => $this->db->fetching("SELECT username_ FROM users WHERE time_ = {$comment['uid']}")[0]["username_"],
+                    "username" => $username ? $username[0]["username_"] : "deleted user",
                     "message" => $comment['message']
                 ];
             }

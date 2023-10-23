@@ -22,7 +22,7 @@
     <p class="root-path" style="display: none"><?= BASEURL ?></p>
     <?php if (isset($data["dir"])) echo '<p class="image-path" style="display: none">' . BASEURL . '/' . $data["dir"] . '/assets/images/</p>' ?>
     
-    <?php require_once $content ?>
+    <?php if (file_exists($content)) require_once $content; else echo $data["content"]; ?>
     
     <?php if (isset($data["navigation"]) && $data["navigation"]) echo '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' ?>
     <?php if (isset($data["script"])): ?>

@@ -127,13 +127,15 @@
         }
         
         public function about() {
-            $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
+            $this->data["content"] = '<main id="home-about">' . PHP_EOL;
+            $this->data["content"] .= '<section class="readme ' . $this->data['dir'] . '"></section>' . PHP_EOL;
+            $this->data["content"] .= '</main>' . PHP_EOL;
             
-            $this->view(SHARED_DIR, "templates/header", $this->data);
-            echo '<main id="home-about">' . PHP_EOL;
-            echo '<section class="readme ' . $this->data['dir'] . '"></section>' . PHP_EOL;
-            echo '</main>' . PHP_EOL;
-            $this->view(SHARED_DIR, "templates/footer", $this->data);
+            $this->data["navigation"] = true;
+            $this->data["script"][] = '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>' . PHP_EOL;
+            $this->data["script"][] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
+            
+            $this->view("", $this->data);
         }
     }
 ?>

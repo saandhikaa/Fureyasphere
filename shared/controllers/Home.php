@@ -41,18 +41,21 @@
         }
         
         public function about() {
-            $this->data["appScript"] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
-            
-            $this->view(SHARED_DIR, "templates/header", $this->data);
-            echo '<main id="home-about">' . PHP_EOL;
-            echo '<section class="readme shared"></section>' . PHP_EOL;
+            $this->data["content"] = '<main id="home-about">' . PHP_EOL;
+            $this->data["content"] .= '<section class="readme shared"></section>' . PHP_EOL;
             foreach (App::getAppList() as $app) {
                 if (file_exists(__DIR__ . "/../../" . $app["dir"][0] . "/README.md")) {
-                    echo '<section class="readme ' . $app["dir"][0] . '"></section>' . PHP_EOL;
+                    $this->data["content"] .= '<section class="readme ' . $app["dir"][0] . '"></section>' . PHP_EOL;
                 }
             }
-            echo '</main>' . PHP_EOL;
-            $this->view(SHARED_DIR, "templates/footer", $this->data);
+            $this->data["content"] .= '</main>';
+            
+            $this->data["page-title"] = SITE_TITLE;
+            $this->data["navigation"] = true;
+            $this->data["script"][] = '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>' . PHP_EOL;
+            $this->data["script"][] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;
+            
+            $this->view("", $this->data);
         }
         
         public function resources() {
@@ -67,8 +70,6 @@
                     }
                 }
             }
-            
-            $this->data["page-title"] = SITE_TITLE;
             
             $this->data["content"] = "<h1>Resources</h1>" . PHP_EOL;
             foreach ($list as $key => $ul) {

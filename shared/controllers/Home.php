@@ -56,19 +56,31 @@
         }
         
         public function resources() {
-            $this->data["main-id"] = "resources";
-            $this->data["page-title"] = "Resources";
-            $this->data["script"][] = '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/resources.js"></script>' . PHP_EOL;
-            
             foreach (App::getAppList(true) as $app) {
                 foreach ($app["class"] as $appClass) {
                     $appClass = strtolower($appClass);
                     if ($app["dir"][0] != SHARED_DIR || $appClass == $this->data["class"]) {
-                        $this->data["body"][] = __DIR__ . "/../../" . $app["dir"][0] . "/views/$appClass/resources.php";
+                        $resource = __DIR__ . "/../../" . $app["dir"][0] . "/views/$appClass/resources.php";
+                        if (file_exists($resource)) {
+                            require_once $resource;
+                        }
                     }
                 }
             }
-            $this->view(SHARED_DIR, "layout/main", $this->data);
+            
+            $this->data["page-title"] = SITE_TITLE;
+            
+            $this->data["content"] = "<h1>Resources</h1>" . PHP_EOL;
+            foreach ($list as $key => $ul) {
+                $this->data["content"] .= "<h2>" . ucwords(str_replace("-", " ", $key)) . "</h2>" . PHP_EOL;
+                $this->data["content"] .= "<ul>" . PHP_EOL;
+                foreach ($ul as $li) {
+                    $this->data["content"] .= $li . PHP_EOL;
+                }
+                $this->data["content"] .= "</ul>" . PHP_EOL;
+            }
+            
+            $this->view("", $this->data);
         }
         
         public function terms() {

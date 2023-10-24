@@ -59,7 +59,7 @@
                         }
                         move_uploaded_file($accepted["tmp_name"][$i], $this->path . $files[$i]["path"]);
                     } else {
-                        echo 'failed to upload file';
+                        die('failed to upload file');
                     }
                 }
                 
@@ -76,11 +76,8 @@
         }
         
         public function updateExistingFiles ($codename, $key, $time, $prevtime) {
-            // update time_ in table database
-            $query = "UPDATE $this->table SET time_ = '$time' WHERE codename_ = '$codename' AND key_ = '$key' AND time_ != '$time'";
-            
-            // Check if any rows are updated 
-            if ($this->db->executing($query)) {
+            // update time_ in table databain & Check if any rows are updated 
+            if ($this->db->executing("UPDATE $this->table SET time_ = ? WHERE codename_ = ? AND key_ = ? AND time_ != ?", [$time, $codename, $key, $time])) {
                 $filteredFiles = [];
                 $files = scandir($this->path);
                 
@@ -109,8 +106,9 @@
         public function insertDB ($data) {
             $result = false;
             try {
-                $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES ('{$data["time"]}', '{$data["owner"]}', '{$data["codename"]}', '{$data["key"]}', '{$data["filename"]}', '{$data["filesize"]}', '{$data["duration"]}', '{$data["available"]}')";
-                $result = $this->db->executing($query);
+                $query = "INSERT INTO $this->table (time_, owner_, codename_, key_, filename_, filesize_, duration_, available_) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                $params = [$data["time"], $data["owner"], $data["codename"], $data["key"], $data["filename"], $data["filesize"], $data["duration"], $data["available"]];
+                $result = $this->db->executing($query, $params);
             } catch (Exception $e) {}
             return $result;
         }
@@ -119,7 +117,7 @@
         public function autoRemove() {
             // get list of file that passed the limit
             $limit = time() - $this->perseconds;
-            $result = $this->db->fetching("SELECT * FROM $this->table WHERE available_ = 'YES' AND time_ < '$limit'");
+            $result = $this->db->fetching("SELECT * FROM $this->table WHERE available_ = 'YES' AND time_ < ?", [$limit]);
             
             // remove file
             foreach ($result as $entry) {
@@ -135,7 +133,7 @@
             }
             
             // update VALUES at column available_ to NO
-            $this->db->executing("UPDATE $this->table SET available_ = 'NO' WHERE time_ < '$limit'");
+            $this->db->executing("UPDATE $this->table SET available_ = 'NO' WHERE time_ < ?", [$limit]);
         }
         
         function download ($savedName, $filePath) {
@@ -168,7 +166,7 @@
         }
         
         public function generateKey ($codename) {
-            $result = $this->db->fetching("SELECT key_ FROM $this->table WHERE codename_ = '$codename' AND available_ = 'YES'");
+            $result = $this->db->fetching("SELECT key_ FROM $this->table WHERE codename_ = ? AND available_ = 'YES'", [$codename]);
             
             $keys = array_column($result, 'key_');
             $keys = array_unique($keys);
@@ -214,7 +212,7 @@
         
         // handling for submitted form, check for codename and file
         public function handleRePost ($codename, $files) {
-            $result = $this->db->fetching("SELECT filename_, key_, time_ FROM $this->table WHERE codename_ = '$codename' AND available_ = 'YES'");
+            $result = $this->db->fetching("SELECT filename_, key_, time_ FROM $this->table WHERE codename_ = ? AND available_ = 'YES'", [$codename]);
             
             $time = [];
             $listed = [];
@@ -260,7 +258,7 @@
         
         // get list of file by codename and key
         public function loadFiles ($codename, $key) {
-            return $this->db->fetching("SELECT * FROM $this->table WHERE codename_ = '$codename' AND key_ = '$key' AND available_ = 'YES'");
+            return $this->db->fetching("SELECT * FROM $this->table WHERE codename_ = ? AND key_ = ? AND available_ = 'YES'", [$codename, $key]);
         }
         
         public static function formatBytes($num_bytes) {

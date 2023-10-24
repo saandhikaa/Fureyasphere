@@ -9,7 +9,7 @@
             $this->data["dir"] = SHARED_DIR;
             
             $this->data["title"] = SITE_TITLE;
-            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/home.css">' . PHP_EOL;
+            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/app.css">' . PHP_EOL;
         }
         
         public function index() {

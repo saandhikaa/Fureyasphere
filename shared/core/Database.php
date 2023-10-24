@@ -12,6 +12,21 @@
             return $this->conn;
         }
         
+        public function querying($sql, $params = [], $types = "") {
+            $stmt = $this->conn->prepare($sql);
+            if($stmt === false) {
+                die('prepare() failed: ' . htmlspecialchars($this->conn->error));
+            }
+            
+            if ($params) {
+                $types = str_repeat('s', count($params)); // assumes all parameters are strings
+                $stmt->bind_param($types, ...$params);
+            }
+            
+            $stmt->execute();
+            return $stmt;
+        }
+        
         public function fetching ($query) {
             $result = $this->conn->query($query);
             $rows = [];

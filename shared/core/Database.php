@@ -27,41 +27,42 @@
             return $stmt;
         }
         
-        public function fetching ($query) {
-            $result = $this->conn->query($query);
+        public function fetching ($query, $params = []) {
+            $stmt = $this->querying($query, $params);
+            $result = $stmt->get_result();
             $rows = [];
             while ($row = $result->fetch_assoc()) {
                 $rows[] = $row;
             }
+            $stmt->close();
             return $rows;
         }
         
-        public function executing ($query) {
-            return $this->conn->query($query);
+        public function executing ($query, $params = []) {
+            $stmt = $this->querying($query, $params);
+            $affected_rows = $stmt->affected_rows;
+            $stmt->close();
+            return $affected_rows > 0;
         }
-        
+
         public function dropAndCreateTable ($tableName, $createTableSQL) {
-            $dropQuery = "DROP TABLE IF EXISTS $tableName";
-            $createQuery = $createTableSQL;
-            
-            $this->conn->query($dropQuery);
-            return $this->conn->query($createQuery);
+            return $this->executing("DROP TABLE IF EXISTS {$tableName}; {$createTableSQL}");
         }
         
         public function tableExists ($tableName, $url = "") {
-            $result = $this->conn->query("SHOW TABLES LIKE '$tableName'");
-            if ($result->num_rows == 0 && !empty($url)) {
+            if (count($this->fetching("SHOW TABLES LIKE '$tableName'")) == 0 && !empty($url)) {
                 echo '<script>
-                    if(confirm("The Table [' . $tableName . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
-                        window.location.href = "' . $url . '";
+                    if(confirm("The Table [' . htmlspecialchars($tableName) . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
+                        window.location.href = "' . htmlspecialchars($url) . '";
                     } else {
                         window.location.href = "' . BASEURL . '";
                     }
                 </script>';
+                return false;
             }
-            return $result->num_rows > 0;
+            return true;
         }
-
+        
         public function closing() {
             $this->conn->close();
         }

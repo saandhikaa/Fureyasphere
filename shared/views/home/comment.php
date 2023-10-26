@@ -1,16 +1,14 @@
 <main id="comment">
     <ul class="comment-root">
         <?php foreach ($data["comment-lists"] as $comment): ?>
-            <li>
-                <section>
-                    <p><strong><?= $comment["username"] ?></strong> <span class="time"><?= $comment["time"] ?></span></p>
-                    <p><?= $comment["message"] ?></p>
-                    <ul class="comment-action">
-                        <li><button>Like</button></li>
-                        <li><button>Reply</button></li>
-                        <li><button>Show replies</button></li>
-                    </ul>
-                </section>
+            <li class="comment-field">
+                <p><strong><?= $comment["username"] ?></strong> <span class="time"><?= $comment["time"] ?></span></p>
+                <p><?= $comment["message"] ?></p>
+                <ul class="comment-action">
+                    <li><button>Like</button></li>
+                    <li><button>Reply</button></li>
+                    <li><button>Show replies</button></li>
+                </ul>
             </li>
         <?php endforeach ?>
     </ul>

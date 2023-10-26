@@ -5,10 +5,6 @@
         margin-bottom: 20px;
     }
     
-    h2 {
-        font-weight: 500;
-    }
-    
     p {
         font-size: 1rem;
     }
@@ -69,6 +65,54 @@
 #comment {
     font-size: 16px;
     margin: 20px 10px 100px;
+    position: relative;
+    
+    .comment-field {
+        margin-bottom: 30px;
+    }
+    
+    .comment-action {
+        margin-top: 5px;
+        display: flex;
+        gap: 20px;
+        
+        button {
+            background-color: transparent;
+            outline: none;
+            border: 0;
+            font-weight: 500;
+            color: #444444;
+            
+            &:active {
+                color: #2B73E6;
+            }
+        }
+    }
+    
+    section.add-comment {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
+        form {
+            .field {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+        a.redirect {
+            background-color: lightblue;
+            color: black;
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+        }
+    }
 }
 
 @media (min-width: 768px) {

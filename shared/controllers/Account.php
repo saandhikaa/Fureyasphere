@@ -12,6 +12,8 @@
             $this->data["title"] = SITE_TITLE;
             $this->data["page-title"] = __CLASS__;
             $this->data["navigation"] = true;
+            
+            $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->data['dir'] . '/assets/js/appAccount.js"></script>' . PHP_EOL;
         }
         
         public function index() {

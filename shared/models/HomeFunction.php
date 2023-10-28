@@ -43,12 +43,24 @@
             
             $rows = [];
             foreach ($comments as $comment) {
+                $replies = [];
+                foreach ($comment["replies"] as $reply) {
+                    $username = $this->db->fetching("SELECT username_ FROM users WHERE time_ = ?", [$reply['uid']]);
+                    $replies[] = [
+                        "id" => $reply["uid"] . "-" . $reply["time"],
+                        "time" => date('M d, Y', $reply['time']),
+                        "username" => $username ? $username[0]["username_"] : "deleted user",
+                        "message" => self::sanitize_html($reply['message'])
+                    ];
+                }
+                
                 $username = $this->db->fetching("SELECT username_ FROM users WHERE time_ = ?", [$comment['uid']]);
                 $rows[] = [
                     "id" => $comment["uid"] . "-" . $comment["time"],
                     "time" => date('M d, Y', $comment['time']),
                     "username" => $username ? $username[0]["username_"] : "deleted user",
-                    "message" => self::sanitize_html($comment['message'])
+                    "message" => self::sanitize_html($comment['message']),
+                    "replies" => $replies
                 ];
             }
             

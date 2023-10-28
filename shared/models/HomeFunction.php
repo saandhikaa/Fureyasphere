@@ -31,6 +31,7 @@
             foreach ($comments as $comment) {
                 $username = $this->db->fetching("SELECT username_ FROM users WHERE time_ = ?", [$comment['uid']]);
                 $rows[] = [
+                    "id" => $comment["uid"] . "-" . $comment["time"],
                     "time" => date('M d, Y', $comment['time']),
                     "username" => $username ? $username[0]["username_"] : "deleted user",
                     "message" => self::sanitize_html($comment['message'])

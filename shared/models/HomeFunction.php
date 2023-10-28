@@ -33,11 +33,23 @@
                 $rows[] = [
                     "time" => date('M d, Y', $comment['time']),
                     "username" => $username ? $username[0]["username_"] : "deleted user",
-                    "message" => $comment['message']
+                    "message" => self::sanitize_html($comment['message'])
                 ];
             }
             
             return $rows;
+        }
+        
+        public static function sanitize_html($dirty_html) {
+            $allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'i'];
+            $escaped_html = htmlspecialchars($dirty_html);
+            
+            foreach ($allowed_tags as $tag) {
+                $escaped_html = str_replace("&lt;".$tag."&gt;", "<".$tag.">", $escaped_html);
+                $escaped_html = str_replace("&lt;/".$tag."&gt;", "</".$tag.">", $escaped_html);
+            }
+            
+            return nl2br($escaped_html);
         }
     }
 ?>

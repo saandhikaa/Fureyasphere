@@ -19,7 +19,21 @@
         
         public function addComment ($newComment) {
             $comments = json_decode(file_get_contents($this->commentsPath), true);
-            $comments[] = $newComment;
+            
+            if ($newComment["replied"] == "0") {
+                unset($newComment["replied"]);
+                $newComment["replies"] = [];
+                $comments[] = $newComment;
+            } else {
+                $reply = explode("-", $newComment["replied"]);
+                foreach ($comments as &$comment) {
+                    if ($comment['uid'] == $reply[0] && $comment['time'] == $reply[1]) {
+                        unset($newComment["replied"]);
+                        $comment["replies"][] = $newComment;
+                    }
+                }
+                unset($comment);
+            }
             
             return file_put_contents($this->commentsPath, json_encode($comments));
         }

@@ -10,6 +10,7 @@
             
             $this->data["title"] = SITE_TITLE;
             $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/app.css">' . PHP_EOL;
+            $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->data['dir'] . '/assets/js/appHome.js"></script>' . PHP_EOL;
         }
         
         public function index() {
@@ -25,7 +26,7 @@
                     $data = [
                         "time" => time(),
                         "uid" => $_SESSION["sign-in"]["uid"],
-                        "mentioned" => $_POST["mentioned"],
+                        "replied" => $_POST["replied"],
                         "message" => $_POST["message"]
                     ];
                     $this->model(SHARED_DIR, "HomeFunction")->addComment($data);

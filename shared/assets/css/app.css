@@ -61,16 +61,59 @@
 
 #comment {
     font-size: 16px;
-    margin: 20px 10px 100px;
+    margin: 20px 0 150px;
     position: relative;
 }
 
-#comment .comment-field {
-    margin-bottom: 30px;
+#comment h1 {
+    margin: 10px 20px 30px;
+}
+
+#comment .comment-list-level1 .level1 {
+    padding-bottom: 20px;
+}
+
+#comment .comment-list-level1 .level1:nth-child(odd) {
+    background-color: #F6F6F6;
+}
+
+#comment .comment-list-level1 .level1:nth-child(even) {
+    background-color: white;
+}
+
+#comment .comment-list-level1 .level1 .selected {
+    background-color: lightblue;
+}
+
+#comment .comment-list-level1 section.comment-container {
+    padding: 30px 20px 20px;
+}
+
+#comment .comment-list-level1 section.comment-container:not(:last-child) {
+    margin-bottom: 2px;
+}
+
+#comment .comment-list-level2 {
+    margin-left: 35px;
+    border-left: 4px solid lightblue;
+    padding-left: 15px;
+}
+
+#comment .comment-list-level2 .level2:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+#comment .comment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#comment .comment-container p strong, #comment .comment-container p .time {
+    color: #0b387b;
 }
 
 #comment .comment-action {
-    margin-top: 5px;
     display: flex;
     gap: 20px;
 }
@@ -94,9 +137,26 @@
     right: 0;
 }
 
+#comment section.add-comment form {
+    background-color: white;
+    padding: 10px;
+}
+
 #comment section.add-comment form .field {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
+}
+
+#comment section.add-comment form .field textarea {
+    padding: 5px;
+    flex: 1;
+    height: 30px;
+    resize: none;
+    font-size: 1rem;
+}
+
+#comment section.add-comment form .field input {
+    padding: 5px;
 }
 
 #comment section.add-comment a.redirect {

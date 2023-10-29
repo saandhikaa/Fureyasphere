@@ -64,15 +64,56 @@
 
 #comment {
     font-size: 16px;
-    margin: 20px 10px 100px;
+    margin: 20px 0 150px;
     position: relative;
     
-    .comment-field {
-        margin-bottom: 30px;
+    h1 {
+        margin: 10px 20px 30px;
+    }
+    
+    .comment-list-level1 {
+        .level1 {
+            padding-bottom: 20px;
+            &:nth-child(odd) {
+                background-color: #F6F6F6;
+            }
+            &:nth-child(even) {
+                background-color: white;
+            }
+            .selected {
+                background-color: lightblue;
+            }
+        }
+        
+        section.comment-container {
+            padding: 30px 20px 20px;
+            &:not(:last-child) {
+                margin-bottom: 2px;
+            }
+        }
+    }
+    
+    .comment-list-level2 {
+        margin-left: 35px;
+        border-left: 4px solid lightblue;
+        padding-left: 15px;
+        
+        .level2:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
+    
+    .comment-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        
+        p strong, p .time {
+            color: #0b387b;
+        }
     }
     
     .comment-action {
-        margin-top: 5px;
         display: flex;
         gap: 20px;
         
@@ -96,9 +137,24 @@
         right: 0;
         
         form {
+            background-color: white;
+            padding: 10px;
+            
             .field {
                 display: flex;
-                flex-direction: column;
+                gap: 10px;
+                
+                textarea {
+                    padding: 5px;
+                    flex: 1;
+                    height: 30px;
+                    resize: none;
+                    font-size: 1rem;
+                }
+                
+                input {
+                    padding: 5px;
+                }
             }
         }
         

@@ -68,7 +68,7 @@
         }
         
         public static function sanitize_html($dirty_html) {
-            $allowed_tags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'b', 'i'];
+            $allowed_tags = ['b', 'i'];
             $escaped_html = htmlspecialchars($dirty_html);
             
             foreach ($allowed_tags as $tag) {

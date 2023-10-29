@@ -22,7 +22,7 @@
         
         public function comment() {
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
-                if ($_POST["submit"] === "send") {
+                if ($_POST["submit"] === "send" && !empty($_POST["message"])) {
                     $data = [
                         "time" => time(),
                         "uid" => $_SESSION["sign-in"]["uid"],
@@ -30,6 +30,9 @@
                         "message" => $_POST["message"]
                     ];
                     $this->model(SHARED_DIR, "HomeFunction")->addComment($data);
+                    
+                    header("Location: " . BASEURL . "/home/comment");
+                    exit;
                 }
             }
             

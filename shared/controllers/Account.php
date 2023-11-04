@@ -66,7 +66,7 @@
             $this->database->tableExists($this->table, BASEURL . "/{$this->data['class']}/setup");
         }
         
-        public function signin($redirect = null) {
+        public function signin($redirect = null, $subRedirect = "") {
             if ($this->model(SHARED_DIR, "AccountControl")->isLoggedIn()) {
                 header("Location: " . BASEURL . "/{$this->data['class']}");
                 exit;
@@ -78,7 +78,7 @@
                         if (is_null($redirect)) {
                             header("Location: " . BASEURL . "/{$this->data['class']}");
                         } elseif (!empty($redirect)) {
-                            header("Location: " . BASEURL . "/$redirect");
+                            header("Location: " . BASEURL . "/$redirect/$subRedirect");
                         }
                         exit;
                     } else {

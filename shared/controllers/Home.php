@@ -22,7 +22,7 @@
         
         public function comment() {
             if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0 && isset($_POST["submit"])) {
-                if ($_POST["submit"] === "send" && !empty($_POST["message"])) {
+                if ($_POST["submit"] === "Send" && !empty($_POST["message"])) {
                     $data = [
                         "time" => time(),
                         "uid" => $_SESSION["sign-in"]["uid"],

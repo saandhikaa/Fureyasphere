@@ -31,4 +31,23 @@
     </ul>
     
     <button class="newComment" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Add comment</button>
+    
+    <?php if (isset($_SESSION["sign-in"])): ?>
+        <div class="comment-container">
+            <section class="comment-popup">
+                <form action="" method="post">
+                    <input id="reply" type="hidden" name="replied" value="0">
+                    <p class="reply"></p>
+                    
+                    <label for="comment-message">Comment as <?= $_SESSION["sign-in"]["username"] ?></label>
+                    <textarea id="comment-message" spellcheck="false" name="message" placeholder="Write a comment (<b> and <i> tags available)"></textarea>
+                    
+                    <section class="action">
+                        <button type="button" class="button cancel">Cancel</button>
+                        <input type="submit" name="submit" class="button send" value="Send">
+                    </section>
+                </form>
+            </section>
+        </div>
+    <?php endif ?>
 </main>

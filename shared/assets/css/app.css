@@ -69,48 +69,25 @@
     margin: 10px 20px 30px;
 }
 
-#comment .comment-list-level1 .level1 {
-    padding-bottom: 20px;
-}
-
-#comment .comment-list-level1 .level1:nth-child(odd) {
-    background-color: #F6F6F6;
-}
-
-#comment .comment-list-level1 .level1:nth-child(even) {
-    background-color: white;
-}
-
-#comment .comment-list-level1 .level1 .selected {
-    background-color: lightblue;
-}
-
-#comment .comment-list-level1 section.comment-container {
-    padding: 30px 20px 20px;
-}
-
-#comment .comment-list-level1 section.comment-container:not(:last-child) {
-    margin-bottom: 2px;
-}
-
-#comment .comment-list-level2 {
-    margin-left: 35px;
-    border-left: 4px solid lightblue;
-    padding-left: 15px;
-}
-
-#comment .comment-list-level2 .level2:not(:last-child) {
-    margin-bottom: 20px;
-}
-
-#comment .comment-container {
+#comment .comment-list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
-#comment .comment-container p strong, #comment .comment-container p .time {
-    color: #0b387b;
+#comment .comment-list > li {
+    padding: 30px 20px 0;
+}
+
+#comment .comment-list.root > li {
+    padding-bottom: 40px;
+}
+
+#comment .comment-list.root > li:nth-child(odd) {
+    background-color: #F3F3F3;
+}
+
+#comment p.message {
+    padding: 5px 0;
 }
 
 #comment .comment-action {
@@ -123,51 +100,31 @@
     outline: none;
     border: 0;
     font-weight: 500;
-    color: #444444;
+    color: #385d99;
 }
 
 #comment .comment-action button:active {
     color: #2B73E6;
 }
 
-#comment section.add-comment {
+#comment button.newComment {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-#comment section.add-comment form {
-    background-color: white;
-    padding: 10px;
-}
-
-#comment section.add-comment form .field {
-    display: flex;
-    gap: 10px;
-}
-
-#comment section.add-comment form .field textarea {
-    padding: 5px;
-    flex: 1;
-    height: 30px;
-    resize: none;
+    background-color: #2B73E6;
+    color: white;
+    font-weight: 400;
     font-size: 1rem;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 2.5rem;
+    border-radius: 8px;
+    border: 0;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
-#comment section.add-comment form .field input {
-    padding: 5px;
-}
-
-#comment section.add-comment a.redirect {
-    background-color: lightblue;
-    color: black;
-    display: block;
-    margin: 10px;
-    padding: 10px;
-    text-align: center;
-    font-weight: 500;
-    text-decoration: none;
+#comment button.newComment:active {
+    transform: scale(0.95);
 }
 
 @media (min-width: 768px) {

@@ -71,48 +71,26 @@
         margin: 10px 20px 30px;
     }
     
-    .comment-list-level1 {
-        .level1 {
-            padding-bottom: 20px;
-            &:nth-child(odd) {
-                background-color: #F6F6F6;
-            }
-            &:nth-child(even) {
-                background-color: white;
-            }
-            .selected {
-                background-color: lightblue;
-            }
-        }
-        
-        section.comment-container {
-            padding: 30px 20px 20px;
-            &:not(:last-child) {
-                margin-bottom: 2px;
-            }
-        }
-    }
-    
-    .comment-list-level2 {
-        margin-left: 35px;
-        border-left: 4px solid lightblue;
-        padding-left: 15px;
-        
-        .level2:not(:last-child) {
-            margin-bottom: 20px;
-        }
-    }
-    
-    .comment-container {
+    .comment-list {
         display: flex;
         flex-direction: column;
-        gap: 5px;
         
-        p strong, p .time {
-            color: #0b387b;
+        & > li {
+            padding: 30px 20px 0;
+        }
+        
+        &.root {
+            & > li {
+                padding-bottom: 40px;
+            }
+            & > li:nth-child(odd) {
+                background-color: #F3F3F3;
+            }
         }
     }
-    
+    p.message {
+        padding: 5px 0;
+    }
     .comment-action {
         display: flex;
         gap: 20px;
@@ -122,7 +100,7 @@
             outline: none;
             border: 0;
             font-weight: 500;
-            color: #444444;
+            color: #385d99;
             
             &:active {
                 color: #2B73E6;
@@ -130,43 +108,23 @@
         }
     }
     
-    section.add-comment {
+    button.newComment {
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        background-color: #2B73E6;
+        color: white;
+        font-weight: 400;
+        font-size: 1rem;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        height: 2.5rem;
+        border-radius: 8px;
+        border: 0;
+        outline: none;
+        transition: all 0.2s ease;
         
-        form {
-            background-color: white;
-            padding: 10px;
-            
-            .field {
-                display: flex;
-                gap: 10px;
-                
-                textarea {
-                    padding: 5px;
-                    flex: 1;
-                    height: 30px;
-                    resize: none;
-                    font-size: 1rem;
-                }
-                
-                input {
-                    padding: 5px;
-                }
-            }
-        }
-        
-        a.redirect {
-            background-color: lightblue;
-            color: black;
-            display: block;
-            margin: 10px;
-            padding: 10px;
-            text-align: center;
-            font-weight: 500;
-            text-decoration: none;
+        &:active {
+            transform: scale(0.95);
         }
     }
 }

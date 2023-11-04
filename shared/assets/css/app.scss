@@ -127,6 +127,81 @@
             transform: scale(0.95);
         }
     }
+    
+    &.show .comment-container {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+    }
+    .comment-container {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        z-index: 12;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        transform: scale(1.2);
+        transition: all 0.3s ease-in-out;
+        
+        .comment-popup {
+            position: relative;
+            padding: 25px;
+            max-width: 420px;
+            width: 95%;
+            background: #fff;
+            border-radius: 12px;
+            
+            .close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                font-size: 30px;
+                color: #b4b4b4;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            
+            textarea {
+                min-height: 200px;
+                width: 100%;
+                margin-top: 20px;
+                outline: none;
+                border: 1px solid #ddd;
+                padding: 12px;
+                border-radius: 6px;
+                resize: none;
+                font-size: 18px;
+                font-weight: 400;
+                background: #f3f3f3;
+            }
+            
+            .action {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 15px;
+                
+                .button {
+                    outline: none;
+                    border: none;
+                    padding: 8px 14px;
+                    border-radius: 6px;
+                    background: #6f93f6;
+                    margin-left: 12px;
+                    color: #fff;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+            }
+        }
+    }
 }
 
 @media (min-width: 768px) {

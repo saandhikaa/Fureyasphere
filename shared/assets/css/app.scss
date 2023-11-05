@@ -88,7 +88,7 @@
             }
         }
     }
-    p.message {
+    p.comment-message {
         padding: 5px 0;
     }
     .comment-action {
@@ -158,16 +158,6 @@
             background: #fff;
             border-radius: 12px;
             
-            .close {
-                position: absolute;
-                top: 16px;
-                right: 16px;
-                font-size: 30px;
-                color: #b4b4b4;
-                cursor: pointer;
-                transition: all 0.2s ease;
-            }
-            
             section.reply-status {
                 p.reply-message {
                     display: -webkit-box;
@@ -205,12 +195,22 @@
                     border: none;
                     padding: 8px 14px;
                     border-radius: 6px;
-                    background: #6f93f6;
                     margin-left: 12px;
+                    background: #6f93f6;
                     color: #fff;
                     font-size: 14px;
                     cursor: pointer;
                     transition: all 0.3s ease;
+                    
+                    &.send:hover {
+                      background: #275df1;
+                    }
+                    &.cancel {
+                      background: #f082ac;
+                    }
+                    &.cancel:hover {
+                      background: #ec5f95;
+                    }
                 }
             }
         }

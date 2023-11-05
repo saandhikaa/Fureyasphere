@@ -86,7 +86,7 @@
     background-color: #F3F3F3;
 }
 
-#comment p.message {
+#comment p.comment-message {
     padding: 5px 0;
 }
 
@@ -160,16 +160,6 @@
     border-radius: 12px;
 }
 
-#comment .comment-container .comment-popup .close {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 30px;
-    color: #b4b4b4;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
 #comment .comment-container .comment-popup section.reply-status p.reply-message {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -205,12 +195,24 @@
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
-    background: #6f93f6;
     margin-left: 12px;
+    background: #6f93f6;
     color: #fff;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+#comment .comment-container .comment-popup .action .button.send:hover {
+    background: #275df1;
+}
+
+#comment .comment-container .comment-popup .action .button.cancel {
+    background: #f082ac;
+}
+
+#comment .comment-container .comment-popup .action .button.cancel:hover {
+    background: #ec5f95;
 }
 
 @media (min-width: 768px) {

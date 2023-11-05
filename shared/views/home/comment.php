@@ -3,9 +3,9 @@
     
     <ul class="comment-list root">
         <?php foreach ($data["comment-lists"] as $comment): ?>
-            <li>
-                <p class="username"><strong><?= $comment["username"] ?></strong> <span class="time"><?= $comment["time"] ?></span></p>
-                <p class="message"><?= $comment["message"] ?></p>
+            <li data-cid="<?= $comment["id"] ?>">
+                <p class="comment-title"><strong><?= $comment["username"] ?></strong> at <span class="time"><?= $comment["time"] ?></span></p>
+                <p class="comment-message"><?= $comment["message"] ?></p>
                 <ul class="comment-action">
                     <li><button class="likeThis" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Like</button></li>
                     <li><button class="newReply" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
@@ -37,10 +37,10 @@
             <section class="comment-popup">
                 <form action="" method="post">
                     <input id="reply" type="hidden" name="replied" value="0">
-                    <p class="reply"></p>
+                    <section class="reply-status"></section>
                     
-                    <label for="comment-message">Comment as <?= $_SESSION["sign-in"]["username"] ?></label>
-                    <textarea id="comment-message" spellcheck="false" name="message" placeholder="Write a comment (<b> and <i> tags available)"></textarea>
+                    <label for="comment-message"><span>Comment</span> as <?= $_SESSION["sign-in"]["username"] ?></label>
+                    <textarea id="comment-message" spellcheck="false" name="message" placeholder="Enter your message (<b> and <i> tags available)"></textarea>
                     
                     <section class="action">
                         <button type="button" class="button cancel">Cancel</button>

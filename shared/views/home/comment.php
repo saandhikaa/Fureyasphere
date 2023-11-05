@@ -15,9 +15,9 @@
                 <section class="comment-replies">
                     <ul class="comment-list">
                         <?php foreach ($comment["replies"] as $reply): ?>
-                            <li>
-                                <p class="username"><strong><?= $reply["username"] ?></strong> <span class="time"><?= $reply["time"] ?></span></p>
-                                <p class="message"><?= $reply["message"] ?></p>
+                            <li data-cid="<?= $reply["id"] ?>">
+                                <p class="comment-title"><strong><?= $reply["username"] ?></strong> at <span class="time"><?= $reply["time"] ?></span></p>
+                                <p class="comment-message"><?= $reply["message"] ?></p>
                                 <ul class="comment-action">
                                     <li><button class="likeThis" data-commentId="<?= $reply["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Like</button></li>
                                     <li><button class="newReplyMention" data-commentId="<?= $reply["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
@@ -33,17 +33,17 @@
     <button class="newComment" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Add comment</button>
     
     <?php if (isset($_SESSION["sign-in"])): ?>
-        <div class="comment-container">
+        <div class="comment-container closeCommentPopup">
             <section class="comment-popup">
                 <form action="" method="post">
                     <input id="reply" type="hidden" name="replied" value="0">
                     <section class="reply-status"></section>
                     
                     <label for="comment-message"><span>Comment</span> as <?= $_SESSION["sign-in"]["username"] ?></label>
-                    <textarea id="comment-message" spellcheck="false" name="message" placeholder="Enter your message (<b> and <i> tags available)"></textarea>
+                    <textarea id="comment-message" spellcheck="false" name="message" placeholder="Enter your message... <b> and <i> tags are available"></textarea>
                     
                     <section class="action">
-                        <button type="button" class="button cancel">Cancel</button>
+                        <button type="button" class="button cancel closeCommentPopup">Cancel</button>
                         <input type="submit" name="submit" class="button send" value="Send">
                     </section>
                 </form>

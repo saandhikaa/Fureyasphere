@@ -9,7 +9,7 @@
                 <ul class="comment-action">
                     <li><button class="likeThis" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Like</button></li>
                     <li><button class="newReply" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
-                    <li><button class="showReplies" data-commentId="<?= $comment["id"] ?>">Show replies</button></li>
+                    <?php if (!empty($comment["replies"])): ?><li><button class="showReplies" data-commentId="<?= $comment["id"] ?>"><span>Show </span><?= count($comment["replies"]) > 1 ? count($comment["replies"]) . " replies" : "a reply"?></button></li><?php endif ?>
                 </ul>
                 
                 <section class="comment-replies">

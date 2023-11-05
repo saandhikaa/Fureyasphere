@@ -43,6 +43,14 @@ Scanning.prototype.showReplies = element => {
     element.querySelector('span').textContent = 'Hide';
 };
 
+Scanning.prototype.hideReplies = element => {
+    element.closest('li[data-cid]').querySelector('section.comment-replies').classList.remove('show');
+    
+    element.classList.add('showReplies');
+    element.classList.remove('hideReplies');
+    element.querySelector('span').textContent = 'Show';
+};
+
 Scanning.prototype.closeCommentPopup = () => {
     document.querySelector('#comment').classList.remove('show');
     setTimeout(function() {

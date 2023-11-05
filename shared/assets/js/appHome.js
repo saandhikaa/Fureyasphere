@@ -21,7 +21,7 @@ Scanning.prototype.newReply = element => {
         
         const replyTitle = document.createElement('p');
         replyTitle.className = 'reply-title';
-        replyTitle.textContent = comment.querySelector('p.comment-title').textContent;
+        replyTitle.innerHTML = comment.querySelector('p.comment-title').innerHTML;
         
         const replyMessage = document.createElement('p');
         replyMessage.className = 'reply-message';
@@ -33,4 +33,11 @@ Scanning.prototype.newReply = element => {
             window.location.href = document.querySelector('.root-path').textContent + '/account/signin/home/comment';
         }
     }
+};
+
+Scanning.prototype.closeCommentPopup = () => {
+    document.querySelector('#comment').classList.remove('show');
+    setTimeout(function() {
+        document.querySelector('section.reply-status').innerHTML = '';
+    }, 1000);
 };

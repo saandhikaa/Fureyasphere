@@ -35,6 +35,14 @@ Scanning.prototype.newReply = element => {
     }
 };
 
+Scanning.prototype.showReplies = element => {
+    element.closest('li[data-cid]').querySelector('section.comment-replies').classList.add('show');
+    
+    element.classList.remove('showReplies');
+    element.classList.add('hideReplies');
+    element.querySelector('span').textContent = 'Hide';
+};
+
 Scanning.prototype.closeCommentPopup = () => {
     document.querySelector('#comment').classList.remove('show');
     setTimeout(function() {

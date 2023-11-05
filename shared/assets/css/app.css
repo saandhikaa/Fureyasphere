@@ -170,6 +170,16 @@
     transition: all 0.2s ease;
 }
 
+#comment .comment-container .comment-popup section.reply-status p.reply-message {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+    color: grey;
+}
+
 #comment .comment-container .comment-popup textarea {
     min-height: 200px;
     width: 100%;

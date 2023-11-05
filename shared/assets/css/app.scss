@@ -168,6 +168,19 @@
                 transition: all 0.2s ease;
             }
             
+            section.reply-status {
+                p.reply-message {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                    margin-bottom: 20px;
+                    color: grey;
+                }
+            }
+            
             textarea {
                 min-height: 200px;
                 width: 100%;

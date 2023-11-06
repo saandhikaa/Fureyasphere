@@ -59,11 +59,18 @@
                 $replies = [];
                 foreach ($comment["replies"] as $reply) {
                     $username = $this->db->fetching("SELECT username_ FROM users WHERE time_ = ?", [$reply['uid']]);
+                    $mention = false;
+                    if (isset($reply["replied"])) {
+                        $commentId = explode("-", $reply["replied"]);
+                        $mention = [$this->db->fetching("SELECT username_ FROM users WHERE time_ = ?", [$commentId[0]])[0]["username_"], $reply["replied"]];
+                    }
+                    
                     $replies[] = [
                         "id" => $reply["uid"] . "-" . $reply["time"],
                         "time" => date('M d, Y', $reply['time']),
                         "username" => $username ? $username[0]["username_"] : "deleted user",
-                        "message" => self::sanitize_html($reply['message'])
+                        "message" => self::sanitize_html($reply['message']),
+                        "mention" => $mention
                     ];
                 }
                 

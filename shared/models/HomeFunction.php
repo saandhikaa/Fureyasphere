@@ -25,11 +25,24 @@
                 $newComment["replies"] = [];
                 $comments[] = $newComment;
             } else {
-                $reply = explode("-", $newComment["replied"]);
-                foreach ($comments as &$comment) {
-                    if ($comment['uid'] == $reply[0] && $comment['time'] == $reply[1]) {
-                        unset($newComment["replied"]);
-                        $comment["replies"][] = $newComment;
+                $commentId = explode("-", $newComment["replied"]);
+                if (isset($newComment["mention"])) {
+                    foreach ($comments as &$comment) {
+                        foreach ($comment["replies"] as &$reply) {
+                            if ($reply['uid'] == $commentId[0] && $reply['time'] == $commentId[1]) {
+                                unset($newComment["mention"]);
+                                $comment["replies"][] = $newComment;
+                                break 2;
+                            }
+                        }
+                    }
+                } else {
+                    foreach ($comments as &$comment) {
+                        if ($comment['uid'] == $commentId[0] && $comment['time'] == $commentId[1]) {
+                            unset($newComment["replied"]);
+                            $comment["replies"][] = $newComment;
+                            break;
+                        }
                     }
                 }
                 unset($comment);

@@ -29,6 +29,9 @@
                         "replied" => $_POST["replied"],
                         "message" => $_POST["message"]
                     ];
+                    if (isset($_POST["mention"])) {
+                        $data["mention"] = $_POST["mention"];
+                    }
                     $this->model(SHARED_DIR, "HomeFunction")->addComment($data);
                     
                     header("Location: " . BASEURL . "/home/comment");

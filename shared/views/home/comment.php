@@ -16,7 +16,7 @@
                         <?php foreach ($comment["replies"] as $reply): ?>
                             <li data-cid="<?= $reply["id"] ?>">
                                 <p class="comment-title"><strong><?= $reply["username"] ?></strong> at <span class="time"><?= $reply["time"] ?></span></p>
-                                <p class="comment-message"><?= $reply["message"] ?></p>
+                                <p class="comment-message"><?php if ($reply["mention"]): ?><span class="goMention" data-mentioned="<?= $reply["mention"][1] ?>">@<?= $reply["mention"][0] . " " ?></span><?php endif ?><?= $reply["message"] ?></p>
                                 <ul class="comment-action">
                                     <li><button class="newReplyMention" data-commentId="<?= $reply["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
                                 </ul>

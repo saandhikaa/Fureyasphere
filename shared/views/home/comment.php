@@ -7,9 +7,8 @@
                 <p class="comment-title"><strong><?= $comment["username"] ?></strong> at <span class="time"><?= $comment["time"] ?></span></p>
                 <p class="comment-message"><?= $comment["message"] ?></p>
                 <ul class="comment-action">
-                    <li><button class="likeThis" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Like</button></li>
                     <li><button class="newReply" data-commentId="<?= $comment["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
-                    <?php if (!empty($comment["replies"])): ?><li><button class="showReplies" data-commentId="<?= $comment["id"] ?>"><span>Show </span><?= count($comment["replies"]) > 1 ? count($comment["replies"]) . " replies" : "a reply"?></button></li><?php endif ?>
+                    <?php if (!empty($comment["replies"])): ?><li><button class="showReplies" data-commentId="<?= $comment["id"] ?>"><span>Show</span><?= count($comment["replies"]) > 1 ? " " . count($comment["replies"]) . " replies" : " a reply"?></button></li><?php endif ?>
                 </ul>
                 
                 <section class="comment-replies">
@@ -19,7 +18,6 @@
                                 <p class="comment-title"><strong><?= $reply["username"] ?></strong> at <span class="time"><?= $reply["time"] ?></span></p>
                                 <p class="comment-message"><?= $reply["message"] ?></p>
                                 <ul class="comment-action">
-                                    <li><button class="likeThis" data-commentId="<?= $reply["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Like</button></li>
                                     <li><button class="newReplyMention" data-commentId="<?= $reply["id"] ?>" data-isLoggedIn="<?= isset($_SESSION["sign-in"]) ? $_SESSION["sign-in"]["username"] : false ?>">Reply</button></li>
                                 </ul>
                             </li>

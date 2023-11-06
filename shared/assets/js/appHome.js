@@ -1,6 +1,8 @@
 Scanning.prototype.newComment = element => {
     if (element.getAttribute('data-isLoggedIn')) {
         document.querySelector('#comment').classList.add('show');
+        
+        document.body.style.overflow = 'hidden';
     } else {
         if (window.confirm('Access denied, sign in needed.\n\nDo you wish to proceed to the sign-in page?')) {
             window.location.href = document.querySelector('.root-path').textContent + '/account/signin/home/comment';
@@ -28,6 +30,8 @@ Scanning.prototype.newReply = element => {
         replyMessage.innerHTML = comment.querySelector('p.comment-message').innerHTML;
         
         reply.append(replyTitle, replyMessage);
+        
+        document.body.style.overflow = 'hidden';
     } else {
         if (window.confirm('Access denied, sign in needed.\n\nDo you wish to proceed to the sign-in page?')) {
             window.location.href = document.querySelector('.root-path').textContent + '/account/signin/home/comment';
@@ -56,4 +60,6 @@ Scanning.prototype.closeCommentPopup = () => {
     setTimeout(function() {
         document.querySelector('section.reply-status').innerHTML = '';
     }, 1000);
+    
+    document.body.style.overflow = 'auto';
 };

@@ -70,6 +70,9 @@
     h1 {
         margin: 10px 20px 30px;
     }
+    b {
+        font-weight: 500;
+    }
     
     .comment-list {
         display: flex;
@@ -82,6 +85,12 @@
         &.root {
             & > li {
                 padding-bottom: 40px;
+                section.comment-replies {
+                    display: none;
+                    &.show {
+                        display: block;
+                    }
+                }
             }
             & > li:nth-child(odd) {
                 background-color: #F3F3F3;

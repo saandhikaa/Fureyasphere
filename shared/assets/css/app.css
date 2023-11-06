@@ -82,12 +82,24 @@
     padding-bottom: 40px;
 }
 
+#comment .comment-list.root > li section.comment-replies {
+    display: none;
+}
+
+#comment .comment-list.root > li section.comment-replies.show {
+    display: block;
+}
+
 #comment .comment-list.root > li:nth-child(odd) {
     background-color: #F3F3F3;
 }
 
 #comment p.comment-message {
     padding: 5px 0;
+}
+
+#comment p.comment-message b {
+    font-weight: 500;
 }
 
 #comment .comment-action {

@@ -127,7 +127,7 @@
         }
         
         public function about() {
-            $this->data["content"] = '<main id="home-about">' . PHP_EOL;
+            $this->data["content"] = '<main id="about">' . PHP_EOL;
             $this->data["content"] .= '<section class="readme ' . $this->data['dir'] . '"></section>' . PHP_EOL;
             $this->data["content"] .= '</main>' . PHP_EOL;
             

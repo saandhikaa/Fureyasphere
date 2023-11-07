@@ -48,7 +48,7 @@
         }
         
         public function about() {
-            $this->data["content"] = '<main id="home-about">' . PHP_EOL;
+            $this->data["content"] = '<main id="about">' . PHP_EOL;
             $this->data["content"] .= '<section class="readme shared"></section>' . PHP_EOL;
             foreach (App::getAppList() as $app) {
                 if (file_exists(__DIR__ . "/../../" . $app["dir"][0] . "/README.md")) {

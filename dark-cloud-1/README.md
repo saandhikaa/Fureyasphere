@@ -7,9 +7,8 @@ Dark Cloud is an anonymous cloud-based file sharing service that allows anyone t
 * Anonymous file upload and download
 * Keyword-based file search
 * Easy-to-use interface
-* Secure file storage and transfer
 * Upload limit: 40MB
-* Automatic file removal after 24 hours
+* Automatic file removal after 2 days
 
 ### Usage
 
@@ -28,4 +27,4 @@ Dark Cloud is an anonymous cloud-based file sharing service that allows anyone t
 
 ### Conclusion
 
-Please note that Dark Cloud does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Dark Cloud. Additionally, remember that files uploaded to Dark Cloud will be automatically removed after 24 hours.
+Please note that Dark Cloud does not encrypt files at this time. If you need to share sensitive files, you may want to consider using a different file sharing platform or encrypting the files before uploading them to Dark Cloud. Additionally, remember that files uploaded to Dark Cloud will be automatically removed after 2 * 24 hours.

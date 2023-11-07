@@ -49,7 +49,7 @@
                         "key" => $key, 
                         "filename" => $filename[$i], 
                         "filesize" => $accepted["size"][$i], 
-                        "duration" => 1, 
+                        "duration" => 2, 
                         "available" => "YES"
                     ];
                     
@@ -180,18 +180,20 @@
         }
         
         // cut canceled $_FILES by given argument
-        public function slice($accepted) {
-            $sliced = [];
-            foreach ($_FILES['file']['name'] as $index => $file) {
-                if (in_array($file, $accepted)) {
-                    $sliced['name'][] = $_FILES['file']['name'][$index];
-                    $sliced['type'][] = $_FILES['file']['type'][$index];
-                    $sliced['size'][] = $_FILES['file']['size'][$index];
-                    $sliced['error'][] = $_FILES['file']['error'][$index];
-                    $sliced['tmp_name'][] = $_FILES['file']['tmp_name'][$index];
+        public function slice($slicer) {
+            $indices = [];
+            foreach ($slicer as $name) {
+                $index = array_search($name, $_FILES["file"]["name"]);
+                if ($index !== false) {
+                    $indices[] = $index;
                 }
             }
-            return $sliced;
+            
+            $result = [];
+            foreach ($_FILES["file"] as $key => $values) {
+                $result[$key] = array_intersect_key($values, array_flip($indices));
+            }
+            return $result;
         }
         
         // rename (add numbering) for duplicate filename

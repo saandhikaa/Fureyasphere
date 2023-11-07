@@ -20,11 +20,9 @@ $group-input-space: (
         border-radius: 20%;
         width: 2rem;
         height: 2rem;
-        
         display: flex;
         align-items: center;
         justify-content: center;
-        
         transition: all 0.2s ease;
         
         &:active {
@@ -41,63 +39,6 @@ $group-input-space: (
     }
 }
 
-@mixin account-form() {
-    margin: 30px 60px;
-    
-    h1 {
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    
-    .group-input {
-        .field {
-            padding-top: 8px;
-            padding-bottom: 8px;
-        }
-        
-        @include password-visibility-button();
-    }
-    
-    .action-button {
-        border-radius: 10px;
-        margin-top: 50px;
-        margin-bottom: 30px;
-        width: 100%;
-        height: 48px;
-    }
-}
-
-@mixin password-visibility-button() {
-    button {
-        background-color: transparent;
-        outline: none;
-        border: 0;
-        margin-right: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        transition: scale 0.2s;
-        
-        svg {
-            width: 1.6rem;
-            height: 1.6rem;
-        }
-        &:active {
-            transform: scale(0.9);
-        }
-    }
-}
-
-@mixin section-go() {
-    section.go {
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-        margin-bottom: 100px;
-    }
-}
-
 
 
 * {
@@ -109,10 +50,6 @@ $group-input-space: (
 
 body {
     padding-top: 60px;
-}
-
-h1 {
-    //font-weight: 500;
 }
 
 ul {
@@ -133,20 +70,9 @@ form {
     input[type="password"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
-    
     input[type="password"]::-ms-reveal {
         display: none;
     }
-}
-
-.database-error {
-    position: relative;
-    background-color: #FCF3D6;
-    color: #BE9655;
-    left: 0;
-    right: 0;
-    margin-top: 10px;
-    padding: 0 10px;
 }
 
 .group-input {
@@ -161,7 +87,6 @@ form {
         border-radius: 10px;
         padding: map-get($group-input-space, input-padding);
         width: 100%;
-        
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
@@ -288,7 +213,6 @@ form {
                     display: block;
                     
                     text-decoration: none;
-                    //font-weight: 400;
                     color: #333333;
                 }
             }
@@ -307,11 +231,9 @@ form {
             align-items: center;
             justify-content: space-between;
             
-            section {
-                h1 {
-                    padding: 0 map-get($nav-space, apadding);
-                    font-size: 1.2rem;
-                }
+            section h1 {
+                padding: 0 map-get($nav-space, apadding);
+                font-size: 1.2rem;
             }
             
             @include nav-button();
@@ -343,7 +265,7 @@ form {
                 margin: 10px 0;
                 padding: map-get($nav-space, apadding);
                 font-size: 1rem;
-                //font-weight: 500;
+                font-weight: 500;
             }
         }
         
@@ -376,54 +298,7 @@ form {
     }
 }
 
-#sign-up {
-    position: relative;
-    @include account-form();
-    
-    .validation {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        line-height: 1rem;
-        margin: 5px 10px;
-        color: #AAAAAA;
-        
-        svg {
-            width: 1rem;
-            height: 1rem;
-        }
-    }
-    .not-pass {
-        color: #FF0000;
-    }
-    .pass {
-        color: #04BA71;
-    }
-    
-    .agreement {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        margin: 10px 1px 0;
-    }
-    
-    @include section-go();
-}
-
-#sign-in {
-    position: relative;
-    
-    @include account-form();
-    @include section-go();
-    
-    .sign-in-failed {
-        color: #FF0000;
-        font-style: italic;
-        position: absolute;
-    }
-}
-
-#body #home-about {
+#body #about {
     padding: 20px;
     
     section.readme {
@@ -435,14 +310,12 @@ form {
         h2 {
             margin-bottom: 15px;
             font-size: 1.5em;
-            //font-weight: 500;
         }
         
         h3 {
             margin-top: 20px;
             margin-bottom: 10px;
             font-size: 1.2em;
-            //font-weight: 500;
         }
         
         p {
@@ -476,7 +349,7 @@ form {
         }
         
         strong {
-            //font-weight: 500;
+            font-weight: 500;
         }
     }
 }
@@ -485,12 +358,6 @@ form {
 @media (min-width: 768px) {
     body {
         padding-right: map-get($nav-space, width);
-    }
-    
-    #sign-up, 
-    #sign-in {
-        margin: auto;
-        width: 24rem;
     }
     
     #body .navigation-container {
@@ -513,7 +380,7 @@ form {
         }
     }
     
-    #home-about {
+    #about {
         margin: auto;
         width: 30rem;
     }

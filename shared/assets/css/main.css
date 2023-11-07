@@ -31,16 +31,6 @@ form input[type="password"]::-ms-reveal {
     display: none;
 }
 
-.database-error {
-    position: relative;
-    background-color: #FCF3D6;
-    color: #BE9655;
-    left: 0;
-    right: 0;
-    margin-top: 10px;
-    padding: 0 10px;
-}
-
 .group-input {
     padding: 10px 0;
     display: flex;
@@ -273,6 +263,7 @@ form input[type="password"]::-ms-reveal {
     margin: 10px 0;
     padding: 5px;
     font-size: 1rem;
+    font-weight: 500;
 }
 
 .navigation-container nav.navigation footer {
@@ -302,201 +293,65 @@ form input[type="password"]::-ms-reveal {
     color: #8A8A8A;
 }
 
-#sign-up {
-    position: relative;
-    margin: 30px 60px;
-}
-
-#sign-up h1 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#sign-up .group-input .field {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-#sign-up .group-input button {
-    background-color: transparent;
-    outline: none;
-    border: 0;
-    margin-right: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: scale 0.2s;
-}
-
-#sign-up .group-input button svg {
-    width: 1.6rem;
-    height: 1.6rem;
-}
-
-#sign-up .group-input button:active {
-    transform: scale(0.9);
-}
-
-#sign-up .action-button {
-    border-radius: 10px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    width: 100%;
-    height: 48px;
-}
-
-#sign-up .validation {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    line-height: 1rem;
-    margin: 5px 10px;
-    color: #AAAAAA;
-}
-
-#sign-up .validation svg {
-    width: 1rem;
-    height: 1rem;
-}
-
-#sign-up .not-pass {
-    color: #FF0000;
-}
-
-#sign-up .pass {
-    color: #04BA71;
-}
-
-#sign-up .agreement {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 10px 1px 0;
-}
-
-#sign-up section.go {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 100px;
-}
-
-#sign-in {
-    position: relative;
-    margin: 30px 60px;
-}
-
-#sign-in h1 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#sign-in .group-input .field {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-#sign-in .group-input button {
-    background-color: transparent;
-    outline: none;
-    border: 0;
-    margin-right: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: scale 0.2s;
-}
-
-#sign-in .group-input button svg {
-    width: 1.6rem;
-    height: 1.6rem;
-}
-
-#sign-in .group-input button:active {
-    transform: scale(0.9);
-}
-
-#sign-in .action-button {
-    border-radius: 10px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    width: 100%;
-    height: 48px;
-}
-
-#sign-in section.go {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-bottom: 100px;
-}
-
-#sign-in .sign-in-failed {
-    color: #FF0000;
-    font-style: italic;
-    position: absolute;
-}
-
-#body #home-about {
+#body #about {
     padding: 20px;
 }
 
-#body #home-about section.readme {
+#body #about section.readme {
     background-color: #fff;
     border: 1px solid #ddd;
     margin-bottom: 50px;
     padding: 20px;
 }
 
-#body #home-about section.readme h2 {
+#body #about section.readme h2 {
     margin-bottom: 15px;
     font-size: 1.5em;
 }
 
-#body #home-about section.readme h3 {
+#body #about section.readme h3 {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 1.2em;
 }
 
-#body #home-about section.readme p {
+#body #about section.readme p {
     margin-bottom: 15px;
     font-size: 1em;
     line-height: 1.5em;
 }
 
-#body #home-about section.readme a {
+#body #about section.readme a {
     color: #2B73E6;
     text-decoration: none;
 }
 
-#body #home-about section.readme code {
+#body #about section.readme code {
     background-color: #f7f7f7;
     padding: 2px 4px;
     font-family: Consolas, monospace;
 }
 
-#body #home-about section.readme ul, #body #home-about section.readme ol {
+#body #about section.readme ul, #body #about section.readme ol {
     margin-left: 30px;
     margin-bottom: 10px;
 }
 
-#body #home-about section.readme ul {
+#body #about section.readme ul {
     list-style-type: disc;
 }
 
-#body #home-about section.readme li {
+#body #about section.readme li {
     margin-bottom: 5px;
+}
+
+#body #about section.readme strong {
+    font-weight: 500;
 }
 
 @media (min-width: 768px) {
     body {
         padding-right: 280px;
-    }
-    #sign-up,
-#sign-in {
-        margin: auto;
-        width: 24rem;
     }
     #body .navigation-container {
         background-color: transparent;
@@ -515,7 +370,7 @@ form input[type="password"]::-ms-reveal {
     #body .navigation-container footer {
         padding-bottom: 0;
     }
-    #home-about {
+    #about {
         margin: auto;
         width: 30rem;
     }

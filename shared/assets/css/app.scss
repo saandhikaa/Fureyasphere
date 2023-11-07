@@ -79,12 +79,19 @@
         flex-direction: column;
         
         & > li {
-            padding: 30px 20px 0;
+            padding: 15px 20px;
+            &:focus {
+                background-color: lightblue;
+                border-radius: 5px;
+            }
+            &:first-child {
+                margin-top: 15px;
+            }
         }
         
         &.root {
             & > li {
-                padding-bottom: 40px;
+                padding-bottom: 30px;
                 section.comment-replies {
                     display: none;
                     &.show {
@@ -104,6 +111,7 @@
         padding: 5px 0;
     }
     .comment-action {
+        margin-top: 5px;
         display: flex;
         gap: 20px;
         

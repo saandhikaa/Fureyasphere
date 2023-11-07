@@ -79,11 +79,20 @@
 }
 
 #comment .comment-list > li {
-    padding: 30px 20px 0;
+    padding: 15px 20px;
+}
+
+#comment .comment-list > li:focus {
+    background-color: lightblue;
+    border-radius: 5px;
+}
+
+#comment .comment-list > li:first-child {
+    margin-top: 15px;
 }
 
 #comment .comment-list.root > li {
-    padding-bottom: 40px;
+    padding-bottom: 30px;
 }
 
 #comment .comment-list.root > li section.comment-replies {
@@ -107,6 +116,7 @@
 }
 
 #comment .comment-action {
+    margin-top: 5px;
     display: flex;
     gap: 20px;
 }

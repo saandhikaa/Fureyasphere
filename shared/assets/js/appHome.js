@@ -90,6 +90,16 @@ Scanning.prototype.hideReplies = element => {
     element.querySelector('span').textContent = 'Show';
 };
 
+Scanning.prototype.goMention = element => {
+    const mentioned = element.getAttribute('data-mentioned');
+    const target = document.querySelector(`li[data-cid="${mentioned}"]`);
+    target.setAttribute('tabindex', '0');
+    target.focus();
+    target.addEventListener('blur', function() {
+        target.removeAttribute('tabindex');
+    });
+};
+
 Scanning.prototype.closeCommentPopup = () => {
     document.querySelector('#comment').classList.remove('show');
     setTimeout(function() {

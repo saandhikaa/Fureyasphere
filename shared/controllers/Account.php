@@ -13,6 +13,7 @@
             $this->data["page-title"] = __CLASS__;
             $this->data["navigation"] = true;
             
+            $this->data["style"][] = '<link rel="stylesheet" href="' . BASEURL . '/' . SHARED_DIR . '/assets/css/app.css">' . PHP_EOL;
             $this->data["script"][] = '<script src="' . BASEURL . '/' . $this->data['dir'] . '/assets/js/appAccount.js"></script>' . PHP_EOL;
         }
         

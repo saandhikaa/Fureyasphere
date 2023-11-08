@@ -133,6 +133,24 @@ form {
     }
 }
 
+button.scrollToTop {
+    position: fixed;
+    display: none;
+    right: 10px;
+    outline: none;
+    border: 0;
+    border-radius: 10px;
+    height: 40px;
+    width: 40px;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: scale 0.2s;
+    
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
 
 
 #page-header {

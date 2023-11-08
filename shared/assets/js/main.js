@@ -46,6 +46,25 @@ Scanning.prototype.feedbackList = (element) => {
     }
 };
 
+(async function() {
+    const buttonScrollToTop = document.querySelector('button.scrollToTop');
+    if (buttonScrollToTop) {
+        const bottomPosition = buttonScrollToTop.getAttribute('data-mb');
+        buttonScrollToTop.style.bottom = bottomPosition ? bottomPosition + 'px' : '20px' ;
+        
+        let arrowUp = await fetch(document.querySelector('.image-path').textContent + 'icons/arrow_upward_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
+        arrowUp = arrowUp.replace('<path', `<path fill="white"`);
+        buttonScrollToTop.innerHTML = arrowUp;
+        
+        window.onscroll = function() { buttonScrollToTop.style.display = document.body.scrollTop > 200 || document.documentElement.scrollTop > 200 ? "block" : "none" ; };
+    }
+})();
+
+Scanning.prototype.scrollToTop = () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+};
+
+
 
 
 const greetings = document.querySelectorAll('h1.nav-greeting');

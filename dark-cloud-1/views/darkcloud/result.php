@@ -12,6 +12,11 @@
                 <p>Here are the files that match your search keyword:</p>
             </section>
         <?php endif ?>
+        
+        <section class="copying">
+            <input type="text" value="<?= BASEURL . '/' . $data['class'] . '/result/' . $data['keyword']?>" id="uploadedLink">
+            <button class="copyLink" data-inputId="uploadedLink">Copy Link</button>
+        </section>
     <?php else: ?>
         <p>invalid keyword or the file is gone</p>
     <?php endif ?>

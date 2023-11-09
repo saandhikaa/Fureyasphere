@@ -61,7 +61,8 @@
 
 #comment {
     font-size: 16px;
-    margin: 20px 0 150px;
+    margin: 20px 0;
+    padding-bottom: 150px;
     position: relative;
 }
 
@@ -135,13 +136,15 @@
 
 #comment button.newComment {
     position: fixed;
+    display: block;
     background-color: #2B73E6;
     color: white;
     font-weight: 400;
     font-size: 1rem;
-    left: 10px;
-    right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     bottom: 10px;
+    width: calc(100% - 20px);
     height: 2.5rem;
     border-radius: 8px;
     border: 0;
@@ -381,10 +384,18 @@
         font-size: 16px;
     }
     #home,
-#resources,
-#comment {
+#resources {
         margin: 2rem auto 100px;
         width: 24rem;
+    }
+    #comment {
+        margin: 2rem auto 0;
+        width: 26rem;
+    }
+    #comment button.newComment {
+        margin: 0;
+        width: 26rem;
+        bottom: 20px;
     }
     #sign-up,
 #sign-in {

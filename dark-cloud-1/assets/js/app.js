@@ -14,7 +14,13 @@ Scanning.prototype.scrollTop = () => {
     });
 };
 
-
+Scanning.prototype.copyLink = element => {
+  const copyText = document.querySelector('input#' + element.getAttribute('data-inputId'));
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  copyText.blur();
+};
 
 window.addEventListener('scroll', () => document.querySelector('nav.go .scrollTop').style.display = window.scrollY > 300 ? 'block' : 'none');
 

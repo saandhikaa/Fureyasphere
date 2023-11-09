@@ -50,4 +50,4 @@
     <?php endif ?>
 </main>
 
-<button class="scrollToTop" data-mb="60"></button>
+<button class="scrollToTop mobile" data-mb="60"></button>

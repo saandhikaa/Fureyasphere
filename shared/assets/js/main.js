@@ -47,20 +47,20 @@ Scanning.prototype.feedbackList = (element) => {
 };
 
 (async function() {
-    const buttonScrollToTop = document.querySelector('button.scrollToTop');
-    if (buttonScrollToTop) {
-        const bottomPosition = buttonScrollToTop.getAttribute('data-mb');
-        buttonScrollToTop.style.bottom = bottomPosition ? bottomPosition + 'px' : '20px' ;
+    const buttonSTTContainer = document.querySelector('button.scrollToTop');
+    if (buttonSTTContainer) {
+        const bottomPosition = buttonSTTContainer.getAttribute('data-mb');
+        buttonSTTContainer.style.bottom = bottomPosition ? bottomPosition + 'px' : '20px' ;
         
         let arrowUp = await fetch(document.querySelector('.image-path').textContent + 'icons/arrow_upward_FILL0_wght400_GRAD0_opsz24.svg').then(response => response.text());
         arrowUp = arrowUp.replace('<path', `<path fill="white"`);
-        buttonScrollToTop.innerHTML = arrowUp;
+        buttonSTTContainer.innerHTML = '<button class="scrollUp">' + arrowUp + '</button>';
         
-        window.onscroll = function() { buttonScrollToTop.style.display = document.body.scrollTop > 200 || document.documentElement.scrollTop > 200 ? "block" : "none" ; };
+        window.onscroll = function() { buttonSTTContainer.querySelector('button.scrollUp').style.display = document.body.scrollTop > 200 || document.documentElement.scrollTop > 200 ? "block" : "none" ; };
     }
 })();
 
-Scanning.prototype.scrollToTop = () => {
+Scanning.prototype.scrollUp = () => {
     window.scrollTo({top: 0, behavior: 'smooth'});
 };
 

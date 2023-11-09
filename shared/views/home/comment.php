@@ -49,3 +49,5 @@
         </div>
     <?php endif ?>
 </main>
+
+<button class="scrollToTop" data-mb="60"></button>

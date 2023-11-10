@@ -20,6 +20,7 @@ Scanning.prototype.copyLink = element => {
   copyText.setSelectionRange(0, 99999);
   document.execCommand("copy");
   copyText.blur();
+  showToast("Link copied!");
 };
 
 window.addEventListener('scroll', () => document.querySelector('nav.go .scrollTop').style.display = window.scrollY > 300 ? 'block' : 'none');

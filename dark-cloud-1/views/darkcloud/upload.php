@@ -1,4 +1,4 @@
-<main id="fuclouds-upload">
+<main id="darkcloud-upload">
     <section class="header">
         <h2>Upload Files</h2>
         <p>Use the form below to upload your files.</p>

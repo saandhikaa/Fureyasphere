@@ -90,11 +90,11 @@ nav.go a, nav.go button {
     height: 3rem;
 }
 
-#fuclouds-search {
+#darkcloud-search {
     padding: 20px 20px 4rem;
 }
 
-#fuclouds-search form {
+#darkcloud-search form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -102,16 +102,16 @@ nav.go a, nav.go button {
     padding: 10px 0;
 }
 
-#fuclouds-upload {
+#darkcloud-upload {
     padding: 20px 20px 4rem;
 }
 
-#fuclouds-upload form {
+#darkcloud-upload form {
     margin-bottom: 40px;
     padding: 10px 0;
 }
 
-#fuclouds-upload #file-input-container {
+#darkcloud-upload #file-input-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -122,34 +122,34 @@ nav.go a, nav.go button {
     padding-bottom: 10px;
 }
 
-#fuclouds-upload #file-input-container .heading {
+#darkcloud-upload #file-input-container .heading {
     margin: 10px 0 0 20px;
 }
 
-#fuclouds-upload #file-input-container .empty {
+#darkcloud-upload #file-input-container .empty {
     margin: 20px auto 0;
     font-size: 2.5rem;
     font-weight: 700;
     color: #DDDDDD;
 }
 
-#fuclouds-upload #file-input-container #filtered-file {
+#darkcloud-upload #file-input-container #filtered-file {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li {
+#darkcloud-upload #file-input-container #filtered-file li {
     position: relative;
     margin: 0 10px;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .file-info {
+#darkcloud-upload #file-input-container #filtered-file li .file-info {
     display: flex;
     align-items: center;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .file-info img {
+#darkcloud-upload #file-input-container #filtered-file li .file-info img {
     width: 3rem;
     height: auto;
     object-fit: cover;
@@ -157,13 +157,13 @@ nav.go a, nav.go button {
     transform: scale(1.1);
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .file-info .file-size {
+#darkcloud-upload #file-input-container #filtered-file li .file-info .file-size {
     margin-top: 5px;
     font-size: 0.8rem;
     color: #999999;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .file-action {
+#darkcloud-upload #file-input-container #filtered-file li .file-action {
     background-color: pink;
     display: flex;
     align-items: center;
@@ -180,21 +180,21 @@ nav.go a, nav.go button {
     transition: scale 0.2s ease;
 }
 
-#fuclouds-upload #file-input-container #filtered-file li .file-action:active {
+#darkcloud-upload #file-input-container #filtered-file li .file-action:active {
     transform: translateY(-50%) scale(0.9);
 }
 
-#fuclouds-upload #file-input-container input[type="file"] {
+#darkcloud-upload #file-input-container input[type="file"] {
     display: none;
 }
 
-#fuclouds-upload .input-form {
+#darkcloud-upload .input-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-#fuclouds-upload .input-form .browse-file {
+#darkcloud-upload .input-form .browse-file {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -206,25 +206,25 @@ nav.go a, nav.go button {
     border-bottom-right-radius: 10px;
 }
 
-#fuclouds-upload .input-form .browse-file label {
+#darkcloud-upload .input-form .browse-file label {
     width: 40%;
     margin: 0 auto;
 }
 
-#fuclouds-upload .input-form .browse-file .action-button {
+#darkcloud-upload .input-form .browse-file .action-button {
     width: 40%;
 }
 
-#fuclouds-result {
+#darkcloud-result {
     padding: 20px 20px 4rem;
 }
 
-#fuclouds-result p.status {
+#darkcloud-result p.status {
     margin: 30px 0 20px;
     line-height: 1.6rem;
 }
 
-#fuclouds-result p.status span {
+#darkcloud-result p.status span {
     background-color: #CFF3FF;
     border-radius: 5px;
     padding: 0 5px;
@@ -233,7 +233,7 @@ nav.go a, nav.go button {
     color: #0C6EA1;
 }
 
-#fuclouds-result .copying {
+#darkcloud-result .copying {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -241,7 +241,7 @@ nav.go a, nav.go button {
     box-sizing: border-box;
 }
 
-#fuclouds-result .copying input[type="text"] {
+#darkcloud-result .copying input[type="text"] {
     flex-grow: 1;
     margin-right: 10px;
     padding: 10px;
@@ -249,7 +249,7 @@ nav.go a, nav.go button {
     border-radius: 4px;
 }
 
-#fuclouds-result .copying button {
+#darkcloud-result .copying button {
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -259,28 +259,28 @@ nav.go a, nav.go button {
     transition: scale 0.2s;
 }
 
-#fuclouds-result .copying button:active {
+#darkcloud-result .copying button:active {
     transform: scale(0.95);
 }
 
-#fuclouds-result ul.file-list {
+#darkcloud-result ul.file-list {
     margin: 40px 0 50px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#fuclouds-result ul.file-list li {
+#darkcloud-result ul.file-list li {
     position: relative;
     margin: 0 10px;
 }
 
-#fuclouds-result ul.file-list li .file-info {
+#darkcloud-result ul.file-list li .file-info {
     display: flex;
     align-items: center;
 }
 
-#fuclouds-result ul.file-list li .file-info img {
+#darkcloud-result ul.file-list li .file-info img {
     width: 3rem;
     height: auto;
     object-fit: cover;
@@ -288,13 +288,13 @@ nav.go a, nav.go button {
     transform: scale(1.1);
 }
 
-#fuclouds-result ul.file-list li .file-info .file-size {
+#darkcloud-result ul.file-list li .file-info .file-size {
     margin-top: 5px;
     font-size: 0.8rem;
     color: #999999;
 }
 
-#fuclouds-result ul.file-list li .file-action {
+#darkcloud-result ul.file-list li .file-action {
     background-color: #CFF3FF;
     display: flex;
     align-items: center;
@@ -311,18 +311,18 @@ nav.go a, nav.go button {
     transition: scale 0.2s ease;
 }
 
-#fuclouds-result ul.file-list li .file-action:active {
+#darkcloud-result ul.file-list li .file-action:active {
     transform: translateY(-50%) scale(0.9);
 }
 
-#fuclouds-result form.download-all {
+#darkcloud-result form.download-all {
     display: flex;
     flex-direction: column;
     gap: 5px;
     margin: 20px 0 50px;
 }
 
-#fuclouds-result form.download-all .action-button {
+#darkcloud-result form.download-all .action-button {
     position: relative;
     display: flex;
     gap: 5px;
@@ -332,14 +332,14 @@ nav.go a, nav.go button {
     width: 14rem;
 }
 
-#fuclouds-result form.download-all .action-button svg {
+#darkcloud-result form.download-all .action-button svg {
     padding-bottom: 2px;
 }
 
 @media (min-width: 768px) {
-    #fuclouds-search,
-#fuclouds-upload,
-#fuclouds-result {
+    #darkcloud-search,
+#darkcloud-upload,
+#darkcloud-result {
         position: relative;
         padding-left: 0;
         padding-right: 0;

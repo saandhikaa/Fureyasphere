@@ -25,13 +25,13 @@ Scanning.prototype.copyLink = element => {
 
 window.addEventListener('scroll', () => document.querySelector('nav.go .scrollTop').style.display = window.scrollY > 300 ? 'block' : 'none');
 
-const searchKeyword = document.querySelector('#fuclouds-search #keyword');
+const searchKeyword = document.querySelector('#darkcloud-search #keyword');
 if (searchKeyword) {
     searchKeyword.addEventListener('input', event => event.target.value = event.target.value.replace(/[^a-zA-Z0-9/-]/g, ""));
     groupInput(searchKeyword, event);
 }
 
-const uploadCodename = document.querySelector('#fuclouds-upload #codename');
+const uploadCodename = document.querySelector('#darkcloud-upload #codename');
 if (uploadCodename) {
     uploadCodename.addEventListener('input', event => {
         event.target.value = event.target.value.replace(/[^a-zA-Z0-9-]/g, "");
@@ -43,7 +43,7 @@ if (uploadCodename) {
 
 
 function createInput() {
-    const fileUploadContainer = document.querySelector('#fuclouds-upload #file-input-container');
+    const fileUploadContainer = document.querySelector('#darkcloud-upload #file-input-container');
 
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
@@ -85,7 +85,7 @@ function handleFileChange(element) {
 }
 
 async function createFilteredFile(filename, filesize) {
-    const filteredFileContainer = document.querySelector('#fuclouds-upload #filtered-file');
+    const filteredFileContainer = document.querySelector('#darkcloud-upload #filtered-file');
     const filteredFile = document.createElement('li');
     const fileInfo = document.createElement('section');
     const fileDesc = document.createElement('section');
@@ -131,12 +131,12 @@ async function createFilteredFile(filename, filesize) {
 }
 
 function inputCheck() {
-    const filteredFile = document.querySelectorAll('#fuclouds-upload #filtered-file li');
+    const filteredFile = document.querySelectorAll('#darkcloud-upload #filtered-file li');
     
-    const upSubmit = document.querySelector('#fuclouds-upload #up-submit');
+    const upSubmit = document.querySelector('#darkcloud-upload #up-submit');
     upSubmit.disabled = filteredFile.length === 0 || uploadCodename.value === '';
     
-    const emptyMark = document.querySelector('#fuclouds-upload .empty');
+    const emptyMark = document.querySelector('#darkcloud-upload .empty');
     emptyMark.style.display = filteredFile.length === 0 ? 'block' : 'none';
 }
 

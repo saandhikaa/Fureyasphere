@@ -1,4 +1,4 @@
-<main id="fuclouds-result">
+<main id="darkcloud-result">
     <?php if (!empty($data["result"])): ?>
         <?php if ($data["action"] === "uploaded"): ?>
             <section class="header">

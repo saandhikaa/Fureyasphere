@@ -1,4 +1,4 @@
-<main id="fuclouds-search">
+<main id="darkcloud-search">
     <section class="header">
         <h2>Search for Files</h2>
         <p>Use the search bar below to find a file you need.</p>

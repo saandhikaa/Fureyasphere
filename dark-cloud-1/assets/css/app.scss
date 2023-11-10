@@ -155,7 +155,7 @@ nav.go {
 
 
 
-#fuclouds-search {
+#darkcloud-search {
     padding: 20px map-get($space, go-padding-x) 4rem;
     
     form {
@@ -169,7 +169,7 @@ nav.go {
 
 
 
-#fuclouds-upload {
+#darkcloud-upload {
     padding: 20px map-get($space, go-padding-x) 4rem;
     
     form {
@@ -237,7 +237,7 @@ nav.go {
 
 
 
-#fuclouds-result {
+#darkcloud-result {
     padding: 20px map-get($space, go-padding-x) 4rem;
     
     p.status {
@@ -312,9 +312,9 @@ nav.go {
 }
 
 @media(min-width: 768px) {
-    #fuclouds-search, 
-    #fuclouds-upload, 
-    #fuclouds-result {
+    #darkcloud-search, 
+    #darkcloud-upload, 
+    #darkcloud-result {
         position: relative;
         padding-left: 0;
         padding-right: 0;

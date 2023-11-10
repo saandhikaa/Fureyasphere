@@ -14,7 +14,7 @@
         <?php endif ?>
         
         <section class="copying">
-            <input type="text" value="<?= BASEURL . '/' . $data['class'] . '/result/' . $data['keyword']?>" id="uploadedLink">
+            <input type="text" value="<?= BASEURL . '/' . $data['class'] . '/result/' . $data['keyword']?>" id="uploadedLink" readonly>
             <button class="copyLink" data-inputId="uploadedLink">Copy Link</button>
         </section>
     <?php else: ?>

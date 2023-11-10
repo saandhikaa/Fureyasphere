@@ -18,7 +18,7 @@ a.brandeis:visited {
     color: #2B73E6;
 }
 
-svg, svg path {
+svg, svg path, #toast {
     pointer-events: none;
 }
 
@@ -114,6 +114,20 @@ button.scrollToTop .scrollUp {
 
 button.scrollToTop .scrollUp:active {
     transform: scale(0.95);
+}
+
+#toast {
+    background-color: #242424;
+    color: white;
+    position: fixed;
+    border-radius: 10px;
+    left: 50%;
+    top: 10px;
+    padding: 10px 25px;
+    z-index: 20;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: all 0.5s;
 }
 
 #page-header {

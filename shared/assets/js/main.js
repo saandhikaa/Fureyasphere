@@ -125,3 +125,13 @@ async function loadReadme() {
         }
     });
 }
+
+function showToast(message) {
+    let toast = document.querySelector("#toast");
+    toast.textContent = message;
+    toast.style.opacity = '0.7';
+    setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.textContent = '';
+    }, 2200);
+}

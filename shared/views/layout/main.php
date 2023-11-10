@@ -24,6 +24,8 @@
     
     <?php if (file_exists($content)) require_once $content; else echo $data["content"]; ?>
     
+    <div id="toast"></div>
+
     <?php if (isset($data["navigation"]) && $data["navigation"]) echo '<script src="' . BASEURL . '/' . SHARED_DIR . '/assets/js/main.js"></script>' ?>
     <?php if (isset($data["script"])): ?>
         <?php foreach ($data["script"] as $script) echo $script ?>

@@ -140,7 +140,7 @@
             // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["confirmed"] == 'true') {
-                    $this->database->dropAndCreateTable($this->table, "CREATE TABLE $this->table $columns");
+                    $this->database->dropAndCreateTable($this->table, $columns);
                     $this->model(SHARED_DIR, "AccountControl")->signup(["username" => ADMIN_USERNAME, "password" => ADMIN_PASSWORD, "agreement" => 1], 1);
                     exit;
                 }

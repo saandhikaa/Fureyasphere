@@ -44,23 +44,28 @@
             $stmt->close();
             return $affected_rows > 0;
         }
-
+        
         public function dropAndCreateTable ($tableName, $createTableSQL) {
             return $this->executing("DROP TABLE IF EXISTS {$tableName}; {$createTableSQL}");
         }
         
         public function tableExists ($tableName, $url = "") {
-            if (count($this->fetching("SHOW TABLES LIKE '$tableName'")) == 0 && !empty($url)) {
-                echo '<script>
-                    if(confirm("The Table [' . htmlspecialchars($tableName) . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
-                        window.location.href = "' . htmlspecialchars($url) . '";
-                    } else {
-                        window.location.href = "' . BASEURL . '";
-                    }
-                </script>';
-                return false;
+            $exist = count($this->fetching("SHOW TABLES LIKE '$tableName'"));
+            if (!$exist) {
+                if (empty($url)) {
+                    return false;
+                } else {
+                    echo '<script>
+                        if(confirm("The Table [' . $tableName . '] is not set up.\n\nDo you wish to proceed to the setup page?")) {
+                            window.location.href = "' . $url . '";
+                        } else {
+                            window.location.href = "' . BASEURL . '";
+                        }
+                    </script>';
+                }
+            } else {
+                return true;
             }
-            return true;
         }
         
         public function closing() {

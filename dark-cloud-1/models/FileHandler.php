@@ -1,8 +1,8 @@
 <?php
     class FileHandler {
         private $db;
+        private $table = "dc_uploads";
         private $path = __DIR__ . "/../uploads-userfilesbox/";
-        private $table = "uploads";
         private $perseconds = 24 * 60 * 60;
         
         public function __construct(Database $database) {

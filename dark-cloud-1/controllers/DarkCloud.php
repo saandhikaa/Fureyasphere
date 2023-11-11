@@ -2,7 +2,7 @@
     class DarkCloud extends Controller {
         private $appDir, $class;
         private $data = [];
-        private $table = "uploads";
+        private $table = "dc_uploads";
         
         public function __construct(Database $database) {
             $this->database = $database;
@@ -84,7 +84,7 @@
             // Handle AJAX
             if (!empty($_POST) && isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], BASEURL) === 0) {
                 if ($_POST["confirmed"] == 'true') {
-                    $this->database->dropAndCreateTable($this->table, "CREATE TABLE $this->table $columns");
+                    $this->database->dropAndCreateTable($this->table, $columns);
                     $this->model($this->data['dir'], "FileHandler")->createUploadsDir();
                     exit;
                 }
@@ -109,7 +109,7 @@
                 } else {
                     echo '<script>
                         if(confirm("Access Denied, please sign out from current Account and provide a Level 1 Account.\n\nDo you wish to proceed to the sign-in page?")) {
-                            window.location.href = "' . BASEURL . '/account/signin/";
+                            window.location.href = "' . BASEURL . '/account/signin";
                         } else {
                             window.location.href = "' . BASEURL . '";
                         }
@@ -118,7 +118,7 @@
             } else {
                 echo '<script>
                     if(confirm("Access Denied, please provide a Level 1 Account.\n\nDo you wish to proceed to the sign-in page?")) {
-                        window.location.href = "' . BASEURL . '/account/signin/";
+                        window.location.href = "' . BASEURL . '/account/signin/darkcloud/setup";
                     } else {
                         window.location.href = "' . BASEURL . '";
                     }

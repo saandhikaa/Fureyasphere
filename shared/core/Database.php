@@ -45,8 +45,9 @@
             return $affected_rows > 0;
         }
         
-        public function dropAndCreateTable ($tableName, $createTableSQL) {
-            return $this->executing("DROP TABLE IF EXISTS {$tableName}; {$createTableSQL}");
+        public function dropAndCreateTable ($tableName, $columns) {
+            $this->executing("DROP TABLE IF EXISTS $tableName");
+            $this->executing("CREATE TABLE $tableName $columns");
         }
         
         public function tableExists ($tableName, $url = "") {

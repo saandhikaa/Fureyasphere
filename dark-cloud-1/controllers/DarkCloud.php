@@ -131,6 +131,7 @@
             $this->data["content"] .= '<section class="readme ' . $this->data['dir'] . '"></section>' . PHP_EOL;
             $this->data["content"] .= '</main>' . PHP_EOL;
             
+            $this->data["title"] = ucfirst($this->data['class']) . ": About";
             $this->data["navigation"] = true;
             $this->data["script"][] = '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>' . PHP_EOL;
             $this->data["script"][] = '<script type="text/javascript">loadReadme();</script>' . PHP_EOL;

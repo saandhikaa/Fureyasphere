@@ -1,5 +1,5 @@
 <?php
-    class PaperCode {
+    class CodeManager {
         public function save($note) {
             file_put_contents($note['path'].time()."_".$note['title'].".txt", $note['field'], FILE_APPEND | LOCK_EX);
         }
